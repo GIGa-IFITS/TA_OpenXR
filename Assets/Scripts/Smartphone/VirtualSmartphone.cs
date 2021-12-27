@@ -56,7 +56,7 @@ public class VirtualSmartphone : MonoBehaviour
         //this.transform.parent.transform.localScale = new Vector3(widthInMeter * 40, heightInMeter * 40, 0.3f);
         this.transform.parent.transform.localScale = new Vector3(widthInMeter, heightInMeter, 0.0084f);
         //this.transform.parent.transform.localRotation = Quaternion.Euler(90, -90, 0);
-        this.transform.parent.transform.Rotate(new Vector3(90, -90, 0));
+        this.transform.parent.transform.Rotate(new Vector3(0, 0, -100));
     }
 
     // public void ChangeNode(string _id, string _tagName){

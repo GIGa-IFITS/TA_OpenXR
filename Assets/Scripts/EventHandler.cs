@@ -12,12 +12,12 @@ using TMPro;
 
 public class EventHandler : MonoBehaviour
 {
-    [Header("Koneksi dari unity ke database - Event Handler")]
-    // koneksi dari unity ke database
-    public GameObject configPanel;
-    public GameObject retry;
-    public Text retryMessage;
-    public GameObject connectionMessagePanel;
+    // [Header("Koneksi dari unity ke database - Event Handler")]
+    // // koneksi dari unity ke database
+    // public GameObject configPanel;
+    // public GameObject retry;
+    // public Text retryMessage;
+    // public GameObject connectionMessagePanel;
     public string URL;
 
     [Header("Dashboard")]
@@ -85,21 +85,21 @@ public class EventHandler : MonoBehaviour
     public Vector3 endScaleLegend = new Vector3(9.951063f, 6.884685f, 0.4520478f);
     bool destroyedStatus = false;
 
-    [Header("Detail")]
-    // detail peneliti
+    // [Header("Detail")]
+    // // detail peneliti
     
-    public GameObject DetailPenelitiBar;
-    public Text namaPeneliti;
-    public Text tanggalPeneliti;
-    public Text fakultasPeneliti;
-    public Text departemenPeneliti;
-    public Text jurnalPeneliti;
-    public Text konferensiPeneliti;
-    public Text bukuPeneliti;
-    public Text tesisPeneliti;
-    public Text patenPeneliti;
-    public Text penelitianPeneliti;
-    public bool detPenelitiStatus = false;
+    // public GameObject DetailPenelitiBar;
+    // public Text namaPeneliti;
+    // public Text tanggalPeneliti;
+    // public Text fakultasPeneliti;
+    // public Text departemenPeneliti;
+    // public Text jurnalPeneliti;
+    // public Text konferensiPeneliti;
+    // public Text bukuPeneliti;
+    // public Text tesisPeneliti;
+    // public Text patenPeneliti;
+    // public Text penelitianPeneliti;
+    // public bool detPenelitiStatus = false;
 
     [Header("Tombol Navigasi")]
     // public VRTK_InteractableObject tombolDashboard;
@@ -149,9 +149,9 @@ public class EventHandler : MonoBehaviour
             }, (error) => {
                 if (error != "")
                 {
-                    retryMessage.text = error;
-                    retry.SetActive(true);
-                    connectionMessagePanel.SetActive(false);
+                    // retryMessage.text = error;
+                    // retry.SetActive(true);
+                    // connectionMessagePanel.SetActive(false);
                 }
             }));
         }
@@ -224,9 +224,9 @@ public class EventHandler : MonoBehaviour
             }, error => {
                 if (error != "")
                 {
-                    retryMessage.text = error;
-                    retry.SetActive(true);
-                    connectionMessagePanel.SetActive(false);
+                    // retryMessage.text = error;
+                    // retry.SetActive(true);
+                    // connectionMessagePanel.SetActive(false);
                 }
             }
             ));
@@ -300,9 +300,9 @@ public class EventHandler : MonoBehaviour
             }, error => {
                 if (error != "")
                 {
-                    retryMessage.text = error;
-                    retry.SetActive(true);
-                    connectionMessagePanel.SetActive(false);
+                    // retryMessage.text = error;
+                    // retry.SetActive(true);
+                    // connectionMessagePanel.SetActive(false);
                 }
             }
             ));
@@ -349,9 +349,9 @@ public class EventHandler : MonoBehaviour
             }, error => {
                 if (error != "")
                 {
-                    retryMessage.text = error;
-                    retry.SetActive(true);
-                    connectionMessagePanel.SetActive(false);
+                    // retryMessage.text = error;
+                    // retry.SetActive(true);
+                    // connectionMessagePanel.SetActive(false);
                 }
             }
             ));
@@ -399,9 +399,9 @@ public class EventHandler : MonoBehaviour
             }, error => {
                 if (error != "")
                 {
-                    retryMessage.text = error;
-                    retry.SetActive(true);
-                    connectionMessagePanel.SetActive(false);
+                    // retryMessage.text = error;
+                    // retry.SetActive(true);
+                    // connectionMessagePanel.SetActive(false);
                 }
             }
             ));
@@ -448,9 +448,9 @@ public class EventHandler : MonoBehaviour
             }, error => {
                 if (error != "")
                 {
-                    retryMessage.text = error;
-                    retry.SetActive(true);
-                    connectionMessagePanel.SetActive(false);
+                    // retryMessage.text = error;
+                    // retry.SetActive(true);
+                    // connectionMessagePanel.SetActive(false);
                 }
             }
             ));
@@ -496,9 +496,9 @@ public class EventHandler : MonoBehaviour
             }, error => {
                 if (error != "")
                 {
-                    retryMessage.text = error;
-                    retry.SetActive(true);
-                    connectionMessagePanel.SetActive(false);
+                    // retryMessage.text = error;
+                    // retry.SetActive(true);
+                    // connectionMessagePanel.SetActive(false);
                 }
             }
             ));
@@ -543,9 +543,9 @@ public class EventHandler : MonoBehaviour
             }, error => {
                 if (error != "")
                 {
-                    retryMessage.text = error;
-                    retry.SetActive(true);
-                    connectionMessagePanel.SetActive(false);
+                    // retryMessage.text = error;
+                    // retry.SetActive(true);
+                    // connectionMessagePanel.SetActive(false);
                 }
             }
             ));
@@ -592,9 +592,9 @@ public class EventHandler : MonoBehaviour
             }, error => {
                 if (error != "")
                 {
-                    retryMessage.text = error;
-                    retry.SetActive(true);
-                    connectionMessagePanel.SetActive(false);
+                    // retryMessage.text = error;
+                    // retry.SetActive(true);
+                    // connectionMessagePanel.SetActive(false);
                 }
             }
             ));
@@ -641,9 +641,9 @@ public class EventHandler : MonoBehaviour
             }, error => {
                 if (error != "")
                 {
-                    retryMessage.text = error;
-                    retry.SetActive(true);
-                    connectionMessagePanel.SetActive(false);
+                    // retryMessage.text = error;
+                    // retry.SetActive(true);
+                    // connectionMessagePanel.SetActive(false);
                 }
             }
             ));
@@ -688,9 +688,9 @@ public class EventHandler : MonoBehaviour
             }, error => {
                 if (error != "")
                 {
-                    retryMessage.text = error;
-                    retry.SetActive(true);
-                    connectionMessagePanel.SetActive(false);
+                    // retryMessage.text = error;
+                    // retry.SetActive(true);
+                    // connectionMessagePanel.SetActive(false);
                 }
             }
             ));
@@ -877,9 +877,9 @@ public class EventHandler : MonoBehaviour
         }, (error) => {
             if (error != "")
             {
-                retryMessage.text = error;
-                retry.SetActive(true);
-                connectionMessagePanel.SetActive(false);
+                // retryMessage.text = error;
+                // retry.SetActive(true);
+                // connectionMessagePanel.SetActive(false);
             }
         }));
     }
@@ -919,8 +919,8 @@ public class EventHandler : MonoBehaviour
         }
         else if(identifier == "PenelitiButton")
         {
-            detPenelitiStatus = !detPenelitiStatus;
-            DetailPenelitiBar.SetActive(detPenelitiStatus);
+            // detPenelitiStatus = !detPenelitiStatus;
+            // DetailPenelitiBar.SetActive(detPenelitiStatus);
 
             Debug.Log("peneliti button pressed <- eventHandler");
         }

@@ -17,7 +17,6 @@ public class Manager : EventHandler
     public string portServer = "";
     private string param;
     public static Manager instance;
-    public GameObject vrKeys;
 
     private void Awake() {
         if (instance == null){
@@ -38,7 +37,6 @@ public class Manager : EventHandler
     public void SubmitIP(string ip){
         ipAddress = ip;
         StartConnection();
-        vrKeys.SetActive(false);
     }
     
     public void StartConnection()
@@ -48,7 +46,7 @@ public class Manager : EventHandler
         config.SetUrl(ipAddress);
         config.SetPort(portServer);
         ApplyURL(config);
-        configPanel.SetActive(false);
+        //configPanel.SetActive(false);
 
         // start server
         Server.Start(6000);
@@ -66,30 +64,5 @@ public class Manager : EventHandler
         DashboardBar4.SetActive(dashboardStatus);
 
         Debug.Log("dashboard button pressed <- manager");
-    }
-
-    public void PenelitianToggle()
-    {
-        detPenelitiStatus = !detPenelitiStatus;
-        DetailPenelitiBar.SetActive(detPenelitiStatus);
-
-        Debug.Log("peneliti button pressed <- eventHandler");
-    }
-    public void OptionToggle()
-    {
-        detOptionStatus = !detOptionStatus;
-        OptionBar.SetActive(detOptionStatus);
-
-        Debug.Log("option button pressed <- eventHandler");
-
-    }
-    public void OpenResearcherDetail()
-    {
-        DetailPenelitiBar.SetActive(true);
-    }
-
-    public void CloseResearcherDetail()
-    {
-        DetailPenelitiBar.SetActive(false);
     }
 }
