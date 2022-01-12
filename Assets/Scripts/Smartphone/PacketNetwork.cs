@@ -15,7 +15,7 @@ public enum ServerPackets
     sendCommand,
     sendFilterSummary,
     sendResearcherId,
-    // sendNodeRequest
+    sendNodeRequest
     // sendDashboardData
 }
 
@@ -29,7 +29,7 @@ public enum ClientPackets
     sendCommand,
     sendFilterSummary,
     sendResearcherId,
-    // sendNodeRequest
+    sendNodeRequest
     // sendDashboardData
 }
 

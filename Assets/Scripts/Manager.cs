@@ -46,23 +46,11 @@ public class Manager : EventHandler
         config.SetUrl(ipAddress);
         config.SetPort(portServer);
         ApplyURL(config);
-        //configPanel.SetActive(false);
 
         // start server
         Server.Start(6000);
 
         // connect to smartphone
         Client.instance.ConnectToServer();
-    }
-
-    public void DashboardToggle()
-    {
-        dashboardStatus = !dashboardStatus;
-        DashboardBar.SetActive(dashboardStatus);
-        DashboardBar2.SetActive(dashboardStatus);
-        DashboardBar3.SetActive(dashboardStatus);
-        DashboardBar4.SetActive(dashboardStatus);
-
-        Debug.Log("dashboard button pressed <- manager");
     }
 }

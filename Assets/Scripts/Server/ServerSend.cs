@@ -73,14 +73,14 @@ public class ServerSend
         }
     }
 
-    // public static void SendNodeRequestToVR(string _id, string _tagName){
-    //     using(PacketNetwork _packet = new PacketNetwork((int)ServerPackets.sendNodeRequest)){
-    //         _packet.Write(_id);
-    //         _packet.Write(_tagName);
+    public static void SendNodeRequestToVR(string _id, string _tagName){
+        using(PacketNetwork _packet = new PacketNetwork((int)ServerPackets.sendNodeRequest)){
+            _packet.Write(_id);
+            _packet.Write(_tagName);
 
-    //         SendTCPData(1, _packet);
-    //     }
-    // }
+            SendTCPData(1, _packet);
+        }
+    }
 
     // public static void RequestForTexture(int _fromClient, string _msg){
     //     using (PacketNetwork _packet = new PacketNetwork((int)ServerPackets.textureRequest)){

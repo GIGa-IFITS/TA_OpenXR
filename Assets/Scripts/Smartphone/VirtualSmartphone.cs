@@ -54,26 +54,42 @@ public class VirtualSmartphone : MonoBehaviour
         Debug.Log("width in meter: " + widthInMeter + " height in meter: " + heightInMeter);
 
         //this.transform.parent.transform.localScale = new Vector3(widthInMeter * 40, heightInMeter * 40, 0.3f);
-        this.transform.parent.transform.localScale = new Vector3(widthInMeter, heightInMeter, 0.0084f);
+        //this.transform.parent.transform.localScale = new Vector3(widthInMeter, heightInMeter, 0.0084f);
         //this.transform.parent.transform.localRotation = Quaternion.Euler(90, -90, 0);
-        this.transform.parent.transform.Rotate(new Vector3(0, 0, -100));
+        //this.transform.parent.transform.Rotate(new Vector3(0, 0, -100));
     }
 
-    // public void ChangeNode(string _id, string _tagName){
-    //     if(_tagName == "ListPenelitiDepartemen"){
-    //         Manager.instance.getPenelitiDepartemenDetailITS(_id);
+    public void PreviousNode(string _id, string _tagName){
+        if(_tagName == "ListPenelitiDepartemen"){
+            // show faculty list (institution unit filter)
+            Manager.instance.getPenelitiDepartemenITS(_id);
 
-    //         GameObject nodeParent = GameObject.Find("3DScatterParent");
-    //         NodeVariable nodeObject = nodeParent.transform.Find(_id).GetComponentInParent<NodeVariable>();
+            GameObject nodeParent = GameObject.Find("3DScatterParent");
+            NodeVariable nodeObject = nodeParent.transform.Find(_id).GetComponentInParent<NodeVariable>();
             
-    //         if(nodeObject != null){
-    //             string nama = nodeObject.nama;
-    //             int jumlah = nodeObject.jumlah;
-    //             string filterName = "Institution Unit";
-    //             ClientSend.SendFilterSummary(nama, jumlah, _tagName, _id, filterName);
-    //         }
-    //     }else if(_tagName == "ListPublikasiKataKunci"){
-    //         //
-    //     }
-    // }
+            if(nodeObject != null){
+                // SEND DATA FROM VR TO SMARTPHONE
+                string nama = nodeObject.nama;
+                int jumlah = nodeObject.jumlah;
+                string tag = "ListPenelitiFakultas";
+                string filterName = "Institution Unit";
+                ClientSend.SendFilterSummary(nama, jumlah, tag, _id, filterName);
+            }
+        }else if(_tagName == "ListPublikasiKataKunci"){
+            // show faculty list (research keyword filter)
+            Manager.instance.getPublikasiKataKunci(_id);
+
+            GameObject nodeParent = GameObject.Find("3DScatterParent");
+            NodeVariable nodeObject = nodeParent.transform.Find(_id).GetComponentInParent<NodeVariable>();
+            
+            if(nodeObject != null){
+                // SEND DATA FROM VR TO SMARTPHONE
+                string nama = nodeObject.nama;
+                int jumlah = nodeObject.jumlah;
+                string tag = "ListPublikasiFakultas";
+                string filterName = "Research Keyword";
+                ClientSend.SendFilterSummary(nama, jumlah, tag, _id, filterName);
+            }
+        }
+    }
 }

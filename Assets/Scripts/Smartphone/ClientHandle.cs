@@ -43,7 +43,7 @@ public class ClientHandle : MonoBehaviour
 
         Debug.Log($"Received dashboard toggle value from server.");
         Manager.instance.Dashboard();
-        Manager.instance.DashboardToggle();
+        //Manager.instance.DashboardToggle();
     }
 
     // receive command from server
@@ -71,6 +71,7 @@ public class ClientHandle : MonoBehaviour
             Debug.Log("Destroying node, back to filter menu");
             Manager.instance.flushNode();
         }
+        Manager.instance.PrintDebug();
     }
 
     // receive filter summary
@@ -93,13 +94,13 @@ public class ClientHandle : MonoBehaviour
         FilterManager.instance.ShowResearcherDetail(_id, _filterName);
     }
 
-    // public static void NodeRequestReceived(PacketNetwork _packet){
-    //     string _id = _packet.ReadString();
-    //     string _tagName = _packet.ReadString();
+    public static void NodeRequestReceived(PacketNetwork _packet){
+        string _id = _packet.ReadString();
+        string _tagName = _packet.ReadString();
 
-    //     // update smartphone screen
-    //     VirtualSmartphone.instance.ChangeNode(_id, _tagName);
-    // }
+        // update smartphone screen
+        VirtualSmartphone.instance.PreviousNode(_id, _tagName);
+    }
 
     // receive request for texture message from server
     // public static void TextureRequested(PacketNetwork _packet){

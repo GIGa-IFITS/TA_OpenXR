@@ -115,11 +115,10 @@ public class VirtualSmartphoneCollision : MonoBehaviour
             else if (nodeObject.CompareTag("ListPublikasiKataKunci"))
             {
                 string id = nodeObject.kode_peneliti;
-                string nama = name;
+                string nama = nodeObject.nama;
                 Manager.instance.getKataKunciPeneliti(id, nama);
 
                 // SEND DATA FROM VR TO SMARTPHONE
-                nama = nodeObject.nama;
                 int jumlah = nodeObject.jumlah;
                 string tag = "ListPublikasiKataKunci";
                 string filterName = "Research Keyword";
@@ -128,7 +127,6 @@ public class VirtualSmartphoneCollision : MonoBehaviour
             else if (nodeObject.CompareTag("ListKataKunciPeneliti"))
             {
                 string id = nodeObject.kode_peneliti;
-                string nama = name;
                 Manager.instance.getDetailPenelitiITS(id);
 
                 string filterName = "Research Keyword";

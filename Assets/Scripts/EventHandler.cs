@@ -12,32 +12,9 @@ using TMPro;
 
 public class EventHandler : MonoBehaviour
 {
-    // [Header("Koneksi dari unity ke database - Event Handler")]
-    // // koneksi dari unity ke database
-    // public GameObject configPanel;
-    // public GameObject retry;
-    // public Text retryMessage;
-    // public GameObject connectionMessagePanel;
     public string URL;
-
-    [Header("Dashboard")]
-    // total publikasi - dashboard
-    public GameObject DashboardBar;
-    public GameObject DashboardBar2;
-    public GameObject DashboardBar3;
-    public GameObject DashboardBar4;
-    public List<GameObject> listDashboard2;
-
-    public Text publikasiJurnal;
-    public Text publikasiKonferensi;
-    public Text publikasiBuku;
-    public Text publikasiTesis;
-    public Text publikasiPaten;
-    public Text publikasiPenelitian;
     public bool dashboardStatus = false;
     bool dashboardRefreshed = false;
-
-
 
     [Header("Pengaturan Node")]
     // peneliti ( secara umum )
@@ -47,16 +24,6 @@ public class EventHandler : MonoBehaviour
     public float sizeCoef = 0.005f;
     GameObject[] listPeneliti;
     int transparency = 1;
-
-    [Header("bool data")]
-    bool penelitiAbjadRefreshed = false;
-    bool penelitiInisialRefreshed = false;
-    bool penelitiFakultasRefreshed = false;
-    bool penelitiDepartemenRefreshed = false;
-    bool penelitiGelarFakultasRefreshed = false;
-    bool penelitiGelarDepartemenRefreshed = false;
-    bool penelitiLabFakultasRefreshed = false;
-    bool penelitiLabDepartemenRefreshed = false;
 
     [Header("Material")]
     public Material AbjadMaterial;
@@ -85,42 +52,13 @@ public class EventHandler : MonoBehaviour
     public Vector3 endScaleLegend = new Vector3(9.951063f, 6.884685f, 0.4520478f);
     bool destroyedStatus = false;
 
-    // [Header("Detail")]
-    // // detail peneliti
-    
-    // public GameObject DetailPenelitiBar;
-    // public Text namaPeneliti;
-    // public Text tanggalPeneliti;
-    // public Text fakultasPeneliti;
-    // public Text departemenPeneliti;
-    // public Text jurnalPeneliti;
-    // public Text konferensiPeneliti;
-    // public Text bukuPeneliti;
-    // public Text tesisPeneliti;
-    // public Text patenPeneliti;
-    // public Text penelitianPeneliti;
-    // public bool detPenelitiStatus = false;
-
-    [Header("Tombol Navigasi")]
-    // public VRTK_InteractableObject tombolDashboard;
-    // public VRTK_InteractObjectHighlighter highlightOption;
-    // public GameObject TableButton;
-
     [Header("Pengaturan")]
 
     public GameObject OptionBar;
     public bool detOptionStatus = false;
-
-    [Header("Navigator")]
-
-    public TMP_Text NavigatorText;
+    public TextMeshProUGUI debugText;
 
     RequestHandler requestPeneliti = new RequestHandler();
-    
-    void Start()
-    {
-        //TableButton = GameObject.Find("NavigationButton");
-    }
 
     public void ApplyURL(Config config)
     {
@@ -137,105 +75,98 @@ public class EventHandler : MonoBehaviour
 
     public void Dashboard()
     {
-        if(dashboardRefreshed == false)
+        requestPeneliti.URL = URL;
+        StartCoroutine(requestPeneliti.RequestData((result) =>
         {
-            requestPeneliti.URL = URL;
-            //NavigatorText.text = "Dashboard";
-            StartCoroutine(requestPeneliti.RequestData((result) =>
+            // mengambil jumlah jurnal, conference, books, thesis, paten dan research yang ada
+            hasilPublikasiITS(result);
+            
+        }, (error) => {
+            if (error != "")
             {
-                // mengambil jumlah jurnal, conference, books, thesis, paten dan research yang ada
-                hasilPublikasiITS(result);
-               
-            }, (error) => {
-                if (error != "")
-                {
-                    // retryMessage.text = error;
-                    // retry.SetActive(true);
-                    // connectionMessagePanel.SetActive(false);
-                }
-            }));
-        }
+                // retryMessage.text = error;
+                // retry.SetActive(true);
+                // connectionMessagePanel.SetActive(false);
+            }
+        }));
     }
 
     // hasilPublikasiITS adalah data pertama yang ditampilkan di dashboard
     void hasilPublikasiITS(RawData rawdata)
     {
-        listDashboard2.Add(DashboardBar);
-        listDashboard2.Add(DashboardBar2);
-        listDashboard2.Add(DashboardBar3);
-        listDashboard2.Add(DashboardBar4);
+        // listDashboard2.Add(DashboardBar);
+        // listDashboard2.Add(DashboardBar2);
+        // listDashboard2.Add(DashboardBar3);
+        // listDashboard2.Add(DashboardBar4);
 
 
-        foreach (GameObject dashboardPlane in listDashboard2)
-        {
-            Text publikasiJurnalTest = dashboardPlane.transform.GetChild(0).GetChild(2).GetChild(1).GetComponent<Text>();
-            Text publikasiKonferensiTest = dashboardPlane.transform.GetChild(0).GetChild(3).GetChild(1).GetComponent<Text>();
-            Text publikasiBukuTest = dashboardPlane.transform.GetChild(0).GetChild(4).GetChild(1).GetComponent<Text>();
-            Text publikasiTesisTest = dashboardPlane.transform.GetChild(0).GetChild(5).GetChild(1).GetComponent<Text>();
-            Text publikasiPatenTest = dashboardPlane.transform.GetChild(0).GetChild(6).GetChild(1).GetComponent<Text>();
-            Text publikasiPenelitianTest = dashboardPlane.transform.GetChild(0).GetChild(7).GetChild(1).GetComponent<Text>();
+        // foreach (GameObject dashboardPlane in listDashboard2)
+        // {
+        //     Text publikasiJurnalTest = dashboardPlane.transform.GetChild(0).GetChild(2).GetChild(1).GetComponent<Text>();
+        //     Text publikasiKonferensiTest = dashboardPlane.transform.GetChild(0).GetChild(3).GetChild(1).GetComponent<Text>();
+        //     Text publikasiBukuTest = dashboardPlane.transform.GetChild(0).GetChild(4).GetChild(1).GetComponent<Text>();
+        //     Text publikasiTesisTest = dashboardPlane.transform.GetChild(0).GetChild(5).GetChild(1).GetComponent<Text>();
+        //     Text publikasiPatenTest = dashboardPlane.transform.GetChild(0).GetChild(6).GetChild(1).GetComponent<Text>();
+        //     Text publikasiPenelitianTest = dashboardPlane.transform.GetChild(0).GetChild(7).GetChild(1).GetComponent<Text>();
 
-            publikasiJurnalTest.text = rawdata.data[0].dashboard_data[0].hasil_publikasi[0].journals.ToString();
-            publikasiKonferensiTest.text = rawdata.data[0].dashboard_data[0].hasil_publikasi[1].conferences.ToString();
-            publikasiBukuTest.text = rawdata.data[0].dashboard_data[0].hasil_publikasi[2].books.ToString();
-            publikasiTesisTest.text = rawdata.data[0].dashboard_data[0].hasil_publikasi[3].thesis.ToString();
-            publikasiPatenTest.text = rawdata.data[0].dashboard_data[0].hasil_publikasi[4].paten.ToString();
-            publikasiPenelitianTest.text = rawdata.data[0].dashboard_data[0].hasil_publikasi[5].research.ToString();
-        }
+        //     publikasiJurnalTest.text = rawdata.data[0].dashboard_data[0].hasil_publikasi[0].journals.ToString();
+        //     publikasiKonferensiTest.text = rawdata.data[0].dashboard_data[0].hasil_publikasi[1].conferences.ToString();
+        //     publikasiBukuTest.text = rawdata.data[0].dashboard_data[0].hasil_publikasi[2].books.ToString();
+        //     publikasiTesisTest.text = rawdata.data[0].dashboard_data[0].hasil_publikasi[3].thesis.ToString();
+        //     publikasiPatenTest.text = rawdata.data[0].dashboard_data[0].hasil_publikasi[4].paten.ToString();
+        //     publikasiPenelitianTest.text = rawdata.data[0].dashboard_data[0].hasil_publikasi[5].research.ToString();
+        // }
     }
 
     public void getPenelitiAbjadITS()
     {
-        if(penelitiAbjadRefreshed == false)
-        {
-            flushNode();
+        flushNode();
 
-            requestPeneliti.URL = URL + "/peneliti?abjad=none";
-            NavigatorText.text = "Initials";
-            StartCoroutine(requestPeneliti.RequestData((result) => {
-                foreach (var data in result.data[0].inisial_peneliti)
-                {
+        requestPeneliti.URL = URL + "/peneliti?abjad=none";
+        debugText.text = debugText.text + requestPeneliti.URL;
+        StartCoroutine(requestPeneliti.RequestData((result) => {
+            debugText.text = debugText.text + "masuk coroutine\n";
+            foreach (var data in result.data[0].inisial_peneliti)
+            {
 
-                    GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti);
-                    //NodeAbjadPeneliti.GetComponent<VRTK_PressedObject>().Start();
-                    NodeAbjadPeneliti.name = data.inisial;
-                    NodeAbjadPeneliti.tag = "ListPenelitiAbjad";
-                    int jumlah = data.total;
+                GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti);
+                NodeAbjadPeneliti.name = data.inisial;
+                debugText.text = debugText.text + "data.inisial\n";
+                NodeAbjadPeneliti.tag = "ListPenelitiAbjad";
+                int jumlah = data.total;
 
-                    float size = jumlah * sizeCoef;
+                float size = jumlah * sizeCoef;
 
-                    int test = Random.Range(0, 2);
-                    if (test == 0) { NodeAbjadPeneliti.GetComponent<FloatingSphere>().orientation = -1; }
+                int test = Random.Range(0, 2);
+                if (test == 0) { NodeAbjadPeneliti.GetComponent<FloatingSphere>().orientation = -1; }
 
-                    NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
-                    tambahan.kode_peneliti = data.inisial;
-                    tambahan.nama = data.inisial;
-                    tambahan.jumlah = jumlah;
-                    tambahan.ukuran2 = new Vector3(size, size, size);
+                NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
+                tambahan.kode_peneliti = data.inisial;
+                tambahan.nama = data.inisial;
+                tambahan.jumlah = jumlah;
+                tambahan.ukuran2 = new Vector3(size, size, size);
 
-                    spawnNode(NodeAbjadPeneliti, size);
-                }
-                listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiAbjad");
-                foreach(GameObject node in listPeneliti)
-                {
-                    animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2, endMarker, InitialRotation, 0) ;
-                    StartCoroutine(animate);
-                }
-            }, error => {
-                if (error != "")
-                {
-                    // retryMessage.text = error;
-                    // retry.SetActive(true);
-                    // connectionMessagePanel.SetActive(false);
-                }
+                spawnNode(NodeAbjadPeneliti, size);
             }
-            ));
+            listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiAbjad");
+            foreach(GameObject node in listPeneliti)
+            {
+                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2, endMarker, InitialRotation, 0) ;
+                StartCoroutine(animate);
+            }
+        }, error => {
+            if (error != "")
+            {
+                // retryMessage.text = error;
+                // retry.SetActive(true);
+                // connectionMessagePanel.SetActive(false);
+            }
         }
-        else
-        {
+        ));
+    }
 
-        }
-
+    public void PrintDebug(){
+        debugText.text = debugText.text + "masuk command received tapi gak masuk filter manapun\n";
     }
 
     public void peekNodePeneliti(GameObject NodePeneliti, string jenis="researchers")
@@ -267,434 +198,393 @@ public class EventHandler : MonoBehaviour
 
     public void getPenelitiInisialITS(string inisial)
     {
-        if(penelitiInisialRefreshed == false)
-        {
-            flushNode();
-            NavigatorText.text = "Initial :" + inisial;
-            requestPeneliti.URL = URL + "/peneliti?abjad=" + inisial;
-            StartCoroutine(requestPeneliti.RequestData((result) => {
-                foreach (var data in result.data[0].nama_peneliti)
-                {
-                    GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti);
-                    Debug.Log(data.nama + " " + data.kode_dosen + " " + data.jumlah);
-                    NodeAbjadPeneliti.name = data.kode_dosen;
-                    int jumlah = data.jumlah;
-                    float size = jumlah * sizeCoef;
-                    NodeAbjadPeneliti.tag = "ListPenelitiInisial";
+        flushNode();
+        requestPeneliti.URL = URL + "/peneliti?abjad=" + inisial;
+        StartCoroutine(requestPeneliti.RequestData((result) => {
+            foreach (var data in result.data[0].nama_peneliti)
+            {
+                GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti);
+                Debug.Log(data.nama + " " + data.kode_dosen + " " + data.jumlah);
+                NodeAbjadPeneliti.name = data.kode_dosen;
+                int jumlah = data.jumlah;
+                float size = jumlah * sizeCoef;
+                NodeAbjadPeneliti.tag = "ListPenelitiInisial";
 
-                    NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
-                    tambahan.kode_peneliti = data.kode_dosen;
-                    tambahan.nama = data.nama;
-                    tambahan.jumlah = jumlah;
-                    tambahan.ukuran = size;
-                    tambahan.ukuran2 = new Vector3(size, size, size);
+                NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
+                tambahan.kode_peneliti = data.kode_dosen;
+                tambahan.nama = data.nama;
+                tambahan.jumlah = jumlah;
+                tambahan.ukuran = size;
+                tambahan.ukuran2 = new Vector3(size, size, size);
 
-                    spawnNode(NodeAbjadPeneliti, size);
-                }
-                listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiInisial");
-                foreach (GameObject node in listPeneliti)
-                {
-                    animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2, endMarker, InitialRotation, 0);
-                    StartCoroutine(animate);
-                }
-            }, error => {
-                if (error != "")
-                {
-                    // retryMessage.text = error;
-                    // retry.SetActive(true);
-                    // connectionMessagePanel.SetActive(false);
-                }
+                spawnNode(NodeAbjadPeneliti, size);
             }
-            ));
+            listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiInisial");
+            foreach (GameObject node in listPeneliti)
+            {
+                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2, endMarker, InitialRotation, 0);
+                StartCoroutine(animate);
+            }
+        }, error => {
+            if (error != "")
+            {
+                // retryMessage.text = error;
+                // retry.SetActive(true);
+                // connectionMessagePanel.SetActive(false);
+            }
         }
+        ));
     }
 
     public void getPenelitiFakultasITS()
     {
-        if(penelitiFakultasRefreshed == false)
-        {
+        flushNode();
 
-            flushNode();
+        requestPeneliti.URL = URL + "/peneliti?fakultas=none";
+        StartCoroutine(requestPeneliti.RequestData((result) => {
+            foreach (var data in result.data[0].fakultas_peneliti)
+            {
 
-            requestPeneliti.URL = URL + "/peneliti?fakultas=none";
-            NavigatorText.text = "Faculties";
-            StartCoroutine(requestPeneliti.RequestData((result) => {
-                foreach (var data in result.data[0].fakultas_peneliti)
-                {
+                GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti);
+                NodeAbjadPeneliti.name = data.nama_fakultas;
+                NodeAbjadPeneliti.tag = "ListPenelitiFakultas";
 
-                    GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti);
-                    NodeAbjadPeneliti.name = data.nama_fakultas;
-                    NodeAbjadPeneliti.tag = "ListPenelitiFakultas";
+                int jumlah = data.jumlah;
+                float size = jumlah * sizeCoef;
 
-                    int jumlah = data.jumlah;
-                    float size = jumlah * sizeCoef;
-
-                    NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
-                    tambahan.kode_alternate = data.kode_fakultas.ToString();
-                    tambahan.kode_peneliti = data.kode_fakultas.ToString();
-                    tambahan.nama = data.nama_fakultas;
-                    tambahan.jumlah = jumlah;
-                    tambahan.ukuran = size;
-                    tambahan.ukuran2 = new Vector3(size, size, size);
+                NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
+                tambahan.kode_alternate = data.kode_fakultas.ToString();
+                tambahan.kode_peneliti = data.kode_fakultas.ToString();
+                tambahan.nama = data.nama_fakultas;
+                tambahan.jumlah = jumlah;
+                tambahan.ukuran = size;
+                tambahan.ukuran2 = new Vector3(size, size, size);
 
 
-                    spawnNode(NodeAbjadPeneliti, size);
-                }
-                listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiFakultas");
-                foreach (GameObject node in listPeneliti)
-                {
-                    animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2, endMarker, InitialRotation, 0);
-                    StartCoroutine(animate);
-                }
-            }, error => {
-                if (error != "")
-                {
-                    // retryMessage.text = error;
-                    // retry.SetActive(true);
-                    // connectionMessagePanel.SetActive(false);
-                }
+                spawnNode(NodeAbjadPeneliti, size);
             }
-            ));
+            listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiFakultas");
+            foreach (GameObject node in listPeneliti)
+            {
+                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2, endMarker, InitialRotation, 0);
+                StartCoroutine(animate);
+            }
+        }, error => {
+            if (error != "")
+            {
+                // retryMessage.text = error;
+                // retry.SetActive(true);
+                // connectionMessagePanel.SetActive(false);
+            }
         }
-        
+        ));   
     }
 
     public void getPenelitiDepartemenITS(string kode_fakultas)
     {
-        if(penelitiDepartemenRefreshed == false)
-        {
+        flushNode();
+        requestPeneliti.URL = URL + "/peneliti?fakultas=" + kode_fakultas.ToString();
+        StartCoroutine(requestPeneliti.RequestData((result) => {
+            foreach (var data in result.data[0].departemen_peneliti)
+            {
 
-            flushNode();
-            requestPeneliti.URL = URL + "/peneliti?fakultas=" + kode_fakultas.ToString();
-            StartCoroutine(requestPeneliti.RequestData((result) => {
-                NavigatorText.text = result.data[0].departemen_peneliti[0].nama_fakultas;
-                foreach (var data in result.data[0].departemen_peneliti)
-                {
+                GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti);
+                NodeAbjadPeneliti.name = data.nama_departemen;
+                NodeAbjadPeneliti.tag = "ListPenelitiDepartemen";
 
-                    GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti);
-                    NodeAbjadPeneliti.name = data.nama_departemen;
-                    NodeAbjadPeneliti.tag = "ListPenelitiDepartemen";
-
-                    int jumlah = data.jumlah;
-                    float size = jumlah * sizeCoef;
+                int jumlah = data.jumlah;
+                float size = jumlah * sizeCoef;
 
 
-                    NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
-                    tambahan.kode_alternate = data.kode_fakultas.ToString();
-                    tambahan.kode_peneliti = data.kode_departemen.ToString();
-                    tambahan.nama = data.nama_departemen;
-                    tambahan.jumlah = jumlah;
-                    tambahan.ukuran = size;
-                    tambahan.ukuran2 = new Vector3(size, size, size);
+                NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
+                tambahan.kode_alternate = data.kode_fakultas.ToString();
+                tambahan.kode_peneliti = data.kode_departemen.ToString();
+                tambahan.nama = data.nama_departemen;
+                tambahan.jumlah = jumlah;
+                tambahan.ukuran = size;
+                tambahan.ukuran2 = new Vector3(size, size, size);
 
-                    spawnNode(NodeAbjadPeneliti, size);
-                }
-                listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiDepartemen");
-                foreach (GameObject node in listPeneliti)
-                {
-                    animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2, endMarker, InitialRotation, 0);
-                    StartCoroutine(animate);
-                }
-                
-            }, error => {
-                if (error != "")
-                {
-                    // retryMessage.text = error;
-                    // retry.SetActive(true);
-                    // connectionMessagePanel.SetActive(false);
-                }
+                spawnNode(NodeAbjadPeneliti, size);
             }
-            ));
+            listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiDepartemen");
+            foreach (GameObject node in listPeneliti)
+            {
+                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2, endMarker, InitialRotation, 0);
+                StartCoroutine(animate);
+            }
+            
+        }, error => {
+            if (error != "")
+            {
+                // retryMessage.text = error;
+                // retry.SetActive(true);
+                // connectionMessagePanel.SetActive(false);
+            }
         }
-        
+        ));
     }
 
     public void getPenelitiDepartemenDetailITS(string kode_departemen)
     {
-        if (penelitiDepartemenRefreshed == false)
-        {
-            flushNode();
+        flushNode();
 
-            requestPeneliti.URL = URL + "/peneliti?departemen=" + kode_departemen.ToString();
-            StartCoroutine(requestPeneliti.RequestData((result) => {
-                NavigatorText.text = result.data[0].nama_peneliti[0].nama_departemen;
-                foreach (var data in result.data[0].nama_peneliti)
-                {
+        requestPeneliti.URL = URL + "/peneliti?departemen=" + kode_departemen.ToString();
+        StartCoroutine(requestPeneliti.RequestData((result) => {
+            foreach (var data in result.data[0].nama_peneliti)
+            {
 
-                    GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti);
-                    NodeAbjadPeneliti.name = data.nama;
-                    NodeAbjadPeneliti.tag = "ListPenelitiDepartemenDetail";
+                GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti);
+                NodeAbjadPeneliti.name = data.nama;
+                NodeAbjadPeneliti.tag = "ListPenelitiDepartemenDetail";
 
-                    int jumlah = data.jumlah;
-                    //float sizeCoef = 0.005f;
-                    float size = jumlah * sizeCoef;
+                int jumlah = data.jumlah;
+                //float sizeCoef = 0.005f;
+                float size = jumlah * sizeCoef;
 
 
-                    NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
-                    tambahan.kode_peneliti = data.kode_dosen.ToString();
-                    tambahan.nama = NodeAbjadPeneliti.name;
-                    tambahan.jumlah = jumlah;
-                    tambahan.ukuran = size;
-                    tambahan.ukuran2 = new Vector3(size, size, size);
+                NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
+                tambahan.kode_peneliti = data.kode_dosen.ToString();
+                tambahan.nama = NodeAbjadPeneliti.name;
+                tambahan.jumlah = jumlah;
+                tambahan.ukuran = size;
+                tambahan.ukuran2 = new Vector3(size, size, size);
 
-                    spawnNode(NodeAbjadPeneliti, size);
-                }
-                listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiDepartemenDetail");
-                foreach (GameObject node in listPeneliti)
-                {
-                    animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2, endMarker, InitialRotation, 0);
-                    StartCoroutine(animate);
-                }
-            }, error => {
-                if (error != "")
-                {
-                    // retryMessage.text = error;
-                    // retry.SetActive(true);
-                    // connectionMessagePanel.SetActive(false);
-                }
+                spawnNode(NodeAbjadPeneliti, size);
             }
-            ));
+            listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiDepartemenDetail");
+            foreach (GameObject node in listPeneliti)
+            {
+                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2, endMarker, InitialRotation, 0);
+                StartCoroutine(animate);
+            }
+        }, error => {
+            if (error != "")
+            {
+                // retryMessage.text = error;
+                // retry.SetActive(true);
+                // connectionMessagePanel.SetActive(false);
+            }
         }
-
+        ));
     }
 
     public void getGelarPenelitiITS()
     {
-        if (penelitiGelarFakultasRefreshed == false)
-        {
-            flushNode();
+        flushNode();
 
-            requestPeneliti.URL = URL + "/gelar?kode=none";
-            NavigatorText.text = "Academic Degree";
-            StartCoroutine(requestPeneliti.RequestData((result) => {
-                foreach (var data in result.data[0].gelar_peneliti)
-                {
+        requestPeneliti.URL = URL + "/gelar?kode=none";
+        StartCoroutine(requestPeneliti.RequestData((result) => {
+            foreach (var data in result.data[0].gelar_peneliti)
+            {
 
-                    GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti);
-                    NodeAbjadPeneliti.name = data.gelar;
-                    NodeAbjadPeneliti.tag = "ListGelar";
+                GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti);
+                NodeAbjadPeneliti.name = data.gelar;
+                NodeAbjadPeneliti.tag = "ListGelar";
 
-                    int jumlah = data.jumlah;
-                    float size = jumlah * sizeCoef;
+                int jumlah = data.jumlah;
+                float size = jumlah * sizeCoef;
 
-                    NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
-                    tambahan.kode_peneliti = data.gelar.ToString();
-                    tambahan.nama = tambahan.kode_peneliti;
-                    tambahan.jumlah = jumlah;
-                    tambahan.ukuran = size;
-                    tambahan.ukuran2 = new Vector3(size, size, size);
+                NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
+                tambahan.kode_peneliti = data.gelar.ToString();
+                tambahan.nama = tambahan.kode_peneliti;
+                tambahan.jumlah = jumlah;
+                tambahan.ukuran = size;
+                tambahan.ukuran2 = new Vector3(size, size, size);
 
 
-                    spawnNode(NodeAbjadPeneliti, size);
-                }
-                listPeneliti = GameObject.FindGameObjectsWithTag("ListGelar");
-                foreach (GameObject node in listPeneliti)
-                {
-                    animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2, endMarker, InitialRotation, 0);
-                    StartCoroutine(animate);
-                }
-            }, error => {
-                if (error != "")
-                {
-                    // retryMessage.text = error;
-                    // retry.SetActive(true);
-                    // connectionMessagePanel.SetActive(false);
-                }
+                spawnNode(NodeAbjadPeneliti, size);
             }
-            ));
+            listPeneliti = GameObject.FindGameObjectsWithTag("ListGelar");
+            foreach (GameObject node in listPeneliti)
+            {
+                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2, endMarker, InitialRotation, 0);
+                StartCoroutine(animate);
+            }
+        }, error => {
+            if (error != "")
+            {
+                // retryMessage.text = error;
+                // retry.SetActive(true);
+                // connectionMessagePanel.SetActive(false);
+            }
         }
+        ));
     }
 
     public void getGelarPenelitiDetail(string kode)
     {
-        if (penelitiGelarFakultasRefreshed == false)
-        {
-            flushNode();
+        flushNode();
 
-            requestPeneliti.URL = URL + "/gelar?kode="+kode;
-            NavigatorText.text = "Degree : " + kode;
-            StartCoroutine(requestPeneliti.RequestData((result) => {
-                foreach (var data in result.data[0].nama_peneliti)
-                {
+        requestPeneliti.URL = URL + "/gelar?kode="+kode;
+        StartCoroutine(requestPeneliti.RequestData((result) => {
+            foreach (var data in result.data[0].nama_peneliti)
+            {
 
-                    GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti);
-                    NodeAbjadPeneliti.name = data.nama;
-                    NodeAbjadPeneliti.tag = "ListGelarDetail";
+                GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti);
+                NodeAbjadPeneliti.name = data.nama;
+                NodeAbjadPeneliti.tag = "ListGelarDetail";
 
-                    int jumlah = data.jumlah;
-                    float size = jumlah * sizeCoef;
+                int jumlah = data.jumlah;
+                float size = jumlah * sizeCoef;
 
-                    NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
-                    tambahan.kode_peneliti = data.kode_dosen.ToString();
-                    tambahan.nama = NodeAbjadPeneliti.name;
-                    tambahan.jumlah = jumlah;
-                    tambahan.ukuran = size;
-                    tambahan.ukuran2 = new Vector3(size, size, size);
+                NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
+                tambahan.kode_peneliti = data.kode_dosen.ToString();
+                tambahan.nama = NodeAbjadPeneliti.name;
+                tambahan.jumlah = jumlah;
+                tambahan.ukuran = size;
+                tambahan.ukuran2 = new Vector3(size, size, size);
 
 
-                    spawnNode(NodeAbjadPeneliti, size);
-                }
-                listPeneliti = GameObject.FindGameObjectsWithTag("ListGelarDetail");
-                foreach (GameObject node in listPeneliti)
-                {
-                    animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2, endMarker, InitialRotation, 0);
-                    StartCoroutine(animate);
-                }
-            }, error => {
-                if (error != "")
-                {
-                    // retryMessage.text = error;
-                    // retry.SetActive(true);
-                    // connectionMessagePanel.SetActive(false);
-                }
+                spawnNode(NodeAbjadPeneliti, size);
             }
-            ));
+            listPeneliti = GameObject.FindGameObjectsWithTag("ListGelarDetail");
+            foreach (GameObject node in listPeneliti)
+            {
+                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2, endMarker, InitialRotation, 0);
+                StartCoroutine(animate);
+            }
+        }, error => {
+            if (error != "")
+            {
+                // retryMessage.text = error;
+                // retry.SetActive(true);
+                // connectionMessagePanel.SetActive(false);
+            }
         }
+        ));
     }
 
     public void getPublikasiFakultas()
     {
-        if (penelitiLabFakultasRefreshed == false)
-        {
-            flushNode();
+        flushNode();
 
-            requestPeneliti.URL = URL + "/publikasi?fakultas=none";
-            NavigatorText.text = "Publications";
-            StartCoroutine(requestPeneliti.RequestData((result) => {
-                foreach (var data in result.data[0].fakultas_peneliti)
-                {
+        requestPeneliti.URL = URL + "/publikasi?fakultas=none";
+        StartCoroutine(requestPeneliti.RequestData((result) => {
+            foreach (var data in result.data[0].fakultas_peneliti)
+            {
 
-                    GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti);
-                    NodeAbjadPeneliti.name = data.nama_fakultas;
-                    NodeAbjadPeneliti.tag = "ListPublikasiFakultas";
+                GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti);
+                NodeAbjadPeneliti.name = data.nama_fakultas;
+                NodeAbjadPeneliti.tag = "ListPublikasiFakultas";
 
-                    //jumlah disini adalah jumlah publikasi, bukan jumlah peneliti
-                    int jumlah = data.jumlah;
-                    float size = jumlah * sizeCoef * 0.1f;
+                //jumlah disini adalah jumlah publikasi, bukan jumlah peneliti
+                int jumlah = data.jumlah;
+                float size = jumlah * sizeCoef * 0.1f;
 
-                    NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
-                    tambahan.kode_alternate = data.kode_fakultas.ToString();
-                    tambahan.kode_peneliti = data.kode_fakultas.ToString();
-                    tambahan.nama = NodeAbjadPeneliti.name;
-                    tambahan.jumlah = jumlah;
-                    tambahan.ukuran = size;
-                    tambahan.ukuran2 = new Vector3(size, size, size);
+                NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
+                tambahan.kode_alternate = data.kode_fakultas.ToString();
+                tambahan.kode_peneliti = data.kode_fakultas.ToString();
+                tambahan.nama = NodeAbjadPeneliti.name;
+                tambahan.jumlah = jumlah;
+                tambahan.ukuran = size;
+                tambahan.ukuran2 = new Vector3(size, size, size);
 
 
-                    spawnNode(NodeAbjadPeneliti, size);
-                }
-                listPeneliti = GameObject.FindGameObjectsWithTag("ListPublikasiFakultas");
-                foreach (GameObject node in listPeneliti)
-                {
-                    animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2, endMarker, InitialRotation, 0);
-                    StartCoroutine(animate);
-                }
-            }, error => {
-                if (error != "")
-                {
-                    // retryMessage.text = error;
-                    // retry.SetActive(true);
-                    // connectionMessagePanel.SetActive(false);
-                }
+                spawnNode(NodeAbjadPeneliti, size);
             }
-            ));
+            listPeneliti = GameObject.FindGameObjectsWithTag("ListPublikasiFakultas");
+            foreach (GameObject node in listPeneliti)
+            {
+                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2, endMarker, InitialRotation, 0);
+                StartCoroutine(animate);
+            }
+        }, error => {
+            if (error != "")
+            {
+                // retryMessage.text = error;
+                // retry.SetActive(true);
+                // connectionMessagePanel.SetActive(false);
+            }
         }
+        ));
     }
 
     public void getPublikasiKataKunci(string kode)
     {
-        if(penelitiLabDepartemenRefreshed == false)
-        {
-            flushNode();
+        flushNode();
 
-            requestPeneliti.URL = URL + "/publikasi?fakultas=" + kode;
-            StartCoroutine(requestPeneliti.RequestData((result) => {
-                NavigatorText.text = result.data[0].fakultas_publikasi[0].nama_fakultas;
-                foreach (var data in result.data[0].fakultas_publikasi)
-                {
-                    
+        requestPeneliti.URL = URL + "/publikasi?fakultas=" + kode;
+        StartCoroutine(requestPeneliti.RequestData((result) => {
+            foreach (var data in result.data[0].fakultas_publikasi)
+            {
+                
 
-                    GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti);
-                    NodeAbjadPeneliti.name = data.kata_kunci;
-                    NodeAbjadPeneliti.tag = "ListPublikasiKataKunci";
+                GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti);
+                NodeAbjadPeneliti.name = data.kata_kunci;
+                NodeAbjadPeneliti.tag = "ListPublikasiKataKunci";
 
-                    int jumlah = int.Parse(data.df);
-                    float size = jumlah * sizeCoef;
+                int jumlah = int.Parse(data.df);
+                float size = jumlah * sizeCoef;
 
-                    NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
-                    tambahan.kode_alternate = data.kode_fakultas.ToString();
-                    tambahan.kode_peneliti = data.kode_fakultas.ToString();
-                    tambahan.nama = NodeAbjadPeneliti.name;
-                    tambahan.jumlah = jumlah;
-                    tambahan.ukuran = float.Parse(data.idf);
-                    tambahan.ukuran2 = new Vector3(size, size, size);
+                NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
+                tambahan.kode_alternate = data.kode_fakultas.ToString();
+                tambahan.kode_peneliti = data.kode_fakultas.ToString();
+                tambahan.nama = NodeAbjadPeneliti.name;
+                tambahan.jumlah = jumlah;
+                tambahan.ukuran = float.Parse(data.idf);
+                tambahan.ukuran2 = new Vector3(size, size, size);
 
 
-                    spawnNode(NodeAbjadPeneliti, size);
-                }
-                listPeneliti = GameObject.FindGameObjectsWithTag("ListPublikasiKataKunci");
-                foreach (GameObject node in listPeneliti)
-                {
-                    animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2, endMarker, InitialRotation, 0);
-                    StartCoroutine(animate);
-                }
-            }, error => {
-                if (error != "")
-                {
-                    // retryMessage.text = error;
-                    // retry.SetActive(true);
-                    // connectionMessagePanel.SetActive(false);
-                }
+                spawnNode(NodeAbjadPeneliti, size);
             }
-            ));
+            listPeneliti = GameObject.FindGameObjectsWithTag("ListPublikasiKataKunci");
+            foreach (GameObject node in listPeneliti)
+            {
+                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2, endMarker, InitialRotation, 0);
+                StartCoroutine(animate);
+            }
+        }, error => {
+            if (error != "")
+            {
+                // retryMessage.text = error;
+                // retry.SetActive(true);
+                // connectionMessagePanel.SetActive(false);
+            }
         }
+        ));
     }
 
     public void getKataKunciPeneliti(string fakultas, string katakunci)
     {
-        if (penelitiLabDepartemenRefreshed == false)
-        {
-            flushNode();
+        flushNode();
 
-            requestPeneliti.URL = URL + "/publikasi?fakultas=" + fakultas + "&katakunci=" + katakunci;
-            NavigatorText.text = "Keyword : " + katakunci;
-            StartCoroutine(requestPeneliti.RequestData((result) => {
-                foreach (var data in result.data[0].nama_peneliti)
-                {
+        requestPeneliti.URL = URL + "/publikasi?fakultas=" + fakultas + "&katakunci=" + katakunci;
+        StartCoroutine(requestPeneliti.RequestData((result) => {
+            foreach (var data in result.data[0].nama_peneliti)
+            {
 
-                    GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti);
-                    NodeAbjadPeneliti.name = data.nama;
-                    NodeAbjadPeneliti.tag = "ListKataKunciPeneliti";
+                GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti);
+                NodeAbjadPeneliti.name = data.nama;
+                NodeAbjadPeneliti.tag = "ListKataKunciPeneliti";
 
-                    int jumlah = data.jumlah;
-                    float size = jumlah * sizeCoef * 10;
+                int jumlah = data.jumlah;
+                float size = jumlah * sizeCoef * 10;
 
-                    NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
-                    tambahan.kode_peneliti = data.kode_dosen.ToString();
-                    tambahan.nama = NodeAbjadPeneliti.name;
-                    tambahan.jumlah = jumlah;
-                    tambahan.ukuran = size;
-                    tambahan.ukuran2 = new Vector3(size, size, size);
+                NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
+                tambahan.kode_peneliti = data.kode_dosen.ToString();
+                tambahan.nama = NodeAbjadPeneliti.name;
+                tambahan.jumlah = jumlah;
+                tambahan.ukuran = size;
+                tambahan.ukuran2 = new Vector3(size, size, size);
 
 
-                    spawnNode(NodeAbjadPeneliti, size);
-                }
-                listPeneliti = GameObject.FindGameObjectsWithTag("ListKataKunciPeneliti");
-                foreach (GameObject node in listPeneliti)
-                {
-                    animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2, endMarker, InitialRotation, 0);
-                    StartCoroutine(animate);
-                }
-            }, error => {
-                if (error != "")
-                {
-                    // retryMessage.text = error;
-                    // retry.SetActive(true);
-                    // connectionMessagePanel.SetActive(false);
-                }
+                spawnNode(NodeAbjadPeneliti, size);
             }
-            ));
+            listPeneliti = GameObject.FindGameObjectsWithTag("ListKataKunciPeneliti");
+            foreach (GameObject node in listPeneliti)
+            {
+                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2, endMarker, InitialRotation, 0);
+                StartCoroutine(animate);
+            }
+        }, error => {
+            if (error != "")
+            {
+                // retryMessage.text = error;
+                // retry.SetActive(true);
+                // connectionMessagePanel.SetActive(false);
+            }
         }
+        ));
     }
 
     public void spawnNode(GameObject node, float size)
@@ -898,34 +788,4 @@ public class EventHandler : MonoBehaviour
         // patenPeneliti.text = rawdata.data[0].detail_peneliti[0].paten.ToString();
         // penelitianPeneliti.text = rawdata.data[0].detail_peneliti[0].penelitian.ToString();
     }
-
-    public void buttonPressed(string identifier, string name = null)
-    {
-        Debug.Log("button pressed <- eventHandler");
-        if(identifier == "ListPenelitiAbjad")
-        {
-            Debug.Log(identifier + "<- eventhandler");
-            getPenelitiInisialITS(name);
-        }
-        else if(identifier == "ListInisialPeneliti")
-        {
-            Debug.Log(identifier + "<- eventhandler");
-            getDetailPenelitiITS(name);
-        }
-        else if(identifier == "DashboardButton")
-        {
-            dashboardStatus = !dashboardStatus;
-            Debug.Log("dashboard button pressed <- eventHandler");
-        }
-        else if(identifier == "PenelitiButton")
-        {
-            // detPenelitiStatus = !detPenelitiStatus;
-            // DetailPenelitiBar.SetActive(detPenelitiStatus);
-
-            Debug.Log("peneliti button pressed <- eventHandler");
-        }
-
-    }
-
-
 }   
