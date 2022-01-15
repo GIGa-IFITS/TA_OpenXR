@@ -5,10 +5,8 @@ using UnityEngine;
 public class VirtualSmartphoneCollision : MonoBehaviour
 {
     // knock smartphone to node
-    void OnCollisionEnter(Collision collision){
-        Debug.Log("collide with " + collision.gameObject.name);
-
-        NodeVariable nodeObject = collision.gameObject.GetComponent<NodeVariable>();
+    public void CollideWithNode(NodeVariable nodeObject){
+        //NodeVariable nodeObject = collision.gameObject.GetComponent<NodeVariable>();
         if (nodeObject != null){
             if (nodeObject.CompareTag("ListPenelitiAbjad"))
             {

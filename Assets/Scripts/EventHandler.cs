@@ -6,9 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.Networking;
 using UnityEngine.Android;
 using System.IO;
-//using VRTK;
 using TMPro;
-
 
 public class EventHandler : MonoBehaviour
 {
@@ -20,10 +18,8 @@ public class EventHandler : MonoBehaviour
     // peneliti ( secara umum )
     public GameObject parentPenelitiScatter;
     public GameObject NodePeneliti;
-    public GameObject peekPeneliti;
     public float sizeCoef = 0.005f;
     GameObject[] listPeneliti;
-    int transparency = 1;
 
     [Header("Material")]
     public Material AbjadMaterial;
@@ -167,33 +163,6 @@ public class EventHandler : MonoBehaviour
 
     public void PrintDebug(){
         debugText.text = debugText.text + "masuk command received tapi gak masuk filter manapun\n";
-    }
-
-    public void peekNodePeneliti(GameObject NodePeneliti, string jenis="researchers")
-    {
-        GameObject peekNodePeneliti = peekPeneliti;
-        peekNodePeneliti.SetActive(true);
-        var peekNode = peekNodePeneliti.transform;
-
-        var peek = peekNode.GetChild(0);
-
-        var peekNodeNama = peek.GetChild(1).GetComponent<TMP_Text>();
-        var PeekNodeTitle = peek.GetChild(2).GetComponent<TMP_Text>();
-        var peekNodeJumlah = peek.GetChild(3).GetComponent<TMP_Text>();
-        var NodeVariable = NodePeneliti.GetComponent<NodeVariable>().nama;
-        var jumlahPublikasi = NodePeneliti.GetComponent<NodeVariable>().jumlah;
-
-        if (jenis == "researchers")
-        {
-            PeekNodeTitle.text = "Total Researchers";
-        }
-        else
-        {
-            PeekNodeTitle.text = "Total Publications";
-        }
-
-        peekNodeNama.text = NodeVariable;
-        peekNodeJumlah.text = jumlahPublikasi.ToString();
     }
 
     public void getPenelitiInisialITS(string inisial)
@@ -593,8 +562,10 @@ public class EventHandler : MonoBehaviour
         if (test == 0) { node.GetComponent<FloatingSphere>().orientation = -1; }
 
         node.transform.SetParent(parentPenelitiScatter.transform, false);
-        node.transform.localPosition = new Vector3(Random.Range(-3.0f, 3.0f), 0, Random.Range(-3.0f, 3.0f));
+        node.transform.localPosition = new Vector3(Random.Range(-2.0f, 2.0f), 0, Random.Range(-2.0f, 2.0f));
         node.transform.localScale = new Vector3(0f, 0f, 0f);
+
+        node.GetComponentInChildren<TextMeshProUGUI>().text = node.name;
 
         if (node.CompareTag("ListPenelitiAbjad"))
         {

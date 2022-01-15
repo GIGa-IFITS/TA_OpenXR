@@ -73,9 +73,9 @@ public class ServerSend
         }
     }
 
-    public static void SendNodeRequestToVR(string _id, string _tagName){
+    public static void SendNodeRequestToVR(string _nodeId, string _tagName){
         using(PacketNetwork _packet = new PacketNetwork((int)ServerPackets.sendNodeRequest)){
-            _packet.Write(_id);
+            _packet.Write(_nodeId);
             _packet.Write(_tagName);
 
             SendTCPData(1, _packet);

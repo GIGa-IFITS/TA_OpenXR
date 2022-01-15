@@ -10,6 +10,7 @@ public class VirtualSmartphone : MonoBehaviour
     private float heightInMeter;
     public OVRMeshRenderer handReference;
     public MeshRenderer smartphoneRenderer;
+    public bool isSimulator;
 
     private void Awake()
     {
@@ -30,9 +31,11 @@ public class VirtualSmartphone : MonoBehaviour
     }
 
     private void Update(){
-        bool renderStatus = handReference.IsDataValid && handReference.IsDataHighConfidence;
-        smartphoneRenderer.enabled = renderStatus;
-        smartphoneScreenRenderer.enabled = renderStatus;
+        if(!isSimulator){
+            bool renderStatus = handReference.IsDataValid && handReference.IsDataHighConfidence;
+            smartphoneRenderer.enabled = renderStatus;
+            smartphoneScreenRenderer.enabled = renderStatus;
+        }
     }
 
     public void CopyTexture2DToRenderTexture(byte[] _texture2D){
@@ -63,33 +66,9 @@ public class VirtualSmartphone : MonoBehaviour
         if(_tagName == "ListPenelitiDepartemen"){
             // show faculty list (institution unit filter)
             Manager.instance.getPenelitiDepartemenITS(_id);
-
-            GameObject nodeParent = GameObject.Find("3DScatterParent");
-            NodeVariable nodeObject = nodeParent.transform.Find(_id).GetComponentInParent<NodeVariable>();
-            
-            if(nodeObject != null){
-                // SEND DATA FROM VR TO SMARTPHONE
-                string nama = nodeObject.nama;
-                int jumlah = nodeObject.jumlah;
-                string tag = "ListPenelitiFakultas";
-                string filterName = "Institution Unit";
-                ClientSend.SendFilterSummary(nama, jumlah, tag, _id, filterName);
-            }
         }else if(_tagName == "ListPublikasiKataKunci"){
             // show faculty list (research keyword filter)
             Manager.instance.getPublikasiKataKunci(_id);
-
-            GameObject nodeParent = GameObject.Find("3DScatterParent");
-            NodeVariable nodeObject = nodeParent.transform.Find(_id).GetComponentInParent<NodeVariable>();
-            
-            if(nodeObject != null){
-                // SEND DATA FROM VR TO SMARTPHONE
-                string nama = nodeObject.nama;
-                int jumlah = nodeObject.jumlah;
-                string tag = "ListPublikasiFakultas";
-                string filterName = "Research Keyword";
-                ClientSend.SendFilterSummary(nama, jumlah, tag, _id, filterName);
-            }
         }
     }
 }
