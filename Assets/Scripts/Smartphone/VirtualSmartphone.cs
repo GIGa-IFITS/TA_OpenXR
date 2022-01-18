@@ -47,7 +47,8 @@ public class VirtualSmartphone : MonoBehaviour
         // // copy from texture 2d to render texture
         // Graphics.Blit(textureReceived2D, textureReceived);
 
-        smartphoneScreenRenderer.material.mainTexture = textureReceived2D;
+        //smartphoneScreenRenderer.material.mainTexture = textureReceived2D;
+        smartphoneScreenRenderer.material.SetTexture("_BaseMap", textureReceived2D);
     }
 
     public void UpdatePhoneSize(float _width, float _height){

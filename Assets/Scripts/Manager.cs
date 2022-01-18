@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Networking;
 using UnityEngine.Android;
+using UnityEngine.XR;
 
 public class Manager : EventHandler
 {
@@ -32,6 +33,7 @@ public class Manager : EventHandler
     void Start()
     {
         StartConnection();
+        XRSettings.eyeTextureResolutionScale = 2f;
     }
 
     public void SubmitIP(string ip){

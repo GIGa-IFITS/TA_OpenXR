@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class FloatingSphere : MonoBehaviour
 {
+    public GameObject nodeCanvas;
+    [SerializeField] private GameObject playerRef;
     // User Inputs
     public float degreesPerSecond = 1.0f;
     public float amplitude = 0.1f;
@@ -18,12 +20,15 @@ public class FloatingSphere : MonoBehaviour
     void Start()
     {
         posOffset = transform.position;
-        
+        //playerRef = GameObject.Find("Stage Object/OVRCameraRig");
+        playerRef = GameObject.Find("Stage Object/[VRSimulator_CameraRig]");
     }
 
     // Update is called once per frame
     void Update()
     {
+        nodeCanvas.transform.LookAt(nodeCanvas.transform.position + playerRef.transform.rotation * Vector3.forward, playerRef.transform.rotation * Vector3.up);
+
         // Float up/down with a Sin()
         tempPos = posOffset;
 
