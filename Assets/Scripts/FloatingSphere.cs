@@ -20,8 +20,10 @@ public class FloatingSphere : MonoBehaviour
     void Start()
     {
         posOffset = transform.position;
-        //playerRef = GameObject.Find("Stage Object/OVRCameraRig");
-        playerRef = GameObject.Find("Stage Object/[VRSimulator_CameraRig]");
+        playerRef = GameObject.Find("Stage Object/OVRCameraRig");
+        if(playerRef == null){
+            playerRef = GameObject.Find("Stage Object/[VRSimulator_CameraRig]");
+        }
     }
 
     // Update is called once per frame

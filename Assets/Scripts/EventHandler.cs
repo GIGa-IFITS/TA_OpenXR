@@ -18,7 +18,7 @@ public class EventHandler : MonoBehaviour
     // peneliti ( secara umum )
     public GameObject parentPenelitiScatter;
     public GameObject NodePeneliti;
-    public float sizeCoef = 0.005f;
+    public float sizeCoef = 0.001f;
     GameObject[] listPeneliti;
 
     [Header("Material")]
@@ -174,7 +174,7 @@ public class EventHandler : MonoBehaviour
             {
                 GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti);
                 Debug.Log(data.nama + " " + data.kode_dosen + " " + data.jumlah);
-                NodeAbjadPeneliti.name = data.kode_dosen;
+                NodeAbjadPeneliti.name = data.nama;
                 int jumlah = data.jumlah;
                 float size = jumlah * sizeCoef;
                 NodeAbjadPeneliti.tag = "ListPenelitiInisial";
