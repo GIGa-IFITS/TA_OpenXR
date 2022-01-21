@@ -141,7 +141,7 @@ public class EventHandler : MonoBehaviour
             listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiAbjad");
             foreach(GameObject node in listPeneliti)
             {
-                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2, endMarker, InitialRotation, 0) ;
+                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2);
                 StartCoroutine(animate);
             }
         }, error => {
@@ -185,7 +185,7 @@ public class EventHandler : MonoBehaviour
             listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiInisial");
             foreach (GameObject node in listPeneliti)
             {
-                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2, endMarker, InitialRotation, 0);
+                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2);
                 StartCoroutine(animate);
             }
         }, error => {
@@ -227,7 +227,7 @@ public class EventHandler : MonoBehaviour
             listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiFakultas");
             foreach (GameObject node in listPeneliti)
             {
-                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2, endMarker, InitialRotation, 0);
+                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2);
                 StartCoroutine(animate);
             }
         }, error => {
@@ -268,7 +268,7 @@ public class EventHandler : MonoBehaviour
             listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiDepartemen");
             foreach (GameObject node in listPeneliti)
             {
-                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2, endMarker, InitialRotation, 0);
+                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2);
                 StartCoroutine(animate);
             }
             
@@ -310,7 +310,7 @@ public class EventHandler : MonoBehaviour
             listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiDepartemenDetail");
             foreach (GameObject node in listPeneliti)
             {
-                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2, endMarker, InitialRotation, 0);
+                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2);
                 StartCoroutine(animate);
             }
         }, error => {
@@ -351,7 +351,7 @@ public class EventHandler : MonoBehaviour
             listPeneliti = GameObject.FindGameObjectsWithTag("ListGelar");
             foreach (GameObject node in listPeneliti)
             {
-                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2, endMarker, InitialRotation, 0);
+                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2);
                 StartCoroutine(animate);
             }
         }, error => {
@@ -393,7 +393,7 @@ public class EventHandler : MonoBehaviour
             listPeneliti = GameObject.FindGameObjectsWithTag("ListGelarDetail");
             foreach (GameObject node in listPeneliti)
             {
-                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2, endMarker, InitialRotation, 0);
+                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2);
                 StartCoroutine(animate);
             }
         }, error => {
@@ -437,7 +437,7 @@ public class EventHandler : MonoBehaviour
             listPeneliti = GameObject.FindGameObjectsWithTag("ListPublikasiFakultas");
             foreach (GameObject node in listPeneliti)
             {
-                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2, endMarker, InitialRotation, 0);
+                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2);
                 StartCoroutine(animate);
             }
         }, error => {
@@ -479,7 +479,7 @@ public class EventHandler : MonoBehaviour
             listPeneliti = GameObject.FindGameObjectsWithTag("ListPublikasiKataKunci");
             foreach (GameObject node in listPeneliti)
             {
-                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2, endMarker, InitialRotation, 0);
+                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2);
                 StartCoroutine(animate);
             }
         }, error => {
@@ -520,7 +520,7 @@ public class EventHandler : MonoBehaviour
             listPeneliti = GameObject.FindGameObjectsWithTag("ListKataKunciPeneliti");
             foreach (GameObject node in listPeneliti)
             {
-                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2, endMarker, InitialRotation, 0);
+                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2);
                 StartCoroutine(animate);
             }
         }, error => {
@@ -588,38 +588,18 @@ public class EventHandler : MonoBehaviour
         }
     }
 
-    public IEnumerator animateNode(GameObject node, Vector3 nodeScale, Vector3 nodeLocation , Quaternion nodeRotation ,int mode = 0)
+    public IEnumerator animateNode(GameObject node, Vector3 nodeScale)
     {
         float timeElapsed = 0f;
         float waitTime = 2f;
-        if (mode == 0) // dari kecil ke membesar
-        {
-            while (node.transform.localScale.x < nodeScale.x)
-            {
-                node.transform.localScale = Vector3.Lerp(node.transform.localScale, nodeScale, (timeElapsed / waitTime));
+        while (node.transform.localScale.x < nodeScale.x){
+            node.transform.localScale = Vector3.Lerp(node.transform.localScale, nodeScale, (timeElapsed / waitTime));
 
-                timeElapsed += Time.deltaTime;
-                yield return null;
-            }
-
-            node.transform.localScale = nodeScale;
-
+            timeElapsed += Time.deltaTime;
             yield return null;
         }
-        else // dari besar ke mengecil
-        {
-            while (node.transform.localScale.x > nodeScale.x)
-            {
-                node.transform.localScale = Vector3.Lerp(node.transform.localScale, nodeScale, (timeElapsed / waitTime));
-
-                timeElapsed += Time.deltaTime;
-                yield return null;
-            }
-
-            node.transform.localScale = nodeScale;
-            destroyedStatus = true;
-            yield return null;
-        }
+        node.transform.localScale = nodeScale;
+        yield return null;
     }
 
     public void resizeNode(float zoom)
