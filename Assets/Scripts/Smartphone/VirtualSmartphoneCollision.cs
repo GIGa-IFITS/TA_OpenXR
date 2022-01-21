@@ -25,7 +25,6 @@ public class VirtualSmartphoneCollision : MonoBehaviour
             {
                 string id = nodeObject.kode_peneliti;
                 Debug.Log(id + " <- NodeVariable");
-                Manager.instance.getDetailPenelitiITS(id);
 
                 string filterName = "Researcher Name";
 
@@ -63,7 +62,6 @@ public class VirtualSmartphoneCollision : MonoBehaviour
             {
                 string id = nodeObject.kode_peneliti;
                 Debug.Log(id + " <- NodeVariable");
-                Manager.instance.getDetailPenelitiITS(id);
 
                 string filterName = "Institution Unit";
 
@@ -88,7 +86,6 @@ public class VirtualSmartphoneCollision : MonoBehaviour
             {
                 string id = nodeObject.kode_peneliti;
                 Debug.Log(id + " <- NodeVariable");
-                Manager.instance.getDetailPenelitiITS(id);
 
                 string filterName = "Academic Degree";
 
@@ -125,7 +122,6 @@ public class VirtualSmartphoneCollision : MonoBehaviour
             else if (nodeObject.CompareTag("ListKataKunciPeneliti"))
             {
                 string id = nodeObject.kode_peneliti;
-                Manager.instance.getDetailPenelitiITS(id);
 
                 string filterName = "Research Keyword";
 

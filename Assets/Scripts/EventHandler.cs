@@ -67,7 +67,6 @@ public class EventHandler : MonoBehaviour
         {
             URL = config.GetWebAPI();
         }
-        getDetailPenelitiITS(4987.ToString());
     }
 
     public void Dashboard()
@@ -620,52 +619,7 @@ public class EventHandler : MonoBehaviour
         {
             foreach (GameObject node in listPeneliti)
             {
-                //node.GetComponent<FloatingSphere>().frequency += zoom;
-            }
-        }
-    }
-
-    public void movePositionNode(string axis, float amount)
-    {
-        var location = parentPenelitiScatter.transform.localPosition;
-        if (axis == "x")
-        {
-            parentPenelitiScatter.transform.localPosition = parentPenelitiScatter.transform.localPosition + new Vector3(amount, 0, 0);
-        }
-        else if (axis == "y")
-        {
-            parentPenelitiScatter.transform.localPosition = parentPenelitiScatter.transform.localPosition + new Vector3(0, amount, 0);
-        }
-        else if (axis == "z")
-        {
-            parentPenelitiScatter.transform.localPosition = parentPenelitiScatter.transform.localPosition + new Vector3(0, 0, amount);
-        }
-        else
-        {
-            Debug.Log("error, only supporting 3 axis (x,y,z)");
-        }
-    }
-
-    public void transparentNode(int transparentType)
-    {
-        if (listPeneliti != null)
-        {
-            foreach (GameObject node in listPeneliti)
-            {
-                Debug.Log("tes");
-
-                if (transparentType == 0)
-                {
-                    node.GetComponent<Renderer>().material = lessTransparentMaterial;
-                }
-                else if(transparentType == 1)
-                {
-                    node.GetComponent<Renderer>().material = normalTransparentMaterial;
-                }
-                else
-                {
-                    node.GetComponent<Renderer>().material = moreTransparentMaterial;
-                }
+                node.GetComponent<FloatingSphere>().floatStrength += zoom;
             }
         }
     }
@@ -679,39 +633,5 @@ public class EventHandler : MonoBehaviour
                 Destroy(node);
             }
         }
-        
-    }
-
-    // detailPenelitiITS adalah data yang ditampilkan ketika melihat salah satu peneliti ITS
-    public void getDetailPenelitiITS(string id_peneliti)
-    {
-        requestPeneliti.URL = URL + "/detailpeneliti?id_peneliti=" + id_peneliti;
-        StartCoroutine(requestPeneliti.RequestData((result) =>
-        {
-            // mengambil jumlah jurnal, conference, books, thesis, paten dan research yang ada
-            detailPenelitiITS(result);
-        }, (error) => {
-            if (error != "")
-            {
-                // retryMessage.text = error;
-                // retry.SetActive(true);
-                // connectionMessagePanel.SetActive(false);
-            }
-        }));
-    }
-
-    void detailPenelitiITS(RawData rawdata)
-    {
-        // namaPeneliti.text = rawdata.data[0].detail_peneliti[0].nama;
-        // tanggalPeneliti.text = rawdata.data[0].detail_peneliti[0].tanggal_lahir;
-        // fakultasPeneliti.text = rawdata.data[0].detail_peneliti[0].fakultas;
-        // departemenPeneliti.text = rawdata.data[0].detail_peneliti[0].departemen;
-
-        // jurnalPeneliti.text = rawdata.data[0].detail_peneliti[0].jurnal.ToString();
-        // konferensiPeneliti.text = rawdata.data[0].detail_peneliti[0].konferensi.ToString();
-        // bukuPeneliti.text = rawdata.data[0].detail_peneliti[0].buku.ToString();
-        // tesisPeneliti.text = rawdata.data[0].detail_peneliti[0].tesis.ToString();
-        // patenPeneliti.text = rawdata.data[0].detail_peneliti[0].paten.ToString();
-        // penelitianPeneliti.text = rawdata.data[0].detail_peneliti[0].penelitian.ToString();
     }
 }   
