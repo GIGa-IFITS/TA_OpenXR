@@ -6,43 +6,44 @@ public class FloatingSphere : MonoBehaviour
 {
     public GameObject nodeCanvas;
     [SerializeField] private GameObject playerRef;
+    private OVRGrabbable ovrGrabbable;
+    private Rigidbody rigidbody;
     // User Inputs
-    public float degreesPerSecond = 1.0f;
-    public float amplitude = 0.1f;
-    public float frequency = 2.2f;
-    public int orientation = 1;
+    public float floatStrength;
+    public float maxVelocity;
+    private float sqrMaxVelocity;
+    private float floatingPosition;
 
-    // Position Storage Variables
-    Vector3 posOffset = new Vector3();
-    Vector3 tempPos = new Vector3();
-
-    // Start is called before the first frame update
     void Start()
     {
-        posOffset = transform.position;
         playerRef = GameObject.Find("Stage Object/OVRCameraRig");
         if(playerRef == null){
             playerRef = GameObject.Find("Stage Object/[VRSimulator_CameraRig]");
         }
+        ovrGrabbable = GetComponent<OVRGrabbable>();
+        rigidbody = GetComponent<Rigidbody>();
+
+        floatingPosition = Random.Range(transform.position.y - 0.2f, transform.position.y + 0.2f);
+        sqrMaxVelocity = maxVelocity * maxVelocity;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        nodeCanvas.transform.LookAt(nodeCanvas.transform.position + playerRef.transform.rotation * Vector3.forward, playerRef.transform.rotation * Vector3.up);
+        if(!ovrGrabbable.isGrabbed){
+            nodeCanvas.transform.LookAt(nodeCanvas.transform.position + playerRef.transform.rotation * Vector3.forward, playerRef.transform.rotation * Vector3.up);
 
-        // Float up/down with a Sin()
-        tempPos = posOffset;
-
-        if(orientation < 0)
-        {
-            tempPos.y += Mathf.Sin(Time.fixedTime * Mathf.PI * frequency) * amplitude;
-        }
-        else
-        {
-            tempPos.y -= Mathf.Sin(Time.fixedTime * Mathf.PI * frequency) * amplitude;
+            if(transform.position.y < floatingPosition){
+                rigidbody.AddForce(Vector3.up * floatStrength);
+            }
+            if(transform.position.y > floatingPosition){
+                rigidbody.AddForce(Vector3.down * floatStrength);
+            }
         }
 
-        transform.position = tempPos;
+        // clamp velocity if necessary, use sqr for faster performance
+        Vector3 v = rigidbody.velocity;
+        if(v.sqrMagnitude > sqrMaxVelocity){
+            rigidbody.velocity = v.normalized * maxVelocity;
+        } 
     }
 }

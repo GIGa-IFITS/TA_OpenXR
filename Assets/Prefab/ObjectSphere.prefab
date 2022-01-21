@@ -185,10 +185,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeCanvas: {fileID: 8261994457078514787}
   playerRef: {fileID: 0}
-  degreesPerSecond: 15
-  amplitude: 0.1
-  frequency: 0.1
-  orientation: 1
+  floatStrength: 0.1
+  maxVelocity: 0.13
 --- !u!54 &4558236291946227333
 Rigidbody:
   m_ObjectHideFlags: 0
