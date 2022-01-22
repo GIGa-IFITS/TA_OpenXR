@@ -11,6 +11,7 @@ public class VirtualSmartphone : MonoBehaviour
     public OVRMeshRenderer handReference;
     public MeshRenderer smartphoneRenderer;
     public bool isSimulator;
+    private Texture2D textureReceived2D;
 
     private void Awake()
     {
@@ -27,7 +28,7 @@ public class VirtualSmartphone : MonoBehaviour
 
     private void Start() {
         smartphoneScreenRenderer = this.GetComponent<Renderer>();
-        //smartphoneRenderer = this.GetComponentInParent<MeshRenderer>();
+        textureReceived2D = new Texture2D(2048, 2048, TextureFormat.ARGB32, false);
     }
 
     private void Update(){
@@ -39,15 +40,7 @@ public class VirtualSmartphone : MonoBehaviour
     }
 
     public void CopyTexture2DToRenderTexture(byte[] _texture2D){
-        Texture2D textureReceived2D = new Texture2D(256, 256, TextureFormat.ARGB32, false);
         textureReceived2D.LoadImage(_texture2D);
-
-        // RenderTexture textureReceived = new RenderTexture(textureReceived2D.width, textureReceived2D.height, 16, RenderTextureFormat.ARGB32);
-
-        // // copy from texture 2d to render texture
-        // Graphics.Blit(textureReceived2D, textureReceived);
-
-        //smartphoneScreenRenderer.material.mainTexture = textureReceived2D;
         smartphoneScreenRenderer.material.SetTexture("_BaseMap", textureReceived2D);
     }
 
@@ -56,11 +49,6 @@ public class VirtualSmartphone : MonoBehaviour
         heightInMeter = 0.0254f * _height;
 
         Debug.Log("width in meter: " + widthInMeter + " height in meter: " + heightInMeter);
-
-        //this.transform.parent.transform.localScale = new Vector3(widthInMeter * 40, heightInMeter * 40, 0.3f);
-        //this.transform.parent.transform.localScale = new Vector3(widthInMeter, heightInMeter, 0.0084f);
-        //this.transform.parent.transform.localRotation = Quaternion.Euler(90, -90, 0);
-        //this.transform.parent.transform.Rotate(new Vector3(0, 0, -100));
     }
 
     public void PreviousNode(string _id, string _tagName){

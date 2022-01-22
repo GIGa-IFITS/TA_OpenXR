@@ -14314,8 +14314,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1769390390}
-  - {fileID: 2068876452}
   - {fileID: 3541435995520631953}
+  - {fileID: 2068876452}
   - {fileID: 1878422850205105513}
   - {fileID: 1707919357738268278}
   - {fileID: 4593681231067689}
@@ -15310,7 +15310,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1769390390
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18290,7 +18290,7 @@ PrefabInstance:
     - target: {fileID: 275573318996494051, guid: 578252b4dc5bde847bcce75597216de8,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 275573318996494051, guid: 578252b4dc5bde847bcce75597216de8,
         type: 3}
@@ -21220,7 +21220,7 @@ Transform:
   m_LocalScale: {x: 0.1516, y: 0.328, z: 0.0178}
   m_Children: []
   m_Father: {fileID: 1666768003}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 30, z: 0}
 --- !u!1 &3541435995520631954
 GameObject:
@@ -21241,7 +21241,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &3541435995520631955
 MonoBehaviour:
   m_ObjectHideFlags: 0
