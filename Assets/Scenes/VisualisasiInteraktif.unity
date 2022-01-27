@@ -1060,7 +1060,7 @@ GameObject:
   m_Component:
   - component: {fileID: 162077501}
   - component: {fileID: 162077502}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2333,7 +2333,8 @@ GameObject:
   m_Component:
   - component: {fileID: 287619871}
   - component: {fileID: 287619872}
-  m_Layer: 0
+  - component: {fileID: 287619873}
+  m_Layer: 8
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2367,6 +2368,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &287619873
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287619870}
+  serializedVersion: 2
+  m_Mass: 1e+9
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &305308604
 GameObject:
   m_ObjectHideFlags: 0
@@ -2936,7 +2953,7 @@ GameObject:
   m_Component:
   - component: {fileID: 403636265}
   - component: {fileID: 403636266}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3787,7 +3804,7 @@ GameObject:
   m_Component:
   - component: {fileID: 511213126}
   - component: {fileID: 511213127}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5045,7 +5062,7 @@ MonoBehaviour:
   debugText: {fileID: 1402960975}
   ip: {fileID: 0}
   port: {fileID: 0}
-  ipAddress: 192.168.100.111
+  ipAddress: 192.168.100.89
   portServer: 5000
 --- !u!1 &642598573
 GameObject:
@@ -12583,7 +12600,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1433551604}
   - component: {fileID: 1433551605}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16941,7 +16958,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1940399760}
   - component: {fileID: 1940399761}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -133,6 +133,7 @@ public class EventHandler : MonoBehaviour
                 tambahan.kode_peneliti = data.inisial;
                 tambahan.nama = data.inisial;
                 tambahan.jumlah = jumlah;
+                tambahan.ukuran = size;
                 tambahan.ukuran2 = new Vector3(size, size, size);
 
                 spawnNode(NodeAbjadPeneliti, size);
@@ -154,8 +155,8 @@ public class EventHandler : MonoBehaviour
         ));
     }
 
-    public void PrintDebug(){
-        debugText.text = debugText.text + "masuk command received tapi gak masuk filter manapun\n";
+    public void PrintDebug(string textLog){
+        debugText.text = textLog;
     }
 
     public void getPenelitiInisialITS(string inisial)
@@ -169,7 +170,7 @@ public class EventHandler : MonoBehaviour
                 Debug.Log(data.nama + " " + data.kode_dosen + " " + data.jumlah);
                 NodeAbjadPeneliti.name = data.nama;
                 int jumlah = data.jumlah;
-                float size = jumlah * sizeCoef;
+                float size = jumlah * sizeCoef * 2;
                 NodeAbjadPeneliti.tag = "ListPenelitiInisial";
 
                 NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
@@ -295,7 +296,7 @@ public class EventHandler : MonoBehaviour
                 NodeAbjadPeneliti.tag = "ListPenelitiDepartemenDetail";
 
                 int jumlah = data.jumlah;
-                float size = jumlah * sizeCoef;
+                float size = jumlah * sizeCoef * 2;
 
                 NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
                 tambahan.kode_peneliti = data.kode_dosen.ToString();
@@ -378,7 +379,7 @@ public class EventHandler : MonoBehaviour
                 NodeAbjadPeneliti.tag = "ListGelarDetail";
 
                 int jumlah = data.jumlah;
-                float size = jumlah * sizeCoef;
+                float size = jumlah * sizeCoef * 2;
 
                 NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
                 tambahan.kode_peneliti = data.kode_dosen.ToString();

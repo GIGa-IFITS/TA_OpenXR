@@ -71,7 +71,6 @@ public class ClientHandle : MonoBehaviour
             Debug.Log("Destroying node, back to filter menu");
             Manager.instance.flushNode();
         }
-        Manager.instance.PrintDebug();
     }
 
     // receive filter summary
