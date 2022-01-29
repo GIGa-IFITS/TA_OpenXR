@@ -55,7 +55,8 @@ public class Server
             { (int)ClientPackets.sendCommand, ServerHandle.SendCommand },
             { (int)ClientPackets.sendFilterSummary, ServerHandle.SendFilterSummary },
             { (int)ClientPackets.sendResearcherId, ServerHandle.SendResearcherId },
-            { (int)ClientPackets.sendNodeRequest, ServerHandle.SendNodeRequest }
+            { (int)ClientPackets.sendNodeRequest, ServerHandle.SendNodeRequest },
+            { (int)ClientPackets.sendErrorMessage, ServerHandle.SendErrorMessage }
         };
     }
 }

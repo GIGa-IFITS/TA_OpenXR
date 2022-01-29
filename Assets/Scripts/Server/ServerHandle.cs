@@ -106,6 +106,7 @@ public class ServerHandle
     public static void SendNodeRequest(int _fromClient, PacketNetwork _packet){
         int _clientIdCheck = _packet.ReadInt();
         string _nodeId = _packet.ReadString();
+        string _nodeId2 = _packet.ReadString();
         string _tagName = _packet.ReadString();
 
         if(_fromClient != _clientIdCheck){
@@ -114,7 +115,20 @@ public class ServerHandle
         Debug.Log("SERVER: " + Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint + " /phone with id " + _fromClient + " request node " + _nodeId + ". Server will now send it to the other client");
 
         // send to VR
-        ServerSend.SendNodeRequestToVR(_nodeId, _tagName);
+        ServerSend.SendNodeRequestToVR(_nodeId, _nodeId2, _tagName);
+    }
+
+    public static void SendErrorMessage(int _fromClient, PacketNetwork _packet){
+        int _clientIdCheck = _packet.ReadInt();
+        string _errorMsg = _packet.ReadString();
+
+        if(_fromClient != _clientIdCheck){
+            Debug.Log("SERVER: " + _fromClient + " has assumed wrong client id");
+        }
+        Debug.Log("SERVER: " + Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint + " /VR with id " + _fromClient + " send error message " + _errorMsg + ". Server will now send it to the other client");
+
+        // send to smartphone
+        ServerSend.SendErrorMessageToPhone(_errorMsg);
     }
 
     // public static void TextureRequested(int _fromClient, PacketNetwork _packet){

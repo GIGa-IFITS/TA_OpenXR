@@ -95,10 +95,18 @@ public class ClientHandle : MonoBehaviour
 
     public static void NodeRequestReceived(PacketNetwork _packet){
         string _nodeId = _packet.ReadString();
+        string _nodeId2 = _packet.ReadString();
         string _tagName = _packet.ReadString();
 
+        // update node
+        Manager.instance.GetNode(_nodeId, _nodeId2, _tagName);
+    }
+
+    public static void ErrorMessageReceived(PacketNetwork _packet){
+        string _errorMsg = _packet.ReadString();
+
         // update smartphone screen
-        VirtualSmartphone.instance.PreviousNode(_nodeId, _tagName);
+        FilterManager.instance.ShowErrorScreen(_errorMsg);
     }
 
     // receive request for texture message from server

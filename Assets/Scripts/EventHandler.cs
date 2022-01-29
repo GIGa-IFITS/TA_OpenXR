@@ -147,9 +147,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                // retryMessage.text = error;
-                // retry.SetActive(true);
-                // connectionMessagePanel.SetActive(false);
+                ClientSend.SendErrorMessage(error);
             }
         }
         ));
@@ -191,9 +189,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                // retryMessage.text = error;
-                // retry.SetActive(true);
-                // connectionMessagePanel.SetActive(false);
+                ClientSend.SendErrorMessage(error);
             }
         }
         ));
@@ -233,9 +229,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                // retryMessage.text = error;
-                // retry.SetActive(true);
-                // connectionMessagePanel.SetActive(false);
+                ClientSend.SendErrorMessage(error);
             }
         }
         ));   
@@ -275,9 +269,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                // retryMessage.text = error;
-                // retry.SetActive(true);
-                // connectionMessagePanel.SetActive(false);
+                ClientSend.SendErrorMessage(error);
             }
         }
         ));
@@ -316,9 +308,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                // retryMessage.text = error;
-                // retry.SetActive(true);
-                // connectionMessagePanel.SetActive(false);
+                ClientSend.SendErrorMessage(error);
             }
         }
         ));
@@ -357,9 +347,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                // retryMessage.text = error;
-                // retry.SetActive(true);
-                // connectionMessagePanel.SetActive(false);
+                ClientSend.SendErrorMessage(error);
             }
         }
         ));
@@ -399,9 +387,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                // retryMessage.text = error;
-                // retry.SetActive(true);
-                // connectionMessagePanel.SetActive(false);
+                ClientSend.SendErrorMessage(error);
             }
         }
         ));
@@ -443,9 +429,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                // retryMessage.text = error;
-                // retry.SetActive(true);
-                // connectionMessagePanel.SetActive(false);
+                ClientSend.SendErrorMessage(error);
             }
         }
         ));
@@ -485,9 +469,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                // retryMessage.text = error;
-                // retry.SetActive(true);
-                // connectionMessagePanel.SetActive(false);
+                ClientSend.SendErrorMessage(error);
             }
         }
         ));
@@ -526,9 +508,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                // retryMessage.text = error;
-                // retry.SetActive(true);
-                // connectionMessagePanel.SetActive(false);
+                ClientSend.SendErrorMessage(error);
             }
         }
         ));
@@ -633,6 +613,27 @@ public class EventHandler : MonoBehaviour
             {
                 Destroy(node);
             }
+        }
+    }
+
+    public void GetNode(string _nodeId, string _nodeId2, string _tagName){
+        if (_tagName == "ListPenelitiAbjad"){
+            Manager.instance.getPenelitiInisialITS(_nodeId);
+        } 
+        else if(_tagName == "ListPenelitiFakultas"){
+            Manager.instance.getPenelitiDepartemenITS(_nodeId);
+        }
+        else if(_tagName == "ListPenelitiDepartemen"){
+            Manager.instance.getPenelitiDepartemenDetailITS(_nodeId);
+        }    
+        else if(_tagName == "ListGelar"){
+            Manager.instance.getGelarPenelitiDetail(_nodeId);
+        }
+        else if(_tagName == "ListPublikasiFakultas"){
+            Manager.instance.getPublikasiKataKunci(_nodeId);
+        }
+        else if (_tagName == "ListPublikasiKataKunci"){
+            Manager.instance.getKataKunciPeneliti(_nodeId, _nodeId2);
         }
     }
 }   

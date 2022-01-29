@@ -73,12 +73,21 @@ public class ServerSend
         }
     }
 
-    public static void SendNodeRequestToVR(string _nodeId, string _tagName){
+    public static void SendNodeRequestToVR(string _nodeId, string _nodeId2, string _tagName){
         using(PacketNetwork _packet = new PacketNetwork((int)ServerPackets.sendNodeRequest)){
             _packet.Write(_nodeId);
+            _packet.Write(_nodeId2);
             _packet.Write(_tagName);
 
             SendTCPData(1, _packet);
+        }
+    }
+
+    public static void SendErrorMessageToPhone(string _errorMsg){
+        using(PacketNetwork _packet = new PacketNetwork((int)ServerPackets.sendErrorMessage)){
+            _packet.Write(_errorMsg);
+
+            SendTCPData(2, _packet);
         }
     }
 
