@@ -63,7 +63,7 @@ public class ClientReference
             try{
                 int _byteLength = stream.EndRead(_result);
                 if(_byteLength <= 0){
-                    // TODO: disconnect
+                    Server.clients[id].tcp.Disconnect();
                     return;
                 }
 
@@ -77,7 +77,7 @@ public class ClientReference
             }
             catch (Exception _ex){
                 Debug.Log("SERVER: Error receiving TCP data: " + _ex);
-                // TODO: disconnect
+                Server.clients[id].tcp.Disconnect();
             }
         }
 
@@ -118,6 +118,14 @@ public class ClientReference
             }
 
             return false;
+        }
+
+        public void Disconnect(){
+            socket.Close();
+            stream = null;
+            receivedData = null;
+            receiveBuffer = null;
+            socket = null;
         }
     }
 }
