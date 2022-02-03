@@ -169,15 +169,22 @@ public class Client : MonoBehaviour
             { (int)ServerPackets.sendFilterSummary, ClientHandle.FilterSummaryReceived },
             { (int)ServerPackets.sendResearcherId, ClientHandle.ResearcherIdReceived },
             { (int)ServerPackets.sendNodeRequest, ClientHandle.NodeRequestReceived },
-            { (int)ServerPackets.sendErrorMessage, ClientHandle.ErrorMessageReceived }
+            { (int)ServerPackets.sendErrorMessage, ClientHandle.ErrorMessageReceived },
+            { (int)ServerPackets.sendOrientation, ClientHandle.OrientationReceived }
         };
         Debug.Log("initialized packets");
     }
 
-    private void Disconnect(){
+    public void Disconnect(){
         if(isConnected){
             isConnected = false;
             tcp.socket.Close();
+
+            if(myId == 1){
+                Manager.instance.Disconnected();
+            }else{
+                NetworkUIManager.instance.Disconnected();
+            }
         }
     }
 }

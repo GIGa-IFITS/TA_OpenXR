@@ -9,9 +9,10 @@ public class VirtualSmartphone : MonoBehaviour
     private float widthInMeter;
     private float heightInMeter;
     public OVRMeshRenderer handReference;
-    public MeshRenderer smartphoneRenderer;
     public bool isSimulator;
     private Texture2D textureReceived2D;
+    private bool isOrientationUp = false;
+    [SerializeField] private GameObject largeScreen;
 
     private void Awake()
     {
@@ -34,8 +35,13 @@ public class VirtualSmartphone : MonoBehaviour
     private void Update(){
         if(!isSimulator){
             bool renderStatus = handReference.IsDataValid && handReference.IsDataHighConfidence;
-            smartphoneRenderer.enabled = renderStatus;
-            smartphoneScreenRenderer.enabled = renderStatus;
+            if(isOrientationUp){
+                smartphoneScreenRenderer.enabled = false;
+                largeScreen.SetActive(true);
+            }else{
+                smartphoneScreenRenderer.enabled = renderStatus;
+                largeScreen.SetActive(false);
+            }
         }
     }
 
@@ -59,5 +65,9 @@ public class VirtualSmartphone : MonoBehaviour
             // show faculty list (research keyword filter)
             Manager.instance.getPublikasiKataKunci(_id);
         }
+    }
+
+    public void UpdateDeviceOrientation(bool _isUp){
+        isOrientationUp = _isUp;
     }
 }

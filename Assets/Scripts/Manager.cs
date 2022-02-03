@@ -55,4 +55,10 @@ public class Manager : EventHandler
         // connect to smartphone
         Client.instance.ConnectToServer();
     }
+
+    public void Disconnected(){
+        // show canvas please check your internet connection then connect your phone again
+        // flush node if exist
+        // ada tombol yang ngarah ke fungsi StartConnection
+    }
 }

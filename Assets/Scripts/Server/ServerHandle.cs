@@ -131,6 +131,19 @@ public class ServerHandle
         ServerSend.SendErrorMessageToPhone(_errorMsg);
     }
 
+    public static void SendOrientation(int _fromClient, PacketNetwork _packet){
+        int _clientIdCheck = _packet.ReadInt();
+        bool _isUp = _packet.ReadBool();
+
+        if(_fromClient != _clientIdCheck){
+            Debug.Log("SERVER: " + _fromClient + " has assumed wrong client id");
+        }
+        Debug.Log("SERVER: " + Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint + " /smartphone with id " + _fromClient + " send orientation " + _isUp + ". Server will now send it to the other client");
+
+        // send to VR
+        ServerSend.SendOrientationToVR(_isUp);
+    }
+
     // public static void TextureRequested(int _fromClient, PacketNetwork _packet){
     //     int _clientIdCheck = _packet.ReadInt();
 

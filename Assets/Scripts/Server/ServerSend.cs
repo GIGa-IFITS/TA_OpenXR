@@ -91,6 +91,14 @@ public class ServerSend
         }
     }
 
+    public static void SendOrientationToVR(bool _isUp){
+        using(PacketNetwork _packet = new PacketNetwork((int)ServerPackets.sendOrientation)){
+            _packet.Write(_isUp);
+
+            SendTCPData(1, _packet);
+        }
+    }
+
     // public static void RequestForTexture(int _fromClient, string _msg){
     //     using (PacketNetwork _packet = new PacketNetwork((int)ServerPackets.textureRequest)){
     //         _packet.Write(_msg);
