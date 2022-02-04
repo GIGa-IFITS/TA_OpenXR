@@ -63,6 +63,7 @@ public class Manager : EventHandler
         disconnectCanvas.SetActive(true);
         Vector3 offset = playerRef.transform.forward;
         offset *= 2f;
+        offset += new Vector3(0, 1.6f, 0);
         disconnectCanvas.transform.position = playerRef.transform.position + offset;
         flushNode();
 
