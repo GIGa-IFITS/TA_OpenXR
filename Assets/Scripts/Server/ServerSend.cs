@@ -99,6 +99,14 @@ public class ServerSend
         }
     }
 
+    public static void SendNodeSizeToVR(float _nodeSize){
+        using(PacketNetwork _packet = new PacketNetwork((int)ServerPackets.sendNodeSize)){
+            _packet.Write(_nodeSize);
+
+            SendTCPData(1, _packet);
+        }
+    }
+
     // public static void RequestForTexture(int _fromClient, string _msg){
     //     using (PacketNetwork _packet = new PacketNetwork((int)ServerPackets.textureRequest)){
     //         _packet.Write(_msg);

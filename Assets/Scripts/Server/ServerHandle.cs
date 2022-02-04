@@ -144,6 +144,19 @@ public class ServerHandle
         ServerSend.SendOrientationToVR(_isUp);
     }
 
+    public static void SendNodeSize(int _fromClient, PacketNetwork _packet){
+        int _clientIdCheck = _packet.ReadInt();
+        float _nodeSize = _packet.ReadFloat();
+
+        if(_fromClient != _clientIdCheck){
+            Debug.Log("SERVER: " + _fromClient + " has assumed wrong client id");
+        }
+        Debug.Log("SERVER: " + Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint + " /smartphone with id " + _fromClient + " send node size " + _nodeSize + ". Server will now send it to the other client");
+
+        // send to VR
+        ServerSend.SendNodeSizeToVR(_nodeSize);
+    }
+
     // public static void TextureRequested(int _fromClient, PacketNetwork _packet){
     //     int _clientIdCheck = _packet.ReadInt();
 

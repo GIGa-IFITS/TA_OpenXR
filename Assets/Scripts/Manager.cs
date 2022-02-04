@@ -51,14 +51,26 @@ public class Manager : EventHandler
 
         // start server
         Server.Start(6000);
-
-        // connect to smartphone
         Client.instance.ConnectToServer();
     }
 
     public void Disconnected(){
-        // show canvas please check your internet connection then connect your phone again
-        // flush node if exist
+        GameObject playerRef = GameObject.Find("Stage Object/OVRCameraRig");
+        if(playerRef == null){
+            playerRef = GameObject.Find("Stage Object/[VRSimulator_CameraRig]");
+        }
+
+        disconnectCanvas.SetActive(true);
+        Vector3 offset = playerRef.transform.forward;
+        offset *= 2f;
+        disconnectCanvas.transform.position = playerRef.transform.position + offset;
+        flushNode();
+
         // ada tombol yang ngarah ke fungsi StartConnection
+        // kalau ip server ganti --> apakah perlu restart server atau otomatis?
+    }
+
+    public void SetDisconnectCanvasInactive(){
+        disconnectCanvas.SetActive(false);
     }
 }

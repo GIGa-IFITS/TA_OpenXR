@@ -57,7 +57,8 @@ public class Server
             { (int)ClientPackets.sendResearcherId, ServerHandle.SendResearcherId },
             { (int)ClientPackets.sendNodeRequest, ServerHandle.SendNodeRequest },
             { (int)ClientPackets.sendErrorMessage, ServerHandle.SendErrorMessage },
-            { (int)ClientPackets.sendOrientation, ServerHandle.SendOrientation }
+            { (int)ClientPackets.sendOrientation, ServerHandle.SendOrientation },
+            { (int)ClientPackets.sendNodeSize, ServerHandle.SendNodeSize }
         };
     }
 }

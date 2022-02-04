@@ -11,8 +11,6 @@ using TMPro;
 public class EventHandler : MonoBehaviour
 {
     public string URL;
-    public bool dashboardStatus = false;
-    bool dashboardRefreshed = false;
 
     [Header("Pengaturan Node")]
     // peneliti ( secara umum )
@@ -40,19 +38,10 @@ public class EventHandler : MonoBehaviour
 
     [Header("Animation")]
     public IEnumerator animate;
-    public Vector3 initialScale;
-    public Quaternion InitialRotation;
 
-    public Vector3 endMarker = new Vector3(5.47f, -0.57f, -11);
-    public Vector3 endMarkerLegend = new Vector3(-6.8256f, -0.09f, -10.991f);
-    public Vector3 endScaleChart = new Vector3(13.08183f, 7.320017f, 1);
-    public Vector3 endScaleLegend = new Vector3(9.951063f, 6.884685f, 0.4520478f);
-    bool destroyedStatus = false;
+    [Header("Disconnect")]
+    public GameObject disconnectCanvas;
 
-    [Header("Pengaturan")]
-
-    public GameObject OptionBar;
-    public bool detOptionStatus = false;
     public TextMeshProUGUI debugText;
 
     RequestHandler requestPeneliti = new RequestHandler();
@@ -75,7 +64,7 @@ public class EventHandler : MonoBehaviour
         StartCoroutine(requestPeneliti.RequestData((result) =>
         {
             // mengambil jumlah jurnal, conference, books, thesis, paten dan research yang ada
-            hasilPublikasiITS(result);
+            //hasilPublikasiITS(result);
             
         }, (error) => {
             if (error != "")
@@ -85,33 +74,6 @@ public class EventHandler : MonoBehaviour
                 // connectionMessagePanel.SetActive(false);
             }
         }));
-    }
-
-    // hasilPublikasiITS adalah data pertama yang ditampilkan di dashboard
-    void hasilPublikasiITS(RawData rawdata)
-    {
-        // listDashboard2.Add(DashboardBar);
-        // listDashboard2.Add(DashboardBar2);
-        // listDashboard2.Add(DashboardBar3);
-        // listDashboard2.Add(DashboardBar4);
-
-
-        // foreach (GameObject dashboardPlane in listDashboard2)
-        // {
-        //     Text publikasiJurnalTest = dashboardPlane.transform.GetChild(0).GetChild(2).GetChild(1).GetComponent<Text>();
-        //     Text publikasiKonferensiTest = dashboardPlane.transform.GetChild(0).GetChild(3).GetChild(1).GetComponent<Text>();
-        //     Text publikasiBukuTest = dashboardPlane.transform.GetChild(0).GetChild(4).GetChild(1).GetComponent<Text>();
-        //     Text publikasiTesisTest = dashboardPlane.transform.GetChild(0).GetChild(5).GetChild(1).GetComponent<Text>();
-        //     Text publikasiPatenTest = dashboardPlane.transform.GetChild(0).GetChild(6).GetChild(1).GetComponent<Text>();
-        //     Text publikasiPenelitianTest = dashboardPlane.transform.GetChild(0).GetChild(7).GetChild(1).GetComponent<Text>();
-
-        //     publikasiJurnalTest.text = rawdata.data[0].dashboard_data[0].hasil_publikasi[0].journals.ToString();
-        //     publikasiKonferensiTest.text = rawdata.data[0].dashboard_data[0].hasil_publikasi[1].conferences.ToString();
-        //     publikasiBukuTest.text = rawdata.data[0].dashboard_data[0].hasil_publikasi[2].books.ToString();
-        //     publikasiTesisTest.text = rawdata.data[0].dashboard_data[0].hasil_publikasi[3].thesis.ToString();
-        //     publikasiPatenTest.text = rawdata.data[0].dashboard_data[0].hasil_publikasi[4].paten.ToString();
-        //     publikasiPenelitianTest.text = rawdata.data[0].dashboard_data[0].hasil_publikasi[5].research.ToString();
-        // }
     }
 
     public void getPenelitiAbjadITS()
@@ -584,26 +546,8 @@ public class EventHandler : MonoBehaviour
 
     public void resizeNode(float zoom)
     {
-        if(listPeneliti != null)
-        {
-            foreach (GameObject node in listPeneliti)
-            {
-                Debug.Log("resized");
-                node.transform.localScale = node.transform.localScale + new Vector3(zoom, zoom, zoom);
-            }
-        }
+        sizeCoef = zoom / 3000;
     }    
-
-    public void changeSpeedNode(float zoom)
-    {
-        if(listPeneliti != null)
-        {
-            foreach (GameObject node in listPeneliti)
-            {
-                node.GetComponent<FloatingSphere>().floatStrength += zoom;
-            }
-        }
-    }
 
     public void flushNode()
     {

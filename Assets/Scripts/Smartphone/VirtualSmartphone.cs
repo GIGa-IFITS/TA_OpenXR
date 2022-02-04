@@ -54,6 +54,8 @@ public class VirtualSmartphone : MonoBehaviour
         widthInMeter = 0.0254f * _width;
         heightInMeter = 0.0254f * _height;
 
+        Manager.instance.SetDisconnectCanvasInactive();
+
         Debug.Log("width in meter: " + widthInMeter + " height in meter: " + heightInMeter);
     }
 

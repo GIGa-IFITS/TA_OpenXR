@@ -126,6 +126,12 @@ public class ClientReference
             receivedData = null;
             receiveBuffer = null;
             socket = null;
+
+            if(id == 2){
+                ThreadManager.ExecuteOnMainThread(() => {
+                    Manager.instance.Disconnected();
+                });
+            }
         }
     }
 }
