@@ -22,11 +22,12 @@ public class ClientHandle : MonoBehaviour
     }
 
     public static void PhoneSizeReceived(PacketNetwork _packet){
-        float _screenWidth = _packet.ReadFloat();
-        float _screenHeight = _packet.ReadFloat();
+        // float _screenWidth = _packet.ReadFloat();
+        // float _screenHeight = _packet.ReadFloat();
 
-        Debug.Log($"Received phone size from server.");
-        VirtualSmartphone.instance.UpdatePhoneSize(_screenWidth, _screenHeight);
+        // Debug.Log($"Received phone size from server.");
+        // VirtualSmartphone.instance.UpdatePhoneSize(_screenWidth, _screenHeight);
+        Manager.instance.SetVirtualSmartphoneCanvasActive();
     }
     
     // receive texture from server
@@ -34,7 +35,7 @@ public class ClientHandle : MonoBehaviour
         byte[] _receivedTexture2D = _packet.ReadBytes(_packet.UnreadLength());
 
         Debug.Log($"Received texture2D from server.");
-        VirtualSmartphone.instance.CopyTexture2DToRenderTexture(_receivedTexture2D);
+        //VirtualSmartphone.instance.CopyTexture2DToRenderTexture(_receivedTexture2D);
     }
 
     // receive dashboard toggle data from server
@@ -43,7 +44,6 @@ public class ClientHandle : MonoBehaviour
 
         Debug.Log($"Received dashboard toggle value from server.");
         Manager.instance.Dashboard();
-        //Manager.instance.DashboardToggle();
     }
 
     // receive command from server
@@ -70,6 +70,11 @@ public class ClientHandle : MonoBehaviour
         else if (_command == "destroy"){
             Debug.Log("Destroying node, back to filter menu");
             Manager.instance.flushNode();
+        }
+
+        // for canvas 
+        if(_command != "destroy"){
+            VirtualSmartphoneCanvas.instance.UpdateScreenFilter(_command);
         }
     }
 
@@ -113,13 +118,25 @@ public class ClientHandle : MonoBehaviour
         bool _isUp = _packet.ReadBool();
 
         // show large screen
-        VirtualSmartphone.instance.UpdateDeviceOrientation(_isUp);
+        //VirtualSmartphone.instance.UpdateDeviceOrientation(_isUp);
+
+        // show large screen - FOR CANVAS
+        VirtualSmartphoneCanvas.instance.UpdateDeviceOrientation(_isUp);
     }
 
     public static void NodeSizeReceived(PacketNetwork _packet){
         float _nodeSize = _packet.ReadFloat();
 
         Manager.instance.resizeNode(_nodeSize);
+
+        //FOR CANVAS
+        VirtualSmartphoneCanvas.instance.UpdateScreenSettingsNode(_nodeSize);
+    }
+
+    public static void PageTypeReceived(PacketNetwork _packet){
+        string _pageType = _packet.ReadString();
+        Debug.Log("receive page type " + _pageType);
+        VirtualSmartphoneCanvas.instance.ChangeMenuScreen(_pageType);
     }
 
     // receive request for texture message from server

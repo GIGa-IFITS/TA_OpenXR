@@ -64,14 +64,24 @@ public class EventHandler : MonoBehaviour
         StartCoroutine(requestPeneliti.RequestData((result) =>
         {
             // mengambil jumlah jurnal, conference, books, thesis, paten dan research yang ada
-            //hasilPublikasiITS(result);
-            
+            VirtualSmartphoneCanvas.instance.ShowDashboardData(result);
         }, (error) => {
             if (error != "")
             {
-                // retryMessage.text = error;
-                // retry.SetActive(true);
-                // connectionMessagePanel.SetActive(false);
+
+            }
+        }));   
+    }
+
+    public void getResearcherDetailData(string _id){
+        requestPeneliti.URL = URL + "/detailpeneliti?id_peneliti=" + _id;
+        StartCoroutine(requestPeneliti.RequestData((result) =>
+        {
+            // mengambil jumlah jurnal, conference, books, thesis, paten dan research yang ada
+            VirtualSmartphoneCanvas.instance.ShowResearcherDetail(result);
+        }, (error) => {
+            if (error != ""){
+                VirtualSmartphoneCanvas.instance.ShowErrorResearcherDetail();
             }
         }));
     }
@@ -110,6 +120,7 @@ public class EventHandler : MonoBehaviour
             if (error != "")
             {
                 ClientSend.SendErrorMessage(error);
+                VirtualSmartphoneCanvas.instance.ShowErrorScreen();
             }
         }
         ));
@@ -152,6 +163,7 @@ public class EventHandler : MonoBehaviour
             if (error != "")
             {
                 ClientSend.SendErrorMessage(error);
+                VirtualSmartphoneCanvas.instance.ShowErrorScreen();
             }
         }
         ));
@@ -192,6 +204,7 @@ public class EventHandler : MonoBehaviour
             if (error != "")
             {
                 ClientSend.SendErrorMessage(error);
+                VirtualSmartphoneCanvas.instance.ShowErrorScreen();
             }
         }
         ));   
@@ -232,6 +245,7 @@ public class EventHandler : MonoBehaviour
             if (error != "")
             {
                 ClientSend.SendErrorMessage(error);
+                VirtualSmartphoneCanvas.instance.ShowErrorScreen();
             }
         }
         ));
@@ -271,6 +285,7 @@ public class EventHandler : MonoBehaviour
             if (error != "")
             {
                 ClientSend.SendErrorMessage(error);
+                VirtualSmartphoneCanvas.instance.ShowErrorScreen();
             }
         }
         ));
@@ -310,6 +325,7 @@ public class EventHandler : MonoBehaviour
             if (error != "")
             {
                 ClientSend.SendErrorMessage(error);
+                VirtualSmartphoneCanvas.instance.ShowErrorScreen();
             }
         }
         ));
@@ -350,6 +366,7 @@ public class EventHandler : MonoBehaviour
             if (error != "")
             {
                 ClientSend.SendErrorMessage(error);
+                VirtualSmartphoneCanvas.instance.ShowErrorScreen();
             }
         }
         ));
@@ -392,6 +409,7 @@ public class EventHandler : MonoBehaviour
             if (error != "")
             {
                 ClientSend.SendErrorMessage(error);
+                VirtualSmartphoneCanvas.instance.ShowErrorScreen();
             }
         }
         ));
@@ -432,6 +450,7 @@ public class EventHandler : MonoBehaviour
             if (error != "")
             {
                 ClientSend.SendErrorMessage(error);
+                VirtualSmartphoneCanvas.instance.ShowErrorScreen();
             }
         }
         ));
@@ -471,6 +490,7 @@ public class EventHandler : MonoBehaviour
             if (error != "")
             {
                 ClientSend.SendErrorMessage(error);
+                VirtualSmartphoneCanvas.instance.ShowErrorScreen();
             }
         }
         ));

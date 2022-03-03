@@ -157,6 +157,19 @@ public class ServerHandle
         ServerSend.SendNodeSizeToVR(_nodeSize);
     }
 
+    public static void SendPageType(int _fromClient, PacketNetwork _packet){
+        int _clientIdCheck = _packet.ReadInt();
+        string _pageType = _packet.ReadString();
+
+        if(_fromClient != _clientIdCheck){
+            Debug.Log("SERVER: " + _fromClient + " has assumed wrong client id");
+        }
+        Debug.Log("SERVER: " + Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint + " /smartphone with id " + _fromClient + " send page type " + _pageType + ". Server will now send it to the other client");
+
+        // send to smartphone
+        ServerSend.SendPageTypeToVR(_pageType);
+    }
+
     // public static void TextureRequested(int _fromClient, PacketNetwork _packet){
     //     int _clientIdCheck = _packet.ReadInt();
 

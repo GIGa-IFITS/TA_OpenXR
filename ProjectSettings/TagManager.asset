@@ -16,6 +16,7 @@ TagManager:
   - ListPublikasiKataKunci
   - ListKataKunciPeneliti
   - Dashboard
+  - InteractHand
   layers:
   - Default
   - TransparentFX

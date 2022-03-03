@@ -18,6 +18,7 @@ public class Manager : EventHandler
     public string portServer = "";
     private string param;
     public static Manager instance;
+    [SerializeField] private GameObject virtualSmartphoneCanvas;
 
     private void Awake() {
         if (instance == null){
@@ -67,11 +68,15 @@ public class Manager : EventHandler
         disconnectCanvas.transform.position = playerRef.transform.position + offset;
         flushNode();
 
+        // FOR CANVAS
+        virtualSmartphoneCanvas.SetActive(false);
+
         // ada tombol yang ngarah ke fungsi StartConnection
         // kalau ip server ganti --> apakah perlu restart server atau otomatis?
     }
 
-    public void SetDisconnectCanvasInactive(){
+    public void SetVirtualSmartphoneCanvasActive(){
+        virtualSmartphoneCanvas.SetActive(true);
         disconnectCanvas.SetActive(false);
     }
 }

@@ -21,6 +21,9 @@ public class VirtualSmartphoneCollision : MonoBehaviour
                 string tag = "ListPenelitiAbjad";
                 string filterName = "Researcher Name";
                 ClientSend.SendFilterSummary(nama, jumlah, tag, id, filterName);
+
+                // FOR CANVAS
+                VirtualSmartphoneCanvas.instance.UpdateScreenSummary(nama, jumlah, tag, id, filterName);
             }
             else if(nodeObject.CompareTag("ListPenelitiInisial"))
             {
@@ -31,6 +34,9 @@ public class VirtualSmartphoneCollision : MonoBehaviour
 
                 // SEND DATA FROM VR TO SMARTPHONE
                 ClientSend.SendResearcherId(id, filterName);
+
+                // FOR CANVAS
+                VirtualSmartphoneCanvas.instance.UpdateScreenResearcherDetail(id, filterName);
             }
             
             else if(nodeObject.CompareTag("ListPenelitiFakultas"))
@@ -45,6 +51,9 @@ public class VirtualSmartphoneCollision : MonoBehaviour
                 string tag = "ListPenelitiFakultas";
                 string filterName = "Institution Unit";
                 ClientSend.SendFilterSummary(nama, jumlah, tag, id, filterName);
+
+                // FOR CANVAS
+                VirtualSmartphoneCanvas.instance.UpdateScreenSummary(nama, jumlah, tag, id, filterName);
             }
             else if(nodeObject.CompareTag("ListPenelitiDepartemen"))
             {
@@ -58,6 +67,9 @@ public class VirtualSmartphoneCollision : MonoBehaviour
                 string tag = "ListPenelitiDepartemen";
                 string filterName = "Institution Unit";
                 ClientSend.SendFilterSummary(nama, jumlah, tag, id, filterName);
+
+                // FOR CANVAS
+                VirtualSmartphoneCanvas.instance.UpdateScreenSummary(nama, jumlah, tag, id, filterName);
             }
             else if(nodeObject.CompareTag("ListPenelitiDepartemenDetail"))
             {
@@ -68,6 +80,9 @@ public class VirtualSmartphoneCollision : MonoBehaviour
 
                 // SEND DATA FROM VR TO SMARTPHONE
                 ClientSend.SendResearcherId(id, filterName);
+
+                // FOR CANVAS
+                VirtualSmartphoneCanvas.instance.UpdateScreenResearcherDetail(id, filterName);
             }
             
             else if(nodeObject.CompareTag("ListGelar"))
@@ -82,6 +97,9 @@ public class VirtualSmartphoneCollision : MonoBehaviour
                 string tag = "ListGelar";
                 string filterName = "Academic Degree";
                 ClientSend.SendFilterSummary(nama, jumlah, tag, id, filterName);
+
+                // FOR CANVAS
+                VirtualSmartphoneCanvas.instance.UpdateScreenSummary(nama, jumlah, tag, id, filterName);
             }
             else if (nodeObject.CompareTag("ListGelarDetail"))
             {
@@ -92,6 +110,9 @@ public class VirtualSmartphoneCollision : MonoBehaviour
 
                 // SEND DATA FROM VR TO SMARTPHONE
                 ClientSend.SendResearcherId(id, filterName);
+
+                // FOR CANVAS
+                VirtualSmartphoneCanvas.instance.UpdateScreenResearcherDetail(id, filterName);
             }
 
 
@@ -107,6 +128,9 @@ public class VirtualSmartphoneCollision : MonoBehaviour
                 string tag = "ListPublikasiFakultas";
                 string filterName = "Research Keyword";
                 ClientSend.SendFilterSummary(nama, jumlah, tag, id, filterName);
+
+                // FOR CANVAS
+                VirtualSmartphoneCanvas.instance.UpdateScreenSummary(nama, jumlah, tag, id, filterName);
             }
             else if (nodeObject.CompareTag("ListPublikasiKataKunci"))
             {
@@ -119,6 +143,9 @@ public class VirtualSmartphoneCollision : MonoBehaviour
                 string tag = "ListPublikasiKataKunci";
                 string filterName = "Research Keyword";
                 ClientSend.SendFilterSummary(nama, jumlah, tag, id, filterName);
+
+                // FOR CANVAS
+                VirtualSmartphoneCanvas.instance.UpdateScreenSummary(nama, jumlah, tag, id, filterName);
             }
             else if (nodeObject.CompareTag("ListKataKunciPeneliti"))
             {
@@ -128,6 +155,9 @@ public class VirtualSmartphoneCollision : MonoBehaviour
 
                 // SEND DATA FROM VR TO SMARTPHONE
                 ClientSend.SendResearcherId(id, filterName);
+
+                // FOR CANVAS
+                VirtualSmartphoneCanvas.instance.UpdateScreenResearcherDetail(id, filterName);
             }
         }
     }

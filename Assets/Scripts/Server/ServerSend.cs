@@ -107,6 +107,14 @@ public class ServerSend
         }
     }
 
+    public static void SendPageTypeToVR(string _pageType){
+        using(PacketNetwork _packet = new PacketNetwork((int)ServerPackets.sendPageType)){
+            _packet.Write(_pageType);
+
+            SendTCPData(1, _packet);
+        }
+    }
+
     // public static void RequestForTexture(int _fromClient, string _msg){
     //     using (PacketNetwork _packet = new PacketNetwork((int)ServerPackets.textureRequest)){
     //         _packet.Write(_msg);
