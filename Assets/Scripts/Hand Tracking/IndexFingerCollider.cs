@@ -10,7 +10,7 @@ public class IndexFingerCollider : MonoBehaviour
         skeleton = GetComponent<OVRSkeleton>();
         // Add collider to tip of index finger
         foreach(OVRBone bone in skeleton.Bones) {
-            if (bone.Id == OVRSkeleton.BoneId.Hand_IndexTip || bone.Id == OVRSkeleton.BoneId.Hand_ThumbTip) {
+            if (bone.Id == OVRSkeleton.BoneId.Hand_IndexTip) {
                 bone.Transform.gameObject.AddComponent<SphereCollider>();
                 bone.Transform.gameObject.GetComponent<SphereCollider>().radius = 0.01f;        
                 bone.Transform.gameObject.tag = "InteractHand";
