@@ -5,14 +5,20 @@ using UnityEngine;
 public class VirtualSmartphone : MonoBehaviour
 {
     public static VirtualSmartphone instance;
-    private Renderer smartphoneScreenRenderer;
-    private float widthInMeter;
-    private float heightInMeter;
-    public OVRMeshRenderer handReference;
-    public bool isSimulator;
-    private Texture2D textureReceived2D;
+    
     private bool isOrientationUp = false;
-    [SerializeField] private GameObject largeScreen;
+    [SerializeField] private Transform defPhoneAnchor;
+    [SerializeField] private Transform largePhoneAnchor;
+    [SerializeField] private GameObject playerRef;
+    [Header("Threshold")]
+    [SerializeField] private float minX;
+    [SerializeField] private float maxX;
+    [SerializeField] private float minY;
+    [SerializeField] private float maxY;
+    [SerializeField] private float minZ;
+    [SerializeField] private float maxZ;
+    private Vector3 rotation;
+
 
     private void Awake()
     {
@@ -27,47 +33,29 @@ public class VirtualSmartphone : MonoBehaviour
         }
     }
 
-    private void Start() {
-        smartphoneScreenRenderer = this.GetComponent<Renderer>();
-        textureReceived2D = new Texture2D(2048, 2048, TextureFormat.ARGB32, false);
+    void Update(){
+        //always face user
+        //this.transform.LookAt(this.transform.position + playerRef.transform.rotation * Vector3.forward, playerRef.transform.rotation * Vector3.up);
+
+        rotation = transform.eulerAngles;
+        rotation.x = Mathf.Clamp(rotation.x, minX, maxX);
+        rotation.y = Mathf.Clamp(rotation.y, minY, maxY);
+        rotation.z = Mathf.Clamp(rotation.z, minZ, maxZ);
+
+        transform.eulerAngles = rotation;
+        //Debug.Log("euler angles " + transform.eulerAngles);
     }
 
-    private void Update(){
-        if(!isSimulator){
-            bool renderStatus = handReference.IsDataValid && handReference.IsDataHighConfidence;
-            if(isOrientationUp){
-                smartphoneScreenRenderer.enabled = false;
-                largeScreen.SetActive(true);
-            }else{
-                smartphoneScreenRenderer.enabled = renderStatus;
-                largeScreen.SetActive(false);
-            }
-        }
-    }
-
-    public void CopyTexture2DToRenderTexture(byte[] _texture2D){
-        textureReceived2D.LoadImage(_texture2D);
-        smartphoneScreenRenderer.material.SetTexture("_BaseMap", textureReceived2D);
-    }
-
-    public void UpdatePhoneSize(float _width, float _height){
-        widthInMeter = 0.0254f * _width;
-        heightInMeter = 0.0254f * _height;
-
-        Debug.Log("width in meter: " + widthInMeter + " height in meter: " + heightInMeter);
-    }
-
-    public void PreviousNode(string _id, string _tagName){
-        if(_tagName == "ListPenelitiDepartemen"){
-            // show faculty list (institution unit filter)
-            Manager.instance.getPenelitiDepartemenITS(_id);
-        }else if(_tagName == "ListPublikasiKataKunci"){
-            // show faculty list (research keyword filter)
-            Manager.instance.getPublikasiKataKunci(_id);
-        }
-    }
-
-    public void UpdateDeviceOrientation(bool _isUp){
+    public void SetDeviceOrientation(bool _isUp){
         isOrientationUp = _isUp;
+        if(isOrientationUp){
+            this.transform.localPosition = largePhoneAnchor.localPosition;
+            this.transform.localRotation = largePhoneAnchor.localRotation;
+            this.transform.localScale = largePhoneAnchor.localScale;
+        }else{
+            this.transform.localPosition = defPhoneAnchor.localPosition;
+            this.transform.localRotation = defPhoneAnchor.localRotation;
+            this.transform.localScale = defPhoneAnchor.localScale;
+        }
     }
 }

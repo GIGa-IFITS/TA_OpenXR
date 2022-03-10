@@ -18,7 +18,9 @@ public class Manager : EventHandler
     public string portServer = "";
     private string param;
     public static Manager instance;
+    [Header("Hand dan Virtual Smartphone - Manager")]
     [SerializeField] private GameObject virtualSmartphoneCanvas;
+    [SerializeField] private HandPoseSwitch handPoseSwitch;
 
     private void Awake() {
         if (instance == null){
@@ -66,17 +68,14 @@ public class Manager : EventHandler
         offset *= 2f;
         offset += new Vector3(0, 1.6f, 0);
         disconnectCanvas.transform.position = playerRef.transform.position + offset;
-        flushNode();
-
-        // FOR CANVAS
         virtualSmartphoneCanvas.SetActive(false);
-
-        // ada tombol yang ngarah ke fungsi StartConnection
-        // kalau ip server ganti --> apakah perlu restart server atau otomatis?
+        handPoseSwitch.SetStaticHandStatus(false);
+        flushNode();
     }
 
     public void SetVirtualSmartphoneCanvasActive(){
         virtualSmartphoneCanvas.SetActive(true);
         disconnectCanvas.SetActive(false);
+        handPoseSwitch.SetStaticHandStatus(true);
     }
 }

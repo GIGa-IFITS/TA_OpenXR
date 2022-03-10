@@ -49,9 +49,6 @@ public class Server
 
         packetHandlers = new Dictionary<int, PacketHandler>(){
             { (int)ClientPackets.welcomeReceived, ServerHandle.WelcomeReceived },
-            { (int)ClientPackets.sendPhoneSize, ServerHandle.SendPhoneSize },
-            { (int)ClientPackets.sendTexture, ServerHandle.SendTexture },
-            { (int)ClientPackets.sendDashboardToggle, ServerHandle.SendDashboardToggle },
             { (int)ClientPackets.sendCommand, ServerHandle.SendCommand },
             { (int)ClientPackets.sendFilterSummary, ServerHandle.SendFilterSummary },
             { (int)ClientPackets.sendResearcherId, ServerHandle.SendResearcherId },

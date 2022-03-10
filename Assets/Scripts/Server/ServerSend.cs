@@ -19,26 +19,9 @@ public class ServerSend
         }
     }
 
-    public static void SendPhoneSizeToVR(float _screenWidth, float _screenHeight){
-        using (PacketNetwork _packet = new PacketNetwork((int)ServerPackets.sendPhoneSize)){
-            _packet.Write(_screenWidth);
-            _packet.Write(_screenHeight);
-
-            SendTCPData(1, _packet);
-        }
-    }
-
-    public static void SendTextureToVR(byte[] _textureToSend2D){
-        using(PacketNetwork _packet = new PacketNetwork((int)ServerPackets.sendTexture)){
-            _packet.Write(_textureToSend2D);
-
-            SendTCPData(1, _packet);
-        }
-    }
-
-    public static void SendDashboardToggleToVR(bool _on){
-        using(PacketNetwork _packet = new PacketNetwork((int)ServerPackets.sendDashboardToggle)){
-            _packet.Write(_on);
+    public static void SendPhoneStatusToVR(){
+        using (PacketNetwork _packet = new PacketNetwork((int)ServerPackets.welcome)){
+            _packet.Write(true);
 
             SendTCPData(1, _packet);
         }
@@ -114,27 +97,6 @@ public class ServerSend
             SendTCPData(1, _packet);
         }
     }
-
-    // public static void RequestForTexture(int _fromClient, string _msg){
-    //     using (PacketNetwork _packet = new PacketNetwork((int)ServerPackets.textureRequest)){
-    //         _packet.Write(_msg);
-
-    //         SendTCPDataToOtherClient(_fromClient, _packet);
-    //     }
-    // }
-
-    // public static void SendDashboardDataToSmartphone(int journals, int conferences, int books, int thesis, int patents, int research){
-    //     using(PacketNetwork _packet = new PacketNetwork((int)ServerPackets.sendDashboardData)){
-    //         _packet.Write(journals);
-    //         _packet.Write(conferences);
-    //         _packet.Write(books);
-    //         _packet.Write(thesis);
-    //         _packet.Write(patents);
-    //         _packet.Write(research);
-
-    //         SendTCPData(2, _packet);
-    //     }
-    // }
     
     #endregion
 }

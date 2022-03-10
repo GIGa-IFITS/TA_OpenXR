@@ -12,49 +12,10 @@ public class ServerHandle
         }
         Debug.Log("SERVER: " + Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint +  " connected succesfuly");
 
-    }
-
-    // received phone size
-    public static void SendPhoneSize(int _fromClient, PacketNetwork _packet){
-        int _clientIdCheck = _packet.ReadInt();
-        float _screenWidth = _packet.ReadFloat();
-        float _screenHeight = _packet.ReadFloat();
-
-        if(_fromClient != _clientIdCheck){
-            Debug.Log("SERVER: " + _fromClient + " has assumed wrong client id");
+        // if message is from smartphone, send message to VR
+        if(_fromClient == 2){
+            ServerSend.SendPhoneStatusToVR();
         }
-        Debug.Log("SERVER: " + Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint + " /Smartphone with id " + _fromClient + " sent phone size with width " + _screenWidth + " and height " + _screenHeight + ". Server will now send it to the other client");
-
-        // send phone size from server to VR
-        ServerSend.SendPhoneSizeToVR(_screenWidth, _screenHeight);
-    }
-    
-    // received texture from smartphone
-    public static void SendTexture(int _fromClient, PacketNetwork _packet){
-        int _clientIdCheck = _packet.ReadInt();
-        byte[] _textureToSend2D = _packet.ReadBytes(_packet.UnreadLength());
-
-        if(_fromClient != _clientIdCheck){
-            Debug.Log("SERVER: " + _fromClient + " has assumed wrong client id");
-        }
-        Debug.Log("SERVER: " + Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint + " /Smartphone with id " + _fromClient + " sent texture2d " + _textureToSend2D + " server will now send it to the other client");
-
-        // send texture 2D from server to VR
-        ServerSend.SendTextureToVR(_textureToSend2D);
-    }
-
-    // received dashboard toggle data from smartphone
-    public static void SendDashboardToggle(int _fromClient, PacketNetwork _packet){
-        int _clientIdCheck = _packet.ReadInt();
-        bool _toggleVal = _packet.ReadBool();
-
-        if(_fromClient != _clientIdCheck){
-            Debug.Log("SERVER: " + _fromClient + " has assumed wrong client id");
-        }
-        Debug.Log("SERVER: " + Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint + " /Smartphone with id " + _fromClient + " sent dashboard toggle " + _toggleVal + " server will now send it to the other client");
-
-        // send to VR
-        ServerSend.SendDashboardToggleToVR(_toggleVal);
     }
 
     // send filter type to spawn first level node
@@ -169,36 +130,4 @@ public class ServerHandle
         // send to smartphone
         ServerSend.SendPageTypeToVR(_pageType);
     }
-
-    // public static void TextureRequested(int _fromClient, PacketNetwork _packet){
-    //     int _clientIdCheck = _packet.ReadInt();
-
-    //     if(_fromClient != _clientIdCheck){
-    //         Debug.Log("SERVER: " + _fromClient + " has assumed wrong client id");
-    //     }
-    //     Debug.Log("SERVER: " + Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint + " /VR with id " + _fromClient + " request for texture");
-
-    //     // request for texture 2D to smartphone
-    //     ServerSend.RequestForTexture(_fromClient, "request texture");
-    // }
-
-    // // received dashboard data from VR
-    // public static void SendDashboardData(int _fromClient, PacketNetwork _packet){
-    //     int _clientIdCheck = _packet.ReadInt();
-
-    //     int journals = _packet.ReadInt();
-    //     int conferences = _packet.ReadInt();
-    //     int books = _packet.ReadInt();
-    //     int thesis = _packet.ReadInt();
-    //     int patents = _packet.ReadInt();
-    //     int research = _packet.ReadInt();
-
-    //     if(_fromClient != _clientIdCheck){
-    //         Debug.Log("SERVER: " + _fromClient + " has assumed wrong client id");
-    //     }
-    //     Debug.Log("SERVER: " + Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint + " /VR with id " + _fromClient + " sent dashboard data. Server will now send it to the other client");
-
-    //     // send data from server to smartphone
-    //     ServerSend.SendDashboardDataToSmartphone(journals, conferences, books, thesis, patents, research);
-    // }
 }

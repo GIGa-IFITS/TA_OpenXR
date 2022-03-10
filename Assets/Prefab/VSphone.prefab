@@ -7231,6 +7231,7 @@ GameObject:
   - component: {fileID: 3389779944009236588}
   - component: {fileID: 3389779944009236589}
   - component: {fileID: 3389779944009236586}
+  - component: {fileID: 593083137157425772}
   m_Layer: 0
   m_Name: VSphone
   m_TagString: Untagged
@@ -7286,9 +7287,6 @@ MonoBehaviour:
   ipText: {fileID: 3389779944423556624}
   addNodeSizeBtn: {fileID: 3389779944646047149}
   subtractNodeSizeBtn: {fileID: 3389779943902741447}
-  isSimulator: 0
-  defPhoneAnchor: {fileID: 0}
-  largePhoneAnchor: {fileID: 0}
 --- !u!114 &3389779944009236589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7314,6 +7312,27 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.08, y: 0.15, z: 0.05}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &593083137157425772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3389779944009236584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08155c272a49a334782a842279128a48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defPhoneAnchor: {fileID: 0}
+  largePhoneAnchor: {fileID: 0}
+  playerRef: {fileID: 0}
+  minX: 340
+  maxX: 360
+  minY: 20
+  maxY: 30
+  minZ: 0
+  maxZ: 10
 --- !u!1 &3389779944019908933
 GameObject:
   m_ObjectHideFlags: 0

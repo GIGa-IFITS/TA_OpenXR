@@ -58,10 +58,6 @@ public class VirtualSmartphoneCanvas : MonoBehaviour
     private string currId;
     private string currId2;
     private string currResearcherId;
-    public bool isSimulator;
-    private bool isOrientationUp = false;
-    [SerializeField] private Transform defPhoneAnchor;
-    [SerializeField] private Transform largePhoneAnchor;
 
     private void Awake()
     {
@@ -109,20 +105,6 @@ public class VirtualSmartphoneCanvas : MonoBehaviour
         detResearchText = detailPanel.transform.GetChild(1).GetChild(1).GetChild(5).GetChild(1).GetComponent<TextMeshProUGUI>();
     
         ipText.text = "Connected to:" + "\n" + Client.instance.ip;
-    }
-
-    private void Update(){
-        if(!isSimulator){
-            if(isOrientationUp){
-                this.transform.localPosition = largePhoneAnchor.localPosition;
-                this.transform.localRotation = largePhoneAnchor.localRotation;
-                this.transform.localScale = largePhoneAnchor.localScale;
-            }else{
-                this.transform.localPosition = defPhoneAnchor.localPosition;
-                this.transform.localRotation = defPhoneAnchor.localRotation;
-                this.transform.localScale = defPhoneAnchor.localScale;
-            }
-        }
     }
 
     public void ChangeMenuScreen(string _pageType){
@@ -345,9 +327,5 @@ public class VirtualSmartphoneCanvas : MonoBehaviour
             summaryErrorPanel.SetActive(true);
             summaryPanel.SetActive(false);
         }
-    }
-
-    public void UpdateDeviceOrientation(bool _isUp){
-        isOrientationUp = _isUp;
     }
 }

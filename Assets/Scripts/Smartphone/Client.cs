@@ -162,9 +162,7 @@ public class Client : MonoBehaviour
         
         packetHandlers = new Dictionary<int, PacketHandler>(){
             { (int)ServerPackets.welcome, ClientHandle.Welcome },
-            { (int)ServerPackets.sendPhoneSize, ClientHandle.PhoneSizeReceived },
-            { (int)ServerPackets.sendTexture, ClientHandle.TextureReceived }, 
-            { (int)ServerPackets.sendDashboardToggle, ClientHandle.ToggleReceived },
+            { (int)ServerPackets.sendPhoneStatus, ClientHandle.PhoneStatusReceived },
             { (int)ServerPackets.sendCommand, ClientHandle.CommandReceived },
             { (int)ServerPackets.sendFilterSummary, ClientHandle.FilterSummaryReceived },
             { (int)ServerPackets.sendResearcherId, ClientHandle.ResearcherIdReceived },
