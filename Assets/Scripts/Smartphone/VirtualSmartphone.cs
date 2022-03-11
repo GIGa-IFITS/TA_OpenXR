@@ -9,16 +9,6 @@ public class VirtualSmartphone : MonoBehaviour
     private bool isOrientationUp = false;
     [SerializeField] private Transform defPhoneAnchor;
     [SerializeField] private Transform largePhoneAnchor;
-    [SerializeField] private GameObject playerRef;
-    [Header("Threshold")]
-    [SerializeField] private float minX;
-    [SerializeField] private float maxX;
-    [SerializeField] private float minY;
-    [SerializeField] private float maxY;
-    [SerializeField] private float minZ;
-    [SerializeField] private float maxZ;
-    private Vector3 rotation;
-
 
     private void Awake()
     {
@@ -31,19 +21,6 @@ public class VirtualSmartphone : MonoBehaviour
             Debug.Log("Instance already exists, destroying object!");
             Destroy(this);
         }
-    }
-
-    void Update(){
-        //always face user
-        //this.transform.LookAt(this.transform.position + playerRef.transform.rotation * Vector3.forward, playerRef.transform.rotation * Vector3.up);
-
-        rotation = transform.eulerAngles;
-        rotation.x = Mathf.Clamp(rotation.x, minX, maxX);
-        rotation.y = Mathf.Clamp(rotation.y, minY, maxY);
-        rotation.z = Mathf.Clamp(rotation.z, minZ, maxZ);
-
-        transform.eulerAngles = rotation;
-        //Debug.Log("euler angles " + transform.eulerAngles);
     }
 
     public void SetDeviceOrientation(bool _isUp){

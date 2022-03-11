@@ -4,17 +4,23 @@ using UnityEngine;
 
 public class IndexFingerCollider : MonoBehaviour
 {
-    private OVRSkeleton skeleton;
+    public OVRSkeleton skeleton;
  
     void Start() {
         skeleton = GetComponent<OVRSkeleton>();
-        // Add collider to tip of index finger
-        foreach(OVRBone bone in skeleton.Bones) {
-            if (bone.Id == OVRSkeleton.BoneId.Hand_IndexTip) {
-                bone.Transform.gameObject.AddComponent<SphereCollider>();
-                bone.Transform.gameObject.GetComponent<SphereCollider>().radius = 0.01f;        
-                bone.Transform.gameObject.tag = "InteractHand";
-            }
-        }
+        StartCoroutine(addTriggerToTip(1f));
+    }
+
+    IEnumerator addTriggerToTip(float seconds){
+        //Wait for n seconds
+        yield return new WaitForSeconds(seconds);
+        //Add collider to tip of index finger
+        GameObject indexTip = transform.GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(0).gameObject;
+        Rigidbody rigidbody = indexTip.AddComponent<Rigidbody>();
+        rigidbody.isKinematic = true;
+        SphereCollider sphereCollider = indexTip.AddComponent<SphereCollider>();
+        sphereCollider.isTrigger = true;
+        sphereCollider.radius = 0.01f;
+        indexTip.tag = "InteractHand";
     }
 }

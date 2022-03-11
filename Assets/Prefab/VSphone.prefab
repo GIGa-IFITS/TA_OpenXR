@@ -3625,8 +3625,6 @@ GameObject:
   - component: {fileID: 3389779943563310139}
   - component: {fileID: 3389779943563310136}
   - component: {fileID: 3389779943563310137}
-  - component: {fileID: 1108149241518474623}
-  - component: {fileID: 6984825057359257327}
   m_Layer: 5
   m_Name: Institution Unit Button
   m_TagString: Untagged
@@ -3734,35 +3732,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!65 &1108149241518474623
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3389779943563310135}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 450, y: 450, z: 0.01}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &6984825057359257327
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3389779943563310135}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 118
-  m_CollisionDetection: 0
 --- !u!1 &3389779943575039472
 GameObject:
   m_ObjectHideFlags: 0
@@ -4385,8 +4354,6 @@ GameObject:
   - component: {fileID: 3389779943622062580}
   - component: {fileID: 3389779943622062581}
   - component: {fileID: 3389779943622062578}
-  - component: {fileID: 274718198285730291}
-  - component: {fileID: 3696688970856853715}
   m_Layer: 5
   m_Name: Academic Degree Button
   m_TagString: Untagged
@@ -4494,35 +4461,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!65 &274718198285730291
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3389779943622062576}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 450, y: 450, z: 0.01}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &3696688970856853715
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3389779943622062576}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 118
-  m_CollisionDetection: 0
 --- !u!1 &3389779943627437315
 GameObject:
   m_ObjectHideFlags: 0
@@ -5807,8 +5745,6 @@ GameObject:
   - component: {fileID: 3389779943835983083}
   - component: {fileID: 3389779943835983080}
   - component: {fileID: 3389779943835983081}
-  - component: {fileID: 7403361352153222265}
-  - component: {fileID: 7051131300279242365}
   m_Layer: 5
   m_Name: Research Keyword Button
   m_TagString: Untagged
@@ -5916,35 +5852,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!65 &7403361352153222265
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3389779943835983079}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 450, y: 450, z: 0.01}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &7051131300279242365
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3389779943835983079}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 118
-  m_CollisionDetection: 0
 --- !u!1 &3389779943860495242
 GameObject:
   m_ObjectHideFlags: 0
