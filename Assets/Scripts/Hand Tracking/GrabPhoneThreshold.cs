@@ -5,7 +5,7 @@ using UnityEngine;
 public class GrabPhoneThreshold : MonoBehaviour
 {
     public bool thresholdActiveDebug;
-
+    public bool smoothActiveDebug;
     [SerializeField] private float minX;
     [SerializeField] private float maxX;
     [SerializeField] private float minY;
@@ -13,6 +13,8 @@ public class GrabPhoneThreshold : MonoBehaviour
     [SerializeField] private float minZ;
     [SerializeField] private float maxZ;
     private Vector3 rotation;
+
+    [SerializeField] private float smoothTime = 1f;
 
     void Update()
     {
@@ -22,7 +24,11 @@ public class GrabPhoneThreshold : MonoBehaviour
             rotation.y = Mathf.Clamp(rotation.y, minY, maxY);
             rotation.z = Mathf.Clamp(rotation.z, minZ, maxZ);
 
-            transform.eulerAngles = rotation;
+            if(smoothActiveDebug){
+                transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, rotation, smoothTime * Time.deltaTime);
+            }else{
+                transform.eulerAngles = rotation;
+            }
         }
         Debug.Log("euler angles " + transform.eulerAngles);
     }

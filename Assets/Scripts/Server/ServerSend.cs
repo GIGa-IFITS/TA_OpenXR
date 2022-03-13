@@ -20,7 +20,7 @@ public class ServerSend
     }
 
     public static void SendPhoneStatusToVR(){
-        using (PacketNetwork _packet = new PacketNetwork((int)ServerPackets.welcome)){
+        using (PacketNetwork _packet = new PacketNetwork((int)ServerPackets.sendPhoneStatus)){
             _packet.Write(true);
 
             SendTCPData(1, _packet);

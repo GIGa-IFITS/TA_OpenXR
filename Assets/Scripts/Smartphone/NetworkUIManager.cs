@@ -143,7 +143,7 @@ public class NetworkUIManager : MonoBehaviour {
         requestPeneliti.URL = URL;
         StartCoroutine(requestPeneliti.RequestData((result) =>
         {
-            // mengambil jumlah jurnal, conference, books, thesis, paten dan re search yang ada
+            // mengambil jumlah jurnal, conference, books, thesis, paten dan research yang ada
             hasilPublikasiITS(result);
             
         }, (error) => {

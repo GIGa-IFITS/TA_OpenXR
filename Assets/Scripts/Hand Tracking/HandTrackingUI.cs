@@ -9,7 +9,7 @@ public class HandTrackingUI : MonoBehaviour
     public OVRInputModule inputModule;
     void Start()
     {
-        inputModule.rayTransform = hand.PointerPose;
+        //inputModule.rayTransform = hand.PointerPose;
+        inputModule.rayTransform = hand.transform.GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(0).gameObject.transform;
     }
-
 }
