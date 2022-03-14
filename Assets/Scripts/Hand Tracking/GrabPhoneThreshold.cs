@@ -4,32 +4,32 @@ using UnityEngine;
 
 public class GrabPhoneThreshold : MonoBehaviour
 {
-    public bool thresholdActiveDebug;
-    public bool smoothActiveDebug;
-    [SerializeField] private float minX;
-    [SerializeField] private float maxX;
-    [SerializeField] private float minY;
-    [SerializeField] private float maxY;
-    [SerializeField] private float minZ;
-    [SerializeField] private float maxZ;
-    private Vector3 rotation;
-
-    [SerializeField] private float smoothTime = 1f;
+    [SerializeField] private GameObject playerRef;
+    [SerializeField] private float threshold = 0.7f;
+    public float x;
+    public float y;
+    public float z;
 
     void Update()
     {
-        if(thresholdActiveDebug){
-            rotation = transform.eulerAngles;
-            rotation.x = Mathf.Clamp(rotation.x, minX, maxX);
-            rotation.y = Mathf.Clamp(rotation.y, minY, maxY);
-            rotation.z = Mathf.Clamp(rotation.z, minZ, maxZ);
+        //take the dot product of the facing direction of phone compared to the direction from phone to player
+        //if it's 1, phone is looking exactly at player
+        //if it's -1, phone is looking completely the opposite direction to player
+        //if it's somewhere between 0 and 1, they're looking roughty in the right direction
+        //threshold is to define as "not perfectly".
+        Vector3 dirFromPhonetoCam = (playerRef.transform.position - transform.position).normalized;
+        float dotProd = Vector3.Dot(dirFromPhonetoCam, transform.forward);
 
-            if(smoothActiveDebug){
-                transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, rotation, smoothTime * Time.deltaTime);
-            }else{
-                transform.eulerAngles = rotation;
-            }
+        transform.LookAt(playerRef.transform);
+        transform.Rotate(x,y,z);
+ 
+        if(dotProd < threshold) {
+            // phone is looking mostly opposite of player
+            Debug.Log("looking opposite player");
+            transform.LookAt(playerRef.transform);
+            transform.Rotate(x,y,z);
+        }else{
+            Debug.Log("looking mostly at  player");
         }
-        Debug.Log("euler angles " + transform.eulerAngles);
     }
 }

@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class IndexFingerCollider : MonoBehaviour
 {
-    public OVRSkeleton skeleton;
- 
+    private OVRSkeleton skeleton;
     void Start() {
         skeleton = GetComponent<OVRSkeleton>();
         StartCoroutine(addTriggerToTip(1f));
@@ -18,9 +17,10 @@ public class IndexFingerCollider : MonoBehaviour
         GameObject indexTip = transform.GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(0).gameObject;
         Rigidbody rigidbody = indexTip.AddComponent<Rigidbody>();
         rigidbody.isKinematic = true;
-        SphereCollider sphereCollider = indexTip.AddComponent<SphereCollider>();
-        sphereCollider.isTrigger = true;
-        sphereCollider.radius = 0.01f;
+        BoxCollider boxCollider = indexTip.AddComponent<BoxCollider>();
+        boxCollider.isTrigger = true;
+        boxCollider.size = new Vector3(0.01f, 0.01f, 0.01f);
         indexTip.tag = "InteractHand";
+        indexTip.AddComponent<FingerRay>();
     }
 }
