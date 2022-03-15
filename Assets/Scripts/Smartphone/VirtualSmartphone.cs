@@ -6,9 +6,11 @@ public class VirtualSmartphone : MonoBehaviour
 {
     public static VirtualSmartphone instance;
     
-    private bool isOrientationUp = false;
+    public bool isOrientationUp = false;
     [SerializeField] private Transform defPhoneAnchor;
+    [SerializeField] private Transform defPhoneParent;
     [SerializeField] private Transform largePhoneAnchor;
+    [SerializeField] private Transform largePhoneParent;
 
     private void Awake()
     {
@@ -26,13 +28,15 @@ public class VirtualSmartphone : MonoBehaviour
     public void SetDeviceOrientation(bool _isUp){
         isOrientationUp = _isUp;
         if(isOrientationUp){
-            this.transform.localPosition = largePhoneAnchor.localPosition;
-            this.transform.localRotation = largePhoneAnchor.localRotation;
-            this.transform.localScale = largePhoneAnchor.localScale;
+            transform.localPosition = largePhoneAnchor.localPosition;
+            transform.localRotation = largePhoneAnchor.localRotation;
+            transform.localScale = largePhoneAnchor.localScale;
+            transform.parent = largePhoneParent;
         }else{
-            this.transform.localPosition = defPhoneAnchor.localPosition;
-            this.transform.localRotation = defPhoneAnchor.localRotation;
-            this.transform.localScale = defPhoneAnchor.localScale;
+            transform.parent = defPhoneParent;
+            transform.localPosition = defPhoneAnchor.localPosition;
+            transform.localRotation = defPhoneAnchor.localRotation;
+            transform.localScale = defPhoneAnchor.localScale;
         }
     }
 }

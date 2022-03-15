@@ -9,7 +9,7 @@ public class ButtonPress : MonoBehaviour
     [SerializeField] private bool isPressed;
     [SerializeField] private Sprite normalSprite;
     [SerializeField] private Sprite pressedSprite;
-    void Start()
+    void Awake()
     {
         isPressed = false;
         btn = btnObject.GetComponent<Button>();
@@ -29,5 +29,11 @@ public class ButtonPress : MonoBehaviour
             isPressed = false;
             btn.image.sprite = normalSprite;
         }
+    }
+
+    private void OnEnable() {
+        btnObject.transform.localPosition = new Vector3(btnObject.transform.localPosition.x, btnObject.transform.localPosition.y, -0.01f);
+        isPressed = false;
+        btn.image.sprite = normalSprite;
     }
 }
