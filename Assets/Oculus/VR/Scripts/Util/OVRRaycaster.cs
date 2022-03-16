@@ -89,11 +89,13 @@ public class OVRRaycaster : GraphicRaycaster, IPointerEnterHandler
         if (canvas == null)
             return;
 
-        float hitDistance = float.MaxValue;
+        //float hitDistance = float.MaxValue; SHORT DISTANCE RAYCAST TO SHOW HOVER EFFECT
+        float hitDistance = 0.035f;
 
         if (checkForBlocking && blockingObjects != BlockingObjects.None)
         {
-            float dist = eventCamera.farClipPlane;
+            //float dist = eventCamera.farClipPlane; SHORT DISTANCE RAYCAST TO SHOW HOVER EFFECT
+            float dist = 0.035f;
 
             if (blockingObjects == BlockingObjects.ThreeD || blockingObjects == BlockingObjects.All)
             {
