@@ -68,9 +68,9 @@ public class Manager : EventHandler
         offset *= 2f;
         offset += new Vector3(0, 1.6f, 0);
         disconnectCanvas.transform.position = playerRef.transform.position + offset;
+        flushNode();
         virtualSmartphoneCanvas.SetActive(false);
         handPoseSwitch.SetStaticHandStatus(false);
-        flushNode();
     }
 
     public void SetVirtualSmartphoneCanvasActive(){

@@ -44,7 +44,7 @@ public class ClientReference
             if(Manager.instance.ipAddress == ""){
                 ServerSend.Welcome(id, "Welcome to the server");
             }else{
-                ServerSend.Welcome(id, Manager.instance.ipAddress);
+                ServerSend.Welcome(id, Manager.instance.URL);
             }
         }
 

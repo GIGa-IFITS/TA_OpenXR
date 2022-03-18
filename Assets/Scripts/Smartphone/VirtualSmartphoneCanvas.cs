@@ -328,4 +328,12 @@ public class VirtualSmartphoneCanvas : MonoBehaviour
             summaryPanel.SetActive(false);
         }
     }
+
+    void OnEnable(){
+        filterMenu.SetActive(false);
+        settingsMenu.SetActive(false);
+        illustMenu.SetActive(false);
+        summaryMenu.SetActive(false);
+        detailMenu.SetActive(false);
+    }
 }

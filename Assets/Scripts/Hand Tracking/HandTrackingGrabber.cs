@@ -6,7 +6,7 @@ using OculusSampleFramework;
 public class HandTrackingGrabber : OVRGrabber
 {
     private OVRHand hand;
-    public float pinchThreshold = 0.7f;
+    public float pinchThreshold = 0.5f;
 
     protected override void Start()
     {
