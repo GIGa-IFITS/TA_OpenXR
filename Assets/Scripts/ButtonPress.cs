@@ -4,31 +4,32 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ButtonPress : MonoBehaviour
 {
-    [SerializeField] private GameObject btnObject;
+    private GameObject btnObject;
     private Button btn;
-    [SerializeField] private bool isPressed;
+    private bool isPressed;
     [SerializeField] private Sprite normalSprite;
     [SerializeField] private Sprite pressedSprite;
     void Awake()
     {
         isPressed = false;
-        btn = btnObject.GetComponent<Button>();
+        btnObject = gameObject;
+        btn = GetComponent<Button>();
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if(!isPressed && other.gameObject.tag == "InteractHand"){
-            btnObject.transform.localPosition = new Vector3(btnObject.transform.localPosition.x, btnObject.transform.localPosition.y, 0f);
-            isPressed = true;
-            btn.image.sprite = pressedSprite;
-        }
+    public void ButtonPressed(){
+        btnObject.transform.localPosition = new Vector3(btnObject.transform.localPosition.x, btnObject.transform.localPosition.y, 0f);
+        isPressed = true;
+        btn.image.sprite = pressedSprite;
+
+        StartCoroutine(backToDefault(0.1f));
     }
 
-    private void OnTriggerExit(Collider other) {
-        if(other.gameObject.tag == "InteractHand"){
-            btnObject.transform.localPosition = new Vector3(btnObject.transform.localPosition.x, btnObject.transform.localPosition.y, -0.01f);
-            isPressed = false;
-            btn.image.sprite = normalSprite;
-        }
+    IEnumerator backToDefault(float seconds){
+        //Wait for n seconds
+        yield return new WaitForSeconds(seconds);
+        btnObject.transform.localPosition = new Vector3(btnObject.transform.localPosition.x, btnObject.transform.localPosition.y, -0.01f);
+        isPressed = false;
+        btn.image.sprite = normalSprite;
     }
 
     private void OnEnable() {

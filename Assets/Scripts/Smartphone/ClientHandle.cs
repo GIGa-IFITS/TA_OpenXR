@@ -22,6 +22,7 @@ public class ClientHandle : MonoBehaviour
     }
 
     public static void PhoneStatusReceived(PacketNetwork _packet){
+        Debug.Log("set active");
         Manager.instance.SetVirtualSmartphoneCanvasActive();
     }
 

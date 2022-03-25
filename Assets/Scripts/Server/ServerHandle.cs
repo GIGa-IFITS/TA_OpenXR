@@ -15,7 +15,8 @@ public class ServerHandle
         // if message is from smartphone, send message to VR
         if(_fromClient == 2){
             Debug.Log("message from smartphone, sending to vr");
-            ServerSend.SendPhoneStatusToVR();
+            //ServerSend.SendPhoneStatusToVR();
+            Manager.instance.SetVirtualSmartphoneCanvasActive();
         }
     }
 

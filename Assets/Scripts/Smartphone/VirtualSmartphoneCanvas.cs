@@ -48,8 +48,8 @@ public class VirtualSmartphoneCanvas : MonoBehaviour
     [SerializeField] private GameObject detailLoading;
     [SerializeField] private TextMeshProUGUI nodeSizeText;
     [SerializeField] private TextMeshProUGUI ipText;
-    [SerializeField] private Button addNodeSizeBtn;
-    [SerializeField] private Button subtractNodeSizeBtn;
+    // [SerializeField] private Button addNodeSizeBtn;
+    // [SerializeField] private Button subtractNodeSizeBtn;
     private string prevNodeName;
     private string prevNodeTotal;
     private string prevNodeId;
@@ -58,6 +58,31 @@ public class VirtualSmartphoneCanvas : MonoBehaviour
     private string currId;
     private string currId2;
     private string currResearcherId;
+    [SerializeField] private ButtonPress dashboardPageDashboardBtn;
+    [SerializeField] private ButtonPress dashboardPageFilterBtn;
+    [SerializeField] private ButtonPress dashboardPageSettingBtn;
+    [SerializeField] private ButtonPress filterPageDashboardBtn;
+    [SerializeField] private ButtonPress filterPageFilterBtn;
+    [SerializeField] private ButtonPress filterPageSettingBtn;
+    [SerializeField] private ButtonPress settingPageDashboardBtn;
+    [SerializeField] private ButtonPress settingPageFilterBtn;
+    [SerializeField] private ButtonPress settingPageSettingBtn;
+    [SerializeField] private ButtonPress dashboardPageTryBtn;
+    [SerializeField] private ButtonPress filterNameBtn;
+    [SerializeField] private ButtonPress filterInstitutionBtn;
+    [SerializeField] private ButtonPress filterDegreeBtn;
+    [SerializeField] private ButtonPress filterKeywordBtn;
+    [SerializeField] private ButtonPress filterLv1BackBtn;
+    [SerializeField] private ButtonPress filterLv1TryBtn;
+    [SerializeField] private ButtonPress filterLv2BackBtn;
+    [SerializeField] private ButtonPress filterLv2TryBtn;
+    [SerializeField] private ButtonPress filterDetailBackBtn;
+    [SerializeField] private ButtonPress filterDetailTryBtn;
+    [SerializeField] private ButtonPress subtractNodeSizeBtn;
+    [SerializeField] private ButtonPress addNodeSizeBtn;
+    [SerializeField] private ButtonPress dcBtn;
+    private float prevNodeSize;
+
 
     private void Awake()
     {
@@ -110,12 +135,14 @@ public class VirtualSmartphoneCanvas : MonoBehaviour
     public void ChangeMenuScreen(string _pageType){
         switch (_pageType) {
             case "dashboardMenu":
-                dashboardLoading.SetActive(true);
-                dashboardPanel.SetActive(false);
-                dashboardErrorPanel.SetActive(false);
-                dashboardMenu.SetActive(true);
-                filterMenu.SetActive(false);
-                settingsMenu.SetActive(false);
+            if(dashboardMenu.activeSelf){
+                dashboardPageDashboardBtn.ButtonPressed();
+            }else if(filterMenu.activeSelf){
+                filterPageDashboardBtn.ButtonPressed();
+            }else{
+                settingPageDashboardBtn.ButtonPressed();
+            }
+                StartCoroutine(OnTapDashboardBtn(0.11f));
                 break;
 
             case "dashboardData":
@@ -129,45 +156,46 @@ public class VirtualSmartphoneCanvas : MonoBehaviour
                 break;
     
             case "filterMenu":
-                dashboardMenu.SetActive(false);
-                filterMenu.SetActive(true);
-                settingsMenu.SetActive(false);
+                if(dashboardMenu.activeSelf){
+                    dashboardPageFilterBtn.ButtonPressed();
+                }else if(filterMenu.activeSelf){
+                    filterPageFilterBtn.ButtonPressed();
+                }else{
+                    settingPageFilterBtn.ButtonPressed();
+                }
+                StartCoroutine(OnTapFilterBtn(0.11f));
                 break;
 
             case "settingsMenu":
-                dashboardMenu.SetActive(false);
-                filterMenu.SetActive(false);
-                settingsMenu.SetActive(true);
+                if(dashboardMenu.activeSelf){
+                    dashboardPageSettingBtn.ButtonPressed();
+                }else if(filterMenu.activeSelf){
+                    filterPageSettingBtn.ButtonPressed();
+                }else{
+                    settingPageSettingBtn.ButtonPressed();
+                }
+                StartCoroutine(OnTapSettingBtn(0.11f));
                 break;
 
             case "backToSummaryMenu":
-                detailMenu.SetActive(false);
-                summaryMenu.SetActive(true);
+                filterDetailBackBtn.ButtonPressed();
+                StartCoroutine(OnTapFilterDetailBackBtn(0.11f));
                 break;
             
             case "backToFilterMenu":
-                illustMenu.SetActive(false);
-                summaryMenu.SetActive(false);
-                filterMenu.SetActive(true);
+                filterLv1BackBtn.ButtonPressed();
+                StartCoroutine(OnTapFilterLv1BackBtn(0.11f));
                 break;
 
             case "backToPrevNode":
-                // still in summary menu, send prev id, current tag
-                if(currTag == "ListPenelitiDepartemen"){
-                    currTag = "ListPenelitiFakultas";
-                }
-                else{
-                    currTag = "ListPublikasiFakultas";
-                }
-                currId = prevNodeId;
-                summaryNameText.text = prevNodeName;
-                summaryTotalText.text = prevNodeTotal;
+                filterLv2BackBtn.ButtonPressed();
+                StartCoroutine(OnTapFilterLv2BackBtn(0.11f));
                 break;
 
             case "retryFilter":
-                // summary menu
-                summaryPanel.SetActive(true);
-                summaryErrorPanel.SetActive(false);
+                filterLv1TryBtn.ButtonPressed();
+                filterLv2TryBtn.ButtonPressed();
+                StartCoroutine(OnTapFilterTryBtn(0.11f));
                 break;
 
             case "researcherDetailData":
@@ -177,10 +205,8 @@ public class VirtualSmartphoneCanvas : MonoBehaviour
                 break;
 
             case "retryDetail":
-                detailLoading.SetActive(true);
-                detailPanel.SetActive(false);
-                detailErrorPanel.SetActive(false);
-                Manager.instance.getResearcherDetailData(currResearcherId);
+                filterDetailTryBtn.ButtonPressed();
+                StartCoroutine(OnTapFilterDetailTryBtn(0.11f));
                 break;
 
             case "errorDetail":
@@ -203,31 +229,31 @@ public class VirtualSmartphoneCanvas : MonoBehaviour
     }
 
     public void UpdateScreenFilter(string _filter){
-        filterMenu.SetActive(false);
-        summaryMenu.SetActive(false);
-        illustMenu.SetActive(true);
-        illustPanel.SetActive(true);
-        illustErrorPanel.SetActive(false);
-
         currFilter = _filter;
         currTag = "none";
 
         if(_filter == "name"){
+            filterNameBtn.ButtonPressed();
             illustFilterText.text = "Filtering By:" + "\n" + "Researcher Name";
             illustInstructionText.text = "Try knocking your phone to nearby node to view researchers of the same initial.";
         }
         else if(_filter == "unit"){
+            filterInstitutionBtn.ButtonPressed();
             illustFilterText.text = "Filtering By:" + "\n" + "Institution Unit";
             illustInstructionText.text = "Try knocking your phone to nearby node to view departements of the faculty.";
         }
         else if(_filter == "degree"){
+            filterDegreeBtn.ButtonPressed();
             illustFilterText.text = "Filtering By:" + "\n" + "Academic Degree";
             illustInstructionText.text = "Try knocking your phone to nearby node to view researcher of the selected academic degree.";
         }
         else if(_filter == "keyword"){
+            filterKeywordBtn.ButtonPressed();
             illustFilterText.text = "Filtering By:" + "\n" + "Research Keyword";
             illustInstructionText.text = "Try knocking your phone to nearby node to view research keywords of the faculty.";
         }
+
+        StartCoroutine(OnTapAnyFilterBtn(0.11f));
     }
 
     public void UpdateScreenSummary(string _name, int _total, string _tag, string _nodeId, string _filterName){
@@ -308,14 +334,19 @@ public class VirtualSmartphoneCanvas : MonoBehaviour
 
     public void UpdateScreenSettingsNode(float _nodeSize){
         nodeSizeText.text = _nodeSize.ToString();
+        if(_nodeSize > prevNodeSize){
+            addNodeSizeBtn.ButtonPressed();
+        }else{
+            subtractNodeSizeBtn.ButtonPressed();
+        }
 
         if(_nodeSize == 1){
-            subtractNodeSizeBtn.interactable = false;
+            subtractNodeSizeBtn.gameObject.GetComponent<Button>().interactable = false;
         }else if(_nodeSize == 5){
-            addNodeSizeBtn.interactable = false;
+            addNodeSizeBtn.gameObject.GetComponent<Button>().interactable = false;
         }else{
-            subtractNodeSizeBtn.interactable = true;
-            addNodeSizeBtn.interactable = true;
+            subtractNodeSizeBtn.gameObject.GetComponent<Button>().interactable = true;
+            addNodeSizeBtn.gameObject.GetComponent<Button>().interactable = true;
         }
     }
 
@@ -329,6 +360,10 @@ public class VirtualSmartphoneCanvas : MonoBehaviour
         }
     }
 
+    public void DisconnectButtonPressed(){
+        dcBtn.ButtonPressed();
+    }
+
     void OnEnable(){
         filterMenu.SetActive(false);
         settingsMenu.SetActive(false);
@@ -336,4 +371,96 @@ public class VirtualSmartphoneCanvas : MonoBehaviour
         summaryMenu.SetActive(false);
         detailMenu.SetActive(false);
     }
+    IEnumerator OnTapDashboardBtn(float seconds){
+        //Wait for n seconds
+        yield return new WaitForSeconds(seconds);
+
+        dashboardLoading.SetActive(true);
+        dashboardPanel.SetActive(false);
+        dashboardErrorPanel.SetActive(false);
+        dashboardMenu.SetActive(true);
+        filterMenu.SetActive(false);
+        settingsMenu.SetActive(false);
+    }
+
+    IEnumerator OnTapFilterBtn(float seconds){
+        //Wait for n seconds
+        yield return new WaitForSeconds(seconds);
+
+        dashboardMenu.SetActive(false);
+        filterMenu.SetActive(true);
+        settingsMenu.SetActive(false);
+    }
+
+    IEnumerator OnTapSettingBtn(float seconds){
+        //Wait for n seconds
+        yield return new WaitForSeconds(seconds);
+
+        dashboardMenu.SetActive(false);
+        filterMenu.SetActive(false);
+        settingsMenu.SetActive(true);
+    }
+
+    IEnumerator OnTapFilterDetailBackBtn(float seconds){
+        //Wait for n seconds
+        yield return new WaitForSeconds(seconds);
+
+        detailMenu.SetActive(false);
+        summaryMenu.SetActive(true);
+    }
+
+    IEnumerator OnTapFilterLv1BackBtn(float seconds){
+        //Wait for n seconds
+        yield return new WaitForSeconds(seconds);
+
+        illustMenu.SetActive(false);
+        summaryMenu.SetActive(false);
+        filterMenu.SetActive(true);
+    }
+    
+    IEnumerator OnTapFilterLv2BackBtn(float seconds){
+        //Wait for n seconds
+        yield return new WaitForSeconds(seconds);
+
+        // still in summary menu, send prev id, current tag
+        if(currTag == "ListPenelitiDepartemen"){
+            currTag = "ListPenelitiFakultas";
+        }
+        else{
+            currTag = "ListPublikasiFakultas";
+        }
+        currId = prevNodeId;
+        summaryNameText.text = prevNodeName;
+        summaryTotalText.text = prevNodeTotal;
+    }
+
+    IEnumerator OnTapFilterTryBtn(float seconds){
+        //Wait for n seconds
+        yield return new WaitForSeconds(seconds);
+
+        // summary menu
+        summaryPanel.SetActive(true);
+        summaryErrorPanel.SetActive(false);
+    }
+
+    IEnumerator OnTapAnyFilterBtn(float seconds){
+        //Wait for n seconds
+        yield return new WaitForSeconds(seconds);
+
+        filterMenu.SetActive(false);
+        summaryMenu.SetActive(false);
+        illustMenu.SetActive(true);
+        illustPanel.SetActive(true);
+        illustErrorPanel.SetActive(false);
+    }   
+
+    IEnumerator OnTapFilterDetailTryBtn(float seconds){
+        //Wait for n seconds
+        yield return new WaitForSeconds(seconds);
+
+        detailLoading.SetActive(true);
+        detailPanel.SetActive(false);
+        detailErrorPanel.SetActive(false);
+        Manager.instance.getResearcherDetailData(currResearcherId);
+    }             
 }

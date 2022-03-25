@@ -7,7 +7,7 @@ public class IndexFingerCollider : MonoBehaviour
     private OVRSkeleton skeleton;
     void Start() {
         skeleton = GetComponent<OVRSkeleton>();
-        StartCoroutine(addTriggerToTip(1f));
+        StartCoroutine(addTriggerToTip(2f));
     }
 
     IEnumerator addTriggerToTip(float seconds){
