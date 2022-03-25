@@ -499,7 +499,7 @@ public class EventHandler : MonoBehaviour
     public void spawnNode(GameObject node, float size)
     {
         node.transform.SetParent(parentPenelitiScatter.transform, false);
-        node.transform.localPosition = new Vector3(Random.Range(-nodeArea, nodeArea), 0, Random.Range(-nodeArea, nodeArea));
+        node.transform.localPosition = new Vector3(Random.Range(-nodeArea, nodeArea), Random.Range(-nodeArea/2, nodeArea/2), Random.Range(-nodeArea, nodeArea));
         node.transform.localScale = new Vector3(0f, 0f, 0f);
 
         node.GetComponentInChildren<TextMeshProUGUI>().text = node.name;
