@@ -1934,7 +1934,7 @@ MonoBehaviour:
   debugText: {fileID: 1402960975}
   ip: {fileID: 0}
   port: {fileID: 0}
-  ipAddress: 192.168.195.63
+  ipAddress: 10.21.79.101
   portServer: 5000
   virtualSmartphoneCanvas: {fileID: 1865379642564101990}
   handPoseSwitch: {fileID: 1709899404410711921}
@@ -4018,6 +4018,93 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1666817363}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1967558985
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1967558987}
+  - component: {fileID: 1967558986}
+  m_Layer: 0
+  m_Name: Gesture Detect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1967558986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967558985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9441237de7e6edc479e7b965b568ebd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugMode: 1
+  threshold: 0.1
+  skeleton: {fileID: 114567485935237950}
+  gestures:
+  - name: Flick
+    fingerDatas:
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: 0}
+    - {x: -0.020068971, y: -0.011554019, z: -0.010496999}
+    - {x: -0.03595841, y: -0.019157713, z: -0.028028497}
+    - {x: -0.06128404, y: -0.038277406, z: -0.035109304}
+    - {x: -0.08939764, y: -0.052217055, z: -0.02256803}
+    - {x: -0.095996246, y: -0.0073164487, z: -0.023550672}
+    - {x: -0.13315952, y: -0.004061359, z: -0.016711745}
+    - {x: -0.15685886, y: -0.006550977, z: -0.011935901}
+    - {x: -0.09564657, y: -0.0025431747, z: -0.0017259077}
+    - {x: -0.13797612, y: -0.0070733214, z: 0.0037890282}
+    - {x: -0.16509973, y: -0.010082837, z: 0.007561508}
+    - {x: -0.088693775, y: -0.0065293056, z: 0.017465245}
+    - {x: -0.12696207, y: -0.0132964, z: 0.020696085}
+    - {x: -0.15297332, y: -0.018221797, z: 0.022998279}
+    - {x: -0.034073576, y: -0.009419822, z: 0.022998575}
+    - {x: -0.077895805, y: -0.013691198, z: 0.03505405}
+    - {x: -0.10610305, y: -0.025701163, z: 0.037017778}
+    - {x: -0.11537731, y: -0.043534517, z: 0.03410057}
+    - {x: -0.106771186, y: -0.06155282, z: -0.007829922}
+    - {x: -0.17841579, y: -0.005216925, z: -0.00603859}
+    - {x: -0.18975289, y: -0.009967922, z: 0.011665439}
+    - {x: -0.17725755, y: -0.0197882, z: 0.02449296}
+    - {x: -0.113235824, y: -0.06315372, z: 0.024476105}
+    onRecognized:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1967558986}
+          m_MethodName: OnFlick
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!4 &1967558987
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967558985}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1999037086
 GameObject:
