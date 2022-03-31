@@ -51,6 +51,11 @@ public class ClientHandle : MonoBehaviour
             Debug.Log("Destroying node, back to filter menu");
             Manager.instance.flushNode();
         }
+        else if (_command == "touch"){
+            Debug.Log("touch detected");
+            SmartphoneScreen.instance.TouchButton();
+            
+        }
 
         // for canvas 
         if(_command != "destroy"){
@@ -109,6 +114,12 @@ public class ClientHandle : MonoBehaviour
     public static void PageTypeReceived(PacketNetwork _packet){
         string _pageType = _packet.ReadString();
         Debug.Log("receive page type " + _pageType);
-        VirtualSmartphoneCanvas.instance.ChangeMenuScreen(_pageType);
+        UIManager.instance.ChangeMenuScreen(_pageType);
+    }
+
+    public static void SwipeReceived(PacketNetwork _packet){
+        string _swipeType = _packet.ReadString();
+        Debug.Log("receive swipe type " + _swipeType);
+        Manager.instance.SetScreenMode(_swipeType);
     }
 }

@@ -127,9 +127,22 @@ public class ServerHandle
         if(_fromClient != _clientIdCheck){
             Debug.Log("SERVER: " + _fromClient + " has assumed wrong client id");
         }
-        Debug.Log("SERVER: " + Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint + " /smartphone with id " + _fromClient + " send page type " + _pageType + ". Server will now send it to the other client");
+        Debug.Log("SERVER: " + Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint + " /VR with id " + _fromClient + " send page type " + _pageType + ". Server will now send it to the other client");
 
         // send to smartphone
-        ServerSend.SendPageTypeToVR(_pageType);
+        ServerSend.SendPageTypeToPhone(_pageType);
+    }
+
+    public static void SendSwipe(int _fromClient, PacketNetwork _packet){
+        int _clientIdCheck = _packet.ReadInt();
+        string _swipeType = _packet.ReadString();
+
+        if(_fromClient != _clientIdCheck){
+            Debug.Log("SERVER: " + _fromClient + " has assumed wrong client id");
+        }
+        Debug.Log("SERVER: " + Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint + " /smartphone with id " + _fromClient + " send swipe type " + _swipeType + ". Server will now send it to the other client");
+
+        // send to smartphone
+        ServerSend.SendSwipeToVR(_swipeType);
     }
 }

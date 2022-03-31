@@ -91,9 +91,17 @@ public class ServerSend
         }
     }
 
-    public static void SendPageTypeToVR(string _pageType){
+    public static void SendPageTypeToPhone(string _pageType){
         using(PacketNetwork _packet = new PacketNetwork((int)ServerPackets.sendPageType)){
             _packet.Write(_pageType);
+
+            SendTCPData(2, _packet);
+        }
+    }
+
+    public static void SendSwipeToVR(string _swipeType){
+        using(PacketNetwork _packet = new PacketNetwork((int)ServerPackets.sendSwipe)){
+            _packet.Write(_swipeType);
 
             SendTCPData(1, _packet);
         }

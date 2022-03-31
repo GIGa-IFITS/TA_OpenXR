@@ -64,11 +64,11 @@ public class EventHandler : MonoBehaviour
         StartCoroutine(requestPeneliti.RequestData((result) =>
         {
             // mengambil jumlah jurnal, conference, books, thesis, paten dan research yang ada
-            VirtualSmartphoneCanvas.instance.ShowDashboardData(result);
+            SmartphoneScreen.instance.ShowDashboardData(result);
         }, (error) => {
             if (error != "")
             {
-
+                SmartphoneScreen.instance.ShowDashboardError();
             }
         }));   
     }
@@ -141,7 +141,7 @@ public class EventHandler : MonoBehaviour
                 Debug.Log(data.nama + " " + data.kode_dosen + " " + data.jumlah);
                 NodeAbjadPeneliti.name = data.nama;
                 int jumlah = data.jumlah;
-                float size = jumlah * sizeCoef * 2;
+                float size = jumlah * sizeCoef * 5;
                 NodeAbjadPeneliti.tag = "ListPenelitiInisial";
 
                 NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
@@ -264,7 +264,7 @@ public class EventHandler : MonoBehaviour
                 NodeAbjadPeneliti.tag = "ListPenelitiDepartemenDetail";
 
                 int jumlah = data.jumlah;
-                float size = jumlah * sizeCoef * 2;
+                float size = jumlah * sizeCoef * 5;
 
                 NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
                 tambahan.kode_peneliti = data.kode_dosen.ToString();
@@ -345,7 +345,7 @@ public class EventHandler : MonoBehaviour
                 NodeAbjadPeneliti.tag = "ListGelarDetail";
 
                 int jumlah = data.jumlah;
-                float size = jumlah * sizeCoef * 2;
+                float size = jumlah * sizeCoef * 5;
 
                 NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
                 tambahan.kode_peneliti = data.kode_dosen.ToString();
@@ -428,7 +428,7 @@ public class EventHandler : MonoBehaviour
                 NodeAbjadPeneliti.tag = "ListPublikasiKataKunci";
 
                 int jumlah = int.Parse(data.df);
-                float size = jumlah * sizeCoef;
+                float size = jumlah * sizeCoef * 5;
 
                 NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
                 tambahan.kode_alternate = data.kode_fakultas.ToString();

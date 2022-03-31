@@ -56,7 +56,8 @@ public class Server
             { (int)ClientPackets.sendErrorMessage, ServerHandle.SendErrorMessage },
             { (int)ClientPackets.sendOrientation, ServerHandle.SendOrientation },
             { (int)ClientPackets.sendNodeSize, ServerHandle.SendNodeSize },
-            { (int)ClientPackets.sendPageType, ServerHandle.SendPageType }
+            { (int)ClientPackets.sendPageType, ServerHandle.SendPageType },
+            { (int)ClientPackets.sendSwipe, ServerHandle.SendSwipe }
         };
     }
 }

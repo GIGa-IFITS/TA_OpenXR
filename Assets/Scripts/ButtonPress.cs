@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class ButtonPress : MonoBehaviour
+using UnityEngine.EventSystems;
+public class ButtonPress : MonoBehaviour, IPointerEnterHandler
 {
     private GameObject btnObject;
     private Button btn;
@@ -16,25 +17,24 @@ public class ButtonPress : MonoBehaviour
         btn = GetComponent<Button>();
     }
 
-    public void ButtonPressed(){
-        btnObject.transform.localPosition = new Vector3(btnObject.transform.localPosition.x, btnObject.transform.localPosition.y, 0f);
-        isPressed = true;
-        btn.image.sprite = pressedSprite;
-
-        StartCoroutine(backToDefault(0.1f));
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        Debug.Log("The cursor entered the selectable UI element.");
+        SmartphoneScreen.instance.SetHoverButton(this);
     }
 
-    IEnumerator backToDefault(float seconds){
-        //Wait for n seconds
-        yield return new WaitForSeconds(seconds);
-        btnObject.transform.localPosition = new Vector3(btnObject.transform.localPosition.x, btnObject.transform.localPosition.y, -0.01f);
-        isPressed = false;
-        btn.image.sprite = normalSprite;
+    public void ButtonPressed(){
+        Debug.Log("button pressed");
+        btn.image.sprite = pressedSprite;
+        invokeButtonClick();
+    }
+
+    IEnumerator invokeButtonClick(){
+        yield return new WaitForSeconds(0.11f);
+        btn.onClick.Invoke();
     }
 
     private void OnEnable() {
-        btnObject.transform.localPosition = new Vector3(btnObject.transform.localPosition.x, btnObject.transform.localPosition.y, -0.01f);
-        isPressed = false;
         btn.image.sprite = normalSprite;
     }
 }
