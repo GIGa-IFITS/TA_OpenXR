@@ -23,6 +23,8 @@ public class Manager : EventHandler
     [SerializeField] private GameObject virtualSmartphone;
     [SerializeField] private GameObject desktopScreen;
 
+    [SerializeField] private GameObject centerEyeAnchor;
+
     private void Awake() {
         if (instance == null){
             Debug.Log("client instantiated");
@@ -59,16 +61,11 @@ public class Manager : EventHandler
     }
 
     public void Disconnected(){
-        GameObject playerRef = GameObject.Find("Stage Object/OVRCameraRig");
-        if(playerRef == null){
-            playerRef = GameObject.Find("Stage Object/[VRSimulator_CameraRig]");
-        }
-
         disconnectCanvas.SetActive(true);
-        Vector3 offset = playerRef.transform.forward;
-        offset *= 2f;
-        offset += new Vector3(0, 1.6f, 0);
-        disconnectCanvas.transform.position = playerRef.transform.position + offset;
+        Vector3 offset = centerEyeAnchor.transform.forward;
+        offset *= 30f;
+        disconnectCanvas.transform.position = centerEyeAnchor.transform.position + offset;
+        disconnectCanvas.transform.LookAt(disconnectCanvas.transform.position + centerEyeAnchor.transform.rotation * Vector3.forward, centerEyeAnchor.transform.rotation * Vector3.up);
         flushNode();
         virtualSmartphone.SetActive(false);
         desktopScreen.SetActive(false);
@@ -87,14 +84,12 @@ public class Manager : EventHandler
             Debug.Log("screen mode VR");
             desktopScreen.SetActive(true);
             virtualSmartphone.SetActive(false);
-            GameObject playerRef = GameObject.Find("Stage Object/OVRCameraRig");
-            if(playerRef == null){
-                playerRef = GameObject.Find("Stage Object/[VRSimulator_CameraRig]");
-            }
-            Vector3 offset = playerRef.transform.forward;
-            offset *= 2f;
-            offset += new Vector3(0, 1.6f, 20f);
-            desktopScreen.transform.position = playerRef.transform.position + offset;
+
+            Vector3 offset = centerEyeAnchor.transform.forward;
+            offset *= 30f;
+            desktopScreen.transform.position = centerEyeAnchor.transform.position + offset;
+            desktopScreen.transform.LookAt(desktopScreen.transform.position + centerEyeAnchor.transform.rotation * Vector3.forward, centerEyeAnchor.transform.rotation * Vector3.up);
+            
         }else if(_swipeType == "down"){
             Debug.Log("screen mode smartphone");
             desktopScreen.SetActive(false);

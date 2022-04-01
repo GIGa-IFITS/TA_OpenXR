@@ -53,13 +53,13 @@ public class ClientHandle : MonoBehaviour
         }
         else if (_command == "touch"){
             Debug.Log("touch detected");
-            SmartphoneScreen.instance.TouchButton();
+            ScreenManager.instance.TouchButton();
             
         }
 
         // for canvas 
         if(_command != "destroy"){
-            VirtualSmartphoneCanvas.instance.UpdateScreenFilter(_command);
+            //VirtualSmartphoneCanvas.instance.UpdateScreenFilter(_command);
         }
     }
 

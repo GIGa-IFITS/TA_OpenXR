@@ -1945,6 +1945,7 @@ MonoBehaviour:
   handPoseSwitch: {fileID: 1709899404410711921}
   virtualSmartphone: {fileID: 616857366}
   desktopScreen: {fileID: 2028730081}
+  centerEyeAnchor: {fileID: 1667105139}
 --- !u!1001 &704906391
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2064,8 +2065,6 @@ MonoBehaviour:
   hand: {fileID: 114428880624173542}
   inputModule: {fileID: 704906394}
   laserPointer: {fileID: 704906396}
-  indexFingerTip: {fileID: 0}
-  rot: {x: 45, y: 90, z: 0}
 --- !u!114 &704906394 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114043904411177872, guid: a9d2de84afb308a4796cc671d3432b4d,
@@ -3177,7 +3176,7 @@ PrefabInstance:
     - target: {fileID: 3389779944009236587, guid: 8efedb6fc0cc462448a86b0cd24c8673,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 20
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3389779944009236587, guid: 8efedb6fc0cc462448a86b0cd24c8673,
         type: 3}
@@ -3213,6 +3212,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389779944501787824, guid: 8efedb6fc0cc462448a86b0cd24c8673,
+        type: 3}
+      propertyPath: m_Name
+      value: Search Menu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8efedb6fc0cc462448a86b0cd24c8673, type: 3}
@@ -6599,6 +6603,36 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1001231368871007883, guid: 3fd6b36d940f9b24eae4734f5cf3119e,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 280
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001231368871007883, guid: 3fd6b36d940f9b24eae4734f5cf3119e,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 280
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001231368871007883, guid: 3fd6b36d940f9b24eae4734f5cf3119e,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001231368871007883, guid: 3fd6b36d940f9b24eae4734f5cf3119e,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001231368871007883, guid: 3fd6b36d940f9b24eae4734f5cf3119e,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001231368871007883, guid: 3fd6b36d940f9b24eae4734f5cf3119e,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1551455288515630887, guid: 3fd6b36d940f9b24eae4734f5cf3119e,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -6618,6 +6652,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -62.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1686453869467255029, guid: 3fd6b36d940f9b24eae4734f5cf3119e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1865379641152258568, guid: 3fd6b36d940f9b24eae4734f5cf3119e,
         type: 3}
@@ -6929,6 +6968,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -62.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2409195425010127845, guid: 3fd6b36d940f9b24eae4734f5cf3119e,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1665176201}
     - target: {fileID: 3403928027801162546, guid: 3fd6b36d940f9b24eae4734f5cf3119e,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -6949,6 +6993,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -62.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3660788906357690661, guid: 3fd6b36d940f9b24eae4734f5cf3119e,
+        type: 3}
+      propertyPath: normalSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4e4c4cc407d9eba4084931b817084453,
+        type: 3}
     - target: {fileID: 3705098972473643848, guid: 3fd6b36d940f9b24eae4734f5cf3119e,
         type: 3}
       propertyPath: m_IsActive
@@ -7159,6 +7209,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8593422691252350757, guid: 3fd6b36d940f9b24eae4734f5cf3119e,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1665176201}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3fd6b36d940f9b24eae4734f5cf3119e, type: 3}
 --- !u!1 &1865379642564101989 stripped

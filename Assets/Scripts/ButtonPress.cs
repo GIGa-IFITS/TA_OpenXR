@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-public class ButtonPress : MonoBehaviour, IPointerEnterHandler
+public class ButtonPress : MonoBehaviour
 {
     private GameObject btnObject;
     private Button btn;
@@ -17,24 +17,21 @@ public class ButtonPress : MonoBehaviour, IPointerEnterHandler
         btn = GetComponent<Button>();
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        Debug.Log("The cursor entered the selectable UI element.");
-        SmartphoneScreen.instance.SetHoverButton(this);
+    private void OnTriggerEnter(Collider other) {
+        if(other.gameObject.tag == "InteractHand"){
+            ExecuteEvents.Execute (btnObject, new PointerEventData (EventSystem.current), ExecuteEvents.pointerEnterHandler);
+            ScreenManager.instance.SetHoverButton(this);
+        }
+    }
+
+    private void OnTriggerExit(Collider other) {
+        if(other.gameObject.tag == "InteractHand"){
+            ExecuteEvents.Execute (btnObject, new PointerEventData (EventSystem.current), ExecuteEvents.pointerExitHandler);
+            ScreenManager.instance.ResetHoverButton(this);
+        }
     }
 
     public void ButtonPressed(){
-        Debug.Log("button pressed");
-        btn.image.sprite = pressedSprite;
-        invokeButtonClick();
-    }
-
-    IEnumerator invokeButtonClick(){
-        yield return new WaitForSeconds(0.11f);
         btn.onClick.Invoke();
-    }
-
-    private void OnEnable() {
-        btn.image.sprite = normalSprite;
     }
 }

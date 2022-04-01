@@ -6,7 +6,7 @@ public class VirtualSmartphoneCollision : MonoBehaviour
 {
     // knock smartphone to node
     void OnTriggerEnter(Collider collider){
-        Debug.Log("collide with " + collider.gameObject.name);
+        //Debug.Log("collide with " + collider.gameObject.name);
         NodeVariable nodeObject = collider.gameObject.GetComponent<NodeVariable>();
         if (nodeObject != null){
             if (nodeObject.CompareTag("ListPenelitiAbjad"))

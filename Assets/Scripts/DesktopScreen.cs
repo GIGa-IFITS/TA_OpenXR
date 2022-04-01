@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class SmartphoneScreen : MonoBehaviour
+public class DesktopScreen : MonoBehaviour
 {
     [SerializeField] private GameObject dashboardMenu;
     [SerializeField] private GameObject searchMenu;
@@ -21,15 +21,14 @@ public class SmartphoneScreen : MonoBehaviour
     private TextMeshProUGUI searchNodeTotalText;
     private TextMeshProUGUI searchNodeDetailText;
     private TextMeshProUGUI searchNodeNameText;
-
     private void Start() {
         // dashboard
-        journals = dashboardMenu.transform.GetChild(2).GetChild(1).GetChild(1).GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>();
-        conferences = dashboardMenu.transform.GetChild(2).GetChild(1).GetChild(1).GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>();
-        books = dashboardMenu.transform.GetChild(2).GetChild(1).GetChild(1).GetChild(2).GetChild(2).GetComponent<TextMeshProUGUI>();
-        thesis = dashboardMenu.transform.GetChild(2).GetChild(1).GetChild(1).GetChild(2).GetChild(3).GetComponent<TextMeshProUGUI>();
-        patents = dashboardMenu.transform.GetChild(2).GetChild(1).GetChild(1).GetChild(2).GetChild(4).GetComponent<TextMeshProUGUI>();
-        research = dashboardMenu.transform.GetChild(2).GetChild(1).GetChild(1).GetChild(2).GetChild(5).GetComponent<TextMeshProUGUI>();
+        journals = dashboardPanel.transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>();
+        conferences = dashboardPanel.transform.GetChild(3).GetChild(1).GetComponent<TextMeshProUGUI>();
+        books = dashboardPanel.transform.GetChild(3).GetChild(3).GetComponent<TextMeshProUGUI>();
+        thesis = dashboardPanel.transform.GetChild(3).GetChild(3).GetComponent<TextMeshProUGUI>();
+        patents = dashboardPanel.transform.GetChild(3).GetChild(4).GetComponent<TextMeshProUGUI>();
+        research = dashboardPanel.transform.GetChild(3).GetChild(5).GetComponent<TextMeshProUGUI>();
 
         // search node page
         // searchNodeTitleText = searchNode.transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>();
@@ -60,7 +59,7 @@ public class SmartphoneScreen : MonoBehaviour
         dashboardPanel.SetActive(false);
         dashboardErrorPanel.SetActive(false);
         dashboardMenu.SetActive(true); 
-        searchMenu.SetActive(false);
+        searchMenu.SetActive(false);     
         Manager.instance.Dashboard();
     }
 
@@ -85,5 +84,9 @@ public class SmartphoneScreen : MonoBehaviour
         dashboardMenu.SetActive(false);
         searchMenu.SetActive(true);
         ClientSend.SendPageType("searchMenu");
-    } 
+    }
+
+    void OnEnable(){
+        searchMenu.SetActive(false);
+    }        
 }

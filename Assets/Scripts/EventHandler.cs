@@ -64,11 +64,11 @@ public class EventHandler : MonoBehaviour
         StartCoroutine(requestPeneliti.RequestData((result) =>
         {
             // mengambil jumlah jurnal, conference, books, thesis, paten dan research yang ada
-            SmartphoneScreen.instance.ShowDashboardData(result);
+            ScreenManager.instance.ShowDashboardData(result);
         }, (error) => {
             if (error != "")
             {
-                SmartphoneScreen.instance.ShowDashboardError();
+                ScreenManager.instance.ShowDashboardError();
             }
         }));   
     }
