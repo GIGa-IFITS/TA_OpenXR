@@ -7,12 +7,8 @@ public class ButtonPress : MonoBehaviour
 {
     private GameObject btnObject;
     private Button btn;
-    private bool isPressed;
-    [SerializeField] private Sprite normalSprite;
-    [SerializeField] private Sprite pressedSprite;
     void Awake()
     {
-        isPressed = false;
         btnObject = gameObject;
         btn = GetComponent<Button>();
     }
