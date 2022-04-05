@@ -38,6 +38,8 @@ public class Manager : EventHandler
 
     void Start()
     {
+        virtualSmartphone.SetActive(false);
+        desktopScreen.SetActive(false);
         StartConnection();
         XRSettings.eyeTextureResolutionScale = 2f;
     }
@@ -77,6 +79,8 @@ public class Manager : EventHandler
         virtualSmartphone.SetActive(true);
         disconnectCanvas.SetActive(false);
         handPoseSwitch.SetStaticHandStatus(true);
+
+        ScreenManager.instance.OnTapDashboard();
     }
 
     public void SetScreenMode(string _swipeType){

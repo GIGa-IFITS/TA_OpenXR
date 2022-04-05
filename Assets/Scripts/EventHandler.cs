@@ -68,6 +68,7 @@ public class EventHandler : MonoBehaviour
         }, (error) => {
             if (error != "")
             {
+                Debug.Log("dashboard data error");
                 ScreenManager.instance.ShowDashboardError();
             }
         }));   
@@ -120,7 +121,7 @@ public class EventHandler : MonoBehaviour
             if (error != "")
             {
                 ClientSend.SendErrorMessage(error);
-                VirtualSmartphoneCanvas.instance.ShowErrorScreen();
+                //VirtualSmartphoneCanvas.instance.ShowErrorScreen();
             }
         }
         ));

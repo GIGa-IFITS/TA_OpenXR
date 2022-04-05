@@ -28,7 +28,7 @@ public class ServerHandle
         if(_fromClient != _clientIdCheck){
             Debug.Log("SERVER: " + _fromClient + " has assumed wrong client id");
         }
-        Debug.Log("SERVER: " + Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint + " /Smartphone with id " + _fromClient + " ask for " + _command + ". Server will now send it to the other client");
+        Debug.Log("SERVER: " + Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint + " /Smartphone with id " + _fromClient + " send " + _command + ". Server will now send it to the other client");
 
         // send to VR
         ServerSend.SendCommandToVR(_command);
