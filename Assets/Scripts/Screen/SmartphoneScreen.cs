@@ -6,10 +6,8 @@ using TMPro;
 
 public class SmartphoneScreen : VirtualScreen
 {
-    public new void OnTapSearchName(){
-        base.OnTapSearchName();
-
-        // spawn node in grid
-        
-    }   
+    public void OnTapSearchUnit(){
+        base.OnTapStartSearch("unit");
+        Manager.instance.getPenelitiFakultasITS2D();
+    }
 }

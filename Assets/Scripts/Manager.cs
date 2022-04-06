@@ -94,6 +94,7 @@ public class Manager : EventHandler
             desktopScreen.transform.position = centerEyeAnchor.transform.position + offset;
             desktopScreen.transform.LookAt(desktopScreen.transform.position + centerEyeAnchor.transform.rotation * Vector3.forward, centerEyeAnchor.transform.rotation * Vector3.up);
             
+            ScreenManager.instance.CheckForNodeSpawn();
         }else if(_swipeType == "down"){
             Debug.Log("screen mode smartphone");
             desktopScreen.SetActive(false);

@@ -101,14 +101,14 @@ public class ClientHandle : MonoBehaviour
 
     public static void OrientationReceived(PacketNetwork _packet){
         bool _isUp = _packet.ReadBool();
-        VirtualSmartphone.instance.SetDeviceOrientation(_isUp);
+        //VirtualSmartphone.instance.SetDeviceOrientation(_isUp);
     }
 
     public static void NodeSizeReceived(PacketNetwork _packet){
         float _nodeSize = _packet.ReadFloat();
 
         Manager.instance.resizeNode(_nodeSize);
-        VirtualSmartphoneCanvas.instance.UpdateScreenSettingsNode(_nodeSize);
+        //VirtualSmartphoneCanvas.instance.UpdateScreenSettingsNode(_nodeSize);
     }
 
     public static void PageTypeReceived(PacketNetwork _packet){

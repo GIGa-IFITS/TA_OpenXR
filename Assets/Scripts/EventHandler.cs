@@ -16,6 +16,8 @@ public class EventHandler : MonoBehaviour
     // peneliti ( secara umum )
     public GameObject parentPenelitiScatter;
     public GameObject NodePeneliti;
+    public GameObject parentPeneliti2D;
+    public GameObject NodePeneliti2D;
     public float sizeCoef;
     public float nodeArea;
     GameObject[] listPeneliti;
@@ -79,10 +81,10 @@ public class EventHandler : MonoBehaviour
         StartCoroutine(requestPeneliti.RequestData((result) =>
         {
             // mengambil jumlah jurnal, conference, books, thesis, paten dan research yang ada
-            VirtualSmartphoneCanvas.instance.ShowResearcherDetail(result);
+            //VirtualSmartphoneCanvas.instance.ShowResearcherDetail(result);
         }, (error) => {
             if (error != ""){
-                VirtualSmartphoneCanvas.instance.ShowErrorResearcherDetail();
+                //VirtualSmartphoneCanvas.instance.ShowErrorResearcherDetail();
             }
         }));
     }
@@ -164,7 +166,7 @@ public class EventHandler : MonoBehaviour
             if (error != "")
             {
                 ClientSend.SendErrorMessage(error);
-                VirtualSmartphoneCanvas.instance.ShowErrorScreen();
+                //VirtualSmartphoneCanvas.instance.ShowErrorScreen();
             }
         }
         ));
@@ -205,7 +207,44 @@ public class EventHandler : MonoBehaviour
             if (error != "")
             {
                 ClientSend.SendErrorMessage(error);
-                VirtualSmartphoneCanvas.instance.ShowErrorScreen();
+                //VirtualSmartphoneCanvas.instance.ShowErrorScreen();
+            }
+        }
+        )); 
+    }
+
+    public void getPenelitiFakultasITS2D()
+    {
+        // FLUSH NODE IN PHONE
+        // flushNode();
+
+        requestPeneliti.URL = URL + "/peneliti?fakultas=none";
+        StartCoroutine(requestPeneliti.RequestData((result) => {
+            foreach (var data in result.data[0].fakultas_peneliti)
+            {
+                GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti2D);
+                NodeAbjadPeneliti.name = data.nama_fakultas;
+                NodeAbjadPeneliti.tag = "ListPenelitiFakultas";
+
+                int jumlah = data.jumlah;
+                float size = jumlah * sizeCoef;
+
+                NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
+                tambahan.kode_alternate = data.kode_fakultas.ToString();
+                tambahan.kode_peneliti = data.kode_fakultas.ToString();
+                tambahan.nama = data.nama_fakultas;
+                tambahan.jumlah = jumlah;
+                tambahan.ukuran = size;
+                tambahan.ukuran2 = new Vector3(size, size, size);
+
+                // change node material
+                spawnNode2D(NodeAbjadPeneliti);
+            }
+        }, error => {
+            if (error != "")
+            {
+                // ClientSend.SendErrorMessage(error);
+                //VirtualSmartphoneCanvas.instance.ShowErrorScreen();
             }
         }
         ));   
@@ -246,7 +285,7 @@ public class EventHandler : MonoBehaviour
             if (error != "")
             {
                 ClientSend.SendErrorMessage(error);
-                VirtualSmartphoneCanvas.instance.ShowErrorScreen();
+                //VirtualSmartphoneCanvas.instance.ShowErrorScreen();
             }
         }
         ));
@@ -286,7 +325,7 @@ public class EventHandler : MonoBehaviour
             if (error != "")
             {
                 ClientSend.SendErrorMessage(error);
-                VirtualSmartphoneCanvas.instance.ShowErrorScreen();
+                //VirtualSmartphoneCanvas.instance.ShowErrorScreen();
             }
         }
         ));
@@ -326,7 +365,7 @@ public class EventHandler : MonoBehaviour
             if (error != "")
             {
                 ClientSend.SendErrorMessage(error);
-                VirtualSmartphoneCanvas.instance.ShowErrorScreen();
+                //VirtualSmartphoneCanvas.instance.ShowErrorScreen();
             }
         }
         ));
@@ -367,7 +406,7 @@ public class EventHandler : MonoBehaviour
             if (error != "")
             {
                 ClientSend.SendErrorMessage(error);
-                VirtualSmartphoneCanvas.instance.ShowErrorScreen();
+                //VirtualSmartphoneCanvas.instance.ShowErrorScreen();
             }
         }
         ));
@@ -410,7 +449,7 @@ public class EventHandler : MonoBehaviour
             if (error != "")
             {
                 ClientSend.SendErrorMessage(error);
-                VirtualSmartphoneCanvas.instance.ShowErrorScreen();
+                //VirtualSmartphoneCanvas.instance.ShowErrorScreen();
             }
         }
         ));
@@ -451,7 +490,7 @@ public class EventHandler : MonoBehaviour
             if (error != "")
             {
                 ClientSend.SendErrorMessage(error);
-                VirtualSmartphoneCanvas.instance.ShowErrorScreen();
+                //VirtualSmartphoneCanvas.instance.ShowErrorScreen();
             }
         }
         ));
@@ -491,7 +530,7 @@ public class EventHandler : MonoBehaviour
             if (error != "")
             {
                 ClientSend.SendErrorMessage(error);
-                VirtualSmartphoneCanvas.instance.ShowErrorScreen();
+                //VirtualSmartphoneCanvas.instance.ShowErrorScreen();
             }
         }
         ));
@@ -543,6 +582,56 @@ public class EventHandler : MonoBehaviour
                     node.GetComponent<Renderer>().material = AbjadMaterial;
                     break;
 
+            }
+        }
+        else 
+        {
+            Debug.Log("no material added");
+        }
+    }
+
+    public void spawnNode2D(GameObject node)
+    {
+        node.transform.SetParent(parentPeneliti2D.transform, false);
+        node.GetComponentInChildren<TextMeshProUGUI>().text = node.name;
+
+        if (node.CompareTag("ListPenelitiAbjad"))
+        {
+            node.GetComponentInChildren<Image>().color = new Color32(231,231,231,69);
+        }
+        else if (node.CompareTag("ListPenelitiInisial"))
+        {
+            node.GetComponentInChildren<Image>().color = new Color32(255,214,0,76);
+        }
+        else if (node.CompareTag("ListPenelitiFakultas") || node.CompareTag("ListPenelitiDepartemen") || node.CompareTag("ListPublikasiFakultas") || node.CompareTag("ListPublikasiKataKunci") || node.CompareTag("ListPublikasiKataKunci"))
+        {
+            switch (int.Parse(node.GetComponentInChildren<NodeVariable>().kode_alternate))
+            {
+                case 1:
+                    
+                    node.GetComponentInChildren<Image>().color = new Color32(73,221,0,81);
+                    break;
+                case 2:
+                    node.GetComponentInChildren<Image>().color = new Color32(221,15,0,81);
+                    break;
+                case 3:
+                    node.GetComponentInChildren<Image>().color = new Color32(48,48,48,81);
+                    break;
+                case 4:
+                    node.GetComponentInChildren<Image>().color = new Color32(49,221,255,81);
+                    break;
+                case 5:
+                    node.GetComponentInChildren<Image>().color = new Color32(255,255,0,81);
+                    break;
+                case 6:
+                    node.GetComponentInChildren<Image>().color = new Color32(192,0,221,81);
+                    break;
+                case 7:
+                    node.GetComponentInChildren<Image>().color = new Color32(221,108,0,81);
+                    break;
+                default:
+                    node.GetComponentInChildren<Image>().color = new Color32(231,231,231,69);
+                    break;
             }
         }
         else 

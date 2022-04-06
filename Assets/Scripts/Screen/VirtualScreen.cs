@@ -30,7 +30,7 @@ public class VirtualScreen : MonoBehaviour
         dashboardPanel.SetActive(false);
         dashboardErrorPanel.SetActive(false);
         dashboardMenu.SetActive(true); 
-        searchMenu.SetActive(true);     
+        searchMenu.SetActive(false);     
     }
 
     public void ShowDashboardData(RawData rawdata){
@@ -55,10 +55,23 @@ public class VirtualScreen : MonoBehaviour
         searchMenu.SetActive(true);
     }
 
-    public void OnTapSearchName(){
+    public void OnTapStartSearch(string _searchBy){
         searchMenu.SetActive(false);
         nodeMenu.SetActive(true);
-    }   
+
+        if (_searchBy == "name"){
+            nodeMenuTitleText.text = "Searching By:" + "\n" + "Researcher Name";
+        }
+        else if (_searchBy == "unit"){
+            nodeMenuTitleText.text = "Searching By:" + "\n" + "Institution Unit";
+        }
+        else if (_searchBy == "degree"){
+            nodeMenuTitleText.text = "Searching By:" + "\n" + "Academic Degree";
+        }
+        else if (_searchBy == "keyword"){
+            nodeMenuTitleText.text = "Searching By:" + "\n" + "Research Keyword";
+        }
+    } 
 
     public void UpdateNodeInfo(string _name, int _total, string _tag, string _nodeId, string _filterName){
         nodeMenuTotalText.text = _total.ToString();

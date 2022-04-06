@@ -8,6 +8,8 @@ public class ScreenManager : MonoBehaviour
     public SmartphoneScreen smartphoneScreen;
     public DesktopScreen desktopScreen;
     public ButtonPress hoveredButton;
+    public NodeVariable currNode;
+    public string currTag;
 
 
     private void Awake()
@@ -64,15 +66,40 @@ public class ScreenManager : MonoBehaviour
         ClientSend.SendPageType("searchMenu");
     }
 
-    public void OnTapSearchName(){
-        smartphoneScreen.OnTapSearchName();
-        desktopScreen.OnTapSearchName();
-        ClientSend.SendPageType("name");
+    // public void OnTapSearchName(){
+    //     smartphoneScreen.OnTapSearchName();
+    //     desktopScreen.OnTapSearchName();
+    //     ClientSend.SendPageType("name");
+    // }
+
+    public void CheckForNodeSpawn(){
+        if(currNode == null){
+            if(currTag == "name"){
+
+            }
+            else if(currTag == "unit"){
+                desktopScreen.OnTapSearchUnit();
+            }
+            else if(currTag == "degree"){
+                
+            }
+            else if(currTag == "keyword"){
+                
+            }
+        }else{
+            // check for current id etc.?
+        }
+    }
+
+    public void OnTapUnit(){
+        smartphoneScreen.OnTapSearchUnit();
+        desktopScreen.OnTapSearchUnit();
+        ClientSend.SendPageType("unit");
     }
 
     public void UpdateNodeInfo(string _name, int _total, string _tag, string _nodeId, string _filterName){
-        smartphoneScreen.UpdateNodeInfo(_name, _total, _tag, _nodeId, _filterName);
-        desktopScreen.UpdateNodeInfo(_name, _total, _tag, _nodeId, _filterName);
+        // smartphoneScreen.UpdateNodeInfo(_name, _total, _tag, _nodeId, _filterName);
+        // desktopScreen.UpdateNodeInfo(_name, _total, _tag, _nodeId, _filterName);
         
         // send to phone
     }
@@ -90,7 +117,7 @@ public class ScreenManager : MonoBehaviour
     //     //send data to smartphone
     // }
 
-     public void OnSelectNode(NodeVariable nodeObject, bool selected){
+    public void OnSelectNode(NodeVariable nodeObject, bool selected){
         if (nodeObject != null){
             if (nodeObject.CompareTag("ListPenelitiAbjad"))
             {
@@ -129,6 +156,7 @@ public class ScreenManager : MonoBehaviour
             
             else if(nodeObject.CompareTag("ListPenelitiFakultas"))
             {
+                
                
                 
             }
