@@ -98,8 +98,8 @@ public class ScreenManager : MonoBehaviour
     }
 
     public void UpdateNodeInfo(string _name, int _total, string _tag, string _nodeId, string _filterName){
-        // smartphoneScreen.UpdateNodeInfo(_name, _total, _tag, _nodeId, _filterName);
-        // desktopScreen.UpdateNodeInfo(_name, _total, _tag, _nodeId, _filterName);
+        smartphoneScreen.UpdateNodeInfo(_name, _total, _tag, _nodeId, _filterName);
+        desktopScreen.UpdateNodeInfo(_name, _total, _tag, _nodeId, _filterName);
         
         // send to phone
     }
@@ -156,9 +156,26 @@ public class ScreenManager : MonoBehaviour
             
             else if(nodeObject.CompareTag("ListPenelitiFakultas"))
             {
-                
-               
-                
+                string nodeId = nodeObject.kode_peneliti;
+                Debug.Log(nodeId + " <- fakultaspeneliti");
+
+                string name = nodeObject.nama;
+                int total = nodeObject.jumlah;
+                string tag = "ListPenelitiFakultas";
+                string filterName = "Institution Unit";
+
+                // update screen                
+                // if select node
+                if(selected){
+                    // update node info and also update node list if in phone mode
+
+                    // spawn node if desktop mode
+                    // if(desktopScreen.gameObject.activeSelf){
+                    //     Manager.instance.getPenelitiInisialITS(nodeId);
+                    // }
+                }else{ // only hover
+                    UpdateNodeInfo(name, total, tag, nodeId, filterName);
+                }
             }
             else if(nodeObject.CompareTag("ListPenelitiDepartemen"))
             {

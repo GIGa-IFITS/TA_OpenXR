@@ -74,6 +74,8 @@ public class VirtualScreen : MonoBehaviour
     } 
 
     public void UpdateNodeInfo(string _name, int _total, string _tag, string _nodeId, string _filterName){
+        nodeMenuDefaultPanel.SetActive(false);
+        nodeMenuInfoPanel.SetActive(true);
         nodeMenuTotalText.text = _total.ToString();
         if(_filterName != "Research Keyword"){
             nodeMenuDetailText.text = "Researchers of";
