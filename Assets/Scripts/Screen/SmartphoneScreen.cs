@@ -8,6 +8,8 @@ public class SmartphoneScreen : VirtualScreen
 {
     public void OnTapSearchUnit(){
         base.OnTapStartSearch("unit");
-        Manager.instance.getPenelitiFakultasITS2D();
+        if(gameObject.activeSelf){
+            Manager.instance.getPenelitiFakultasITS2D();
+        }
     }
 }

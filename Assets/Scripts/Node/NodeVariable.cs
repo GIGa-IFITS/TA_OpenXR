@@ -10,4 +10,6 @@ public class NodeVariable : MonoBehaviour
     public int jumlah;
     public float ukuran;
     public Vector3 ukuran2;
+    public Material defaultMaterial;
+    public Material hoverMaterial;
 }

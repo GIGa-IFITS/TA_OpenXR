@@ -120,6 +120,6 @@ public class ClientHandle : MonoBehaviour
     public static void SwipeReceived(PacketNetwork _packet){
         string _swipeType = _packet.ReadString();
         Debug.Log("receive swipe type " + _swipeType);
-        Manager.instance.SetScreenMode(_swipeType);
+        ScreenManager.instance.SetScreenMode(_swipeType);
     }
 }

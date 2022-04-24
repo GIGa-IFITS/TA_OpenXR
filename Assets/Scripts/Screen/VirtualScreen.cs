@@ -6,24 +6,40 @@ using TMPro;
 
 public class VirtualScreen : MonoBehaviour
 {
+    [Header("Dashboard Menu")]
     [SerializeField] protected GameObject dashboardMenu;
     [SerializeField] protected GameObject dashboardPanel;
     [SerializeField] protected GameObject dashboardErrorPanel;
     [SerializeField] protected GameObject dashboardLoading;
-    [SerializeField] protected GameObject searchMenu;
-    [SerializeField] protected GameObject nodeMenu;
-    [SerializeField] protected GameObject nodeMenuDefaultPanel;
-    [SerializeField] protected GameObject nodeMenuInfoPanel;
     [SerializeField] protected TextMeshProUGUI journals;
     [SerializeField] protected TextMeshProUGUI conferences;
     [SerializeField] protected TextMeshProUGUI books;
     [SerializeField] protected TextMeshProUGUI thesis;
     [SerializeField] protected TextMeshProUGUI patents;
     [SerializeField] protected TextMeshProUGUI research;
+    [Header("Search Menu")]
+    [SerializeField] protected GameObject searchMenu;
+    [Header("Node Menu")]
+    public GameObject nodeMenu;
+    [SerializeField] protected GameObject nodeMenuDefaultPanel;
+    [SerializeField] protected GameObject nodeMenuInfoPanel;
+    [SerializeField] protected GameObject nodeMenuLoadingText;
     [SerializeField] protected TextMeshProUGUI nodeMenuTitleText;
     [SerializeField] protected TextMeshProUGUI nodeMenuTotalText;
     [SerializeField] protected TextMeshProUGUI nodeMenuDetailText;
     [SerializeField] protected TextMeshProUGUI nodeMenuNameText;
+
+    [Header("Detail Menu")]
+    public GameObject detailMenu;
+    [SerializeField] protected TextMeshProUGUI detailName;
+    [SerializeField] protected TextMeshProUGUI detailFaculty;
+    [SerializeField] protected TextMeshProUGUI detailDept;
+    [SerializeField] protected TextMeshProUGUI detailJournals;
+    [SerializeField] protected TextMeshProUGUI detailConferences;
+    [SerializeField] protected TextMeshProUGUI detailBooks;
+    [SerializeField] protected TextMeshProUGUI detailThesis;
+    [SerializeField] protected TextMeshProUGUI detailPatents;
+    [SerializeField] protected TextMeshProUGUI detailResearch;
 
     public void OnTapDashboard(){
         dashboardLoading.SetActive(true);
@@ -71,24 +87,52 @@ public class VirtualScreen : MonoBehaviour
         else if (_searchBy == "keyword"){
             nodeMenuTitleText.text = "Searching By:" + "\n" + "Research Keyword";
         }
+    }
+
+    public void ShowDefaultNodeScreen(){
+        nodeMenuLoadingText.SetActive(false);
+        nodeMenuDefaultPanel.SetActive(true);
+        nodeMenuInfoPanel.SetActive(false);
     } 
 
-    public void UpdateNodeInfo(string _name, int _total, string _tag, string _nodeId, string _filterName){
+    public void UpdateNodeInfo(string _name, int _total, string _filterName, bool _detail){
+        nodeMenuLoadingText.SetActive(false);
         nodeMenuDefaultPanel.SetActive(false);
         nodeMenuInfoPanel.SetActive(true);
         nodeMenuTotalText.text = _total.ToString();
-        if(_filterName != "Research Keyword"){
-            nodeMenuDetailText.text = "Researchers of";
-        }else{
+        if(_detail || _filterName == "Research Keyword"){
             nodeMenuDetailText.text = "Publications of";
+        }
+        else{
+            nodeMenuDetailText.text = "Researchers of";
         }
         nodeMenuNameText.text = _name;
     } 
 
-    // public void OnTapNode(string _name, int _total, string _tag, string _nodeId, string _filterName){
-    //     nodeMenuDefaultPanel.SetActive(false);
-    //     nodeMenuInfoPanel.SetActive(true);
+    public void UpdateDetailScreen(List<string> _researcherData){
+        nodeMenu.SetActive(false);
+        detailMenu.SetActive(true);
 
+        detailName.text = _researcherData[0];
+        detailFaculty.text = _researcherData[1];
+        detailDept.text = _researcherData[2];
+        detailJournals.text = _researcherData[3];
+        detailConferences.text = _researcherData[4];
+        detailBooks.text = _researcherData[5];
+        detailThesis.text = _researcherData[6];
+        detailPatents.text = _researcherData[7];
+        detailResearch.text = _researcherData[8];
+    }
 
-    // }
+    public void OnTapBackToSearch(){
+        Manager.instance.flushNode();
+        nodeMenu.SetActive(false);
+        searchMenu.SetActive(true);
+    }
+
+    public void OnTapCloseDetail(){
+        detailMenu.SetActive(false);
+        nodeMenu.SetActive(true);
+    }
+    
 }

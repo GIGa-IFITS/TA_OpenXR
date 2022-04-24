@@ -38,8 +38,6 @@ public class Manager : EventHandler
 
     void Start()
     {
-        virtualSmartphone.SetActive(false);
-        desktopScreen.SetActive(false);
         StartConnection();
         XRSettings.eyeTextureResolutionScale = 2f;
     }
@@ -65,7 +63,7 @@ public class Manager : EventHandler
     public void Disconnected(){
         disconnectCanvas.SetActive(true);
         Vector3 offset = centerEyeAnchor.transform.forward;
-        offset *= 30f;
+        offset *= 2f;
         disconnectCanvas.transform.position = centerEyeAnchor.transform.position + offset;
         disconnectCanvas.transform.LookAt(disconnectCanvas.transform.position + centerEyeAnchor.transform.rotation * Vector3.forward, centerEyeAnchor.transform.rotation * Vector3.up);
         flushNode();
@@ -81,24 +79,5 @@ public class Manager : EventHandler
         handPoseSwitch.SetStaticHandStatus(true);
 
         ScreenManager.instance.OnTapDashboard();
-    }
-
-    public void SetScreenMode(string _swipeType){
-        if(_swipeType == "up"){
-            Debug.Log("screen mode VR");
-            desktopScreen.SetActive(true);
-            virtualSmartphone.SetActive(false);
-
-            Vector3 offset = centerEyeAnchor.transform.forward;
-            offset *= 30f;
-            desktopScreen.transform.position = centerEyeAnchor.transform.position + offset;
-            desktopScreen.transform.LookAt(desktopScreen.transform.position + centerEyeAnchor.transform.rotation * Vector3.forward, centerEyeAnchor.transform.rotation * Vector3.up);
-            
-            ScreenManager.instance.CheckForNodeSpawn();
-        }else if(_swipeType == "down"){
-            Debug.Log("screen mode smartphone");
-            desktopScreen.SetActive(false);
-            virtualSmartphone.SetActive(true);
-        }
     }
 }

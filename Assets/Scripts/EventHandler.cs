@@ -25,8 +25,6 @@ public class EventHandler : MonoBehaviour
     [Header("Material")]
     public Material AbjadMaterial;
     public Material InisialMaterial;
-    public Material FakultasMaterial;
-    public Material DepartemenMaterial;
     public Material F_SCIENTICS;
     public Material F_INDSYS;
     public Material F_CIVPLAN;
@@ -34,12 +32,20 @@ public class EventHandler : MonoBehaviour
     public Material F_ELECTICS;
     public Material F_CREABIZ;
     public Material F_VOCATIONS;
-    public Material lessTransparentMaterial;
-    public Material normalTransparentMaterial;
-    public Material moreTransparentMaterial;
+    public Material hoverMaterial;
 
     [Header("Animation")]
     public IEnumerator animate;
+    [Header("Node Sprite")]
+    public Sprite AbjadSprite;
+    public Sprite InisialSprite;
+    public Sprite F_SCIENTICSSprite;
+    public Sprite F_INDSYSSprite;
+    public Sprite F_CIVPLANSprite;
+    public Sprite F_MARTECHSprite;
+    public Sprite F_ELECTICSSprite;
+    public Sprite F_CREABIZSprite;
+    public Sprite F_VOCATIONSSprite;
 
     [Header("Disconnect")]
     public GameObject disconnectCanvas;
@@ -81,7 +87,7 @@ public class EventHandler : MonoBehaviour
         StartCoroutine(requestPeneliti.RequestData((result) =>
         {
             // mengambil jumlah jurnal, conference, books, thesis, paten dan research yang ada
-            //VirtualSmartphoneCanvas.instance.ShowResearcherDetail(result);
+            ScreenManager.instance.UpdateResearcherDetailData(result);
         }, (error) => {
             if (error != ""){
                 //VirtualSmartphoneCanvas.instance.ShowErrorResearcherDetail();
@@ -203,6 +209,7 @@ public class EventHandler : MonoBehaviour
                 animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2);
                 StartCoroutine(animate);
             }
+            ScreenManager.instance.ShowDefaultNodeScreen();
         }, error => {
             if (error != "")
             {
@@ -215,9 +222,7 @@ public class EventHandler : MonoBehaviour
 
     public void getPenelitiFakultasITS2D()
     {
-        // FLUSH NODE IN PHONE
-        // flushNode();
-
+        flushNode();
         requestPeneliti.URL = URL + "/peneliti?fakultas=none";
         StartCoroutine(requestPeneliti.RequestData((result) => {
             foreach (var data in result.data[0].fakultas_peneliti)
@@ -227,19 +232,18 @@ public class EventHandler : MonoBehaviour
                 NodeAbjadPeneliti.tag = "ListPenelitiFakultas";
 
                 int jumlah = data.jumlah;
-                float size = jumlah * sizeCoef;
 
                 NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
                 tambahan.kode_alternate = data.kode_fakultas.ToString();
                 tambahan.kode_peneliti = data.kode_fakultas.ToString();
                 tambahan.nama = data.nama_fakultas;
                 tambahan.jumlah = jumlah;
-                tambahan.ukuran = size;
-                tambahan.ukuran2 = new Vector3(size, size, size);
 
                 // change node material
                 spawnNode2D(NodeAbjadPeneliti);
             }
+            listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiFakultas");
+            ScreenManager.instance.ShowDefaultNodeScreen();
         }, error => {
             if (error != "")
             {
@@ -262,7 +266,7 @@ public class EventHandler : MonoBehaviour
                 NodeAbjadPeneliti.tag = "ListPenelitiDepartemen";
 
                 int jumlah = data.jumlah;
-                float size = jumlah * sizeCoef;
+                float size = jumlah * sizeCoef * 5f;
 
                 NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
                 tambahan.kode_alternate = data.kode_fakultas.ToString();
@@ -280,7 +284,40 @@ public class EventHandler : MonoBehaviour
                 animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2);
                 StartCoroutine(animate);
             }
-            
+            ScreenManager.instance.ShowDefaultNodeScreen();
+        }, error => {
+            if (error != "")
+            {
+                ClientSend.SendErrorMessage(error);
+                //VirtualSmartphoneCanvas.instance.ShowErrorScreen();
+            }
+        }
+        ));
+    }
+
+    public void getPenelitiDepartemenITS2D(string kode_fakultas)
+    {
+        flushNode();
+        requestPeneliti.URL = URL + "/peneliti?fakultas=" + kode_fakultas.ToString();
+        StartCoroutine(requestPeneliti.RequestData((result) => {
+            foreach (var data in result.data[0].departemen_peneliti)
+            {
+                GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti2D);
+                NodeAbjadPeneliti.name = data.nama_departemen;
+                NodeAbjadPeneliti.tag = "ListPenelitiDepartemen";
+
+                int jumlah = data.jumlah;
+
+                NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
+                tambahan.kode_alternate = data.kode_fakultas.ToString();
+                tambahan.kode_peneliti = data.kode_departemen.ToString();
+                tambahan.nama = data.nama_departemen;
+                tambahan.jumlah = jumlah;
+
+                spawnNode2D(NodeAbjadPeneliti);
+            }
+            listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiDepartemen");
+            ScreenManager.instance.ShowDefaultNodeScreen();
         }, error => {
             if (error != "")
             {
@@ -330,6 +367,39 @@ public class EventHandler : MonoBehaviour
         }
         ));
     }
+
+    public void getPenelitiDepartemenDetailITS2D(string kode_departemen)
+    {
+        flushNode();
+
+        requestPeneliti.URL = URL + "/peneliti?departemen=" + kode_departemen.ToString();
+        StartCoroutine(requestPeneliti.RequestData((result) => {
+            foreach (var data in result.data[0].nama_peneliti)
+            {
+                GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti2D);
+                NodeAbjadPeneliti.name = data.nama;
+                NodeAbjadPeneliti.tag = "ListPenelitiDepartemenDetail";
+
+                int jumlah = data.jumlah;
+
+                NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
+                tambahan.kode_peneliti = data.kode_dosen.ToString();
+                tambahan.nama = NodeAbjadPeneliti.name;
+                tambahan.jumlah = jumlah;
+
+                spawnNode2D(NodeAbjadPeneliti);
+            }
+            listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiDepartemenDetail");
+        }, error => {
+            if (error != "")
+            {
+                ClientSend.SendErrorMessage(error);
+                //VirtualSmartphoneCanvas.instance.ShowErrorScreen();
+            }
+        }
+        ));
+    }
+
 
     public void getGelarPenelitiITS()
     {
@@ -557,25 +627,24 @@ public class EventHandler : MonoBehaviour
             switch (int.Parse(node.GetComponent<NodeVariable>().kode_alternate))
             {
                 case 1:
-                    
                     node.GetComponent<Renderer>().material = F_SCIENTICS;
                     break;
                 case 2:
                     node.GetComponent<Renderer>().material = F_INDSYS;
                     break;
                 case 3:
-                    node.GetComponent<Renderer>().material = F_CIVPLAN;
-                    break;
-                case 4:
-                    node.GetComponent<Renderer>().material = F_MARTECH;
-                    break;
-                case 5:
                     node.GetComponent<Renderer>().material = F_ELECTICS;
                     break;
-                case 6:
+                case 4:
+                    node.GetComponent<Renderer>().material = F_CIVPLAN;
+                    break;
+                case 5:
                     node.GetComponent<Renderer>().material = F_CREABIZ;
                     break;
-                case 7:
+                case 6:
+                    node.GetComponent<Renderer>().material = F_MARTECH;
+                    break;
+                case 8:
                     node.GetComponent<Renderer>().material = F_VOCATIONS;
                     break;
                 default:
@@ -588,6 +657,10 @@ public class EventHandler : MonoBehaviour
         {
             Debug.Log("no material added");
         }
+
+        NodeVariable nodeVariable = node.GetComponent<NodeVariable>();
+        nodeVariable.defaultMaterial = node.GetComponent<Renderer>().material;
+        nodeVariable.hoverMaterial = hoverMaterial;
     }
 
     public void spawnNode2D(GameObject node)
@@ -597,40 +670,39 @@ public class EventHandler : MonoBehaviour
 
         if (node.CompareTag("ListPenelitiAbjad"))
         {
-            node.GetComponentInChildren<Image>().color = new Color32(231,231,231,69);
+            node.GetComponentInChildren<Image>().sprite = AbjadSprite;
         }
         else if (node.CompareTag("ListPenelitiInisial"))
         {
-            node.GetComponentInChildren<Image>().color = new Color32(255,214,0,76);
+            node.GetComponentInChildren<Image>().sprite = InisialSprite;
         }
         else if (node.CompareTag("ListPenelitiFakultas") || node.CompareTag("ListPenelitiDepartemen") || node.CompareTag("ListPublikasiFakultas") || node.CompareTag("ListPublikasiKataKunci") || node.CompareTag("ListPublikasiKataKunci"))
         {
             switch (int.Parse(node.GetComponentInChildren<NodeVariable>().kode_alternate))
             {
-                case 1:
-                    
-                    node.GetComponentInChildren<Image>().color = new Color32(73,221,0,81);
+                case 1:       
+                    node.GetComponentInChildren<Image>().sprite = F_SCIENTICSSprite;
                     break;
                 case 2:
-                    node.GetComponentInChildren<Image>().color = new Color32(221,15,0,81);
+                    node.GetComponentInChildren<Image>().sprite = F_INDSYSSprite;
                     break;
                 case 3:
-                    node.GetComponentInChildren<Image>().color = new Color32(48,48,48,81);
+                    node.GetComponentInChildren<Image>().sprite = F_ELECTICSSprite;
                     break;
                 case 4:
-                    node.GetComponentInChildren<Image>().color = new Color32(49,221,255,81);
+                    node.GetComponentInChildren<Image>().sprite = F_CIVPLANSprite;
                     break;
                 case 5:
-                    node.GetComponentInChildren<Image>().color = new Color32(255,255,0,81);
+                    node.GetComponentInChildren<Image>().sprite = F_CREABIZSprite;
                     break;
                 case 6:
-                    node.GetComponentInChildren<Image>().color = new Color32(192,0,221,81);
+                    node.GetComponentInChildren<Image>().sprite = F_MARTECHSprite;
                     break;
-                case 7:
-                    node.GetComponentInChildren<Image>().color = new Color32(221,108,0,81);
+                case 8:
+                    node.GetComponentInChildren<Image>().sprite = F_VOCATIONSSprite;
                     break;
                 default:
-                    node.GetComponentInChildren<Image>().color = new Color32(231,231,231,69);
+                    node.GetComponentInChildren<Image>().sprite = AbjadSprite;
                     break;
             }
         }
