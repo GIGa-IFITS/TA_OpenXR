@@ -28,6 +28,13 @@ public class VirtualScreen : MonoBehaviour
     [SerializeField] protected TextMeshProUGUI nodeMenuTotalText;
     [SerializeField] protected TextMeshProUGUI nodeMenuDetailText;
     [SerializeField] protected TextMeshProUGUI nodeMenuNameText;
+    [SerializeField] protected GameObject nodeMenuBackButton;
+    [Header("Card Menu")]
+    public GameObject cardMenu;
+    [SerializeField] protected GameObject cardMenuLoadingText;
+    [SerializeField] protected TextMeshProUGUI cardMenuTotalText;
+    [SerializeField] protected TextMeshProUGUI cardMenuDetailText;
+    [SerializeField] protected TextMeshProUGUI cardMenuNameText;
 
     [Header("Detail Menu")]
     public GameObject detailMenu;
@@ -73,7 +80,11 @@ public class VirtualScreen : MonoBehaviour
 
     public void OnTapStartSearch(string _searchBy){
         searchMenu.SetActive(false);
+        cardMenu.SetActive(false);
         nodeMenu.SetActive(true);
+        nodeMenuDefaultPanel.SetActive(true);
+        nodeMenuLoadingText.SetActive(true);
+        nodeMenuInfoPanel.SetActive(false);
 
         if (_searchBy == "name"){
             nodeMenuTitleText.text = "Searching By:" + "\n" + "Researcher Name";
@@ -89,18 +100,28 @@ public class VirtualScreen : MonoBehaviour
         }
     }
 
-    public void ShowDefaultNodeScreen(){
-        nodeMenuLoadingText.SetActive(false);
+    public void ShowLoadingNodeScreen(){
+        nodeMenu.SetActive(true);
+        cardMenu.SetActive(false);
+        nodeMenuLoadingText.SetActive(true);
         nodeMenuDefaultPanel.SetActive(true);
         nodeMenuInfoPanel.SetActive(false);
     } 
 
-    public void UpdateNodeInfo(string _name, int _total, string _filterName, bool _detail){
-        nodeMenuLoadingText.SetActive(false);
+    public void ShowNodeMenu(){
+        nodeMenuBackButton.SetActive(true);
+        cardMenu.SetActive(false);
+    }
+
+    public void SetLoadingNodeScreen(bool val){
+        nodeMenuLoadingText.SetActive(val);
+    } 
+
+    public void UpdateNodeInfo(string _name, int _total, string _searchName){
         nodeMenuDefaultPanel.SetActive(false);
         nodeMenuInfoPanel.SetActive(true);
         nodeMenuTotalText.text = _total.ToString();
-        if(_detail || _filterName == "Research Keyword"){
+        if(_searchName == "Research Keyword"){
             nodeMenuDetailText.text = "Publications of";
         }
         else{
@@ -109,8 +130,32 @@ public class VirtualScreen : MonoBehaviour
         nodeMenuNameText.text = _name;
     } 
 
+     public void SetLoadingCardScreen(bool val){
+        cardMenuLoadingText.SetActive(val);
+    } 
+
+    public void ShowCardMenu(string _name, int _total, string _searchName){
+        cardMenu.SetActive(true);
+        nodeMenuBackButton.SetActive(false);
+
+        cardMenuTotalText.text = _total.ToString();
+        if(_searchName == "Research Keyword"){
+            cardMenuDetailText.text = "Publications of";
+        }
+        else{
+            cardMenuDetailText.text = "Researchers of";
+        }
+        cardMenuNameText.text = _name;
+    }
+
+    public void UpdateCardInfo(string _name, int _total){
+        cardMenuTotalText.text = _total.ToString();
+        cardMenuDetailText.text = "Publications of";
+        cardMenuNameText.text = _name;
+    }
+
     public void UpdateDetailScreen(List<string> _researcherData){
-        nodeMenu.SetActive(false);
+        cardMenu.SetActive(false);
         detailMenu.SetActive(true);
 
         detailName.text = _researcherData[0];
@@ -132,7 +177,6 @@ public class VirtualScreen : MonoBehaviour
 
     public void OnTapCloseDetail(){
         detailMenu.SetActive(false);
-        nodeMenu.SetActive(true);
+        cardMenu.SetActive(true);
     }
-    
 }

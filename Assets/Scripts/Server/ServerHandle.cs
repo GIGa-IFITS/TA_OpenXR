@@ -145,4 +145,17 @@ public class ServerHandle
         // send to smartphone
         ServerSend.SendSwipeToVR(_swipeType);
     }
+
+    public static void SendScrollSpeed(int _fromClient, PacketNetwork _packet){
+        int _clientIdCheck = _packet.ReadInt();
+        float _scrollSpeed = _packet.ReadFloat();
+
+        if(_fromClient != _clientIdCheck){
+            Debug.Log("SERVER: " + _fromClient + " has assumed wrong client id");
+        }
+        Debug.Log("SERVER: " + Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint + " /smartphone with id " + _fromClient + " send scroll speed " + _scrollSpeed + ". Server will now send it to the other client");
+
+        // send to smartphone
+        ServerSend.SendScrollSpeedToVR(_scrollSpeed);
+    }
 }

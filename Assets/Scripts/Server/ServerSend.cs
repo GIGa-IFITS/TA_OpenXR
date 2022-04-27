@@ -106,6 +106,14 @@ public class ServerSend
             SendTCPData(1, _packet);
         }
     }
+
+    public static void SendScrollSpeedToVR(float _scrollSpeed){
+        using(PacketNetwork _packet = new PacketNetwork((int)ServerPackets.sendScrollSpeed)){
+            _packet.Write(_scrollSpeed);
+
+            SendTCPData(1, _packet);
+        }
+    }
     
     #endregion
 }

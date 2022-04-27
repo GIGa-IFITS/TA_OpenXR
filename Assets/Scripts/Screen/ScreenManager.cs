@@ -17,6 +17,7 @@ public class ScreenManager : MonoBehaviour
     public TextMeshProUGUI debugText;
     private List<string> researcherData = new List<string>();
     public bool isSearching = false;
+    private bool isSwipeOnDetail = false;
     [SerializeField] private GameObject centerEyeAnchor;
     [SerializeField] private HandTrackingUI handTrackingUI;
 
@@ -77,20 +78,38 @@ public class ScreenManager : MonoBehaviour
         isSearching = true;
         smartphoneScreen.OnTapSearchUnit();
         desktopScreen.OnTapSearchUnit();
-        ClientSend.SendPageType("unit");
         currSearch = "Institution Unit";
+        ClientSend.SendPageType("searchingMenu");
     }
 
-    public void ShowDefaultNodeScreen(){
-        smartphoneScreen.ShowDefaultNodeScreen();
-        desktopScreen.ShowDefaultNodeScreen();
+    public void ShowNodeMenu(){
+        smartphoneScreen.ShowNodeMenu();
+        desktopScreen.ShowNodeMenu();
     }
 
-    public void UpdateNodeInfo(string _name, int _total, string _searchName, bool _detail){
-        smartphoneScreen.UpdateNodeInfo(_name, _total, _searchName, _detail);
-        desktopScreen.UpdateNodeInfo(_name, _total, _searchName, _detail);
-        
-        // send to phone
+    public void SetLoadingNodeScreen(bool val){
+        smartphoneScreen.SetLoadingNodeScreen(val);
+        desktopScreen.SetLoadingNodeScreen(val);
+    }
+
+    public void UpdateNodeInfo(string _name, int _total, string _searchName){
+        smartphoneScreen.UpdateNodeInfo(_name, _total, _searchName);
+        desktopScreen.UpdateNodeInfo(_name, _total, _searchName);        
+    }
+
+    public void SetLoadingCardScreen(bool val){
+        smartphoneScreen.SetLoadingCardScreen(val);
+        desktopScreen.SetLoadingCardScreen(val);
+    }
+
+    public void ShowCardMenu(string name, int total, string searchName){
+        smartphoneScreen.ShowCardMenu(name, total, searchName);
+        desktopScreen.ShowCardMenu(name, total, searchName);        
+    }
+
+    public void UpdateCardInfo(string name, int total){
+        smartphoneScreen.UpdateCardInfo(name, total);
+        desktopScreen.UpdateCardInfo(name, total);  
     }
 
     public void UpdateDetailScreen(){
@@ -119,8 +138,9 @@ public class ScreenManager : MonoBehaviour
             // update screen                
             // if select node
             if(selected){
-                // update node info
-                UpdateNodeInfo(name, total, currSearch, false);
+                ShowNodeMenu();
+                SetLoadingNodeScreen(true);
+                UpdateNodeInfo(name, total, currSearch);
 
                 // spawn node
                 if(desktopScreen.gameObject.activeSelf){
@@ -134,7 +154,7 @@ public class ScreenManager : MonoBehaviour
                     currNode = CopyNode(nodeObject);
                 }
             }else{ // only hover
-                UpdateNodeInfo(name, total, currSearch, false);
+                UpdateNodeInfo(name, total, currSearch);
             }
         }
         else if(nodeObject.CompareTag("ListPenelitiDepartemen"))
@@ -149,10 +169,8 @@ public class ScreenManager : MonoBehaviour
             // if select node
             if(selected){
                 // change screen to list of researchers
-
-
-                // update node info
-                UpdateNodeInfo(name, total, currSearch, false);
+                ShowCardMenu(name, total, currSearch);
+                SetLoadingCardScreen(true);
 
                 // spawn node
                 if(desktopScreen.gameObject.activeSelf){
@@ -167,7 +185,7 @@ public class ScreenManager : MonoBehaviour
                     currNode = CopyNode(nodeObject);
                 }
             }else{ // only hover
-                UpdateNodeInfo(name, total, currSearch, false);
+                UpdateNodeInfo(name, total, currSearch);
             }
         }
         else if(nodeObject.CompareTag("ListPenelitiDepartemenDetail"))
@@ -183,10 +201,11 @@ public class ScreenManager : MonoBehaviour
             // update screen                
             // if select node
             if(selected){
-                // show detail screen, update detail screen, nonactive node screen
+                // show detail screen, update detail screen, nonactive card screen
                 UpdateDetailScreen();
+                isSearching = false;
             }else{ // only hover
-                UpdateNodeInfo(name, total, currSearch, true);
+                UpdateCardInfo(name, total);
             }
         }
         
@@ -261,6 +280,13 @@ public class ScreenManager : MonoBehaviour
     public void OnTapCloseDetail(){
         smartphoneScreen.OnTapCloseDetail();
         desktopScreen.OnTapCloseDetail();
+        isSearching = true;
+
+        // cek list peneliti null or not, kalau null berarti tadi nge swipe, ganti on select currnode
+        if(Manager.instance.IsListPenelitiEmpty()){
+            OnSelectNode(currNode, true, true);
+        }
+        
     }
 
     public void CheckForNodeSpawn(){
@@ -297,6 +323,10 @@ public class ScreenManager : MonoBehaviour
         return nodeCopy;
     }
 
+    public void SetScroll(float scrollSpeed){
+        smartphoneScreen.SetScroll(scrollSpeed);
+    }
+
     public void SetScreenMode(string _swipeType){
         if(_swipeType == "up" && smartphoneScreen.gameObject.activeSelf){
             StartCoroutine(SwipeUp());
@@ -309,13 +339,15 @@ public class ScreenManager : MonoBehaviour
         Debug.Log("screen mode VR");
         handTrackingUI.SetLaserOn();
 
-        // swipe up when detail menu is active / node menu is nonactive, activate node menu first before flushing node
+        // swipe up when detail menu is active, activate first before flushing node
         if(smartphoneScreen.detailMenu.activeSelf){
-            smartphoneScreen.nodeMenu.SetActive(true);
+            smartphoneScreen.cardMenu.SetActive(true);
             yield return StartCoroutine(WaitForFlushNode());
-            smartphoneScreen.nodeMenu.SetActive(false);
-        }else{
+            smartphoneScreen.cardMenu.SetActive(false);
+        }else if(desktopScreen.detailMenu.activeSelf){
+            desktopScreen.cardMenu.SetActive(true);
             yield return StartCoroutine(WaitForFlushNode());
+            desktopScreen.cardMenu.SetActive(false);
         }
         
         desktopScreen.gameObject.SetActive(true);
@@ -347,8 +379,8 @@ public class ScreenManager : MonoBehaviour
     }
 
     public void CheckIfSearching(){
-        if(ScreenManager.instance.isSearching){
-            ScreenManager.instance.CheckForNodeSpawn();
+        if(isSearching){
+            CheckForNodeSpawn();
         }
     }
 

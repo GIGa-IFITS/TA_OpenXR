@@ -14,10 +14,14 @@ public class EventHandler : MonoBehaviour
 
     [Header("Pengaturan Node")]
     // peneliti ( secara umum )
-    public GameObject parentPenelitiScatter;
+    public GameObject ParentNode;
+    public GameObject ParentCard;
     public GameObject NodePeneliti;
-    public GameObject parentPeneliti2D;
+    public GameObject CardPeneliti;
+    public GameObject ParentNode2D;
+    public GameObject ParentCard2D;
     public GameObject NodePeneliti2D;
+    public GameObject CardPeneliti2D;
     public float sizeCoef;
     public float nodeArea;
     GameObject[] listPeneliti;
@@ -117,7 +121,7 @@ public class EventHandler : MonoBehaviour
                 tambahan.ukuran = size;
                 tambahan.ukuran2 = new Vector3(size, size, size);
 
-                spawnNode(NodeAbjadPeneliti, size);
+                SpawnNode(NodeAbjadPeneliti, size);
             }
             listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiAbjad");
             foreach(GameObject node in listPeneliti)
@@ -160,7 +164,7 @@ public class EventHandler : MonoBehaviour
                 tambahan.ukuran = size;
                 tambahan.ukuran2 = new Vector3(size, size, size);
 
-                spawnNode(NodeAbjadPeneliti, size);
+                SpawnNode(NodeAbjadPeneliti, size);
             }
             listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiInisial");
             foreach (GameObject node in listPeneliti)
@@ -186,14 +190,14 @@ public class EventHandler : MonoBehaviour
         StartCoroutine(requestPeneliti.RequestData((result) => {
             foreach (var data in result.data[0].fakultas_peneliti)
             {
-                GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti);
-                NodeAbjadPeneliti.name = data.nama_fakultas;
-                NodeAbjadPeneliti.tag = "ListPenelitiFakultas";
+                GameObject NodeFakultasPeneliti = (GameObject)Instantiate(NodePeneliti);
+                NodeFakultasPeneliti.name = data.nama_fakultas;
+                NodeFakultasPeneliti.tag = "ListPenelitiFakultas";
 
                 int jumlah = data.jumlah;
                 float size = jumlah * sizeCoef;
 
-                NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
+                NodeVariable tambahan = NodeFakultasPeneliti.AddComponent<NodeVariable>();
                 tambahan.kode_alternate = data.kode_fakultas.ToString();
                 tambahan.kode_peneliti = data.kode_fakultas.ToString();
                 tambahan.nama = data.nama_fakultas;
@@ -201,7 +205,7 @@ public class EventHandler : MonoBehaviour
                 tambahan.ukuran = size;
                 tambahan.ukuran2 = new Vector3(size, size, size);
 
-                spawnNode(NodeAbjadPeneliti, size);
+                SpawnNode(NodeFakultasPeneliti, size);
             }
             listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiFakultas");
             foreach (GameObject node in listPeneliti)
@@ -209,11 +213,11 @@ public class EventHandler : MonoBehaviour
                 animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2);
                 StartCoroutine(animate);
             }
-            ScreenManager.instance.ShowDefaultNodeScreen();
+            ScreenManager.instance.SetLoadingNodeScreen(false);
         }, error => {
             if (error != "")
             {
-                ClientSend.SendErrorMessage(error);
+                //ClientSend.SendErrorMessage(error);
                 //VirtualSmartphoneCanvas.instance.ShowErrorScreen();
             }
         }
@@ -227,23 +231,23 @@ public class EventHandler : MonoBehaviour
         StartCoroutine(requestPeneliti.RequestData((result) => {
             foreach (var data in result.data[0].fakultas_peneliti)
             {
-                GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti2D);
-                NodeAbjadPeneliti.name = data.nama_fakultas;
-                NodeAbjadPeneliti.tag = "ListPenelitiFakultas";
+                GameObject NodeFakultasPeneliti2D = (GameObject)Instantiate(NodePeneliti2D);
+                NodeFakultasPeneliti2D.name = data.nama_fakultas;
+                NodeFakultasPeneliti2D.tag = "ListPenelitiFakultas";
 
                 int jumlah = data.jumlah;
 
-                NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
+                NodeVariable tambahan = NodeFakultasPeneliti2D.AddComponent<NodeVariable>();
                 tambahan.kode_alternate = data.kode_fakultas.ToString();
                 tambahan.kode_peneliti = data.kode_fakultas.ToString();
                 tambahan.nama = data.nama_fakultas;
                 tambahan.jumlah = jumlah;
 
                 // change node material
-                spawnNode2D(NodeAbjadPeneliti);
+                SpawnNode2D(NodeFakultasPeneliti2D);
             }
             listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiFakultas");
-            ScreenManager.instance.ShowDefaultNodeScreen();
+            ScreenManager.instance.SetLoadingNodeScreen(false);
         }, error => {
             if (error != "")
             {
@@ -261,14 +265,14 @@ public class EventHandler : MonoBehaviour
         StartCoroutine(requestPeneliti.RequestData((result) => {
             foreach (var data in result.data[0].departemen_peneliti)
             {
-                GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti);
-                NodeAbjadPeneliti.name = data.nama_departemen;
-                NodeAbjadPeneliti.tag = "ListPenelitiDepartemen";
+                GameObject NodeDepartemenPeneliti = (GameObject)Instantiate(NodePeneliti);
+                NodeDepartemenPeneliti.name = data.nama_departemen;
+                NodeDepartemenPeneliti.tag = "ListPenelitiDepartemen";
 
                 int jumlah = data.jumlah;
                 float size = jumlah * sizeCoef * 5f;
 
-                NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
+                NodeVariable tambahan = NodeDepartemenPeneliti.AddComponent<NodeVariable>();
                 tambahan.kode_alternate = data.kode_fakultas.ToString();
                 tambahan.kode_peneliti = data.kode_departemen.ToString();
                 tambahan.nama = data.nama_departemen;
@@ -276,7 +280,7 @@ public class EventHandler : MonoBehaviour
                 tambahan.ukuran = size;
                 tambahan.ukuran2 = new Vector3(size, size, size);
 
-                spawnNode(NodeAbjadPeneliti, size);
+                SpawnNode(NodeDepartemenPeneliti, size);
             }
             listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiDepartemen");
             foreach (GameObject node in listPeneliti)
@@ -284,11 +288,11 @@ public class EventHandler : MonoBehaviour
                 animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2);
                 StartCoroutine(animate);
             }
-            ScreenManager.instance.ShowDefaultNodeScreen();
+            ScreenManager.instance.SetLoadingNodeScreen(false);
         }, error => {
             if (error != "")
             {
-                ClientSend.SendErrorMessage(error);
+                //ClientSend.SendErrorMessage(error);
                 //VirtualSmartphoneCanvas.instance.ShowErrorScreen();
             }
         }
@@ -302,26 +306,26 @@ public class EventHandler : MonoBehaviour
         StartCoroutine(requestPeneliti.RequestData((result) => {
             foreach (var data in result.data[0].departemen_peneliti)
             {
-                GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti2D);
-                NodeAbjadPeneliti.name = data.nama_departemen;
-                NodeAbjadPeneliti.tag = "ListPenelitiDepartemen";
+                GameObject NodeDepartemenPeneliti2D = (GameObject)Instantiate(NodePeneliti2D);
+                NodeDepartemenPeneliti2D.name = data.nama_departemen;
+                NodeDepartemenPeneliti2D.tag = "ListPenelitiDepartemen";
 
                 int jumlah = data.jumlah;
 
-                NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
+                NodeVariable tambahan = NodeDepartemenPeneliti2D.AddComponent<NodeVariable>();
                 tambahan.kode_alternate = data.kode_fakultas.ToString();
                 tambahan.kode_peneliti = data.kode_departemen.ToString();
                 tambahan.nama = data.nama_departemen;
                 tambahan.jumlah = jumlah;
 
-                spawnNode2D(NodeAbjadPeneliti);
+                SpawnNode2D(NodeDepartemenPeneliti2D);
             }
             listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiDepartemen");
-            ScreenManager.instance.ShowDefaultNodeScreen();
+            ScreenManager.instance.SetLoadingNodeScreen(false);
         }, error => {
             if (error != "")
             {
-                ClientSend.SendErrorMessage(error);
+                //ClientSend.SendErrorMessage(error);
                 //VirtualSmartphoneCanvas.instance.ShowErrorScreen();
             }
         }
@@ -336,32 +340,26 @@ public class EventHandler : MonoBehaviour
         StartCoroutine(requestPeneliti.RequestData((result) => {
             foreach (var data in result.data[0].nama_peneliti)
             {
-                GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti);
-                NodeAbjadPeneliti.name = data.nama;
-                NodeAbjadPeneliti.tag = "ListPenelitiDepartemenDetail";
+                GameObject CardPenelitiDetail = (GameObject)Instantiate(CardPeneliti);
+                CardPenelitiDetail.name = data.nama;
+                CardPenelitiDetail.tag = "ListPenelitiDepartemenDetail";
 
                 int jumlah = data.jumlah;
                 float size = jumlah * sizeCoef * 5;
 
-                NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
+                NodeVariable tambahan = CardPenelitiDetail.AddComponent<NodeVariable>();
                 tambahan.kode_peneliti = data.kode_dosen.ToString();
-                tambahan.nama = NodeAbjadPeneliti.name;
+                tambahan.nama = CardPenelitiDetail.name;
                 tambahan.jumlah = jumlah;
-                tambahan.ukuran = size;
-                tambahan.ukuran2 = new Vector3(size, size, size);
 
-                spawnNode(NodeAbjadPeneliti, size);
+                SpawnCard(CardPenelitiDetail, ParentCard);
             }
             listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiDepartemenDetail");
-            foreach (GameObject node in listPeneliti)
-            {
-                animate = animateNode(node, node.GetComponent<NodeVariable>().ukuran2);
-                StartCoroutine(animate);
-            }
+            ScreenManager.instance.SetLoadingCardScreen(false);
         }, error => {
             if (error != "")
             {
-                ClientSend.SendErrorMessage(error);
+                //ClientSend.SendErrorMessage(error);
                 //VirtualSmartphoneCanvas.instance.ShowErrorScreen();
             }
         }
@@ -376,24 +374,25 @@ public class EventHandler : MonoBehaviour
         StartCoroutine(requestPeneliti.RequestData((result) => {
             foreach (var data in result.data[0].nama_peneliti)
             {
-                GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti2D);
-                NodeAbjadPeneliti.name = data.nama;
-                NodeAbjadPeneliti.tag = "ListPenelitiDepartemenDetail";
+                GameObject CardPenelitiDetail = (GameObject)Instantiate(CardPeneliti2D);
+                CardPenelitiDetail.name = data.nama;
+                CardPenelitiDetail.tag = "ListPenelitiDepartemenDetail";
 
                 int jumlah = data.jumlah;
 
-                NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
+                NodeVariable tambahan = CardPenelitiDetail.AddComponent<NodeVariable>();
                 tambahan.kode_peneliti = data.kode_dosen.ToString();
-                tambahan.nama = NodeAbjadPeneliti.name;
+                tambahan.nama = CardPenelitiDetail.name;
                 tambahan.jumlah = jumlah;
 
-                spawnNode2D(NodeAbjadPeneliti);
+                SpawnCard(CardPenelitiDetail, ParentCard2D);
             }
             listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiDepartemenDetail");
+            ScreenManager.instance.SetLoadingCardScreen(false);
         }, error => {
             if (error != "")
             {
-                ClientSend.SendErrorMessage(error);
+                //ClientSend.SendErrorMessage(error);
                 //VirtualSmartphoneCanvas.instance.ShowErrorScreen();
             }
         }
@@ -423,7 +422,7 @@ public class EventHandler : MonoBehaviour
                 tambahan.ukuran = size;
                 tambahan.ukuran2 = new Vector3(size, size, size);
 
-                spawnNode(NodeAbjadPeneliti, size);
+                SpawnNode(NodeAbjadPeneliti, size);
             }
             listPeneliti = GameObject.FindGameObjectsWithTag("ListGelar");
             foreach (GameObject node in listPeneliti)
@@ -464,7 +463,7 @@ public class EventHandler : MonoBehaviour
                 tambahan.ukuran = size;
                 tambahan.ukuran2 = new Vector3(size, size, size);
 
-                spawnNode(NodeAbjadPeneliti, size);
+                SpawnNode(NodeAbjadPeneliti, size);
             }
             listPeneliti = GameObject.FindGameObjectsWithTag("ListGelarDetail");
             foreach (GameObject node in listPeneliti)
@@ -507,7 +506,7 @@ public class EventHandler : MonoBehaviour
                 tambahan.ukuran = size;
                 tambahan.ukuran2 = new Vector3(size, size, size);
 
-                spawnNode(NodeAbjadPeneliti, size);
+                SpawnNode(NodeAbjadPeneliti, size);
             }
             listPeneliti = GameObject.FindGameObjectsWithTag("ListPublikasiFakultas");
             foreach (GameObject node in listPeneliti)
@@ -548,7 +547,7 @@ public class EventHandler : MonoBehaviour
                 tambahan.ukuran = float.Parse(data.idf);
                 tambahan.ukuran2 = new Vector3(size, size, size);
 
-                spawnNode(NodeAbjadPeneliti, size);
+                SpawnNode(NodeAbjadPeneliti, size);
             }
             listPeneliti = GameObject.FindGameObjectsWithTag("ListPublikasiKataKunci");
             foreach (GameObject node in listPeneliti)
@@ -588,7 +587,7 @@ public class EventHandler : MonoBehaviour
                 tambahan.ukuran = size;
                 tambahan.ukuran2 = new Vector3(size, size, size);
 
-                spawnNode(NodeAbjadPeneliti, size);
+                SpawnNode(NodeAbjadPeneliti, size);
             }
             listPeneliti = GameObject.FindGameObjectsWithTag("ListKataKunciPeneliti");
             foreach (GameObject node in listPeneliti)
@@ -606,9 +605,9 @@ public class EventHandler : MonoBehaviour
         ));
     }
 
-    public void spawnNode(GameObject node, float size)
+    public void SpawnNode(GameObject node, float size)
     {
-        node.transform.SetParent(parentPenelitiScatter.transform, false);
+        node.transform.SetParent(ParentNode.transform, false);
         node.transform.localPosition = new Vector3(Random.Range(-nodeArea, nodeArea), Random.Range(-nodeArea/2, nodeArea/2), Random.Range(-nodeArea, nodeArea));
         node.transform.localScale = new Vector3(0f, 0f, 0f);
 
@@ -663,9 +662,9 @@ public class EventHandler : MonoBehaviour
         nodeVariable.hoverMaterial = hoverMaterial;
     }
 
-    public void spawnNode2D(GameObject node)
+    public void SpawnNode2D(GameObject node)
     {
-        node.transform.SetParent(parentPeneliti2D.transform, false);
+        node.transform.SetParent(ParentNode2D.transform, false);
         node.GetComponentInChildren<TextMeshProUGUI>().text = node.name;
 
         if (node.CompareTag("ListPenelitiAbjad"))
@@ -710,6 +709,12 @@ public class EventHandler : MonoBehaviour
         {
             Debug.Log("no material added");
         }
+    }
+
+    public void SpawnCard(GameObject penelitiCard, GameObject parentCardReference)
+    {
+        penelitiCard.transform.SetParent(parentCardReference.transform, false);
+        penelitiCard.GetComponentInChildren<TextMeshProUGUI>().text = penelitiCard.name;
     }
 
     public IEnumerator animateNode(GameObject node, Vector3 nodeScale)
@@ -760,6 +765,14 @@ public class EventHandler : MonoBehaviour
         }
         else if (_tagName == "ListPublikasiKataKunci"){
             Manager.instance.getKataKunciPeneliti(_nodeId, _nodeId2);
+        }
+    }
+
+    public bool IsListPenelitiEmpty(){
+        if(listPeneliti == null || listPeneliti.Length == 0){
+            return true;
+        }else{
+            return false;
         }
     }
 }   
