@@ -344,10 +344,8 @@ public class ScreenManager : MonoBehaviour
             smartphoneScreen.cardMenu.SetActive(true);
             yield return StartCoroutine(WaitForFlushNode());
             smartphoneScreen.cardMenu.SetActive(false);
-        }else if(desktopScreen.detailMenu.activeSelf){
-            desktopScreen.cardMenu.SetActive(true);
+        }else{
             yield return StartCoroutine(WaitForFlushNode());
-            desktopScreen.cardMenu.SetActive(false);
         }
         
         desktopScreen.gameObject.SetActive(true);
@@ -365,7 +363,13 @@ public class ScreenManager : MonoBehaviour
         Debug.Log("screen mode smartphone");
         handTrackingUI.SetLaserOff();
 
-        yield return StartCoroutine(WaitForFlushNode());
+        if(desktopScreen.detailMenu.activeSelf){
+            desktopScreen.cardMenu.SetActive(true);
+            yield return StartCoroutine(WaitForFlushNode());
+            desktopScreen.cardMenu.SetActive(false);
+        }else{
+            yield return StartCoroutine(WaitForFlushNode());
+        }
 
         desktopScreen.gameObject.SetActive(false);
         smartphoneScreen.gameObject.SetActive(true);
@@ -374,7 +378,6 @@ public class ScreenManager : MonoBehaviour
 
     IEnumerator WaitForFlushNode(){
         Manager.instance.flushNode();
-        debugText.text += "node flushed!\n";
         yield return null;
     }
 

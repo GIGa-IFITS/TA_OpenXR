@@ -139,10 +139,6 @@ public class EventHandler : MonoBehaviour
         ));
     }
 
-    public void PrintDebug(string textLog){
-        debugText.text = textLog;
-    }
-
     public void getPenelitiInisialITS(string inisial)
     {
         flushNode();
@@ -744,6 +740,7 @@ public class EventHandler : MonoBehaviour
             {
                 Destroy(node);
             }
+            listPeneliti = null;
         }
     }
 
