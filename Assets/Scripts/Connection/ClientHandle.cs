@@ -128,4 +128,12 @@ public class ClientHandle : MonoBehaviour
         Debug.Log("receive scroll speed " + _scrollSpeed);
         ScreenManager.instance.SetScroll(_scrollSpeed);
     }
+
+    public static void RotationReceived(PacketNetwork _packet){
+        float _x = _packet.ReadFloat();
+        float _y = _packet.ReadFloat();
+        float _z = _packet.ReadFloat();
+        float _w = _packet.ReadFloat();
+        SmartphoneGyro.instance.SetPhoneRotation(_x, _y, _z, _w);
+    }    
 }

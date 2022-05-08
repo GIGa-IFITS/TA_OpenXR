@@ -172,7 +172,8 @@ public class Client : MonoBehaviour
             { (int)ServerPackets.sendNodeSize, ClientHandle.NodeSizeReceived },
             { (int)ServerPackets.sendPageType, ClientHandle.PageTypeReceived },
             { (int)ServerPackets.sendSwipe, ClientHandle.SwipeReceived },
-            { (int)ServerPackets.sendScrollSpeed, ClientHandle.ScrollSpeedReceived }
+            { (int)ServerPackets.sendScrollSpeed, ClientHandle.ScrollSpeedReceived },
+            { (int)ServerPackets.sendRotation, ClientHandle.RotationReceived }
         };
         Debug.Log("initialized packets");
     }

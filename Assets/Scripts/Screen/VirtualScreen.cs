@@ -85,6 +85,7 @@ public class VirtualScreen : MonoBehaviour
         nodeMenuDefaultPanel.SetActive(true);
         nodeMenuLoadingText.SetActive(true);
         nodeMenuInfoPanel.SetActive(false);
+        nodeMenuBackButton.SetActive(true);
 
         if (_searchBy == "name"){
             nodeMenuTitleText.text = "Searching By:" + "\n" + "Researcher Name";

@@ -155,7 +155,22 @@ public class ServerHandle
         }
         Debug.Log("SERVER: " + Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint + " /smartphone with id " + _fromClient + " send scroll speed " + _scrollSpeed + ". Server will now send it to the other client");
 
-        // send to smartphone
+        // send to VR
         ServerSend.SendScrollSpeedToVR(_scrollSpeed);
     }
+
+    public static void SendRotation(int _fromClient, PacketNetwork _packet){
+        int _clientIdCheck = _packet.ReadInt();
+        float _x = _packet.ReadFloat();
+        float _y = _packet.ReadFloat();
+        float _z = _packet.ReadFloat();
+        float _w = _packet.ReadFloat();
+
+        if(_fromClient != _clientIdCheck){
+            Debug.Log("SERVER: " + _fromClient + " has assumed wrong client id");
+        }
+
+        // send to VR
+        ServerSend.SendRotationToVR(_x, _y, _z, _w);
+    }    
 }

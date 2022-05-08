@@ -8,21 +8,33 @@ public class HandTrackingUI : MonoBehaviour
     [SerializeField] private OVRHand hand;
     [SerializeField] private OVRInputModule inputModule;
     [SerializeField] private LaserPointer laserPointer;
+    private LineRenderer lineRenderer;
     // [SerializeField] private GameObject indexFingerTip;
     // [SerializeField] private Vector3 rot;
     void Start()
     {
         inputModule.rayTransform = hand.PointerPose;
-        laserPointer.laserBeamBehavior = LaserPointer.LaserBeamBehavior.Off;
+        laserPointer.laserBeamBehavior = LaserPointer.LaserBeamBehavior.On;
+
+        lineRenderer = laserPointer.gameObject.GetComponent<LineRenderer>();
+        SetLaserOff();
+
+
         //StartCoroutine(setRayTransform(2f));
     }
 
     public void SetLaserOn(){
-        laserPointer.laserBeamBehavior = LaserPointer.LaserBeamBehavior.On;
+        //laserPointer.laserBeamBehavior = LaserPointer.LaserBeamBehavior.On;
+        lineRenderer.enabled = true;
     }
 
     public void SetLaserOff(){
-        laserPointer.laserBeamBehavior = LaserPointer.LaserBeamBehavior.Off;
+        //laserPointer.laserBeamBehavior = LaserPointer.LaserBeamBehavior.Off;
+        lineRenderer.enabled = false;
+    }
+
+    public string GetLaserBehavior(){
+        return laserPointer.laserBeamBehavior.ToString();
     }
 
     // IEnumerator setRayTransform(float seconds){

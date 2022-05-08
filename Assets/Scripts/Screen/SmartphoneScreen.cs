@@ -12,6 +12,14 @@ public class SmartphoneScreen : VirtualScreen
 
     public float multiplier;
     public float duration;
+
+    public void OnTapSearchName(){
+        base.OnTapStartSearch("name");
+        if(gameObject.activeSelf){
+            Manager.instance.getPenelitiAbjadITS2D();
+        }
+    }
+
     public void OnTapSearchUnit(){
         base.OnTapStartSearch("unit");
         if(gameObject.activeSelf){
@@ -19,11 +27,29 @@ public class SmartphoneScreen : VirtualScreen
         }
     }
 
+    public void OnTapSearchDegree(){
+        base.OnTapStartSearch("degree");
+
+        if(gameObject.activeSelf){
+            Manager.instance.getGelarPenelitiITS2D();
+        }
+    }
+
+    public void OnTapSearchKeyword(){
+        base.OnTapStartSearch("keyword");
+
+        if(gameObject.activeSelf){
+            Manager.instance.getPublikasiFakultas2D();
+        }
+    }
+
     public void SetScroll(float scrollSpeed){
         if(cardScroll.gameObject.activeSelf){ // cardscroll dulu, karna kalau cardscroll aktif nodescroll pasti aktif.
             scrollRect = cardScroll;
+            ScreenManager.instance.PrintDebug("cardScroll\n");
         }else if(nodeScroll.gameObject.activeSelf){
             scrollRect = nodeScroll;
+            ScreenManager.instance.PrintDebug("nodeScroll\n");
         }else{
             scrollRect = null;
         }

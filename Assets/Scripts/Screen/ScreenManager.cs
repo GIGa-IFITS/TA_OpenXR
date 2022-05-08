@@ -74,11 +74,36 @@ public class ScreenManager : MonoBehaviour
         desktopScreen.OnTapSearch();
         ClientSend.SendPageType("searchMenu");
     }
+
+    public void OnTapName(){
+        isSearching = true;
+        smartphoneScreen.OnTapSearchName();
+        desktopScreen.OnTapSearchName();
+        currSearch = "Researcher Name";
+        ClientSend.SendPageType("searchingMenu");
+    }
+
     public void OnTapUnit(){
         isSearching = true;
         smartphoneScreen.OnTapSearchUnit();
         desktopScreen.OnTapSearchUnit();
         currSearch = "Institution Unit";
+        ClientSend.SendPageType("searchingMenu");
+    }
+
+    public void OnTapDegree(){
+        isSearching = true;
+        smartphoneScreen.OnTapSearchDegree();
+        desktopScreen.OnTapSearchDegree();
+        currSearch = "Academic Degree";
+        ClientSend.SendPageType("searchingMenu");
+    }
+
+    public void OnTapKeyword(){
+        isSearching = true;
+        smartphoneScreen.OnTapSearchKeyword();
+        desktopScreen.OnTapSearchKeyword();
+        currSearch = "Research Keyword";
         ClientSend.SendPageType("searchingMenu");
     }
 
@@ -120,17 +145,60 @@ public class ScreenManager : MonoBehaviour
     public void OnSelectNode(NodeVariable nodeObject, bool selected, bool swipe){
         if (nodeObject.CompareTag("ListPenelitiAbjad"))
         {
+            string nodeId = nodeObject.kode_peneliti;
+            Debug.Log(nodeId + " <- Abjad");
 
+            string name = nodeObject.nama;
+            int total = nodeObject.jumlah;
+
+            // update screen                
+            // if select node
+            if(selected){
+                // change screen to list of researchers
+                ShowCardMenu(name, total, currSearch);
+                SetLoadingCardScreen(true);
+
+                // spawn node
+                if(desktopScreen.gameObject.activeSelf){
+                    Manager.instance.getPenelitiInisialITS(nodeId);
+                }else{
+                    Manager.instance.getPenelitiInisialITS2D(nodeId);
+                }
+
+                // update currNode and prevNode if not swipe
+                if(!swipe){
+                    prevNode = currNode;
+                    currNode = CopyNode(nodeObject);
+                }
+            }else{ // only hover
+                UpdateNodeInfo(name, total, currSearch);
+            }
         }
         else if(nodeObject.CompareTag("ListPenelitiInisial"))
         {
-            
+            string nodeId = nodeObject.kode_peneliti;
+            Debug.Log(nodeId + " <- IdPeneliti");
+
+            string name = nodeObject.nama;
+            int total = nodeObject.jumlah;
+
+            Manager.instance.getResearcherDetailData(nodeId);
+
+            // update screen                
+            // if select node
+            if(selected){
+                // show detail screen, update detail screen, nonactive card screen
+                UpdateDetailScreen();
+                isSearching = false;
+            }else{ // only hover
+                UpdateCardInfo(name, total);
+            }
         }
         
         else if(nodeObject.CompareTag("ListPenelitiFakultas"))
         {
             string nodeId = nodeObject.kode_peneliti;
-            Debug.Log(nodeId + " <- fakultaspeneliti");
+            Debug.Log(nodeId + " <- FakultasPeneliti");
 
             string name = nodeObject.nama;
             int total = nodeObject.jumlah;
@@ -160,7 +228,7 @@ public class ScreenManager : MonoBehaviour
         else if(nodeObject.CompareTag("ListPenelitiDepartemen"))
         {
             string nodeId = nodeObject.kode_peneliti;
-            Debug.Log(nodeId + " <- NodeVariable");
+            Debug.Log(nodeId + " <- DepartemenPeneliti");
 
             string name = nodeObject.nama;
             int total = nodeObject.jumlah;
@@ -191,7 +259,7 @@ public class ScreenManager : MonoBehaviour
         else if(nodeObject.CompareTag("ListPenelitiDepartemenDetail"))
         {
             string nodeId = nodeObject.kode_peneliti;
-            Debug.Log(nodeId + " <- NodeVariable");
+            Debug.Log(nodeId + " <- IdPeneliti");
 
             string name = nodeObject.nama;
             int total = nodeObject.jumlah;
@@ -211,25 +279,137 @@ public class ScreenManager : MonoBehaviour
         
         else if(nodeObject.CompareTag("ListGelar"))
         {
-            
+            string nodeId = nodeObject.kode_peneliti;
+            Debug.Log(nodeId + " <- Gelar");
+
+            string name = nodeObject.nama;
+            int total = nodeObject.jumlah;
+
+            // update screen                
+            // if select node
+            if(selected){
+                // change screen to list of researchers
+                ShowCardMenu(name, total, currSearch);
+                SetLoadingCardScreen(true);
+
+                // spawn node
+                if(desktopScreen.gameObject.activeSelf){
+                    Manager.instance.getGelarPenelitiDetail(nodeId);
+                }else{
+                    Manager.instance.getGelarPenelitiDetail2D(nodeId);
+                }
+
+                // update currNode and prevNode if not swipe
+                if(!swipe){
+                    prevNode = currNode;
+                    currNode = CopyNode(nodeObject);
+                }
+            }else{ // only hover
+                UpdateNodeInfo(name, total, currSearch);
+            }
         }
         else if (nodeObject.CompareTag("ListGelarDetail"))
         {
-            
+            string nodeId = nodeObject.kode_peneliti;
+            Debug.Log(nodeId + " <- IdPeneliti");
+
+            string name = nodeObject.nama;
+            int total = nodeObject.jumlah;
+
+            Manager.instance.getResearcherDetailData(nodeId);
+
+            // update screen                
+            // if select node
+            if(selected){
+                // show detail screen, update detail screen, nonactive card screen
+                UpdateDetailScreen();
+                isSearching = false;
+            }else{ // only hover
+                UpdateCardInfo(name, total);
+            }
         }
 
 
         else if(nodeObject.CompareTag("ListPublikasiFakultas"))
         {
-            
+            string nodeId = nodeObject.kode_peneliti;
+            Debug.Log(nodeId + " <- FakultasPublikasi");
+
+            string name = nodeObject.nama;
+            int total = nodeObject.jumlah;
+
+            // update screen                
+            // if select node
+            if(selected){
+                ShowNodeMenu();
+                SetLoadingNodeScreen(true);
+                UpdateNodeInfo(name, total, currSearch);
+
+                // spawn node
+                if(desktopScreen.gameObject.activeSelf){
+                    Manager.instance.getPublikasiKataKunci(nodeId);
+                }else{
+                    Manager.instance.getPublikasiKataKunci2D(nodeId);
+                }
+
+                // update curr node if not swipe
+                if(!swipe){
+                    currNode = CopyNode(nodeObject);
+                }
+            }else{ // only hover
+                UpdateNodeInfo(name, total, currSearch);
+            }
         }
         else if (nodeObject.CompareTag("ListPublikasiKataKunci"))
         {
-            
+            string nodeId = nodeObject.kode_peneliti;
+            Debug.Log(nodeId + " <- KataKunci");
+
+            string name = nodeObject.nama;
+            int total = nodeObject.jumlah;
+
+            // update screen                
+            // if select node
+            if(selected){
+                // change screen to list of researchers
+                ShowCardMenu(name, total, currSearch);
+                SetLoadingCardScreen(true);
+
+                // spawn node
+                if(desktopScreen.gameObject.activeSelf){
+                    Manager.instance.getKataKunciPeneliti(nodeId, name);
+                }else{
+                    Manager.instance.getKataKunciPeneliti2D(nodeId, name);
+                }
+
+                // update currNode and prevNode if not swipe
+                if(!swipe){
+                    prevNode = currNode;
+                    currNode = CopyNode(nodeObject);
+                }
+            }else{ // only hover
+                UpdateNodeInfo(name, total, currSearch);
+            }
         }
         else if (nodeObject.CompareTag("ListKataKunciPeneliti"))
         {
-            
+            string nodeId = nodeObject.kode_peneliti;
+            Debug.Log(nodeId + " <- IdPeneliti");
+
+            string name = nodeObject.nama;
+            int total = nodeObject.jumlah;
+
+            Manager.instance.getResearcherDetailData(nodeId);
+
+            // update screen                
+            // if select node
+            if(selected){
+                // show detail screen, update detail screen, nonactive card screen
+                UpdateDetailScreen();
+                isSearching = false;
+            }else{ // only hover
+                UpdateCardInfo(name, total);
+            } 
         }
     }
 
@@ -255,17 +435,20 @@ public class ScreenManager : MonoBehaviour
                 prevNode = null;
                 OnSelectNode(currNode, true, false);
             }else if(currSearch == "Researcher Name"){
-
+                currNode = null;
+                OnTapName();
             }
             else if(currSearch == "Institution Unit"){
                 currNode = null;
                 OnTapUnit();
             }
             else if(currSearch == "Academic Degree"){
-                
+                currNode = null;
+                OnTapDegree();
             }
             else if(currSearch == "Research Keyword"){
-                
+                currNode = null;
+                OnTapKeyword();
             }
         }
         else{
@@ -292,16 +475,16 @@ public class ScreenManager : MonoBehaviour
     public void CheckForNodeSpawn(){
         if(currNode == null){
             if(currSearch == "Researcher Name"){
-
+                OnTapName();
             }
             else if(currSearch == "Institution Unit"){
                 OnTapUnit();
             }
             else if(currSearch == "Academic Degree"){
-                
+                OnTapDegree();
             }
             else if(currSearch == "Research Keyword"){
-                    
+                OnTapKeyword();
             }
         }else{
             OnSelectNode(currNode, true, true);
@@ -329,15 +512,18 @@ public class ScreenManager : MonoBehaviour
 
     public void SetScreenMode(string _swipeType){
         if(_swipeType == "up" && smartphoneScreen.gameObject.activeSelf){
+            handTrackingUI.SetLaserOn();
+            PrintDebug("laser " + handTrackingUI.GetLaserBehavior());
             StartCoroutine(SwipeUp());
         }else if(_swipeType == "down" && desktopScreen.gameObject.activeSelf){
+            handTrackingUI.SetLaserOff();
+            PrintDebug("laser " + handTrackingUI.GetLaserBehavior());
             StartCoroutine(SwipeDown());
         }
     }
 
     IEnumerator SwipeUp() {
         Debug.Log("screen mode VR");
-        handTrackingUI.SetLaserOn();
 
         // swipe up when detail menu is active, activate first before flushing node
         if(smartphoneScreen.detailMenu.activeSelf){
@@ -361,7 +547,6 @@ public class ScreenManager : MonoBehaviour
 
     IEnumerator SwipeDown(){
         Debug.Log("screen mode smartphone");
-        handTrackingUI.SetLaserOff();
 
         if(desktopScreen.detailMenu.activeSelf){
             desktopScreen.cardMenu.SetActive(true);

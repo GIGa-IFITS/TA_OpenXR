@@ -114,6 +114,17 @@ public class ServerSend
             SendTCPData(1, _packet);
         }
     }
+
+    public static void SendRotationToVR(float _x, float _y, float _z, float _w){
+        using(PacketNetwork _packet = new PacketNetwork((int)ServerPackets.sendRotation)){
+            _packet.Write(_x);
+            _packet.Write(_y);
+            _packet.Write(_z);
+            _packet.Write(_w);
+
+            SendTCPData(1, _packet);
+        }
+    }
     
     #endregion
 }

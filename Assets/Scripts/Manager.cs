@@ -22,9 +22,6 @@ public class Manager : EventHandler
     [SerializeField] private HandPoseSwitch handPoseSwitch;
     [SerializeField] private GameObject virtualSmartphone;
     [SerializeField] private GameObject desktopScreen;
-
-    [SerializeField] private GameObject centerEyeAnchor;
-
     private void Awake() {
         if (instance == null){
             Debug.Log("client instantiated");

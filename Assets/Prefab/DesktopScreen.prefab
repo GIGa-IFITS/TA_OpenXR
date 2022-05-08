@@ -2744,7 +2744,6 @@ GameObject:
   - component: {fileID: 3389779943160875474}
   - component: {fileID: 3389779943160875475}
   - component: {fileID: 3389779943160875472}
-  - component: {fileID: 8084808645912041034}
   m_Layer: 5
   m_Name: Researcher Name Button
   m_TagString: Untagged
@@ -2852,18 +2851,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &8084808645912041034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3389779943160875438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64c02eea8dd36324b8eda59d46a86ee9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3389779943187097795
 GameObject:
   m_ObjectHideFlags: 0
@@ -3529,7 +3516,6 @@ GameObject:
   - component: {fileID: 3389779943563310139}
   - component: {fileID: 3389779943563310136}
   - component: {fileID: 3389779943563310137}
-  - component: {fileID: 5477039691371023040}
   m_Layer: 5
   m_Name: Institution Unit Button
   m_TagString: Untagged
@@ -3637,18 +3623,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &5477039691371023040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3389779943563310135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64c02eea8dd36324b8eda59d46a86ee9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3389779943576658633
 GameObject:
   m_ObjectHideFlags: 0
@@ -4003,7 +3977,6 @@ GameObject:
   - component: {fileID: 3389779943622062580}
   - component: {fileID: 3389779943622062581}
   - component: {fileID: 3389779943622062578}
-  - component: {fileID: 8707454607456622340}
   m_Layer: 5
   m_Name: Academic Degree Button
   m_TagString: Untagged
@@ -4111,18 +4084,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &8707454607456622340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3389779943622062576}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64c02eea8dd36324b8eda59d46a86ee9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3389779943627437315
 GameObject:
   m_ObjectHideFlags: 0
@@ -4333,7 +4294,6 @@ GameObject:
   - component: {fileID: 3389779943835983083}
   - component: {fileID: 3389779943835983080}
   - component: {fileID: 3389779943835983081}
-  - component: {fileID: 8317556656692013475}
   m_Layer: 5
   m_Name: Research Keyword Button
   m_TagString: Untagged
@@ -4441,18 +4401,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &8317556656692013475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3389779943835983079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64c02eea8dd36324b8eda59d46a86ee9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3389779943878177970
 GameObject:
   m_ObjectHideFlags: 0

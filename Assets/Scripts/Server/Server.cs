@@ -58,7 +58,8 @@ public class Server
             { (int)ClientPackets.sendNodeSize, ServerHandle.SendNodeSize },
             { (int)ClientPackets.sendPageType, ServerHandle.SendPageType },
             { (int)ClientPackets.sendSwipe, ServerHandle.SendSwipe },
-            { (int)ClientPackets.sendScrollSpeed, ServerHandle.SendScrollSpeed }
+            { (int)ClientPackets.sendScrollSpeed, ServerHandle.SendScrollSpeed },
+            { (int)ClientPackets.sendRotation, ServerHandle.SendRotation }
         };
     }
 }
