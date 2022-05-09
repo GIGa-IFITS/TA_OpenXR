@@ -807,8 +807,8 @@ public class EventHandler : MonoBehaviour
 
     public void SetParentNodePosition(){
         Vector3 offset = centerEyeAnchor.transform.forward;
-        ParentNode.transform.position = centerEyeAnchor.transform.position + offset;
-        ParentNode.transform.LookAt(centerEyeAnchor.transform);
+        ParentNode.transform.position = centerEyeAnchor.transform.position + new Vector3(offset.x, 0, offset.z * 2);
+        ParentNode.transform.LookAt(ParentNode.transform.position + centerEyeAnchor.transform.rotation * Vector3.forward, centerEyeAnchor.transform.rotation * Vector3.up);
     }
 
     public void SpawnNode(GameObject node, float size)
@@ -817,7 +817,7 @@ public class EventHandler : MonoBehaviour
         float x = ParentNode.transform.position.x;
         float y = ParentNode.transform.position.y;
         float z = ParentNode.transform.position.z;
-        node.transform.localPosition = new Vector3(Random.Range(x - 1f, x + 1f), Random.Range(y - 0.25f, y + 0.25f), Random.Range(z - 1f, z + 1f));
+        node.transform.localPosition = new Vector3(Random.Range(x - 2f, x + 2f), Random.Range(y, y + 0.5f), Random.Range(z - 2f, z + 2f));
         node.transform.localScale = new Vector3(0f, 0f, 0f);
 
         node.GetComponentInChildren<TextMeshProUGUI>().text = node.name;

@@ -27,4 +27,16 @@ public class NodeScript : MonoBehaviour
     public void OnClickNode(){
         ScreenManager.instance.OnSelectNode(gameObject.GetComponent<NodeVariable>(), true, false);
     }
+
+    private void OnCollisionEnter(Collision other) {
+        transform.localRotation = Quaternion.Euler(0, 0, 0);
+    }
+
+    private void OnCollisionStay(Collision other) {
+        transform.localRotation = Quaternion.Euler(0, 0, 0);
+    }
+    
+    private void OnCollisionExit(Collision other) {
+        transform.localRotation = Quaternion.Euler(0, 0, 0);
+    }
 }
