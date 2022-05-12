@@ -44,15 +44,12 @@ public class SmartphoneScreen : VirtualScreen
     }
 
     public void SetScroll(float scrollSpeed){
-        if(cardMenu.activeSelf){ // card menu dulu, karna kalau card menu aktif node menu pasti aktif.
+        if(gameObject.activeSelf && cardMenu.activeSelf){ // card menu dulu, karna kalau card menu aktif node menu pasti aktif.
             scrollRect = cardScroll;
-            ScreenManager.instance.PrintDebug("cardScroll\n");
-        }else if(nodeMenu.activeSelf){
+        }else if(gameObject.activeSelf && nodeMenu.activeSelf){
             scrollRect = nodeScroll;
-            ScreenManager.instance.PrintDebug("nodeScroll\n");
         }else{
             scrollRect = null;
-            ScreenManager.instance.PrintDebug("card and node is not active\n");
         }
 
         if(scrollRect != null){

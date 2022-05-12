@@ -513,11 +513,9 @@ public class ScreenManager : MonoBehaviour
     public void SetScreenMode(string _swipeType){
         if(_swipeType == "up" && smartphoneScreen.gameObject.activeSelf){
             handTrackingUI.SetLaserOn();
-            PrintDebug("laser " + handTrackingUI.GetLaserBehavior());
             StartCoroutine(SwipeUp());
         }else if(_swipeType == "down" && desktopScreen.gameObject.activeSelf){
             handTrackingUI.SetLaserOff();
-            PrintDebug("laser " + handTrackingUI.GetLaserBehavior());
             StartCoroutine(SwipeDown());
         }
     }

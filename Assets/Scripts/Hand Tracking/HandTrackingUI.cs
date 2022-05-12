@@ -8,40 +8,18 @@ public class HandTrackingUI : MonoBehaviour
     [SerializeField] private OVRHand hand;
     [SerializeField] private OVRInputModule inputModule;
     [SerializeField] private LaserPointer laserPointer;
-    private LineRenderer lineRenderer;
-    // [SerializeField] private GameObject indexFingerTip;
-    // [SerializeField] private Vector3 rot;
     void Start()
     {
         inputModule.rayTransform = hand.PointerPose;
-        laserPointer.laserBeamBehavior = LaserPointer.LaserBeamBehavior.On;
-
-        lineRenderer = laserPointer.gameObject.GetComponent<LineRenderer>();
         SetLaserOff();
-
-
-        //StartCoroutine(setRayTransform(2f));
     }
 
     public void SetLaserOn(){
-        //laserPointer.laserBeamBehavior = LaserPointer.LaserBeamBehavior.On;
-        lineRenderer.enabled = true;
+        laserPointer.laserBeamBehavior = LaserPointer.LaserBeamBehavior.On;
+        gameObject.SetActive(true);
     }
 
     public void SetLaserOff(){
-        //laserPointer.laserBeamBehavior = LaserPointer.LaserBeamBehavior.Off;
-        lineRenderer.enabled = false;
+        laserPointer.laserBeamBehavior = LaserPointer.LaserBeamBehavior.Off;
     }
-
-    public string GetLaserBehavior(){
-        return laserPointer.laserBeamBehavior.ToString();
-    }
-
-    // IEnumerator setRayTransform(float seconds){
-    //     yield return new WaitForSeconds(seconds);
-    //     GameObject indexFingerTipRef = hand.transform.GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(0).gameObject;
-    //     indexFingerTip = Instantiate(indexFingerTipRef, indexFingerTipRef.transform.parent.gameObject.transform);
-    //     indexFingerTip.transform.localEulerAngles = rot;
-    //     inputModule.rayTransform = indexFingerTip.transform;
-    // }
 }
