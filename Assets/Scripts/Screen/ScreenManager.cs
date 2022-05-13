@@ -20,6 +20,7 @@ public class ScreenManager : MonoBehaviour
     private bool isSwipeOnDetail = false;
     [SerializeField] private GameObject centerEyeAnchor;
     [SerializeField] private HandTrackingUI handTrackingUI;
+    public float offset = 30f;
 
     private void Awake()
     {
@@ -534,10 +535,8 @@ public class ScreenManager : MonoBehaviour
         
         desktopScreen.gameObject.SetActive(true);
         smartphoneScreen.gameObject.SetActive(false);
-
-        Vector3 offset = centerEyeAnchor.transform.forward;
-        offset *= 30f;
-        desktopScreen.transform.position = centerEyeAnchor.transform.position + offset;
+        
+        desktopScreen.transform.position = centerEyeAnchor.transform.position + centerEyeAnchor.transform.forward * offset;
         desktopScreen.transform.LookAt(desktopScreen.transform.position + centerEyeAnchor.transform.rotation * Vector3.forward, centerEyeAnchor.transform.rotation * Vector3.up);
 
         CheckIfSearching();
