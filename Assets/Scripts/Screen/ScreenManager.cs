@@ -55,25 +55,25 @@ public class ScreenManager : MonoBehaviour
         smartphoneScreen.OnTapDashboard();
         desktopScreen.OnTapDashboard();
         Manager.instance.Dashboard();
-        ClientSend.SendPageType("dashboardMenu");      
+        //ClientSend.SendPageType("dashboardMenu");      
     }
 
     public void ShowDashboardData(RawData rawdata){
         smartphoneScreen.ShowDashboardData(rawdata);
         desktopScreen.ShowDashboardData(rawdata);
-        ClientSend.SendPageType("dashboardData");
+        //ClientSend.SendPageType("dashboardData");
     }
 
     public void ShowDashboardError(){
         smartphoneScreen.ShowDashboardError();
         desktopScreen.ShowDashboardError();
-        ClientSend.SendPageType("dashboardError");
+        //ClientSend.SendPageType("dashboardError");
     }
 
     public void OnTapSearch(){
         smartphoneScreen.OnTapSearch();
         desktopScreen.OnTapSearch();
-        ClientSend.SendPageType("searchMenu");
+        //ClientSend.SendPageType("searchMenu");
     }
 
     public void OnTapName(){
@@ -81,7 +81,7 @@ public class ScreenManager : MonoBehaviour
         smartphoneScreen.OnTapSearchName();
         desktopScreen.OnTapSearchName();
         currSearch = "Researcher Name";
-        ClientSend.SendPageType("searchingMenu");
+        //ClientSend.SendPageType("searchingMenu");
     }
 
     public void OnTapUnit(){
@@ -89,7 +89,7 @@ public class ScreenManager : MonoBehaviour
         smartphoneScreen.OnTapSearchUnit();
         desktopScreen.OnTapSearchUnit();
         currSearch = "Institution Unit";
-        ClientSend.SendPageType("searchingMenu");
+        //ClientSend.SendPageType("searchingMenu");
     }
 
     public void OnTapDegree(){
@@ -97,7 +97,7 @@ public class ScreenManager : MonoBehaviour
         smartphoneScreen.OnTapSearchDegree();
         desktopScreen.OnTapSearchDegree();
         currSearch = "Academic Degree";
-        ClientSend.SendPageType("searchingMenu");
+        //ClientSend.SendPageType("searchingMenu");
     }
 
     public void OnTapKeyword(){
@@ -105,7 +105,7 @@ public class ScreenManager : MonoBehaviour
         smartphoneScreen.OnTapSearchKeyword();
         desktopScreen.OnTapSearchKeyword();
         currSearch = "Research Keyword";
-        ClientSend.SendPageType("searchingMenu");
+        //ClientSend.SendPageType("searchingMenu");
     }
 
     public void ShowNodeMenu(){
@@ -457,7 +457,7 @@ public class ScreenManager : MonoBehaviour
             isSearching = false;
             smartphoneScreen.OnTapBackToSearch();
             desktopScreen.OnTapBackToSearch();
-            ClientSend.SendPageType("searchMenu");
+            //ClientSend.SendPageType("searchMenu");
         } 
     }
 
