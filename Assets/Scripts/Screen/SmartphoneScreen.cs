@@ -53,10 +53,9 @@ public class SmartphoneScreen : VirtualScreen
         }
 
         if(scrollRect != null){
-            Debug.Log("Set scroll!" + scrollSpeed);
+            Debug.Log("Set scroll with scroll speed: " + scrollSpeed);
             float contentHeight = scrollRect.content.sizeDelta.y;
             float contentShift = scrollSpeed * multiplier * Time.deltaTime;
-            Debug.Log("content height: " + contentHeight + " content shift " + contentShift + " result: " + contentShift / contentHeight);
             float val = scrollRect.verticalNormalizedPosition + (contentShift / contentHeight);
             val = Mathf.Clamp(val, 0f, 1f);
             StartCoroutine(LerpToPos(val));
@@ -73,6 +72,5 @@ public class SmartphoneScreen : VirtualScreen
             yield return null;
         }
         scrollRect.verticalNormalizedPosition = endValue;
-        Debug.Log("vertical normalized pos: " + scrollRect.verticalNormalizedPosition);
     }
 }

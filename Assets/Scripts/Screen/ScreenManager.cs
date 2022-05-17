@@ -44,7 +44,7 @@ public class ScreenManager : MonoBehaviour
     }
 
     public void TouchButton(){
-        Debug.Log("touch button called");
+        Debug.Log("touch detected");
         // if there are any button hovered, touch that button
         if(hoveredButton != null){
             hoveredButton.ButtonPressed();
@@ -522,7 +522,7 @@ public class ScreenManager : MonoBehaviour
     }
 
     IEnumerator SwipeUp() {
-        Debug.Log("screen mode VR");
+        Debug.Log("screen mode desktop");
 
         // swipe up when detail menu is active, activate first before flushing node
         if(smartphoneScreen.detailMenu.activeSelf){

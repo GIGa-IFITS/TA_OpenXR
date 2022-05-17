@@ -16,6 +16,7 @@ public class ButtonPress : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.tag == "InteractHand"){
             ExecuteEvents.Execute (btnObject, new PointerEventData (EventSystem.current), ExecuteEvents.pointerEnterHandler);
+            Debug.Log("hover on " + gameObject.name);
             ScreenManager.instance.SetHoverButton(this);
         }
     }
@@ -23,11 +24,13 @@ public class ButtonPress : MonoBehaviour
     private void OnTriggerExit(Collider other) {
         if(other.gameObject.tag == "InteractHand"){
             ExecuteEvents.Execute (btnObject, new PointerEventData (EventSystem.current), ExecuteEvents.pointerExitHandler);
+            Debug.Log("stop hover on " + gameObject.name);
             ScreenManager.instance.ResetHoverButton(this);
         }
     }
 
     public void ButtonPressed(){
+        Debug.Log("click on " + gameObject.name);
         btn.onClick.Invoke();
     }
 }
