@@ -131,6 +131,7 @@ public class EventHandler : MonoBehaviour
                 StartCoroutine(animate);
             }
             ScreenManager.instance.SetLoadingNodeScreen(false);
+            ScreenManager.instance.SetDefaultNodeScreen(true);
         }, error => {
             if (error != "")
             {
@@ -163,6 +164,7 @@ public class EventHandler : MonoBehaviour
             }
             listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiAbjad");
             ScreenManager.instance.SetLoadingNodeScreen(false);
+            ScreenManager.instance.SetDefaultNodeScreen(true);
         }, error => {
             if (error != "")
             {
@@ -266,6 +268,7 @@ public class EventHandler : MonoBehaviour
                 StartCoroutine(animate);
             }
             ScreenManager.instance.SetLoadingNodeScreen(false);
+            ScreenManager.instance.SetDefaultNodeScreen(true);
         }, error => {
             if (error != "")
             {
@@ -300,6 +303,7 @@ public class EventHandler : MonoBehaviour
             }
             listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiFakultas");
             ScreenManager.instance.SetLoadingNodeScreen(false);
+            ScreenManager.instance.SetDefaultNodeScreen(true);
         }, error => {
             if (error != "")
             {
@@ -342,6 +346,7 @@ public class EventHandler : MonoBehaviour
                 StartCoroutine(animate);
             }
             ScreenManager.instance.SetLoadingNodeScreen(false);
+            ScreenManager.instance.SetInfoNodeScreen(true);
         }, error => {
             if (error != "")
             {
@@ -375,6 +380,7 @@ public class EventHandler : MonoBehaviour
             }
             listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiDepartemen");
             ScreenManager.instance.SetLoadingNodeScreen(false);
+            ScreenManager.instance.SetInfoNodeScreen(true);
         }, error => {
             if (error != "")
             {
@@ -484,6 +490,7 @@ public class EventHandler : MonoBehaviour
                 StartCoroutine(animate);
             }
             ScreenManager.instance.SetLoadingNodeScreen(false);
+            ScreenManager.instance.SetDefaultNodeScreen(true);
         }, error => {
             if (error != "")
             {
@@ -516,6 +523,7 @@ public class EventHandler : MonoBehaviour
             }
             listPeneliti = GameObject.FindGameObjectsWithTag("ListGelar");
             ScreenManager.instance.SetLoadingNodeScreen(false);
+            ScreenManager.instance.SetDefaultNodeScreen(true);
         }, error => {
             if (error != "")
             {
@@ -623,6 +631,7 @@ public class EventHandler : MonoBehaviour
                 StartCoroutine(animate);
             }
             ScreenManager.instance.SetLoadingNodeScreen(false);
+            ScreenManager.instance.SetDefaultNodeScreen(true);
         }, error => {
             if (error != "")
             {
@@ -657,6 +666,7 @@ public class EventHandler : MonoBehaviour
             }
             listPeneliti = GameObject.FindGameObjectsWithTag("ListPublikasiFakultas");
             ScreenManager.instance.SetLoadingNodeScreen(false);
+            ScreenManager.instance.SetDefaultNodeScreen(true);
         }, error => {
             if (error != "")
             {
@@ -699,6 +709,7 @@ public class EventHandler : MonoBehaviour
                 StartCoroutine(animate);
             }
             ScreenManager.instance.SetLoadingNodeScreen(false);
+            ScreenManager.instance.SetInfoNodeScreen(true);
         }, error => {
             if (error != "")
             {
@@ -732,6 +743,7 @@ public class EventHandler : MonoBehaviour
             }
             listPeneliti = GameObject.FindGameObjectsWithTag("ListPublikasiKataKunci");
             ScreenManager.instance.SetLoadingNodeScreen(false);
+            ScreenManager.instance.SetInfoNodeScreen(true);
         }, error => {
             if (error != "")
             {

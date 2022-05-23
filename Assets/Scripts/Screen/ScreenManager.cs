@@ -118,6 +118,16 @@ public class ScreenManager : MonoBehaviour
         desktopScreen.SetLoadingNodeScreen(val);
     }
 
+    public void SetDefaultNodeScreen(bool val){
+        smartphoneScreen.SetDefaultNodeScreen(val);
+        desktopScreen.SetDefaultNodeScreen(val);
+    }
+
+    public void SetInfoNodeScreen(bool val){
+        smartphoneScreen.SetInfoNodeScreen(val);
+        desktopScreen.SetInfoNodeScreen(val);
+    }
+
     public void UpdateNodeInfo(string _name, int _total, string _searchName){
         smartphoneScreen.UpdateNodeInfo(_name, _total, _searchName);
         desktopScreen.UpdateNodeInfo(_name, _total, _searchName);        
@@ -172,6 +182,8 @@ public class ScreenManager : MonoBehaviour
                     currNode = CopyNode(nodeObject);
                 }
             }else{ // only hover
+                SetDefaultNodeScreen(false);
+                SetInfoNodeScreen(true);
                 UpdateNodeInfo(name, total, currSearch);
             }
         }
@@ -208,6 +220,7 @@ public class ScreenManager : MonoBehaviour
             // if select node
             if(selected){
                 ShowNodeMenu();
+                SetInfoNodeScreen(false);
                 SetLoadingNodeScreen(true);
                 UpdateNodeInfo(name, total, currSearch);
 
@@ -223,6 +236,8 @@ public class ScreenManager : MonoBehaviour
                     currNode = CopyNode(nodeObject);
                 }
             }else{ // only hover
+                SetDefaultNodeScreen(false);
+                SetInfoNodeScreen(true);
                 UpdateNodeInfo(name, total, currSearch);
             }
         }
@@ -254,6 +269,8 @@ public class ScreenManager : MonoBehaviour
                     currNode = CopyNode(nodeObject);
                 }
             }else{ // only hover
+                SetDefaultNodeScreen(false);
+                SetInfoNodeScreen(true);
                 UpdateNodeInfo(name, total, currSearch);
             }
         }
@@ -306,6 +323,8 @@ public class ScreenManager : MonoBehaviour
                     currNode = CopyNode(nodeObject);
                 }
             }else{ // only hover
+                SetDefaultNodeScreen(false);
+                SetInfoNodeScreen(true);
                 UpdateNodeInfo(name, total, currSearch);
             }
         }
@@ -343,6 +362,7 @@ public class ScreenManager : MonoBehaviour
             // if select node
             if(selected){
                 ShowNodeMenu();
+                SetInfoNodeScreen(false);
                 SetLoadingNodeScreen(true);
                 UpdateNodeInfo(name, total, currSearch);
 
@@ -358,6 +378,8 @@ public class ScreenManager : MonoBehaviour
                     currNode = CopyNode(nodeObject);
                 }
             }else{ // only hover
+                SetDefaultNodeScreen(false);
+                SetInfoNodeScreen(true);
                 UpdateNodeInfo(name, total, currSearch);
             }
         }
@@ -389,6 +411,8 @@ public class ScreenManager : MonoBehaviour
                     currNode = CopyNode(nodeObject);
                 }
             }else{ // only hover
+                SetDefaultNodeScreen(false);
+                SetInfoNodeScreen(true);
                 UpdateNodeInfo(name, total, currSearch);
             }
         }

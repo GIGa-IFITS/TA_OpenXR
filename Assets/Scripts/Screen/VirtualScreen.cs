@@ -82,7 +82,7 @@ public class VirtualScreen : MonoBehaviour
         searchMenu.SetActive(false);
         cardMenu.SetActive(false);
         nodeMenu.SetActive(true);
-        nodeMenuDefaultPanel.SetActive(true);
+        nodeMenuDefaultPanel.SetActive(false);
         nodeMenuLoadingText.SetActive(true);
         nodeMenuInfoPanel.SetActive(false);
         nodeMenuBackButton.SetActive(true);
@@ -118,9 +118,15 @@ public class VirtualScreen : MonoBehaviour
         nodeMenuLoadingText.SetActive(val);
     } 
 
+    public void SetDefaultNodeScreen(bool val){
+        nodeMenuDefaultPanel.SetActive(val);
+    } 
+
+    public void SetInfoNodeScreen(bool val){
+        nodeMenuInfoPanel.SetActive(val);
+    } 
+
     public void UpdateNodeInfo(string _name, int _total, string _searchName){
-        nodeMenuDefaultPanel.SetActive(false);
-        nodeMenuInfoPanel.SetActive(true);
         nodeMenuTotalText.text = _total.ToString();
         if(_searchName == "Research Keyword"){
             nodeMenuDetailText.text = "Publications of";
