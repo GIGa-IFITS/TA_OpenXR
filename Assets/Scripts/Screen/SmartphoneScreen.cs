@@ -6,6 +6,7 @@ using TMPro;
 
 public class SmartphoneScreen : VirtualScreen
 {
+    private GameObject smartphoneCanvas;
     [SerializeField] private ScrollRect nodeScroll;
     [SerializeField] private ScrollRect cardScroll;
     private ScrollRect scrollRect;
@@ -13,16 +14,20 @@ public class SmartphoneScreen : VirtualScreen
     public float multiplier;
     public float duration;
 
+    private void Start() {
+        smartphoneCanvas = transform.GetChild(0).gameObject;
+    }
+
     public void OnTapSearchName(){
         base.OnTapStartSearch("name");
-        if(gameObject.activeSelf){
+        if(smartphoneCanvas.activeSelf){
             Manager.instance.getPenelitiAbjadITS2D();
         }
     }
 
     public void OnTapSearchUnit(){
         base.OnTapStartSearch("unit");
-        if(gameObject.activeSelf){
+        if(smartphoneCanvas.activeSelf){
             Manager.instance.getPenelitiFakultasITS2D();
         }
     }
@@ -30,7 +35,7 @@ public class SmartphoneScreen : VirtualScreen
     public void OnTapSearchDegree(){
         base.OnTapStartSearch("degree");
 
-        if(gameObject.activeSelf){
+        if(smartphoneCanvas.activeSelf){
             Manager.instance.getGelarPenelitiITS2D();
         }
     }
@@ -38,15 +43,15 @@ public class SmartphoneScreen : VirtualScreen
     public void OnTapSearchKeyword(){
         base.OnTapStartSearch("keyword");
 
-        if(gameObject.activeSelf){
+        if(smartphoneCanvas.activeSelf){
             Manager.instance.getPublikasiFakultas2D();
         }
     }
 
     public void SetScroll(float scrollSpeed){
-        if(gameObject.activeSelf && cardMenu.activeSelf){ // card menu dulu, karna kalau card menu aktif node menu pasti aktif.
+        if(smartphoneCanvas.activeSelf && cardMenu.activeSelf){ // card menu dulu, karna kalau card menu aktif node menu pasti aktif.
             scrollRect = cardScroll;
-        }else if(gameObject.activeSelf && nodeMenu.activeSelf){
+        }else if(smartphoneCanvas.activeSelf && nodeMenu.activeSelf){
             scrollRect = nodeScroll;
         }else{
             scrollRect = null;

@@ -534,7 +534,7 @@ public class ScreenManager : MonoBehaviour
         }
         
         desktopScreen.gameObject.SetActive(true);
-        smartphoneScreen.gameObject.SetActive(false);
+        smartphoneScreen.gameObject.transform.GetChild(0).gameObject.SetActive(false);
         
         desktopScreen.transform.position = centerEyeAnchor.transform.position + centerEyeAnchor.transform.forward * offset;
         desktopScreen.transform.LookAt(desktopScreen.transform.position + centerEyeAnchor.transform.rotation * Vector3.forward, centerEyeAnchor.transform.rotation * Vector3.up);
@@ -554,7 +554,7 @@ public class ScreenManager : MonoBehaviour
         }
 
         desktopScreen.gameObject.SetActive(false);
-        smartphoneScreen.gameObject.SetActive(true);
+        smartphoneScreen.gameObject.transform.GetChild(0).gameObject.SetActive(true);
         CheckIfSearching();
     }
 
