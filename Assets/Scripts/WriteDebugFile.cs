@@ -16,13 +16,16 @@ public class WriteDebugFile : MonoBehaviour
     }
 
     private void Start() {
-        filename = Application.persistentDataPath + "/LogFile.txt";
+        filename = Application.persistentDataPath + "/LogFile.csv";
+        TextWriter tw = new StreamWriter(filename, true);
+        tw.WriteLine("timestamp,event,p1,p2,p3");
+        tw.Close();
     }
 
     public void Log(string logString, string stackTrace, LogType type){
         TextWriter tw = new StreamWriter(filename, true);
 
-        tw.WriteLine("[" + System.DateTime.Now + "]" + logString);
+        tw.WriteLine(System.DateTime.Now + "," + logString);
 
         tw.Close();
     }
