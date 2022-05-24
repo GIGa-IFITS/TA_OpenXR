@@ -4882,6 +4882,7 @@ MonoBehaviour:
   detailThesis: {fileID: 1167872038021487870}
   detailPatents: {fileID: 7743294410859523425}
   detailResearch: {fileID: 5513089718940760753}
+  cardMenuTitleText: {fileID: 88576475607987302}
 --- !u!1 &3389779944038354319
 GameObject:
   m_ObjectHideFlags: 0
@@ -5222,6 +5223,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64c02eea8dd36324b8eda59d46a86ee9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isVisible: 1
+  isNode: 0
 --- !u!1 &3389779944079737070
 GameObject:
   m_ObjectHideFlags: 0
