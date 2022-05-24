@@ -479,7 +479,7 @@ public class EventHandler : MonoBehaviour
                 NodeAbjadPeneliti.tag = "ListGelar";
 
                 int jumlah = data.jumlah;
-                float size = jumlah * sizeCoef;
+                float size = jumlah * sizeCoef * 0.5f;
 
                 NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
                 tambahan.kode_peneliti = data.gelar.ToString();
@@ -842,10 +842,10 @@ public class EventHandler : MonoBehaviour
         float z = ParentNode.transform.position.z;
         node.transform.localScale = new Vector3(0f, 0f, 0f);
 
-        if(size <= med){
-            node.transform.localPosition = new Vector3(Random.Range(x - 2f, x + 2f), Random.Range(y, y + 1f), Random.Range(z, z + ParentNode.transform.forward.z * -1.5f));
+        if(size < med){
+            node.transform.localPosition = new Vector3(Random.Range(x - 2f, x + 2f), Random.Range(y, y + 1f), Random.Range(z - 1.5f, z - 0.1f));
         }else{ 
-            node.transform.localPosition = new Vector3(Random.Range(x - 2f, x + 2f), Random.Range(y, y + 1f), Random.Range(z, z + ParentNode.transform.forward.z));
+            node.transform.localPosition = new Vector3(Random.Range(x - 2f, x + 2f), Random.Range(y, y + 1f), Random.Range(z + 0.1f, z + 1.5f));
         }
 
         Debug.Log("forward: " + ParentNode.transform.forward.z + " z : " + z);
