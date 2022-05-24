@@ -932,6 +932,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3550006630021943245, guid: cab004bcae7d2904a8bb90dd7257fc7f,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 5152420388789040617, guid: cab004bcae7d2904a8bb90dd7257fc7f,
         type: 3}
       propertyPath: m_LocalPosition.z

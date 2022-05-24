@@ -7,21 +7,41 @@ public class ButtonPress : MonoBehaviour
 {
     private GameObject btnObject;
     private Button btn;
+    public bool isVisible = true;
+    public bool isNode = false;
+    private RectTransform viewport;
     void Awake()
     {
         btnObject = gameObject;
         btn = GetComponent<Button>();
     }
 
+    private void Start() {
+        if(GetComponent<NodeScript>() != null){
+            isNode = true;
+            isVisible = false;
+        }
+    }
+
     private void OnTriggerEnter(Collider other) {
+        if(other.gameObject.name == "Scroll Collider"){
+            isVisible = true;
+        }
+
         if(other.gameObject.tag == "InteractHand"){
-            ExecuteEvents.Execute (btnObject, new PointerEventData (EventSystem.current), ExecuteEvents.pointerEnterHandler);
-            Debug.Log("hover on " + gameObject.name);
-            ScreenManager.instance.SetHoverButton(this);
+            if(!isNode || isVisible){
+                ExecuteEvents.Execute (btnObject, new PointerEventData (EventSystem.current), ExecuteEvents.pointerEnterHandler);
+                Debug.Log("hover on " + gameObject.name);
+                ScreenManager.instance.SetHoverButton(this);
+            }
         }
     }
 
     private void OnTriggerExit(Collider other) {
+        if(other.gameObject.name == "Scroll Collider"){
+            isVisible = false;
+        }
+
         if(other.gameObject.tag == "InteractHand"){
             ExecuteEvents.Execute (btnObject, new PointerEventData (EventSystem.current), ExecuteEvents.pointerExitHandler);
             Debug.Log("stop hover on " + gameObject.name);

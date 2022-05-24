@@ -593,6 +593,10 @@ public class ScreenManager : MonoBehaviour
         }
     }
 
+    public GameObject GetCenterEyeAnchor(){
+        return centerEyeAnchor;
+    }
+
     public void PrintDebug(string _msg){
         debugText.text += _msg;
     }
