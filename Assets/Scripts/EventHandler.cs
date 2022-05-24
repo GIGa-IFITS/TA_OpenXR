@@ -106,6 +106,7 @@ public class EventHandler : MonoBehaviour
 
         requestPeneliti.URL = URL + "/peneliti?abjad=none";
         StartCoroutine(requestPeneliti.RequestData((result) => {
+            float med = 100 * sizeCoef;
             foreach (var data in result.data[0].inisial_peneliti)
             {
                 GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti);
@@ -122,7 +123,7 @@ public class EventHandler : MonoBehaviour
                 tambahan.ukuran = size;
                 tambahan.ukuran2 = new Vector3(size, size, size);
 
-                SpawnNode(NodeAbjadPeneliti, size);
+                SpawnNode(NodeAbjadPeneliti, size, med);
             }
             listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiAbjad");
             foreach(GameObject node in listPeneliti)
@@ -242,6 +243,8 @@ public class EventHandler : MonoBehaviour
 
         requestPeneliti.URL = URL + "/peneliti?fakultas=none";
         StartCoroutine(requestPeneliti.RequestData((result) => {
+            int idx = result.data[0].fakultas_peneliti.Count / 2;
+            float med = result.data[0].fakultas_peneliti[idx].jumlah * sizeCoef;
             foreach (var data in result.data[0].fakultas_peneliti)
             {
                 GameObject NodeFakultasPeneliti = (GameObject)Instantiate(NodePeneliti);
@@ -259,7 +262,7 @@ public class EventHandler : MonoBehaviour
                 tambahan.ukuran = size;
                 tambahan.ukuran2 = new Vector3(size, size, size);
 
-                SpawnNode(NodeFakultasPeneliti, size);
+                SpawnNode(NodeFakultasPeneliti, size, med);
             }
             listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiFakultas");
             foreach (GameObject node in listPeneliti)
@@ -320,6 +323,8 @@ public class EventHandler : MonoBehaviour
         SetParentNodePosition();
         requestPeneliti.URL = URL + "/peneliti?fakultas=" + kode_fakultas.ToString();
         StartCoroutine(requestPeneliti.RequestData((result) => {
+            int idx = result.data[0].departemen_peneliti.Count / 2;
+            float med = result.data[0].departemen_peneliti[idx].jumlah * sizeCoef * 5f;
             foreach (var data in result.data[0].departemen_peneliti)
             {
                 GameObject NodeDepartemenPeneliti = (GameObject)Instantiate(NodePeneliti);
@@ -337,7 +342,7 @@ public class EventHandler : MonoBehaviour
                 tambahan.ukuran = size;
                 tambahan.ukuran2 = new Vector3(size, size, size);
 
-                SpawnNode(NodeDepartemenPeneliti, size);
+                SpawnNode(NodeDepartemenPeneliti, size, med);
             }
             listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiDepartemen");
             foreach (GameObject node in listPeneliti)
@@ -465,6 +470,8 @@ public class EventHandler : MonoBehaviour
 
         requestPeneliti.URL = URL + "/gelar?kode=none";
         StartCoroutine(requestPeneliti.RequestData((result) => {
+            int idx = result.data[0].gelar_peneliti.Count / 2;
+            float med = result.data[0].gelar_peneliti[idx].jumlah * sizeCoef;
             foreach (var data in result.data[0].gelar_peneliti)
             {
                 GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti);
@@ -481,7 +488,7 @@ public class EventHandler : MonoBehaviour
                 tambahan.ukuran = size;
                 tambahan.ukuran2 = new Vector3(size, size, size);
 
-                SpawnNode(NodeAbjadPeneliti, size);
+                SpawnNode(NodeAbjadPeneliti, size, med);
             }
             listPeneliti = GameObject.FindGameObjectsWithTag("ListGelar");
             foreach (GameObject node in listPeneliti)
@@ -604,6 +611,8 @@ public class EventHandler : MonoBehaviour
 
         requestPeneliti.URL = URL + "/publikasi?fakultas=none";
         StartCoroutine(requestPeneliti.RequestData((result) => {
+            int idx = result.data[0].fakultas_peneliti.Count / 2;
+            float med = result.data[0].fakultas_peneliti[idx].jumlah * sizeCoef * 0.05f;
             foreach (var data in result.data[0].fakultas_peneliti)
             {
                 GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti);
@@ -612,7 +621,7 @@ public class EventHandler : MonoBehaviour
 
                 //jumlah disini adalah jumlah publikasi, bukan jumlah peneliti
                 int jumlah = data.jumlah;
-                float size = jumlah * sizeCoef * 0.1f;
+                float size = jumlah * sizeCoef * 0.05f;
 
                 NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
                 tambahan.kode_alternate = data.kode_fakultas.ToString();
@@ -622,7 +631,7 @@ public class EventHandler : MonoBehaviour
                 tambahan.ukuran = size;
                 tambahan.ukuran2 = new Vector3(size, size, size);
 
-                SpawnNode(NodeAbjadPeneliti, size);
+                SpawnNode(NodeAbjadPeneliti, size, med);
             }
             listPeneliti = GameObject.FindGameObjectsWithTag("ListPublikasiFakultas");
             foreach (GameObject node in listPeneliti)
@@ -683,6 +692,8 @@ public class EventHandler : MonoBehaviour
 
         requestPeneliti.URL = URL + "/publikasi?fakultas=" + kode;
         StartCoroutine(requestPeneliti.RequestData((result) => {
+            int idx = result.data[0].fakultas_publikasi.Count / 2;
+            float med = int.Parse(result.data[0].fakultas_publikasi[idx].df) * sizeCoef * 2;
             foreach (var data in result.data[0].fakultas_publikasi)
             {
                 GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti);
@@ -690,7 +701,7 @@ public class EventHandler : MonoBehaviour
                 NodeAbjadPeneliti.tag = "ListPublikasiKataKunci";
 
                 int jumlah = int.Parse(data.df);
-                float size = jumlah * sizeCoef;
+                float size = jumlah * sizeCoef * 2f;
 
                 NodeVariable tambahan = NodeAbjadPeneliti.AddComponent<NodeVariable>();
                 tambahan.kode_alternate = data.kode_fakultas.ToString();
@@ -700,7 +711,7 @@ public class EventHandler : MonoBehaviour
                 tambahan.ukuran = float.Parse(data.idf);
                 tambahan.ukuran2 = new Vector3(size, size, size);
 
-                SpawnNode(NodeAbjadPeneliti, size);
+                SpawnNode(NodeAbjadPeneliti, size, med);
             }
             listPeneliti = GameObject.FindGameObjectsWithTag("ListPublikasiKataKunci");
             foreach (GameObject node in listPeneliti)
@@ -819,18 +830,26 @@ public class EventHandler : MonoBehaviour
 
     public void SetParentNodePosition(){
         Vector3 offset = centerEyeAnchor.transform.forward;
-        ParentNode.transform.position = centerEyeAnchor.transform.position + new Vector3(offset.x, 0, offset.z * 2);
+        ParentNode.transform.position = centerEyeAnchor.transform.position + (centerEyeAnchor.transform.forward * 2f);
         ParentNode.transform.LookAt(ParentNode.transform.position + centerEyeAnchor.transform.rotation * Vector3.forward, centerEyeAnchor.transform.rotation * Vector3.up);
     }
 
-    public void SpawnNode(GameObject node, float size)
+    public void SpawnNode(GameObject node, float size, float med)
     {
         node.transform.SetParent(ParentNode.transform, false);
         float x = ParentNode.transform.position.x;
         float y = ParentNode.transform.position.y;
         float z = ParentNode.transform.position.z;
-        node.transform.localPosition = new Vector3(Random.Range(x - 2f, x + 2f), Random.Range(y, y + 0.5f), Random.Range(z - 2f, z + 2f));
         node.transform.localScale = new Vector3(0f, 0f, 0f);
+
+        if(size <= med){
+            node.transform.localPosition = new Vector3(Random.Range(x - 2f, x + 2f), Random.Range(y, y + 1f), Random.Range(z, z + ParentNode.transform.forward.z * -1.5f));
+        }else{ 
+            node.transform.localPosition = new Vector3(Random.Range(x - 2f, x + 2f), Random.Range(y, y + 1f), Random.Range(z, z + ParentNode.transform.forward.z));
+        }
+
+        Debug.Log("forward: " + ParentNode.transform.forward.z + " z : " + z);
+        Debug.Log(node.name + node.transform.localPosition);
 
         node.GetComponentInChildren<TextMeshProUGUI>().text = node.name;
 

@@ -15,7 +15,7 @@ public class WriteDebugFile : MonoBehaviour
         Application.logMessageReceived -= Log;
     }
 
-    private void Start() {
+    private void Awake() {
         filename = Application.persistentDataPath + "/LogFile.csv";
         TextWriter tw = new StreamWriter(filename, true);
         tw.WriteLine("timestamp,event,p1,p2,p3");
