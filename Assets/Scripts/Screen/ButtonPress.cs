@@ -7,8 +7,8 @@ public class ButtonPress : MonoBehaviour
 {
     private GameObject btnObject;
     private Button btn;
-    public bool isVisible = true;
-    public bool isNode = false;
+    private bool isVisible = true;
+    private bool isNode = false;
     private RectTransform viewport;
     void Awake()
     {

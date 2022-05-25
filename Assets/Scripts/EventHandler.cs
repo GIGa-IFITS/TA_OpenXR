@@ -853,13 +853,23 @@ public class EventHandler : MonoBehaviour
 
         node.GetComponentInChildren<TextMeshProUGUI>().text = node.name;
 
+        NodeVariable nodeVariable = node.GetComponent<NodeVariable>();
+
         if (node.CompareTag("ListPenelitiAbjad"))
         {
-            node.GetComponent<Renderer>().material = AbjadMaterial;
+            //node.GetComponent<Renderer>().material = AbjadMaterial;
+            Material abjadMat = Resources.Load("Alphabet Materials/" + node.name, typeof(Material)) as Material;
+            node.GetComponent<Renderer>().material = abjadMat;
+            nodeVariable.hoverMaterial = Resources.Load("Alphabet Materials/" + node.name + "-hover", typeof(Material)) as Material;
+
+            // turn off text panel on top of sphere
+            node.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+            node.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
         }
         else if (node.CompareTag("ListPenelitiInisial"))
         {
             node.GetComponent<Renderer>().material = InisialMaterial;
+            nodeVariable.hoverMaterial = hoverMaterial;
         }
         else if (node.CompareTag("ListPenelitiFakultas") || node.CompareTag("ListPenelitiDepartemen") || node.CompareTag("ListPublikasiFakultas") || node.CompareTag("ListPublikasiKataKunci") || node.CompareTag("ListPublikasiKataKunci"))
         {
@@ -891,15 +901,14 @@ public class EventHandler : MonoBehaviour
                     break;
 
             }
+            nodeVariable.hoverMaterial = hoverMaterial;
         }
         else 
         {
             Debug.Log("no material added");
+            nodeVariable.hoverMaterial = hoverMaterial;
         }
-
-        NodeVariable nodeVariable = node.GetComponent<NodeVariable>();
         nodeVariable.defaultMaterial = node.GetComponent<Renderer>().material;
-        nodeVariable.hoverMaterial = hoverMaterial;
     }
 
     public void SpawnNode2D(GameObject node)
@@ -909,7 +918,16 @@ public class EventHandler : MonoBehaviour
 
         if (node.CompareTag("ListPenelitiAbjad"))
         {
-            node.GetComponentInChildren<Image>().sprite = AbjadSprite;
+            //node.GetComponentInChildren<Image>().sprite = AbjadSprite;
+            Sprite abjadSprite = Resources.Load("Alphabet Sprites/" + node.name, typeof(Sprite)) as Sprite;
+            node.GetComponentInChildren<Image>().sprite = abjadSprite;
+            Sprite abjadHoverSprite = Resources.Load("Alphabet Sprites/" + node.name + "-hover", typeof(Sprite)) as Sprite;
+            SpriteState ss = new SpriteState();
+            ss.highlightedSprite = abjadHoverSprite;
+            node.GetComponentInChildren<Button>().spriteState = ss;
+
+            // turn off text on top of node
+            node.transform.GetChild(0).gameObject.SetActive(false);
         }
         else if (node.CompareTag("ListPenelitiInisial"))
         {
