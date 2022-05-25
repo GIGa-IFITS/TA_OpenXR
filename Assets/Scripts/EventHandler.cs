@@ -845,7 +845,7 @@ public class EventHandler : MonoBehaviour
         if(size < med){
             node.transform.localPosition = new Vector3(Random.Range(x - 2f, x + 2f), Random.Range(y, y + 1f), Random.Range(z - 1.5f, z - 0.1f));
         }else{ 
-            node.transform.localPosition = new Vector3(Random.Range(x - 2f, x + 2f), Random.Range(y, y + 1f), Random.Range(z + 0.1f, z + 1.5f));
+            node.transform.localPosition = new Vector3(Random.Range(x - 2f, x + 2f), Random.Range(y, y + 1f), Random.Range(z + 0.1f, z + 1f));
         }
 
         Debug.Log("forward: " + ParentNode.transform.forward.z + " z : " + z);
