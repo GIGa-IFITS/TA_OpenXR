@@ -6,6 +6,10 @@ public class SmartphoneGyro : MonoBehaviour
 {
     public static SmartphoneGyro instance;
     private Quaternion rot;
+    public int newX;
+    public int newY;
+    public int newZ;
+
 
     private void Awake()
     {
@@ -26,6 +30,8 @@ public class SmartphoneGyro : MonoBehaviour
         rot.z = z;
         rot.w = w;
 
+        rot = Quaternion.Euler(newX, newY, newZ) * rot; 
         transform.rotation = rot;
     }
 }
+

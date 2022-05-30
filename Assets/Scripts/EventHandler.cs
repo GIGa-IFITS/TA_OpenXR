@@ -25,6 +25,7 @@ public class EventHandler : MonoBehaviour
     public float sizeCoef;
     GameObject[] listPeneliti;
     public GameObject centerEyeAnchor;
+    public GameObject wall;
 
     [Header("Material")]
     public Material AbjadMaterial;
@@ -832,6 +833,9 @@ public class EventHandler : MonoBehaviour
         Vector3 offset = centerEyeAnchor.transform.forward;
         ParentNode.transform.position = centerEyeAnchor.transform.position + (centerEyeAnchor.transform.forward * 2f);
         ParentNode.transform.LookAt(ParentNode.transform.position + centerEyeAnchor.transform.rotation * Vector3.forward, centerEyeAnchor.transform.rotation * Vector3.up);
+
+        wall.transform.position = centerEyeAnchor.transform.position + centerEyeAnchor.transform.forward * 1.5f;
+        wall.transform.LookAt(wall.transform.position + centerEyeAnchor.transform.rotation * Vector3.forward, centerEyeAnchor.transform.rotation * Vector3.up);
     }
 
     public void SpawnNode(GameObject node, float size, float med)
@@ -843,9 +847,9 @@ public class EventHandler : MonoBehaviour
         node.transform.localScale = new Vector3(0f, 0f, 0f);
 
         if(size < med){
-            node.transform.localPosition = new Vector3(Random.Range(x - 2f, x + 2f), Random.Range(y, y + 1f), Random.Range(z - 1.5f, z - 0.1f));
+            node.transform.localPosition = new Vector3(Random.Range(x - 2f, x + 2f), Random.Range(y, y + 1f), Random.Range(z, z + 0.5f));
         }else{ 
-            node.transform.localPosition = new Vector3(Random.Range(x - 2f, x + 2f), Random.Range(y, y + 1f), Random.Range(z + 0.1f, z + 1f));
+            node.transform.localPosition = new Vector3(Random.Range(x - 2f, x + 2f), Random.Range(y, y + 1f), Random.Range(z + 0.6f, z + 1f));
         }
 
         Debug.Log("forward: " + ParentNode.transform.forward.z + " z : " + z);

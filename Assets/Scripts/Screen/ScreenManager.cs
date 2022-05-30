@@ -17,7 +17,6 @@ public class ScreenManager : MonoBehaviour
     public TextMeshProUGUI debugText;
     private List<string> researcherData = new List<string>();
     public bool isSearching = false;
-    private bool isSwipeOnDetail = false;
     [SerializeField] private GameObject centerEyeAnchor;
     [SerializeField] private HandTrackingUI handTrackingUI;
     public float offset = 30f;
@@ -517,14 +516,16 @@ public class ScreenManager : MonoBehaviour
     }
 
     public NodeVariable CopyNode(NodeVariable nodeObject){
-        NodeVariable nodeCopy = new NodeVariable();
+        NodeVariable nodeCopy;
         nodeCopy = UnityEngine.Object.Instantiate(nodeObject);
 
         // 3d
         if(nodeCopy.ukuran > 0){
-            nodeCopy.GetComponent<Renderer>().enabled = false;
+            nodeCopy.gameObject.GetComponent<Renderer>().enabled = false;
+            nodeCopy.gameObject.GetComponent<SphereCollider>().enabled = false;
         }else{
-            nodeCopy.GetComponent<Image>().enabled = false;
+            nodeCopy.gameObject.GetComponent<Image>().enabled = false;
+            nodeCopy.gameObject.GetComponent<BoxCollider>().enabled = false;
         }
         nodeCopy.transform.GetChild(0).gameObject.SetActive(false);
 
