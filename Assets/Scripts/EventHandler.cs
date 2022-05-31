@@ -834,7 +834,23 @@ public class EventHandler : MonoBehaviour
         ParentNode.transform.position = centerEyeAnchor.transform.position + (centerEyeAnchor.transform.forward * 2f);
         ParentNode.transform.LookAt(ParentNode.transform.position + centerEyeAnchor.transform.rotation * Vector3.forward, centerEyeAnchor.transform.rotation * Vector3.up);
 
-        wall.transform.position = centerEyeAnchor.transform.position + centerEyeAnchor.transform.forward * 1.5f;
+        // set wall position near player first, then moves toward destination
+        StartCoroutine(MoveWall(2f));
+    }
+
+    private IEnumerator MoveWall(float time)
+    {
+        Vector3 startingPos  = centerEyeAnchor.transform.position;
+        wall.transform.position = startingPos;
+        Vector3 finalPos = startingPos + centerEyeAnchor.transform.forward * 1.5f;
+        float elapsedTime = 0;
+        
+        while (elapsedTime < time)
+        {
+            wall.transform.position = Vector3.Lerp(startingPos, finalPos, (elapsedTime / time));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
         wall.transform.LookAt(wall.transform.position + centerEyeAnchor.transform.rotation * Vector3.forward, centerEyeAnchor.transform.rotation * Vector3.up);
     }
 
