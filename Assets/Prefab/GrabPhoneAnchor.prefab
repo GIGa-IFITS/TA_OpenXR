@@ -45,10 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50c666832be7afd479dbfbe99ff456a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  val: 0
-  newX: 0
-  newY: 0
-  newZ: 0
+  correctionX: 90
+  correctionY: -180
+  correctionZ: 0
 --- !u!1001 &1999577536898793254
 PrefabInstance:
   m_ObjectHideFlags: 0
