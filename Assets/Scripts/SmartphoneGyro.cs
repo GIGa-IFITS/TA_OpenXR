@@ -8,7 +8,8 @@ public class SmartphoneGyro : MonoBehaviour
     private Quaternion rot;
     private bool firstTime = true;
     private Quaternion offset;
-
+    [SerializeField] private GameObject leftHandAnchor;
+    [SerializeField] private OVRHand ovrHand;
 
     private void Awake()
     {
@@ -23,6 +24,13 @@ public class SmartphoneGyro : MonoBehaviour
         }
     }
 
+    private void LateUpdate() {
+        // follow position only if data have high confidence, else freeze to avoid hand jitter
+        if(ovrHand.IsDataHighConfidence){
+            transform.position = leftHandAnchor.transform.position;
+        }
+    }
+
     public void SetPhoneRotation(float x, float y, float z, float w){
         rot.x = x;
         rot.y = y;
@@ -30,7 +38,7 @@ public class SmartphoneGyro : MonoBehaviour
         rot.w = w;
 
         if(firstTime){
-            offset = transform.localRotation * Quaternion.Inverse(rot);
+            offset = transform.rotation * Quaternion.Inverse(rot);
             firstTime = false;
         }else{
             transform.rotation = offset * rot;
