@@ -26,15 +26,5 @@ public class IndexFingerCollider : MonoBehaviour
         boxCollider.size = triggerSize;
         indexTip.tag = "InteractHand";
         indexTip.AddComponent<FingerRay>();
-
-        //Add collider to tip of thumb finger
-        GameObject thumbTip = transform.GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetChild(0).GetChild(0).GetChild(0).gameObject;
-        rigidbody = thumbTip.AddComponent<Rigidbody>();
-        rigidbody.isKinematic = true;
-        boxCollider = thumbTip.AddComponent<BoxCollider>();
-        boxCollider.isTrigger = true;
-        boxCollider.size = triggerSize;
-        thumbTip.tag = "InteractHand";
-        thumbTip.AddComponent<FingerRay>();
     }
 }

@@ -584,7 +584,7 @@ public class ScreenManager : MonoBehaviour
         debugText.text += _msg;
     }
 
-    public void PrintSpatialButtonLog(){
-        Debug.Log("click on " + gameObject.name + ",spatial mode");
+    public void PrintSpatialButtonLog(GameObject currButton){
+        Debug.Log("click on " + currButton.name + ",spatial mode");
     }
 }
