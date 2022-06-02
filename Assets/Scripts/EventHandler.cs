@@ -81,8 +81,7 @@ public class EventHandler : MonoBehaviour
         }, (error) => {
             if (error != "")
             {
-                Debug.Log("dashboard data error");
-                ScreenManager.instance.ShowDashboardError();
+                //ScreenManager.instance.ShowDashboardError();
             }
         }));   
     }
@@ -184,7 +183,6 @@ public class EventHandler : MonoBehaviour
             foreach (var data in result.data[0].nama_peneliti)
             {
                 GameObject CardPenelitiDetail = (GameObject)Instantiate(CardPeneliti);
-                Debug.Log(data.nama + " " + data.kode_dosen + " " + data.jumlah);
                 CardPenelitiDetail.name = data.nama;
                 int jumlah = data.jumlah;
                 CardPenelitiDetail.tag = "ListPenelitiInisial";
@@ -830,9 +828,9 @@ public class EventHandler : MonoBehaviour
     }
 
     public void SetParentNodePosition(){
-        Vector3 offset = centerEyeAnchor.transform.forward;
-        ParentNode.transform.position = centerEyeAnchor.transform.position + (centerEyeAnchor.transform.forward * 2f);
-        ParentNode.transform.LookAt(ParentNode.transform.position + centerEyeAnchor.transform.rotation * Vector3.forward, centerEyeAnchor.transform.rotation * Vector3.up);
+        // Vector3 yOffset = new Vector3(0f, -0.5f, 0f);
+        // ParentNode.transform.position = centerEyeAnchor.transform.position + (centerEyeAnchor.transform.forward * 2f) + yOffset;
+        // ParentNode.transform.LookAt(ParentNode.transform.position + centerEyeAnchor.transform.rotation * Vector3.forward, centerEyeAnchor.transform.rotation * Vector3.up);
 
         // set wall position near player first, then moves toward destination
         StartCoroutine(MoveWall(2f));
@@ -867,9 +865,6 @@ public class EventHandler : MonoBehaviour
         }else{ 
             node.transform.localPosition = new Vector3(Random.Range(x - 2f, x + 2f), Random.Range(y, y + 1f), Random.Range(z + 0.6f, z + 1f));
         }
-
-        Debug.Log("forward: " + ParentNode.transform.forward.z + " z : " + z);
-        Debug.Log(node.name + node.transform.localPosition);
 
         node.GetComponentInChildren<TextMeshProUGUI>().text = node.name;
 
@@ -925,7 +920,6 @@ public class EventHandler : MonoBehaviour
         }
         else 
         {
-            Debug.Log("no material added");
             nodeVariable.hoverMaterial = hoverMaterial;
         }
         nodeVariable.defaultMaterial = node.GetComponent<Renderer>().material;
@@ -982,10 +976,6 @@ public class EventHandler : MonoBehaviour
                     node.GetComponentInChildren<Image>().sprite = AbjadSprite;
                     break;
             }
-        }
-        else 
-        {
-            Debug.Log("no material added");
         }
     }
 

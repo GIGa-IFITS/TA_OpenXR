@@ -20,7 +20,6 @@ public class ServerSend
     }
 
     public static void SendPhoneStatusToVR(){
-        Debug.Log("sending phone status to VR");
         using (PacketNetwork _packet = new PacketNetwork((int)ServerPackets.sendPhoneStatus)){
             _packet.Write(true);
 

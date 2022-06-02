@@ -22,7 +22,6 @@ public class ClientHandle : MonoBehaviour
     }
 
     public static void PhoneStatusReceived(PacketNetwork _packet){
-        Debug.Log("set active");
         Manager.instance.SetVirtualSmartphoneCanvasActive();
     }
 
@@ -55,11 +54,6 @@ public class ClientHandle : MonoBehaviour
             Debug.Log("touch detected");
             ScreenManager.instance.TouchButton();
             
-        }
-
-        // for canvas 
-        if(_command != "destroy"){
-            //VirtualSmartphoneCanvas.instance.UpdateScreenFilter(_command);
         }
     }
 
@@ -125,7 +119,6 @@ public class ClientHandle : MonoBehaviour
 
     public static void ScrollSpeedReceived(PacketNetwork _packet){
         float _scrollSpeed = _packet.ReadFloat();
-        Debug.Log("receive scroll speed " + _scrollSpeed);
         ScreenManager.instance.SetScroll(_scrollSpeed);
     }
 

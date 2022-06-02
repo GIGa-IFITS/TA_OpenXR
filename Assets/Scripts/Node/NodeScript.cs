@@ -15,16 +15,28 @@ public class NodeScript : MonoBehaviour
         if(nodeVariable.ukuran > 0){
             renderer = GetComponent<Renderer>();
             renderer.material = nodeVariable.hoverMaterial;
-        }
+            Debug.Log("hover on node " + gameObject.name + ",spatial mode");
+        }else{
+            Debug.Log("hover on node " + gameObject.name + ",smartphone mode");
+        } 
         ScreenManager.instance.OnSelectNode(gameObject.GetComponent<NodeVariable>(), false, false);
     }
 
     public void OnExitHoverNode(){
-        // always 3d, 2d already auto handled by button component
-        renderer.material = GetComponent<NodeVariable>().defaultMaterial;
+        if(nodeVariable.ukuran > 0){
+            Debug.Log("stop hover on node " + gameObject.name + ",spatial mode");
+            renderer.material = nodeVariable.defaultMaterial;
+        }else{
+            Debug.Log("stop hover on node " + gameObject.name + ",smartphone mode");
+        }
     }
     
     public void OnClickNode(){
+        if(nodeVariable.ukuran > 0){
+            Debug.Log("click on node " + gameObject.name + ",spatial mode");
+        }else{
+            Debug.Log("click on node " + gameObject.name + ",smartphone mode");
+        }
         ScreenManager.instance.OnSelectNode(gameObject.GetComponent<NodeVariable>(), true, false);
     }
 }

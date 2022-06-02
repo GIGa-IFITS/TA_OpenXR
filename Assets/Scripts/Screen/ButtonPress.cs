@@ -31,7 +31,7 @@ public class ButtonPress : MonoBehaviour
         if(other.gameObject.tag == "InteractHand"){
             if(!isNode || isVisible){
                 ExecuteEvents.Execute (btnObject, new PointerEventData (EventSystem.current), ExecuteEvents.pointerEnterHandler);
-                Debug.Log("hover on " + gameObject.name);
+                Debug.Log("hover on " + gameObject.name + ",smartphone mode");
                 ScreenManager.instance.SetHoverButton(this);
             }
         }
@@ -44,13 +44,13 @@ public class ButtonPress : MonoBehaviour
 
         if(other.gameObject.tag == "InteractHand"){
             ExecuteEvents.Execute (btnObject, new PointerEventData (EventSystem.current), ExecuteEvents.pointerExitHandler);
-            Debug.Log("stop hover on " + gameObject.name);
+            Debug.Log("stop hover on " + gameObject.name + ",smartphone mode");
             ScreenManager.instance.ResetHoverButton(this);
         }
     }
 
     public void ButtonPressed(){
-        Debug.Log("click on " + gameObject.name);
+        Debug.Log("click on " + gameObject.name + ",smartphone mode");
         btn.onClick.Invoke();
     }
 }

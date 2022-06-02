@@ -70,7 +70,7 @@ public class Manager : EventHandler
     }
 
     public void SetVirtualSmartphoneCanvasActive(){
-        Debug.Log("set canvas active");
+        Debug.Log("Set virtual smartphone active");
         virtualSmartphone.SetActive(true);
         disconnectCanvas.SetActive(false);
         handPoseSwitch.SetStaticHandStatus(true);

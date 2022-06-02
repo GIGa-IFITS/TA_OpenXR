@@ -156,8 +156,6 @@ public class ScreenManager : MonoBehaviour
         if (nodeObject.CompareTag("ListPenelitiAbjad"))
         {
             string nodeId = nodeObject.kode_peneliti;
-            Debug.Log(nodeId + " <- Abjad");
-
             string name = nodeObject.nama;
             int total = nodeObject.jumlah;
 
@@ -189,8 +187,6 @@ public class ScreenManager : MonoBehaviour
         else if(nodeObject.CompareTag("ListPenelitiInisial"))
         {
             string nodeId = nodeObject.kode_peneliti;
-            Debug.Log(nodeId + " <- IdPeneliti");
-
             string name = nodeObject.nama;
             int total = nodeObject.jumlah;
 
@@ -210,8 +206,6 @@ public class ScreenManager : MonoBehaviour
         else if(nodeObject.CompareTag("ListPenelitiFakultas"))
         {
             string nodeId = nodeObject.kode_peneliti;
-            Debug.Log(nodeId + " <- FakultasPeneliti");
-
             string name = nodeObject.nama;
             int total = nodeObject.jumlah;
 
@@ -243,8 +237,6 @@ public class ScreenManager : MonoBehaviour
         else if(nodeObject.CompareTag("ListPenelitiDepartemen"))
         {
             string nodeId = nodeObject.kode_peneliti;
-            Debug.Log(nodeId + " <- DepartemenPeneliti");
-
             string name = nodeObject.nama;
             int total = nodeObject.jumlah;
 
@@ -276,8 +268,6 @@ public class ScreenManager : MonoBehaviour
         else if(nodeObject.CompareTag("ListPenelitiDepartemenDetail"))
         {
             string nodeId = nodeObject.kode_peneliti;
-            Debug.Log(nodeId + " <- IdPeneliti");
-
             string name = nodeObject.nama;
             int total = nodeObject.jumlah;
 
@@ -297,8 +287,6 @@ public class ScreenManager : MonoBehaviour
         else if(nodeObject.CompareTag("ListGelar"))
         {
             string nodeId = nodeObject.kode_peneliti;
-            Debug.Log(nodeId + " <- Gelar");
-
             string name = nodeObject.nama;
             int total = nodeObject.jumlah;
 
@@ -330,8 +318,6 @@ public class ScreenManager : MonoBehaviour
         else if (nodeObject.CompareTag("ListGelarDetail"))
         {
             string nodeId = nodeObject.kode_peneliti;
-            Debug.Log(nodeId + " <- IdPeneliti");
-
             string name = nodeObject.nama;
             int total = nodeObject.jumlah;
 
@@ -352,8 +338,6 @@ public class ScreenManager : MonoBehaviour
         else if(nodeObject.CompareTag("ListPublikasiFakultas"))
         {
             string nodeId = nodeObject.kode_peneliti;
-            Debug.Log(nodeId + " <- FakultasPublikasi");
-
             string name = nodeObject.nama;
             int total = nodeObject.jumlah;
 
@@ -385,8 +369,6 @@ public class ScreenManager : MonoBehaviour
         else if (nodeObject.CompareTag("ListPublikasiKataKunci"))
         {
             string nodeId = nodeObject.kode_peneliti;
-            Debug.Log(nodeId + " <- KataKunci");
-
             string name = nodeObject.nama;
             int total = nodeObject.jumlah;
 
@@ -561,8 +543,8 @@ public class ScreenManager : MonoBehaviour
         desktopScreen.gameObject.SetActive(true);
         smartphoneScreen.gameObject.transform.GetChild(0).gameObject.SetActive(false);
         
-        desktopScreen.transform.position = centerEyeAnchor.transform.position + centerEyeAnchor.transform.forward * offset;
-        desktopScreen.transform.LookAt(desktopScreen.transform.position + centerEyeAnchor.transform.rotation * Vector3.forward, centerEyeAnchor.transform.rotation * Vector3.up);
+        //desktopScreen.transform.position = centerEyeAnchor.transform.position + centerEyeAnchor.transform.forward * offset;
+        //desktopScreen.transform.LookAt(desktopScreen.transform.position + centerEyeAnchor.transform.rotation * Vector3.forward, centerEyeAnchor.transform.rotation * Vector3.up);
 
         CheckIfSearching();
     }
@@ -600,5 +582,9 @@ public class ScreenManager : MonoBehaviour
 
     public void PrintDebug(string _msg){
         debugText.text += _msg;
+    }
+
+    public void PrintSpatialButtonLog(){
+        Debug.Log("click on " + gameObject.name + ",spatial mode");
     }
 }

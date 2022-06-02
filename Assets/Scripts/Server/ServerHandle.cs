@@ -14,8 +14,6 @@ public class ServerHandle
 
         // if message is from smartphone, send message to VR
         if(_fromClient == 2){
-            Debug.Log("message from smartphone, sending to vr");
-            //ServerSend.SendPhoneStatusToVR();
             Manager.instance.SetVirtualSmartphoneCanvasActive();
         }
     }
@@ -28,8 +26,6 @@ public class ServerHandle
         if(_fromClient != _clientIdCheck){
             Debug.Log("SERVER: " + _fromClient + " has assumed wrong client id");
         }
-        Debug.Log("SERVER: " + Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint + " /Smartphone with id " + _fromClient + " send " + _command + ". Server will now send it to the other client");
-
         // send to VR
         ServerSend.SendCommandToVR(_command);
     }
@@ -46,8 +42,6 @@ public class ServerHandle
         if(_fromClient != _clientIdCheck){
             Debug.Log("SERVER: " + _fromClient + " has assumed wrong client id");
         }
-        Debug.Log("SERVER: " + Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint + " /VR with id " + _fromClient + " send filter summary " + _name + ". Server will now send it to the other client");
-
         // send to smartphone
         ServerSend.SendFilterToPhone(_name, _total, _tag, _nodeId, _filterName);
     }
@@ -60,8 +54,6 @@ public class ServerHandle
         if(_fromClient != _clientIdCheck){
             Debug.Log("SERVER: " + _fromClient + " has assumed wrong client id");
         }
-        Debug.Log("SERVER: " + Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint + " /VR with id " + _fromClient + " send researcher id " + _id + ". Server will now send it to the other client");
-
         // send to smartphone
         ServerSend.SendResearcherIdToPhone(_id, _filterName);
     }
@@ -75,8 +67,6 @@ public class ServerHandle
         if(_fromClient != _clientIdCheck){
             Debug.Log("SERVER: " + _fromClient + " has assumed wrong client id");
         }
-        Debug.Log("SERVER: " + Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint + " /phone with id " + _fromClient + " request node " + _nodeId + ". Server will now send it to the other client");
-
         // send to VR
         ServerSend.SendNodeRequestToVR(_nodeId, _nodeId2, _tagName);
     }
@@ -88,8 +78,6 @@ public class ServerHandle
         if(_fromClient != _clientIdCheck){
             Debug.Log("SERVER: " + _fromClient + " has assumed wrong client id");
         }
-        Debug.Log("SERVER: " + Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint + " /VR with id " + _fromClient + " send error message " + _errorMsg + ". Server will now send it to the other client");
-
         // send to smartphone
         ServerSend.SendErrorMessageToPhone(_errorMsg);
     }
@@ -101,8 +89,6 @@ public class ServerHandle
         if(_fromClient != _clientIdCheck){
             Debug.Log("SERVER: " + _fromClient + " has assumed wrong client id");
         }
-        Debug.Log("SERVER: " + Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint + " /smartphone with id " + _fromClient + " send orientation " + _isUp + ". Server will now send it to the other client");
-
         // send to VR
         ServerSend.SendOrientationToVR(_isUp);
     }
@@ -114,8 +100,6 @@ public class ServerHandle
         if(_fromClient != _clientIdCheck){
             Debug.Log("SERVER: " + _fromClient + " has assumed wrong client id");
         }
-        Debug.Log("SERVER: " + Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint + " /smartphone with id " + _fromClient + " send node size " + _nodeSize + ". Server will now send it to the other client");
-
         // send to VR
         ServerSend.SendNodeSizeToVR(_nodeSize);
     }
@@ -127,8 +111,6 @@ public class ServerHandle
         if(_fromClient != _clientIdCheck){
             Debug.Log("SERVER: " + _fromClient + " has assumed wrong client id");
         }
-        Debug.Log("SERVER: " + Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint + " /VR with id " + _fromClient + " send page type " + _pageType + ". Server will now send it to the other client");
-
         // send to smartphone
         ServerSend.SendPageTypeToPhone(_pageType);
     }
@@ -140,8 +122,6 @@ public class ServerHandle
         if(_fromClient != _clientIdCheck){
             Debug.Log("SERVER: " + _fromClient + " has assumed wrong client id");
         }
-        Debug.Log("SERVER: " + Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint + " /smartphone with id " + _fromClient + " send swipe type " + _swipeType + ". Server will now send it to the other client");
-
         // send to smartphone
         ServerSend.SendSwipeToVR(_swipeType);
     }
@@ -153,8 +133,6 @@ public class ServerHandle
         if(_fromClient != _clientIdCheck){
             Debug.Log("SERVER: " + _fromClient + " has assumed wrong client id");
         }
-        Debug.Log("SERVER: " + Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint + " /smartphone with id " + _fromClient + " send scroll speed " + _scrollSpeed + ". Server will now send it to the other client");
-
         // send to VR
         ServerSend.SendScrollSpeedToVR(_scrollSpeed);
     }
@@ -169,7 +147,6 @@ public class ServerHandle
         if(_fromClient != _clientIdCheck){
             Debug.Log("SERVER: " + _fromClient + " has assumed wrong client id");
         }
-
         // send to VR
         ServerSend.SendRotationToVR(_x, _y, _z, _w);
     }    

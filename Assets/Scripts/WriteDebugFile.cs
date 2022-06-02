@@ -17,8 +17,13 @@ public class WriteDebugFile : MonoBehaviour
 
     private void Awake() {
         filename = Application.persistentDataPath + "/LogFile.csv";
+        int i = 0;
+        while(File.Exists(filename)){
+            i++;
+            filename = Application.persistentDataPath + "/LogFile" + i.ToString() + ".csv";
+        }
         TextWriter tw = new StreamWriter(filename, true);
-        tw.WriteLine("timestamp,event,p1,p2,p3");
+        tw.WriteLine("timestamp,event,mode");
         tw.Close();
     }
 
