@@ -102,7 +102,7 @@ public class EventHandler : MonoBehaviour
     public void getPenelitiAbjadITS()
     {
         flushNode();
-        SetParentNodePosition();
+        SetParentNodePosition(1f);
 
         requestPeneliti.URL = URL + "/peneliti?abjad=none";
         StartCoroutine(requestPeneliti.RequestData((result) => {
@@ -238,7 +238,7 @@ public class EventHandler : MonoBehaviour
     public void getPenelitiFakultasITS()
     {
         flushNode();
-        SetParentNodePosition();
+        SetParentNodePosition(1f);
 
         requestPeneliti.URL = URL + "/peneliti?fakultas=none";
         StartCoroutine(requestPeneliti.RequestData((result) => {
@@ -319,7 +319,7 @@ public class EventHandler : MonoBehaviour
     public void getPenelitiDepartemenITS(string kode_fakultas)
     {
         flushNode();
-        SetParentNodePosition();
+        SetParentNodePosition(1f);
         requestPeneliti.URL = URL + "/peneliti?fakultas=" + kode_fakultas.ToString();
         StartCoroutine(requestPeneliti.RequestData((result) => {
             int idx = result.data[0].departemen_peneliti.Count / 2;
@@ -465,7 +465,7 @@ public class EventHandler : MonoBehaviour
     public void getGelarPenelitiITS()
     {
         flushNode();
-        SetParentNodePosition();
+        SetParentNodePosition(1f);
 
         requestPeneliti.URL = URL + "/gelar?kode=none";
         StartCoroutine(requestPeneliti.RequestData((result) => {
@@ -606,7 +606,7 @@ public class EventHandler : MonoBehaviour
     public void getPublikasiFakultas()
     {
         flushNode();
-        SetParentNodePosition();
+        SetParentNodePosition(1f);
 
         requestPeneliti.URL = URL + "/publikasi?fakultas=none";
         StartCoroutine(requestPeneliti.RequestData((result) => {
@@ -687,7 +687,7 @@ public class EventHandler : MonoBehaviour
     public void getPublikasiKataKunci(string kode)
     {
         flushNode();
-        SetParentNodePosition();
+        SetParentNodePosition(2f);
 
         requestPeneliti.URL = URL + "/publikasi?fakultas=" + kode;
         StartCoroutine(requestPeneliti.RequestData((result) => {
@@ -827,10 +827,8 @@ public class EventHandler : MonoBehaviour
         ));
     }
 
-    public void SetParentNodePosition(){
-        // Vector3 yOffset = new Vector3(0f, -0.5f, 0f);
-        // ParentNode.transform.position = centerEyeAnchor.transform.position + (centerEyeAnchor.transform.forward * 2f) + yOffset;
-        // ParentNode.transform.LookAt(ParentNode.transform.position + centerEyeAnchor.transform.rotation * Vector3.forward, centerEyeAnchor.transform.rotation * Vector3.up);
+    public void SetParentNodePosition(float xPos){
+        ParentNode.transform.position = new Vector3(xPos, ParentNode.transform.position.y, ParentNode.transform.position.z);
 
         // set wall position near player first, then moves toward destination
         StartCoroutine(MoveWall(2f));
