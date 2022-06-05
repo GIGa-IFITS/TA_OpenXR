@@ -9,6 +9,8 @@ public class SmartphoneScreen : VirtualScreen
     private GameObject smartphoneCanvas;
     [SerializeField] private ScrollRect nodeScroll;
     [SerializeField] private ScrollRect cardScroll;
+    [SerializeField] private Image nodeBg;
+    [SerializeField] private Image cardBg;
     private ScrollRect scrollRect;
 
     public float multiplier;
@@ -45,6 +47,22 @@ public class SmartphoneScreen : VirtualScreen
 
         if(smartphoneCanvas.activeSelf){
             Manager.instance.getPublikasiFakultas2D();
+        }
+    }
+
+    public void ChangeNodeHoverBg(bool hover){
+        if(hover){
+            nodeBg.color = new Color32(246, 221, 119, 100);
+        }else{
+            nodeBg.color = new Color32(255, 255, 255, 100);
+        }
+    }
+
+    public void ChangeCardHoverBg(bool hover){
+        if(hover){
+            cardBg.color = new Color32(246, 221, 119, 100);
+        }else{
+            cardBg.color = new Color32(255, 255, 255, 100);
         }
     }
 

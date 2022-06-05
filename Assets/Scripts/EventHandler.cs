@@ -191,6 +191,7 @@ public class EventHandler : MonoBehaviour
                 tambahan.kode_peneliti = data.kode_dosen;
                 tambahan.nama = data.nama;
                 tambahan.jumlah = jumlah;
+                tambahan.ukuran = jumlah;
 
                 SpawnCard(CardPenelitiDetail, ParentCard);
             }
@@ -240,7 +241,7 @@ public class EventHandler : MonoBehaviour
         flushNode();
         SetParentNodePosition(1f);
 
-        requestPeneliti.URL = URL + "/peneliti?fakultas=none";
+        requestPeneliti.URL = URL + "/peneliti?fakultas=none&size=true";
         StartCoroutine(requestPeneliti.RequestData((result) => {
             int idx = result.data[0].fakultas_peneliti.Count / 2;
             float med = result.data[0].fakultas_peneliti[idx].jumlah * sizeCoef;
@@ -320,7 +321,7 @@ public class EventHandler : MonoBehaviour
     {
         flushNode();
         SetParentNodePosition(1f);
-        requestPeneliti.URL = URL + "/peneliti?fakultas=" + kode_fakultas.ToString();
+        requestPeneliti.URL = URL + "/peneliti?fakultas=" + kode_fakultas.ToString() + "&size=true";
         StartCoroutine(requestPeneliti.RequestData((result) => {
             int idx = result.data[0].departemen_peneliti.Count / 2;
             float med = result.data[0].departemen_peneliti[idx].jumlah * sizeCoef * 5f;
@@ -413,6 +414,7 @@ public class EventHandler : MonoBehaviour
                 tambahan.kode_peneliti = data.kode_dosen.ToString();
                 tambahan.nama = CardPenelitiDetail.name;
                 tambahan.jumlah = jumlah;
+                tambahan.ukuran = jumlah;
 
                 SpawnCard(CardPenelitiDetail, ParentCard);
             }
@@ -557,6 +559,7 @@ public class EventHandler : MonoBehaviour
                 tambahan.kode_peneliti = data.kode_dosen.ToString();
                 tambahan.nama = CardPenelitiDetail.name;
                 tambahan.jumlah = jumlah;
+                tambahan.ukuran = jumlah;
 
                 SpawnCard(CardPenelitiDetail, ParentCard);
             }
@@ -608,7 +611,7 @@ public class EventHandler : MonoBehaviour
         flushNode();
         SetParentNodePosition(1f);
 
-        requestPeneliti.URL = URL + "/publikasi?fakultas=none";
+        requestPeneliti.URL = URL + "/publikasi?fakultas=none&size=true";
         StartCoroutine(requestPeneliti.RequestData((result) => {
             int idx = result.data[0].fakultas_peneliti.Count / 2;
             float med = result.data[0].fakultas_peneliti[idx].jumlah * sizeCoef * 0.05f;
@@ -689,7 +692,7 @@ public class EventHandler : MonoBehaviour
         flushNode();
         SetParentNodePosition(2f);
 
-        requestPeneliti.URL = URL + "/publikasi?fakultas=" + kode;
+        requestPeneliti.URL = URL + "/publikasi?fakultas=" + kode + "&size=true";
         StartCoroutine(requestPeneliti.RequestData((result) => {
             int idx = result.data[0].fakultas_publikasi.Count / 2;
             float med = int.Parse(result.data[0].fakultas_publikasi[idx].df) * sizeCoef * 2;
@@ -781,6 +784,7 @@ public class EventHandler : MonoBehaviour
                 tambahan.kode_peneliti = data.kode_dosen.ToString();
                 tambahan.nama = CardPenelitiDetail.name;
                 tambahan.jumlah = jumlah;
+                tambahan.ukuran = jumlah;
 
                 SpawnCard(CardPenelitiDetail, ParentCard);
             }

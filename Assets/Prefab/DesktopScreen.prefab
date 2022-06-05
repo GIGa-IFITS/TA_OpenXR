@@ -8273,10 +8273,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Select node object to view information.
+  m_text: 'Hover on node to view information
 
-    Pinch to continue searching
-    based on the selected node object.'
+    Pinch to continue searching based
+    on selected node'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f8a3af301844cc141a33dfcac99457d7, type: 2}
   m_sharedMaterial: {fileID: 1966368560025441568, guid: f8a3af301844cc141a33dfcac99457d7,

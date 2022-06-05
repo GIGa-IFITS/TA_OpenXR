@@ -43,4 +43,20 @@ public class DesktopScreen : VirtualScreen
         }
         cardMenuTitleText.text = "Searching By:" + "\n" + "Research Keyword";
     }
+
+    public void ChangeNodeHoverBg(bool hover){
+        if(hover){
+            nodeMenuTotalText.color = new Color32(246, 221, 119, 100);
+        }else{
+            nodeMenuTotalText.color = new Color32(50, 59, 89, 100);
+        }
+    }
+
+    public void ChangeCardHoverBg(bool hover){
+        if(hover){
+            cardMenuTotalText.color = new Color32(246, 221, 119, 100);
+        }else{
+            cardMenuTotalText.color = new Color32(50, 59, 89, 100);
+        }
+    }
 }

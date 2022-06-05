@@ -20,6 +20,12 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] private GameObject centerEyeAnchor;
     [SerializeField] private HandTrackingUI handTrackingUI;
     public float offset = 30f;
+    private bool isSelected;
+    private string selectedName;
+    private int selectedTotal;
+    private string selectedDetail;
+    private NodeVariable currentHoverNode;
+    private bool isOnCardPage;
 
     private void Awake()
     {
@@ -36,10 +42,23 @@ public class ScreenManager : MonoBehaviour
 
     public void SetHoverButton(ButtonPress _hoveredButton){
         hoveredButton = _hoveredButton;
+        currentHoverNode = hoveredButton.gameObject.GetComponent<NodeVariable>();
+        if(currentHoverNode == null){
+            ResetInfo();
+        }
     }
 
     public void ResetHoverButton(ButtonPress _hoveredButton){
         hoveredButton = null;
+        ResetInfo();
+    }
+
+    private void ResetInfo(){
+        if(isOnCardPage){
+            ResetHoverCard();
+        }else{
+            ResetHoverNode();
+        }
     }
 
     public void TouchButton(){
@@ -127,9 +146,9 @@ public class ScreenManager : MonoBehaviour
         desktopScreen.SetInfoNodeScreen(val);
     }
 
-    public void UpdateNodeInfo(string _name, int _total, string _searchName){
-        smartphoneScreen.UpdateNodeInfo(_name, _total, _searchName);
-        desktopScreen.UpdateNodeInfo(_name, _total, _searchName);        
+    public void UpdateNodeInfo(string name, int total, string detail){
+        smartphoneScreen.UpdateNodeInfo(name, total, detail);
+        desktopScreen.UpdateNodeInfo(name, total, detail);        
     }
 
     public void SetLoadingCardScreen(bool val){
@@ -137,20 +156,47 @@ public class ScreenManager : MonoBehaviour
         desktopScreen.SetLoadingCardScreen(val);
     }
 
-    public void ShowCardMenu(string name, int total, string searchName){
-        smartphoneScreen.ShowCardMenu(name, total, searchName);
-        desktopScreen.ShowCardMenu(name, total, searchName);        
+    public void ShowCardMenu(string name, int total, string detail){
+        smartphoneScreen.ShowCardMenu(name, total, detail);
+        desktopScreen.ShowCardMenu(name, total, detail);        
     }
 
-    public void UpdateCardInfo(string name, int total){
-        smartphoneScreen.UpdateCardInfo(name, total);
-        desktopScreen.UpdateCardInfo(name, total);  
+    public void UpdateCardInfo(string name, int total, string detail){
+        smartphoneScreen.UpdateCardInfo(name, total, detail);
+        desktopScreen.UpdateCardInfo(name, total, detail);  
     }
 
     public void UpdateDetailScreen(){
         smartphoneScreen.UpdateDetailScreen(researcherData);
         desktopScreen.UpdateDetailScreen(researcherData);
     }
+
+    private void ChangeNodeHoverBg(bool val){
+        smartphoneScreen.ChangeNodeHoverBg(val);
+        desktopScreen.ChangeNodeHoverBg(val);
+    }
+
+    private void ChangeCardHoverBg(bool val){
+        smartphoneScreen.ChangeCardHoverBg(val);
+        desktopScreen.ChangeCardHoverBg(val);
+    }
+
+    private void ResetHoverNode(){
+        if(isSelected){
+            UpdateNodeInfo(selectedName, selectedTotal, selectedDetail);
+            ChangeNodeHoverBg(false);
+        }else{
+            SetDefaultNodeScreen(true);
+            SetInfoNodeScreen(false);
+            ChangeNodeHoverBg(false);
+        }
+    }
+
+    private void ResetHoverCard(){
+        UpdateCardInfo(selectedName, selectedTotal, selectedDetail);
+        ChangeCardHoverBg(false);
+    }
+
 
     public void OnSelectNode(NodeVariable nodeObject, bool selected, bool swipe){
         if (nodeObject.CompareTag("ListPenelitiAbjad"))
@@ -162,8 +208,14 @@ public class ScreenManager : MonoBehaviour
             // update screen                
             // if select node
             if(selected){
+                // update selected value
+                selectedName = name;
+                selectedTotal = total;
+                selectedDetail = "Researchers starting with alphabet of";
+                isOnCardPage = true;
+
                 // change screen to list of researchers
-                ShowCardMenu(name, total, currSearch);
+                ShowCardMenu(selectedName, selectedTotal, selectedDetail);
                 SetLoadingCardScreen(true);
 
                 // spawn node
@@ -181,7 +233,8 @@ public class ScreenManager : MonoBehaviour
             }else{ // only hover
                 SetDefaultNodeScreen(false);
                 SetInfoNodeScreen(true);
-                UpdateNodeInfo(name, total, currSearch);
+                UpdateNodeInfo(name, total, "Researchers starting with alphabet of");
+                ChangeNodeHoverBg(true);
             }
         }
         else if(nodeObject.CompareTag("ListPenelitiInisial"))
@@ -199,7 +252,8 @@ public class ScreenManager : MonoBehaviour
                 UpdateDetailScreen();
                 isSearching = false;
             }else{ // only hover
-                UpdateCardInfo(name, total);
+                UpdateCardInfo(name, total, "Publications of");
+                ChangeCardHoverBg(true);
             }
         }
         
@@ -212,10 +266,18 @@ public class ScreenManager : MonoBehaviour
             // update screen                
             // if select node
             if(selected){
+                // update selected value
+                selectedName = name;
+                selectedTotal = total;
+                selectedDetail = "Researchers in the faculty of";
+                isSelected = true;
+                isOnCardPage = false;
+
                 ShowNodeMenu();
                 SetInfoNodeScreen(false);
                 SetLoadingNodeScreen(true);
-                UpdateNodeInfo(name, total, currSearch);
+                UpdateNodeInfo(selectedName, selectedTotal, selectedDetail);
+                ChangeNodeHoverBg(false);
 
                 // spawn node
                 if(desktopScreen.gameObject.activeSelf){
@@ -231,7 +293,8 @@ public class ScreenManager : MonoBehaviour
             }else{ // only hover
                 SetDefaultNodeScreen(false);
                 SetInfoNodeScreen(true);
-                UpdateNodeInfo(name, total, currSearch);
+                UpdateNodeInfo(name, total,  "Researchers in the faculty of");
+                ChangeNodeHoverBg(true);
             }
         }
         else if(nodeObject.CompareTag("ListPenelitiDepartemen"))
@@ -243,8 +306,14 @@ public class ScreenManager : MonoBehaviour
             // update screen                
             // if select node
             if(selected){
+                // update selected value
+                selectedName = name;
+                selectedTotal = total;
+                selectedDetail = "Researchers in the department of";
+                isOnCardPage = true;
+
                 // change screen to list of researchers
-                ShowCardMenu(name, total, currSearch);
+                ShowCardMenu(selectedName, selectedTotal, selectedDetail);
                 SetLoadingCardScreen(true);
 
                 // spawn node
@@ -262,7 +331,8 @@ public class ScreenManager : MonoBehaviour
             }else{ // only hover
                 SetDefaultNodeScreen(false);
                 SetInfoNodeScreen(true);
-                UpdateNodeInfo(name, total, currSearch);
+                UpdateNodeInfo(name, total, "Researchers in the department of");
+                ChangeNodeHoverBg(true);
             }
         }
         else if(nodeObject.CompareTag("ListPenelitiDepartemenDetail"))
@@ -280,7 +350,8 @@ public class ScreenManager : MonoBehaviour
                 UpdateDetailScreen();
                 isSearching = false;
             }else{ // only hover
-                UpdateCardInfo(name, total);
+                UpdateCardInfo(name, total, "Publications of");
+                ChangeCardHoverBg(true);
             }
         }
         
@@ -293,8 +364,14 @@ public class ScreenManager : MonoBehaviour
             // update screen                
             // if select node
             if(selected){
+                // update selected value
+                selectedName = name;
+                selectedTotal = total;
+                selectedDetail = "Researchers with the academic degree of";
+                isOnCardPage = true;
+
                 // change screen to list of researchers
-                ShowCardMenu(name, total, currSearch);
+                ShowCardMenu(selectedName, selectedTotal, selectedDetail);
                 SetLoadingCardScreen(true);
 
                 // spawn node
@@ -312,7 +389,8 @@ public class ScreenManager : MonoBehaviour
             }else{ // only hover
                 SetDefaultNodeScreen(false);
                 SetInfoNodeScreen(true);
-                UpdateNodeInfo(name, total, currSearch);
+                UpdateNodeInfo(name, total, "Researchers with the academic degree of");
+                ChangeNodeHoverBg(true);
             }
         }
         else if (nodeObject.CompareTag("ListGelarDetail"))
@@ -330,7 +408,8 @@ public class ScreenManager : MonoBehaviour
                 UpdateDetailScreen();
                 isSearching = false;
             }else{ // only hover
-                UpdateCardInfo(name, total);
+                UpdateCardInfo(name, total, "Publications of");
+                ChangeCardHoverBg(true);
             }
         }
 
@@ -344,10 +423,18 @@ public class ScreenManager : MonoBehaviour
             // update screen                
             // if select node
             if(selected){
+                // update selected value
+                selectedName = name;
+                selectedTotal = total;
+                selectedDetail = "Publications in the faculty of";
+                isSelected = true;
+                isOnCardPage = false;
+
                 ShowNodeMenu();
                 SetInfoNodeScreen(false);
                 SetLoadingNodeScreen(true);
-                UpdateNodeInfo(name, total, currSearch);
+                UpdateNodeInfo(selectedName, selectedTotal, selectedDetail);
+                ChangeNodeHoverBg(false);
 
                 // spawn node
                 if(desktopScreen.gameObject.activeSelf){
@@ -363,7 +450,8 @@ public class ScreenManager : MonoBehaviour
             }else{ // only hover
                 SetDefaultNodeScreen(false);
                 SetInfoNodeScreen(true);
-                UpdateNodeInfo(name, total, currSearch);
+                UpdateNodeInfo(name, total, "Publications in the faculty of");
+                ChangeNodeHoverBg(true);
             }
         }
         else if (nodeObject.CompareTag("ListPublikasiKataKunci"))
@@ -375,8 +463,14 @@ public class ScreenManager : MonoBehaviour
             // update screen                
             // if select node
             if(selected){
+                // update selected value
+                selectedName = name;
+                selectedTotal = total;
+                selectedDetail = "Publications with the keyword";
+                isOnCardPage = true;
+
                 // change screen to list of researchers
-                ShowCardMenu(name, total, currSearch);
+                ShowCardMenu(selectedName, selectedTotal, selectedDetail);
                 SetLoadingCardScreen(true);
 
                 // spawn node
@@ -394,7 +488,8 @@ public class ScreenManager : MonoBehaviour
             }else{ // only hover
                 SetDefaultNodeScreen(false);
                 SetInfoNodeScreen(true);
-                UpdateNodeInfo(name, total, currSearch);
+                UpdateNodeInfo(name, total, "Publications with the keyword");
+                ChangeNodeHoverBg(true);
             }
         }
         else if (nodeObject.CompareTag("ListKataKunciPeneliti"))
@@ -414,7 +509,8 @@ public class ScreenManager : MonoBehaviour
                 UpdateDetailScreen();
                 isSearching = false;
             }else{ // only hover
-                UpdateCardInfo(name, total);
+                UpdateCardInfo(name, total, "Publications of");
+                ChangeCardHoverBg(true);
             } 
         }
     }

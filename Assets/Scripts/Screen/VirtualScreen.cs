@@ -78,7 +78,7 @@ public class VirtualScreen : MonoBehaviour
         searchMenu.SetActive(true);
     }
 
-    public void OnTapStartSearch(string _searchBy){
+    public void OnTapStartSearch(string searchBy){
         searchMenu.SetActive(false);
         cardMenu.SetActive(false);
         nodeMenu.SetActive(true);
@@ -87,16 +87,16 @@ public class VirtualScreen : MonoBehaviour
         nodeMenuInfoPanel.SetActive(false);
         nodeMenuBackButton.SetActive(true);
 
-        if (_searchBy == "name"){
+        if (searchBy == "name"){
             nodeMenuTitleText.text = "Searching By:" + "\n" + "Researcher Name";
         }
-        else if (_searchBy == "unit"){
+        else if (searchBy == "unit"){
             nodeMenuTitleText.text = "Searching By:" + "\n" + "Institution Unit";
         }
-        else if (_searchBy == "degree"){
+        else if (searchBy == "degree"){
             nodeMenuTitleText.text = "Searching By:" + "\n" + "Academic Degree";
         }
-        else if (_searchBy == "keyword"){
+        else if (searchBy == "keyword"){
             nodeMenuTitleText.text = "Searching By:" + "\n" + "Research Keyword";
         }
     }
@@ -126,54 +126,44 @@ public class VirtualScreen : MonoBehaviour
         nodeMenuInfoPanel.SetActive(val);
     } 
 
-    public void UpdateNodeInfo(string _name, int _total, string _searchName){
-        nodeMenuTotalText.text = _total.ToString();
-        if(_searchName == "Research Keyword"){
-            nodeMenuDetailText.text = "Publications of";
-        }
-        else{
-            nodeMenuDetailText.text = "Researchers of";
-        }
-        nodeMenuNameText.text = _name;
+    public void UpdateNodeInfo(string name, int total, string detail){
+        nodeMenuTotalText.text = total.ToString();
+        nodeMenuDetailText.text = detail;
+        nodeMenuNameText.text = name;
     } 
 
      public void SetLoadingCardScreen(bool val){
         cardMenuLoadingText.SetActive(val);
     } 
 
-    public void ShowCardMenu(string _name, int _total, string _searchName){
+    public void ShowCardMenu(string name, int total, string detail){
         cardMenu.SetActive(true);
         nodeMenuBackButton.SetActive(false);
 
-        cardMenuTotalText.text = _total.ToString();
-        if(_searchName == "Research Keyword"){
-            cardMenuDetailText.text = "Publications of";
-        }
-        else{
-            cardMenuDetailText.text = "Researchers of";
-        }
-        cardMenuNameText.text = _name;
+        cardMenuTotalText.text = total.ToString();
+        cardMenuDetailText.text = detail;
+        cardMenuNameText.text = name;
     }
 
-    public void UpdateCardInfo(string _name, int _total){
-        cardMenuTotalText.text = _total.ToString();
-        cardMenuDetailText.text = "Publications of";
-        cardMenuNameText.text = _name;
+    public void UpdateCardInfo(string name, int total, string detail){
+        cardMenuTotalText.text = total.ToString();
+        cardMenuDetailText.text = detail;
+        cardMenuNameText.text = name;
     }
 
-    public void UpdateDetailScreen(List<string> _researcherData){
+    public void UpdateDetailScreen(List<string> researcherData){
         cardMenu.SetActive(false);
         detailMenu.SetActive(true);
 
-        detailName.text = _researcherData[0];
-        detailFaculty.text = _researcherData[1];
-        detailDept.text = _researcherData[2];
-        detailJournals.text = _researcherData[3];
-        detailConferences.text = _researcherData[4];
-        detailBooks.text = _researcherData[5];
-        detailThesis.text = _researcherData[6];
-        detailPatents.text = _researcherData[7];
-        detailResearch.text = _researcherData[8];
+        detailName.text = researcherData[0];
+        detailFaculty.text = researcherData[1];
+        detailDept.text = researcherData[2];
+        detailJournals.text = researcherData[3];
+        detailConferences.text = researcherData[4];
+        detailBooks.text = researcherData[5];
+        detailThesis.text = researcherData[6];
+        detailPatents.text = researcherData[7];
+        detailResearch.text = researcherData[8];
     }
 
     public void OnTapBackToSearch(){
