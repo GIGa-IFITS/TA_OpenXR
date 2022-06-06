@@ -25,6 +25,5 @@ public class IndexFingerCollider : MonoBehaviour
         boxCollider.isTrigger = true;
         boxCollider.size = triggerSize;
         indexTip.tag = "InteractHand";
-        indexTip.AddComponent<FingerRay>();
     }
 }

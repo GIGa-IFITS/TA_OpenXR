@@ -18,7 +18,7 @@ public class ScreenManager : MonoBehaviour
     private List<string> researcherData = new List<string>();
     public bool isSearching = false;
     [SerializeField] private GameObject centerEyeAnchor;
-    [SerializeField] private HandTrackingUI handTrackingUI;
+    [SerializeField] private GameObject handTrackingUI;
     public float offset = 30f;
     private bool isSelected;
     private string selectedName;
@@ -50,10 +50,9 @@ public class ScreenManager : MonoBehaviour
 
     public void ResetHoverButton(ButtonPress _hoveredButton){
         hoveredButton = null;
-        ResetInfo();
     }
 
-    private void ResetInfo(){
+    public void ResetInfo(){
         if(isOnCardPage){
             ResetHoverCard();
         }else{
@@ -73,25 +72,21 @@ public class ScreenManager : MonoBehaviour
         smartphoneScreen.OnTapDashboard();
         desktopScreen.OnTapDashboard();
         Manager.instance.Dashboard();
-        //ClientSend.SendPageType("dashboardMenu");      
     }
 
     public void ShowDashboardData(RawData rawdata){
         smartphoneScreen.ShowDashboardData(rawdata);
         desktopScreen.ShowDashboardData(rawdata);
-        //ClientSend.SendPageType("dashboardData");
     }
 
     public void ShowDashboardError(){
         smartphoneScreen.ShowDashboardError();
         desktopScreen.ShowDashboardError();
-        //ClientSend.SendPageType("dashboardError");
     }
 
     public void OnTapSearch(){
         smartphoneScreen.OnTapSearch();
         desktopScreen.OnTapSearch();
-        //ClientSend.SendPageType("searchMenu");
     }
 
     public void OnTapName(){
@@ -99,7 +94,6 @@ public class ScreenManager : MonoBehaviour
         smartphoneScreen.OnTapSearchName();
         desktopScreen.OnTapSearchName();
         currSearch = "Researcher Name";
-        //ClientSend.SendPageType("searchingMenu");
     }
 
     public void OnTapUnit(){
@@ -107,7 +101,6 @@ public class ScreenManager : MonoBehaviour
         smartphoneScreen.OnTapSearchUnit();
         desktopScreen.OnTapSearchUnit();
         currSearch = "Institution Unit";
-        //ClientSend.SendPageType("searchingMenu");
     }
 
     public void OnTapDegree(){
@@ -115,7 +108,6 @@ public class ScreenManager : MonoBehaviour
         smartphoneScreen.OnTapSearchDegree();
         desktopScreen.OnTapSearchDegree();
         currSearch = "Academic Degree";
-        //ClientSend.SendPageType("searchingMenu");
     }
 
     public void OnTapKeyword(){
@@ -123,7 +115,6 @@ public class ScreenManager : MonoBehaviour
         smartphoneScreen.OnTapSearchKeyword();
         desktopScreen.OnTapSearchKeyword();
         currSearch = "Research Keyword";
-        //ClientSend.SendPageType("searchingMenu");
     }
 
     public void ShowNodeMenu(){
@@ -197,7 +188,6 @@ public class ScreenManager : MonoBehaviour
         ChangeCardHoverBg(false);
     }
 
-
     public void OnSelectNode(NodeVariable nodeObject, bool selected, bool swipe){
         if (nodeObject.CompareTag("ListPenelitiAbjad"))
         {
@@ -211,8 +201,10 @@ public class ScreenManager : MonoBehaviour
                 // update selected value
                 selectedName = name;
                 selectedTotal = total;
-                selectedDetail = "Researchers starting with alphabet of";
+                selectedDetail = "Researchers starting with the alphabet of";
+                isSelected = true;
                 isOnCardPage = true;
+                ChangeCardHoverBg(false);
 
                 // change screen to list of researchers
                 ShowCardMenu(selectedName, selectedTotal, selectedDetail);
@@ -233,7 +225,7 @@ public class ScreenManager : MonoBehaviour
             }else{ // only hover
                 SetDefaultNodeScreen(false);
                 SetInfoNodeScreen(true);
-                UpdateNodeInfo(name, total, "Researchers starting with alphabet of");
+                UpdateNodeInfo(name, total, "Researchers starting with the alphabet of");
                 ChangeNodeHoverBg(true);
             }
         }
@@ -310,7 +302,9 @@ public class ScreenManager : MonoBehaviour
                 selectedName = name;
                 selectedTotal = total;
                 selectedDetail = "Researchers in the department of";
+                isSelected = true;
                 isOnCardPage = true;
+                ChangeCardHoverBg(false);
 
                 // change screen to list of researchers
                 ShowCardMenu(selectedName, selectedTotal, selectedDetail);
@@ -368,7 +362,9 @@ public class ScreenManager : MonoBehaviour
                 selectedName = name;
                 selectedTotal = total;
                 selectedDetail = "Researchers with the academic degree of";
+                isSelected = true;
                 isOnCardPage = true;
+                ChangeCardHoverBg(false);
 
                 // change screen to list of researchers
                 ShowCardMenu(selectedName, selectedTotal, selectedDetail);
@@ -467,7 +463,9 @@ public class ScreenManager : MonoBehaviour
                 selectedName = name;
                 selectedTotal = total;
                 selectedDetail = "Publications with the keyword";
+                isSelected = true;
                 isOnCardPage = true;
+                ChangeCardHoverBg(false);
 
                 // change screen to list of researchers
                 ShowCardMenu(selectedName, selectedTotal, selectedDetail);
@@ -538,20 +536,26 @@ public class ScreenManager : MonoBehaviour
                 OnSelectNode(currNode, true, false);
             }else if(currSearch == "Researcher Name"){
                 currNode = null;
+                isSelected = false;
                 OnTapName();
             }
             else if(currSearch == "Institution Unit"){
                 currNode = null;
+                isSelected = false;
                 OnTapUnit();
             }
             else if(currSearch == "Academic Degree"){
                 currNode = null;
+                isSelected = false;
                 OnTapDegree();
             }
             else if(currSearch == "Research Keyword"){
                 currNode = null;
+                isSelected = false;
                 OnTapKeyword();
             }
+            isOnCardPage = false;
+            ResetInfo();
         }
         else{
             // back to search menu
@@ -566,6 +570,7 @@ public class ScreenManager : MonoBehaviour
         smartphoneScreen.OnTapCloseDetail();
         desktopScreen.OnTapCloseDetail();
         isSearching = true;
+        ResetInfo();
 
         // cek list peneliti null or not, kalau null berarti tadi nge swipe, ganti on select currnode
         if(Manager.instance.IsListPenelitiEmpty()){
@@ -616,10 +621,10 @@ public class ScreenManager : MonoBehaviour
 
     public void SetScreenMode(string _swipeType){
         if(_swipeType == "up" && smartphoneScreen.gameObject.activeSelf){
-            handTrackingUI.SetLaserOn();
+            handTrackingUI.SetActive(true);
             StartCoroutine(SwipeUp());
         }else if(_swipeType == "down" && desktopScreen.gameObject.activeSelf){
-            handTrackingUI.SetLaserOff();
+            handTrackingUI.SetActive(false);
             StartCoroutine(SwipeDown());
         }
     }

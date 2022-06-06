@@ -14,7 +14,9 @@ public class NodeScript : MonoBehaviour
         // if 3d, change material
         if(nodeVariable.ukuran > 0){
             renderer = GetComponent<Renderer>();
-            renderer.material = nodeVariable.hoverMaterial;
+            if(renderer != null){
+                renderer.material = nodeVariable.hoverMaterial;
+            }
             Debug.Log("hover on node " + gameObject.name + ",spatial mode");
         }else{
             Debug.Log("hover on node " + gameObject.name + ",smartphone mode");
@@ -25,10 +27,13 @@ public class NodeScript : MonoBehaviour
     public void OnExitHoverNode(){
         if(nodeVariable.ukuran > 0){
             Debug.Log("stop hover on node " + gameObject.name + ",spatial mode");
-            renderer.material = nodeVariable.defaultMaterial;
+            if(renderer != null){
+                renderer.material = nodeVariable.defaultMaterial;
+            }
         }else{
             Debug.Log("stop hover on node " + gameObject.name + ",smartphone mode");
         }
+        ScreenManager.instance.ResetInfo();
     }
     
     public void OnClickNode(){

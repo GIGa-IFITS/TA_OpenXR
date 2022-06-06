@@ -6,7 +6,10 @@ using TMPro;
 
 public class SmartphoneScreen : VirtualScreen
 {
+    [Header("Smartphone only")]
+    [SerializeField] protected TextMeshProUGUI nodeMenuSmallTitleText;
     private GameObject smartphoneCanvas;
+    [Header("Others")]
     [SerializeField] private ScrollRect nodeScroll;
     [SerializeField] private ScrollRect cardScroll;
     [SerializeField] private Image nodeBg;
@@ -25,6 +28,7 @@ public class SmartphoneScreen : VirtualScreen
         if(smartphoneCanvas.activeSelf){
             Manager.instance.getPenelitiAbjadITS2D();
         }
+        nodeMenuSmallTitleText.text = "Searching By:" + "\n" + "Researcher Name";
     }
 
     public void OnTapSearchUnit(){
@@ -32,6 +36,7 @@ public class SmartphoneScreen : VirtualScreen
         if(smartphoneCanvas.activeSelf){
             Manager.instance.getPenelitiFakultasITS2D();
         }
+        nodeMenuSmallTitleText.text = "Searching By:" + "\n" + "Institution Unit";
     }
 
     public void OnTapSearchDegree(){
@@ -40,6 +45,7 @@ public class SmartphoneScreen : VirtualScreen
         if(smartphoneCanvas.activeSelf){
             Manager.instance.getGelarPenelitiITS2D();
         }
+        nodeMenuSmallTitleText.text = "Searching By:" + "\n" + "Academic Degree";
     }
 
     public void OnTapSearchKeyword(){
@@ -48,21 +54,22 @@ public class SmartphoneScreen : VirtualScreen
         if(smartphoneCanvas.activeSelf){
             Manager.instance.getPublikasiFakultas2D();
         }
+        nodeMenuSmallTitleText.text = "Searching By:" + "\n" + "Research Keyword";
     }
 
     public void ChangeNodeHoverBg(bool hover){
         if(hover){
-            nodeBg.color = new Color32(246, 221, 119, 100);
+            nodeBg.color = new Color32(246, 221, 119, 255);
         }else{
-            nodeBg.color = new Color32(255, 255, 255, 100);
+            nodeBg.color = new Color32(255, 255, 255, 255);
         }
     }
 
     public void ChangeCardHoverBg(bool hover){
         if(hover){
-            cardBg.color = new Color32(246, 221, 119, 100);
+            cardBg.color = new Color32(246, 221, 119, 255);
         }else{
-            cardBg.color = new Color32(255, 255, 255, 100);
+            cardBg.color = new Color32(255, 255, 255, 255);
         }
     }
 

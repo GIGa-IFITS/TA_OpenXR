@@ -6,15 +6,12 @@ using TMPro;
 
 public class DesktopScreen : VirtualScreen
 {    
-    [Header("Card Menu - Desktop only")]
-    [SerializeField] protected TextMeshProUGUI cardMenuTitleText;
     public void OnTapSearchName(){
         base.OnTapStartSearch("name");
 
         if(gameObject.activeSelf){
             Manager.instance.getPenelitiAbjadITS();
         }
-        cardMenuTitleText.text = "Searching By:" + "\n" + "Researcher Name";
     }
     
     public void OnTapSearchUnit(){
@@ -23,7 +20,6 @@ public class DesktopScreen : VirtualScreen
         if(gameObject.activeSelf){
             Manager.instance.getPenelitiFakultasITS();
         }
-        cardMenuTitleText.text = "Searching By:" + "\n" + "Institution Unit";
     }
 
     public void OnTapSearchDegree(){
@@ -32,7 +28,6 @@ public class DesktopScreen : VirtualScreen
         if(gameObject.activeSelf){
             Manager.instance.getGelarPenelitiITS();
         }
-        cardMenuTitleText.text = "Searching By:" + "\n" + "Academic Degree";
     }
 
     public void OnTapSearchKeyword(){
@@ -41,22 +36,21 @@ public class DesktopScreen : VirtualScreen
         if(gameObject.activeSelf){
             Manager.instance.getPublikasiFakultas();
         }
-        cardMenuTitleText.text = "Searching By:" + "\n" + "Research Keyword";
     }
 
     public void ChangeNodeHoverBg(bool hover){
         if(hover){
-            nodeMenuTotalText.color = new Color32(246, 221, 119, 100);
+            nodeMenuTotalText.color = new Color32(246, 221, 119, 255);
         }else{
-            nodeMenuTotalText.color = new Color32(50, 59, 89, 100);
+            nodeMenuTotalText.color = new Color32(50, 59, 89, 255);
         }
     }
 
     public void ChangeCardHoverBg(bool hover){
         if(hover){
-            cardMenuTotalText.color = new Color32(246, 221, 119, 100);
+            cardMenuTotalText.color = new Color32(246, 221, 119, 255);
         }else{
-            cardMenuTotalText.color = new Color32(50, 59, 89, 100);
+            cardMenuTotalText.color = new Color32(50, 59, 89, 255);
         }
     }
 }

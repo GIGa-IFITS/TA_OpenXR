@@ -630,7 +630,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1732808951507650, guid: a9d2de84afb308a4796cc671d3432b4d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4897607310870066, guid: a9d2de84afb308a4796cc671d3432b4d, type: 3}
       propertyPath: m_RootOrder
@@ -701,7 +701,7 @@ PrefabInstance:
     - target: {fileID: 120006741097097638, guid: a9d2de84afb308a4796cc671d3432b4d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 120006741097097638, guid: a9d2de84afb308a4796cc671d3432b4d,
         type: 3}
@@ -1262,6 +1262,17 @@ MonoBehaviour:
   m_controller: 0
   m_parentTransform: {fileID: 0}
   m_player: {fileID: 0}
+  m_grabVolumeEnabled: 1
+  m_lastPos: {x: 0, y: 0, z: 0}
+  m_lastRot: {x: 0, y: 0, z: 0, w: 0}
+  m_anchorOffsetRotation: {x: 0, y: 0, z: 0, w: 0}
+  m_anchorOffsetPosition: {x: 0, y: 0, z: 0}
+  m_prevFlex: 0
+  m_grabbedObj: {fileID: 0}
+  m_grabbedObjectPosOff: {x: 0, y: 0, z: 0}
+  m_grabbedObjectRotOff: {x: 0, y: 0, z: 0, w: 0}
+  m_operatingWithoutOVRCameraRig: 1
+  hand: {fileID: 0}
   pinchThreshold: 0.7
 --- !u!135 &1292100255
 SphereCollider:
@@ -1591,11 +1602,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smartphoneScreen: {fileID: 1865379642564101993}
   desktopScreen: {fileID: 1481967736}
+  hoveredButton: {fileID: 0}
   debugText: {fileID: 1402960975}
   isSearching: 0
   centerEyeAnchor: {fileID: 1667105139}
-  handTrackingUI: {fileID: 704906393}
+  handTrackingUI: {fileID: 704906392}
   offset: 30
+  isSelected: 0
+  selectedName: 
+  selectedTotal: 0
+  selectedDetail: 
+  currentHoverNode: {fileID: 0}
+  isOnCardPage: 0
+  isSmartphoneMode: 1
 --- !u!1001 &1481967735
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1896,7 +1915,7 @@ PrefabInstance:
     - target: {fileID: 3389779943486073788, guid: 8efedb6fc0cc462448a86b0cd24c8673,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3389779943563310134, guid: 8efedb6fc0cc462448a86b0cd24c8673,
         type: 3}
@@ -2529,6 +2548,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6713280510189164592, guid: 8efedb6fc0cc462448a86b0cd24c8673,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7030623578876738219, guid: 8efedb6fc0cc462448a86b0cd24c8673,
         type: 3}
       propertyPath: m_IsActive
       value: 0

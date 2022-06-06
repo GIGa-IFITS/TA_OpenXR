@@ -207,7 +207,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 316}
+  m_AnchoredPosition: {x: 0, y: 259}
   m_SizeDelta: {x: 1800, y: 195.60168}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &4037935127706745616
@@ -1121,8 +1121,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4284037938
-  m_fontColor: {r: 0.19607843, g: 0.23137255, b: 0.34901962, a: 1}
+    rgba: 3864607538
+  m_fontColor: {r: 0.19607843, g: 0.23137255, b: 0.34901962, a: 0.9019608}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5010,6 +5010,7 @@ MonoBehaviour:
   cardMenuTotalText: {fileID: 1791214340844373136}
   cardMenuDetailText: {fileID: 8761030798977227481}
   cardMenuNameText: {fileID: 1440665345592946056}
+  cardMenuTitleText: {fileID: 88576475607987302}
   detailMenu: {fileID: 4331895661266302886}
   detailName: {fileID: 7554793010042651044}
   detailFaculty: {fileID: 4001926392379123615}
@@ -5020,7 +5021,6 @@ MonoBehaviour:
   detailThesis: {fileID: 1167872038021487870}
   detailPatents: {fileID: 7743294410859523425}
   detailResearch: {fileID: 5513089718940760753}
-  cardMenuTitleText: {fileID: 88576475607987302}
 --- !u!1 &3389779944038354319
 GameObject:
   m_ObjectHideFlags: 0
@@ -8226,7 +8226,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2150404317141230187
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8578,7 +8578,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -507}
   m_SizeDelta: {x: 529.5925, y: 98.787384}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &4816837624650894873
@@ -8618,8 +8618,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4284037938
-  m_fontColor: {r: 0.19607843, g: 0.23137255, b: 0.34901962, a: 1}
+    rgba: 3864607538
+  m_fontColor: {r: 0.19607843, g: 0.23137255, b: 0.34901962, a: 0.9019608}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -10238,7 +10238,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 189}
+  m_AnchoredPosition: {x: 0, y: 107}
   m_SizeDelta: {x: 1600, y: 195.62561}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &3542512202877367235
@@ -10268,7 +10268,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Researchers of
+  m_text: Researchers in the department of
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f8a3af301844cc141a33dfcac99457d7, type: 2}
   m_sharedMaterial: {fileID: 1966368560025441568, guid: f8a3af301844cc141a33dfcac99457d7,

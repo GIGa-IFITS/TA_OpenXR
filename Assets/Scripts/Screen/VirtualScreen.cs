@@ -35,6 +35,7 @@ public class VirtualScreen : MonoBehaviour
     [SerializeField] protected TextMeshProUGUI cardMenuTotalText;
     [SerializeField] protected TextMeshProUGUI cardMenuDetailText;
     [SerializeField] protected TextMeshProUGUI cardMenuNameText;
+    [SerializeField] protected TextMeshProUGUI cardMenuTitleText;
 
     [Header("Detail Menu")]
     public GameObject detailMenu;
@@ -82,22 +83,26 @@ public class VirtualScreen : MonoBehaviour
         searchMenu.SetActive(false);
         cardMenu.SetActive(false);
         nodeMenu.SetActive(true);
-        nodeMenuDefaultPanel.SetActive(false);
+        nodeMenuDefaultPanel.SetActive(true);
         nodeMenuLoadingText.SetActive(true);
         nodeMenuInfoPanel.SetActive(false);
         nodeMenuBackButton.SetActive(true);
 
         if (searchBy == "name"){
             nodeMenuTitleText.text = "Searching By:" + "\n" + "Researcher Name";
+            cardMenuTitleText.text = "Searching By:" + "\n" + "Researcher Name";
         }
         else if (searchBy == "unit"){
             nodeMenuTitleText.text = "Searching By:" + "\n" + "Institution Unit";
+            cardMenuTitleText.text = "Searching By:" + "\n" + "Institution Unit";
         }
         else if (searchBy == "degree"){
             nodeMenuTitleText.text = "Searching By:" + "\n" + "Academic Degree";
+            cardMenuTitleText.text = "Searching By:" + "\n" + "Academic Degree";
         }
         else if (searchBy == "keyword"){
             nodeMenuTitleText.text = "Searching By:" + "\n" + "Research Keyword";
+            cardMenuTitleText.text = "Searching By:" + "\n" + "Research Keyword";
         }
     }
 

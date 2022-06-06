@@ -219,8 +219,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 2992192306
-  m_fontColor: {r: 0.19607843, g: 0.23137255, b: 0.34901962, a: 0.69803923}
+    rgba: 3428399922
+  m_fontColor: {r: 0.19607843, g: 0.23137255, b: 0.34901962, a: 0.8}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -860,8 +860,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 2992192306
-  m_fontColor: {r: 0.19607843, g: 0.23137255, b: 0.34901962, a: 0.69803923}
+    rgba: 3428399922
+  m_fontColor: {r: 0.19607843, g: 0.23137255, b: 0.34901962, a: 0.8}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7326,9 +7326,10 @@ MonoBehaviour:
   nodeMenuBackButton: {fileID: 3389779943771965929}
   cardMenu: {fileID: 8346595476687895776}
   cardMenuLoadingText: {fileID: 4733112856678404059}
-  cardMenuTotalText: {fileID: 0}
-  cardMenuDetailText: {fileID: 0}
-  cardMenuNameText: {fileID: 0}
+  cardMenuTotalText: {fileID: 2009917699013306131}
+  cardMenuDetailText: {fileID: 5467141501566110464}
+  cardMenuNameText: {fileID: 894978211700403902}
+  cardMenuTitleText: {fileID: 6003763824350129810}
   detailMenu: {fileID: 3389779944053470704}
   detailName: {fileID: 3389779944590120872}
   detailFaculty: {fileID: 3389779943729861577}
@@ -7339,10 +7340,11 @@ MonoBehaviour:
   detailThesis: {fileID: 3389779943211963052}
   detailPatents: {fileID: 3389779945065064322}
   detailResearch: {fileID: 3389779943321984596}
+  nodeMenuSmallTitleText: {fileID: 1382128097240540045}
   nodeScroll: {fileID: 6201668709043622074}
   cardScroll: {fileID: 6919376171966488389}
-  nodeBg: {fileID: 0}
-  cardBg: {fileID: 0}
+  nodeBg: {fileID: 1995275881489403160}
+  cardBg: {fileID: 8352204205153826512}
   multiplier: -20
   duration: 1
 --- !u!1 &3389779944019908933
@@ -13281,7 +13283,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5183782332984551764}
   m_HandleRect: {fileID: 2218942287179854792}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -13894,8 +13896,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 2992192306
-  m_fontColor: {r: 0.19607843, g: 0.23137255, b: 0.34901962, a: 0.69803923}
+    rgba: 3428399922
+  m_fontColor: {r: 0.19607843, g: 0.23137255, b: 0.34901962, a: 0.8}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
