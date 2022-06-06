@@ -1,13 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
+[System.Serializable]
 public struct Gesture
 {
     public string name;
     public List<Vector3> fingerDatas;
-    public UnityEvent onRecognized;
 }
 
 public class GestureDetector : MonoBehaviour
@@ -17,6 +16,9 @@ public class GestureDetector : MonoBehaviour
     private List<OVRBone> fingerBones;
     public Gesture startGesture;
     private Gesture previousGesture;
+    private bool isInit = false;
+    [SerializeField] private GameObject startText;
+    [SerializeField] private GameObject centerEyeAnchor;
 
     void Start()
     {
@@ -28,19 +30,32 @@ public class GestureDetector : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         fingerBones = new List<OVRBone>(skeleton.Bones);
         previousGesture = new Gesture();
+        isInit = true;
     }
 
     private void Update() {
-        Gesture currentGesture = Recognize();
-        bool hasRecognized = !currentGesture.Equals(new Gesture());
+        if(isInit){
+            Gesture currentGesture = Recognize();
+            bool hasRecognized = !currentGesture.Equals(new Gesture());
 
-        if(hasRecognized && !currentGesture.Equals(previousGesture)){
-            Debug.Log("gesture found: " + currentGesture.name);
-            Debug.Log("User starting task");
+            if(hasRecognized && !currentGesture.Equals(previousGesture)){
+                Debug.Log("gesture found: " + currentGesture.name);
+                StartCoroutine(StartingTask());
+            }    
             previousGesture = currentGesture;
-            currentGesture.onRecognized.Invoke();
-            // notify user that timer has started, gesture is recognized, debug.log saying task has started
         }
+
+    }
+
+    IEnumerator StartingTask(){
+        startText.SetActive(true);
+        Vector3 offset = centerEyeAnchor.transform.forward;
+        offset *= 2f;
+        startText.transform.position = centerEyeAnchor.transform.position + offset;
+        startText.transform.LookAt(startText.transform.position + centerEyeAnchor.transform.rotation * Vector3.forward, centerEyeAnchor.transform.rotation * Vector3.up);
+        yield return new WaitForSeconds(1f);
+        Debug.Log("User starting task");
+        startText.SetActive(false);
     }
 
     public void Save()
