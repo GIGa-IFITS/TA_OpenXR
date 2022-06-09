@@ -38,6 +38,7 @@ public class EventHandler : MonoBehaviour
     public Material F_CREABIZ;
     public Material F_VOCATIONS;
     public Material hoverMaterial;
+    public Material pressedMaterial;
 
     [Header("Animation")]
     public IEnumerator animate;
@@ -925,6 +926,7 @@ public class EventHandler : MonoBehaviour
             nodeVariable.hoverMaterial = hoverMaterial;
         }
         nodeVariable.defaultMaterial = node.GetComponent<Renderer>().material;
+        nodeVariable.pressedMaterial = pressedMaterial;
     }
 
     public void SpawnNode2D(GameObject node)
@@ -991,13 +993,15 @@ public class EventHandler : MonoBehaviour
     {
         float timeElapsed = 0f;
         float waitTime = 2f;
-        while (node.transform.localScale.x < nodeScale.x){
+        while (node != null && node.transform.localScale.x < nodeScale.x){
             node.transform.localScale = Vector3.Lerp(node.transform.localScale, nodeScale, (timeElapsed / waitTime));
 
             timeElapsed += Time.deltaTime;
             yield return null;
         }
-        node.transform.localScale = nodeScale;
+        if(node != null){
+            node.transform.localScale = nodeScale;
+        }
         yield return null;
     }
 

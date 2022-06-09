@@ -12,4 +12,5 @@ public class NodeVariable : MonoBehaviour
     public Vector3 ukuran2;
     public Material defaultMaterial;
     public Material hoverMaterial;
+    public Material pressedMaterial;
 }

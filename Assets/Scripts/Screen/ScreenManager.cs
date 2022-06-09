@@ -18,7 +18,7 @@ public class ScreenManager : MonoBehaviour
     private List<string> researcherData = new List<string>();
     public bool isSearching = false;
     [SerializeField] private GameObject centerEyeAnchor;
-    [SerializeField] private GameObject handTrackingUI;
+    [SerializeField] private HandTrackingUI handTrackingUI;
     public float offset = 30f;
     private bool isSelected;
     private string selectedName;
@@ -621,10 +621,10 @@ public class ScreenManager : MonoBehaviour
 
     public void SetScreenMode(string _swipeType){
         if(_swipeType == "up" && smartphoneScreen.gameObject.activeSelf){
-            handTrackingUI.SetActive(true);
+            handTrackingUI.SetLaserOn();
             StartCoroutine(SwipeUp());
         }else if(_swipeType == "down" && desktopScreen.gameObject.activeSelf){
-            handTrackingUI.SetActive(false);
+            handTrackingUI.SetLaserOff();
             StartCoroutine(SwipeDown());
         }
     }

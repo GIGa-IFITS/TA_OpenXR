@@ -827,6 +827,7 @@ MonoBehaviour:
   F_CREABIZ: {fileID: 2100000, guid: 4836be1045e2bee41b17edf9cdd9ea33, type: 2}
   F_VOCATIONS: {fileID: 2100000, guid: 37d1077176ebcac4f9ba1093ecc4d95f, type: 2}
   hoverMaterial: {fileID: 2100000, guid: 21ab8c481b73b9d47b936ee225b86587, type: 2}
+  pressedMaterial: {fileID: 2100000, guid: be7b398e55115064bb44d0b0f3e1200e, type: 2}
   AbjadSprite: {fileID: 21300000, guid: 5cea6918fea1b064b8ee92d03ba08da2, type: 3}
   InisialSprite: {fileID: 21300000, guid: aca28e6ff4a6f2b4db60f1e66b868310, type: 3}
   F_SCIENTICSSprite: {fileID: 21300000, guid: d720da622fec6ca428b074f5e40ed541, type: 3}
@@ -1032,7 +1033,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1732808951507650, guid: a9d2de84afb308a4796cc671d3432b4d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4897607310870066, guid: a9d2de84afb308a4796cc671d3432b4d, type: 3}
       propertyPath: m_RootOrder
@@ -2109,7 +2110,7 @@ MonoBehaviour:
   debugText: {fileID: 1402960975}
   isSearching: 0
   centerEyeAnchor: {fileID: 1667105139}
-  handTrackingUI: {fileID: 704906392}
+  handTrackingUI: {fileID: 704906393}
   offset: 30
 --- !u!1001 &1481967735
 PrefabInstance:

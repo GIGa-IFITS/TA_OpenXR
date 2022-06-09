@@ -17,7 +17,6 @@ public class SmartphoneScreen : VirtualScreen
     private ScrollRect scrollRect;
 
     public float multiplier;
-    public float duration;
 
     private void Start() {
         smartphoneCanvas = transform.GetChild(0).gameObject;
@@ -88,19 +87,7 @@ public class SmartphoneScreen : VirtualScreen
             float contentShift = scrollSpeed * multiplier * Time.deltaTime;
             float val = scrollRect.verticalNormalizedPosition + (contentShift / contentHeight);
             val = Mathf.Clamp(val, 0f, 1f);
-            StartCoroutine(LerpToPos(val));
+            scrollRect.verticalNormalizedPosition = val;
         }
-    }
-
-    private IEnumerator LerpToPos(float endValue){
-        float time = 0;
-        float startValue = scrollRect.verticalNormalizedPosition;
-        while (time < duration)
-        {
-            scrollRect.verticalNormalizedPosition = Mathf.Lerp(startValue, endValue, time / duration);
-            time += Time.deltaTime;
-            yield return null;
-        }
-        scrollRect.verticalNormalizedPosition = endValue;
     }
 }

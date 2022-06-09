@@ -8,9 +8,12 @@ public class NodeScript : MonoBehaviour
 {
     Renderer renderer;
     NodeVariable nodeVariable;
-    public void OnHoverNode(){
-        nodeVariable = GetComponent<NodeVariable>();
 
+    private void Start() {
+        nodeVariable = GetComponent<NodeVariable>();
+    }
+
+    public void OnHoverNode(){
         // if 3d, change material
         if(nodeVariable.ukuran > 0){
             renderer = GetComponent<Renderer>();
@@ -39,6 +42,9 @@ public class NodeScript : MonoBehaviour
     public void OnClickNode(){
         if(nodeVariable.ukuran > 0){
             Debug.Log("click on node " + gameObject.name + ",spatial mode");
+            if(renderer != null){
+                renderer.material = nodeVariable.pressedMaterial;
+            }
         }else{
             Debug.Log("click on node " + gameObject.name + ",smartphone mode");
         }
