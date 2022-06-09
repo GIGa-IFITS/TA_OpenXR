@@ -560,6 +560,7 @@ public class ScreenManager : MonoBehaviour
         else{
             // back to search menu
             isSearching = false;
+            Manager.instance.flushNode();
             smartphoneScreen.OnTapBackToSearch();
             desktopScreen.OnTapBackToSearch();
             //ClientSend.SendPageType("searchMenu");
