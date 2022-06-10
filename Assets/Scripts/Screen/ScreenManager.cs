@@ -79,11 +79,6 @@ public class ScreenManager : MonoBehaviour
         desktopScreen.ShowDashboardData(rawdata);
     }
 
-    public void ShowDashboardError(){
-        smartphoneScreen.ShowDashboardError();
-        desktopScreen.ShowDashboardError();
-    }
-
     public void OnTapSearch(){
         smartphoneScreen.OnTapSearch();
         desktopScreen.OnTapSearch();
@@ -563,7 +558,6 @@ public class ScreenManager : MonoBehaviour
             Manager.instance.flushNode();
             smartphoneScreen.OnTapBackToSearch();
             desktopScreen.OnTapBackToSearch();
-            //ClientSend.SendPageType("searchMenu");
         } 
     }
 

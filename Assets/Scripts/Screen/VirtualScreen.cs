@@ -9,7 +9,6 @@ public class VirtualScreen : MonoBehaviour
     [Header("Dashboard Menu")]
     [SerializeField] protected GameObject dashboardMenu;
     [SerializeField] protected GameObject dashboardPanel;
-    [SerializeField] protected GameObject dashboardErrorPanel;
     [SerializeField] protected GameObject dashboardLoading;
     [SerializeField] protected TextMeshProUGUI journals;
     [SerializeField] protected TextMeshProUGUI conferences;
@@ -52,7 +51,6 @@ public class VirtualScreen : MonoBehaviour
     public void OnTapDashboard(){
         dashboardLoading.SetActive(true);
         dashboardPanel.SetActive(false);
-        dashboardErrorPanel.SetActive(false);
         dashboardMenu.SetActive(true); 
         searchMenu.SetActive(false);     
     }
@@ -66,12 +64,6 @@ public class VirtualScreen : MonoBehaviour
         thesis.text = rawdata.data[0].dashboard_data[0].hasil_publikasi[3].thesis.ToString();
         patents.text = rawdata.data[0].dashboard_data[0].hasil_publikasi[4].paten.ToString();
         research.text = rawdata.data[0].dashboard_data[0].hasil_publikasi[5].research.ToString();
-    }
-
-    public void ShowDashboardError(){
-        dashboardLoading.SetActive(false);
-        dashboardPanel.SetActive(false);
-        dashboardErrorPanel.SetActive(true);
     }
 
     public void OnTapSearch(){

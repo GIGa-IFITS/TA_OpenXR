@@ -82,7 +82,7 @@ public class EventHandler : MonoBehaviour
         }, (error) => {
             if (error != "")
             {
-                //ScreenManager.instance.ShowDashboardError();
+                Client.instance.Disconnect();
             }
         }));   
     }
@@ -95,7 +95,7 @@ public class EventHandler : MonoBehaviour
             ScreenManager.instance.UpdateResearcherDetailData(result);
         }, (error) => {
             if (error != ""){
-                //VirtualSmartphoneCanvas.instance.ShowErrorResearcherDetail();
+                Client.instance.Disconnect();
             }
         }));
     }
@@ -137,7 +137,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                
+                Client.instance.Disconnect();
             }
         }
         ));
@@ -170,7 +170,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                
+                Client.instance.Disconnect();
             }
         }
         ));
@@ -201,7 +201,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                
+                Client.instance.Disconnect();
             }
         }
         ));
@@ -231,7 +231,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                
+                Client.instance.Disconnect();
             }
         }
         ));
@@ -276,8 +276,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                //ClientSend.SendErrorMessage(error);
-                //VirtualSmartphoneCanvas.instance.ShowErrorScreen();
+                Client.instance.Disconnect();
             }
         }
         )); 
@@ -311,8 +310,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                // ClientSend.SendErrorMessage(error);
-                //VirtualSmartphoneCanvas.instance.ShowErrorScreen();
+                Client.instance.Disconnect();
             }
         }
         ));   
@@ -356,8 +354,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                //ClientSend.SendErrorMessage(error);
-                //VirtualSmartphoneCanvas.instance.ShowErrorScreen();
+                Client.instance.Disconnect();
             }
         }
         ));
@@ -390,8 +387,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                //ClientSend.SendErrorMessage(error);
-                //VirtualSmartphoneCanvas.instance.ShowErrorScreen();
+                Client.instance.Disconnect();
             }
         }
         ));
@@ -424,8 +420,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                //ClientSend.SendErrorMessage(error);
-                //VirtualSmartphoneCanvas.instance.ShowErrorScreen();
+                Client.instance.Disconnect();
             }
         }
         ));
@@ -457,8 +452,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                //ClientSend.SendErrorMessage(error);
-                //VirtualSmartphoneCanvas.instance.ShowErrorScreen();
+                Client.instance.Disconnect();
             }
         }
         ));
@@ -503,7 +497,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                
+                Client.instance.Disconnect();
             }
         }
         ));
@@ -536,7 +530,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                
+                Client.instance.Disconnect();
             }
         }
         ));
@@ -569,7 +563,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                
+                Client.instance.Disconnect();
             }
         }
         ));
@@ -601,7 +595,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                
+                Client.instance.Disconnect();
             }
         }
         ));
@@ -647,7 +641,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                
+                Client.instance.Disconnect();
             }
         }
         ));
@@ -682,7 +676,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                
+                Client.instance.Disconnect();
             }
         }
         ));
@@ -727,7 +721,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                
+                Client.instance.Disconnect();
             }
         }
         ));
@@ -761,7 +755,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                
+                Client.instance.Disconnect();
             }
         }
         ));
@@ -794,7 +788,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                
+                Client.instance.Disconnect();
             }
         }
         ));
@@ -826,7 +820,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                
+                Client.instance.Disconnect();
             }
         }
         ));

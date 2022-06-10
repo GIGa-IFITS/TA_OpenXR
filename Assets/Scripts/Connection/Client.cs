@@ -183,10 +183,6 @@ public class Client : MonoBehaviour
             isConnected = false;
             tcp.socket.Close();
             Debug.Log("disconnected");
-            // smartphone only
-            ThreadManager.ExecuteOnMainThread(() => {
-                NetworkUIManager.instance.Disconnected();
-            });
         }
     }
 }
