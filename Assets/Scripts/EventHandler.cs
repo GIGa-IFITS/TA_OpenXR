@@ -94,8 +94,9 @@ public class EventHandler : MonoBehaviour
             // mengambil jumlah jurnal, conference, books, thesis, paten dan research yang ada
             ScreenManager.instance.UpdateResearcherDetailData(result);
         }, (error) => {
-            if (error != ""){
-                Client.instance.Disconnect();
+            if (error != "")
+            {
+                Debug.Log("fail to get researcher detail data");
             }
         }));
     }

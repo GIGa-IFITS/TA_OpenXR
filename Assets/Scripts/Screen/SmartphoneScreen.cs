@@ -82,7 +82,6 @@ public class SmartphoneScreen : VirtualScreen
         }
 
         if(scrollRect != null){
-            Debug.Log("Set scroll with scroll speed: " + scrollSpeed);
             float contentHeight = scrollRect.content.sizeDelta.y;
             float contentShift = scrollSpeed * multiplier * Time.deltaTime;
             float val = scrollRect.verticalNormalizedPosition + (contentShift / contentHeight);
