@@ -9,15 +9,7 @@ using System.Text;
 public enum ServerPackets
 {
     welcome = 1,
-    sendPhoneStatus,
-    sendCommand,
-    sendFilterSummary,
-    sendResearcherId,
-    sendNodeRequest,
-    sendErrorMessage,
-    sendOrientation,
-    sendNodeSize,
-    sendPageType,
+    sendTouch,
     sendSwipe,
     sendScrollSpeed,
     sendRotation
@@ -27,15 +19,7 @@ public enum ServerPackets
 public enum ClientPackets
 {
     welcomeReceived = 1,
-    sendPhoneStatus,
-    sendCommand,
-    sendFilterSummary,
-    sendResearcherId,
-    sendNodeRequest,
-    sendErrorMessage,
-    sendOrientation,
-    sendNodeSize,
-    sendPageType,
+    sendTouch,
     sendSwipe,
     sendScrollSpeed,
     sendRotation
@@ -89,13 +73,6 @@ public class PacketNetwork : IDisposable
         buffer.InsertRange(0, BitConverter.GetBytes(buffer.Count)); // Insert the byte length of the packet at the very beginning
     }
 
-    /// <summary>Inserts the given int at the start of the buffer.</summary>
-    /// <param name="_value">The int to insert.</param>
-    public void InsertInt(int _value)
-    {
-        buffer.InsertRange(0, BitConverter.GetBytes(_value)); // Insert the int at the start of the buffer
-    }
-
     /// <summary>Gets the packet's content in array form.</summary>
     public byte[] ToArray()
     {
@@ -133,33 +110,15 @@ public class PacketNetwork : IDisposable
     #endregion
 
     #region Write Data
-    /// <summary>Adds a byte to the packet.</summary>
-    /// <param name="_value">The byte to add.</param>
-    public void Write(byte _value)
-    {
-        buffer.Add(_value);
-    }
     /// <summary>Adds an array of bytes to the packet.</summary>
     /// <param name="_value">The byte array to add.</param>
     public void Write(byte[] _value)
     {
         buffer.AddRange(_value);
     }
-    /// <summary>Adds a short to the packet.</summary>
-    /// <param name="_value">The short to add.</param>
-    public void Write(short _value)
-    {
-        buffer.AddRange(BitConverter.GetBytes(_value));
-    }
     /// <summary>Adds an int to the packet.</summary>
     /// <param name="_value">The int to add.</param>
     public void Write(int _value)
-    {
-        buffer.AddRange(BitConverter.GetBytes(_value));
-    }
-    /// <summary>Adds a long to the packet.</summary>
-    /// <param name="_value">The long to add.</param>
-    public void Write(long _value)
     {
         buffer.AddRange(BitConverter.GetBytes(_value));
     }
@@ -185,27 +144,6 @@ public class PacketNetwork : IDisposable
     #endregion
 
     #region Read Data
-    /// <summary>Reads a byte from the packet.</summary>
-    /// <param name="_moveReadPos">Whether or not to move the buffer's read position.</param>
-    public byte ReadByte(bool _moveReadPos = true)
-    {
-        if (buffer.Count > readPos)
-        {
-            // If there are unread bytes
-            byte _value = readableBuffer[readPos]; // Get the byte at readPos' position
-            if (_moveReadPos)
-            {
-                // If _moveReadPos is true
-                readPos += 1; // Increase readPos by 1
-            }
-            return _value; // Return the byte
-        }
-        else
-        {
-            throw new Exception("Could not read value of type 'byte'!");
-        }
-    }
-
     /// <summary>Reads an array of bytes from the packet.</summary>
     /// <param name="_length">The length of the byte array.</param>
     /// <param name="_moveReadPos">Whether or not to move the buffer's read position.</param>
@@ -228,27 +166,6 @@ public class PacketNetwork : IDisposable
         }
     }
 
-    /// <summary>Reads a short from the packet.</summary>
-    /// <param name="_moveReadPos">Whether or not to move the buffer's read position.</param>
-    public short ReadShort(bool _moveReadPos = true)
-    {
-        if (buffer.Count > readPos)
-        {
-            // If there are unread bytes
-            short _value = BitConverter.ToInt16(readableBuffer, readPos); // Convert the bytes to a short
-            if (_moveReadPos)
-            {
-                // If _moveReadPos is true and there are unread bytes
-                readPos += 2; // Increase readPos by 2
-            }
-            return _value; // Return the short
-        }
-        else
-        {
-            throw new Exception("Could not read value of type 'short'!");
-        }
-    }
-
     /// <summary>Reads an int from the packet.</summary>
     /// <param name="_moveReadPos">Whether or not to move the buffer's read position.</param>
     public int ReadInt(bool _moveReadPos = true)
@@ -267,27 +184,6 @@ public class PacketNetwork : IDisposable
         else
         {
             throw new Exception("Could not read value of type 'int'!");
-        }
-    }
-
-    /// <summary>Reads a long from the packet.</summary>
-    /// <param name="_moveReadPos">Whether or not to move the buffer's read position.</param>
-    public long ReadLong(bool _moveReadPos = true)
-    {
-        if (buffer.Count > readPos)
-        {
-            // If there are unread bytes
-            long _value = BitConverter.ToInt64(readableBuffer, readPos); // Convert the bytes to a long
-            if (_moveReadPos)
-            {
-                // If _moveReadPos is true
-                readPos += 8; // Increase readPos by 8
-            }
-            return _value; // Return the long
-        }
-        else
-        {
-            throw new Exception("Could not read value of type 'long'!");
         }
     }
 

@@ -49,14 +49,7 @@ public class Server
 
         packetHandlers = new Dictionary<int, PacketHandler>(){
             { (int)ClientPackets.welcomeReceived, ServerHandle.WelcomeReceived },
-            { (int)ClientPackets.sendCommand, ServerHandle.SendCommand },
-            { (int)ClientPackets.sendFilterSummary, ServerHandle.SendFilterSummary },
-            { (int)ClientPackets.sendResearcherId, ServerHandle.SendResearcherId },
-            { (int)ClientPackets.sendNodeRequest, ServerHandle.SendNodeRequest },
-            { (int)ClientPackets.sendErrorMessage, ServerHandle.SendErrorMessage },
-            { (int)ClientPackets.sendOrientation, ServerHandle.SendOrientation },
-            { (int)ClientPackets.sendNodeSize, ServerHandle.SendNodeSize },
-            { (int)ClientPackets.sendPageType, ServerHandle.SendPageType },
+            { (int)ClientPackets.sendTouch, ServerHandle.SendTouch },
             { (int)ClientPackets.sendSwipe, ServerHandle.SendSwipe },
             { (int)ClientPackets.sendScrollSpeed, ServerHandle.SendScrollSpeed },
             { (int)ClientPackets.sendRotation, ServerHandle.SendRotation }
