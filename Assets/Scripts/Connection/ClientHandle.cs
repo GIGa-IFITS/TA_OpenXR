@@ -14,7 +14,7 @@ public class ClientHandle : MonoBehaviour
 
         // if smartphone
         if(Client.instance.myId == 2){
-            NetworkUIManager.instance.ClientConnected(_msg);
+            //UIManager.instance.ClientConnected(_msg);
         }
 
         //Send welcome received packet
