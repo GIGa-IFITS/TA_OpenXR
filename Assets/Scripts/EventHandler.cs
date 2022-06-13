@@ -82,7 +82,7 @@ public class EventHandler : MonoBehaviour
         }, (error) => {
             if (error != "")
             {
-                Client.instance.Disconnect();
+                Debug.Log("fail to get dashboard data");
             }
         }));   
     }
@@ -138,7 +138,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                Client.instance.Disconnect();
+                Debug.Log("fail to get abjad data");
             }
         }
         ));
@@ -171,7 +171,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                Client.instance.Disconnect();
+                Debug.Log("fail to get abjad 2d data");
             }
         }
         ));
@@ -202,7 +202,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                Client.instance.Disconnect();
+                Debug.Log("fail to get initial data");
             }
         }
         ));
@@ -232,7 +232,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                Client.instance.Disconnect();
+                Debug.Log("fail to get initial 2d data");
             }
         }
         ));
@@ -277,7 +277,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                Client.instance.Disconnect();
+                Debug.Log("fail to get fakultas data");
             }
         }
         )); 
@@ -311,7 +311,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                Client.instance.Disconnect();
+                Debug.Log("fail to get fakultas 2d data");
             }
         }
         ));   
@@ -355,7 +355,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                Client.instance.Disconnect();
+                Debug.Log("fail to get departemen data");
             }
         }
         ));
@@ -388,7 +388,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                Client.instance.Disconnect();
+                Debug.Log("fail to get departemen 2d data");
             }
         }
         ));
@@ -421,7 +421,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                Client.instance.Disconnect();
+                Debug.Log("fail to get departemen peneliti data");
             }
         }
         ));
@@ -453,7 +453,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                Client.instance.Disconnect();
+                Debug.Log("fail to get departemen peneliti 2d data");
             }
         }
         ));
@@ -498,7 +498,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                Client.instance.Disconnect();
+                Debug.Log("fail to get gelar data");
             }
         }
         ));
@@ -531,7 +531,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                Client.instance.Disconnect();
+                Debug.Log("fail to get gelar 2d data");
             }
         }
         ));
@@ -564,7 +564,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                Client.instance.Disconnect();
+                Debug.Log("fail to get peneliti gelar data");
             }
         }
         ));
@@ -596,7 +596,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                Client.instance.Disconnect();
+                Debug.Log("fail to get peneliti gelar 2d data");
             }
         }
         ));
@@ -642,7 +642,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                Client.instance.Disconnect();
+                Debug.Log("fail to get publikasi fakultas data");
             }
         }
         ));
@@ -677,7 +677,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                Client.instance.Disconnect();
+                Debug.Log("fail to get publikasi fakultas 2d data");
             }
         }
         ));
@@ -722,7 +722,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                Client.instance.Disconnect();
+                Debug.Log("fail to get publikasi kata kunci data");
             }
         }
         ));
@@ -756,7 +756,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                Client.instance.Disconnect();
+                Debug.Log("fail to get publikasi kata kunci 2d data");
             }
         }
         ));
@@ -789,7 +789,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                Client.instance.Disconnect();
+                Debug.Log("fail to get peneliti kata kunci data");
             }
         }
         ));
@@ -821,7 +821,7 @@ public class EventHandler : MonoBehaviour
         }, error => {
             if (error != "")
             {
-                Client.instance.Disconnect();
+                Debug.Log("fail to get peneliti kata kunci 2d data");
             }
         }
         ));
