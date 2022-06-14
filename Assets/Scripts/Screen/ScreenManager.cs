@@ -152,9 +152,9 @@ public class ScreenManager : MonoBehaviour
         desktopScreen.UpdateCardInfo(name, total, detail);  
     }
 
-    public void UpdateDetailScreen(){
-        smartphoneScreen.UpdateDetailScreen(researcherData);
-        desktopScreen.UpdateDetailScreen(researcherData);
+    public void ShowDetailScreen(){
+        smartphoneScreen.ShowDetailScreen();
+        desktopScreen.ShowDetailScreen();
     }
 
     private void ChangeNodeHoverBg(bool val){
@@ -236,7 +236,7 @@ public class ScreenManager : MonoBehaviour
             // if select node
             if(selected){
                 // show detail screen, update detail screen, nonactive card screen
-                UpdateDetailScreen();
+                ShowDetailScreen();
                 isSearching = false;
             }else{ // only hover
                 UpdateCardInfo(name, total, "Publications of");
@@ -336,7 +336,7 @@ public class ScreenManager : MonoBehaviour
             // if select node
             if(selected){
                 // show detail screen, update detail screen, nonactive card screen
-                UpdateDetailScreen();
+                ShowDetailScreen();
                 isSearching = false;
             }else{ // only hover
                 UpdateCardInfo(name, total, "Publications of");
@@ -396,7 +396,7 @@ public class ScreenManager : MonoBehaviour
             // if select node
             if(selected){
                 // show detail screen, update detail screen, nonactive card screen
-                UpdateDetailScreen();
+                ShowDetailScreen();
                 isSearching = false;
             }else{ // only hover
                 UpdateCardInfo(name, total, "Publications of");
@@ -499,7 +499,7 @@ public class ScreenManager : MonoBehaviour
             // if select node
             if(selected){
                 // show detail screen, update detail screen, nonactive card screen
-                UpdateDetailScreen();
+                ShowDetailScreen();
                 isSearching = false;
             }else{ // only hover
                 UpdateCardInfo(name, total, "Publications of");
@@ -520,6 +520,9 @@ public class ScreenManager : MonoBehaviour
         researcherData.Add(rawdata.data[0].detail_peneliti[0].tesis.ToString());
         researcherData.Add(rawdata.data[0].detail_peneliti[0].paten.ToString());
         researcherData.Add(rawdata.data[0].detail_peneliti[0].penelitian.ToString());
+
+        smartphoneScreen.UpdateDetailScreen(researcherData);
+        desktopScreen.UpdateDetailScreen(researcherData);
     }
 
     public void OnTapBackToSearch(){

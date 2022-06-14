@@ -47,6 +47,8 @@ public class VirtualScreen : MonoBehaviour
     [SerializeField] protected TextMeshProUGUI detailThesis;
     [SerializeField] protected TextMeshProUGUI detailPatents;
     [SerializeField] protected TextMeshProUGUI detailResearch;
+    [SerializeField] protected GameObject detailLoadingText;
+    [SerializeField] protected GameObject detailInfoPanel;
 
     public void OnTapDashboard(){
         dashboardLoading.SetActive(true);
@@ -129,7 +131,7 @@ public class VirtualScreen : MonoBehaviour
         nodeMenuNameText.text = name;
     } 
 
-     public void SetLoadingCardScreen(bool val){
+    public void SetLoadingCardScreen(bool val){
         cardMenuLoadingText.SetActive(val);
     } 
 
@@ -148,9 +150,16 @@ public class VirtualScreen : MonoBehaviour
         cardMenuNameText.text = name;
     }
 
-    public void UpdateDetailScreen(List<string> researcherData){
+    public void ShowDetailScreen(){
         cardMenu.SetActive(false);
         detailMenu.SetActive(true);
+        detailLoadingText.SetActive(true);
+        detailInfoPanel.SetActive(false);
+    }
+
+    public void UpdateDetailScreen(List<string> researcherData){
+        detailLoadingText.SetActive(false);
+        detailInfoPanel.SetActive(true);
 
         detailName.text = researcherData[0];
         detailFaculty.text = researcherData[1];
