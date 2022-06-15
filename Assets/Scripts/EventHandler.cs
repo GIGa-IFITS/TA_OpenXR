@@ -986,6 +986,10 @@ public class EventHandler : MonoBehaviour
 
     public IEnumerator animateNode(GameObject node, Vector3 nodeScale)
     {
+        if(!ScreenManager.instance.isSearching){
+            Destroy(node);
+            yield break;
+        }
         float timeElapsed = 0f;
         float waitTime = 2f;
         while (node != null && node.transform.localScale.x < nodeScale.x){
@@ -1014,6 +1018,14 @@ public class EventHandler : MonoBehaviour
                 Destroy(node);
             }
             listPeneliti = null;
+        }
+
+        foreach (Transform child in ParentNode2D.transform) {
+            GameObject.Destroy(child.gameObject);
+        }
+
+        foreach (Transform child in ParentNode.transform) {
+            GameObject.Destroy(child.gameObject);
         }
     }
 
