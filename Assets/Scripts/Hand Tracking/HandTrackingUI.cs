@@ -13,6 +13,7 @@ public class HandTrackingUI : MonoBehaviour
         inputModule.rayTransform = hand.PointerPose;
         SetLaserOff();
     }
+
     public void SetLaserOn(){
         laserPointer.laserBeamBehavior = LaserPointer.LaserBeamBehavior.On;
         gameObject.SetActive(true);

@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class Server
 {
-    public static int MaxClients = 2;
+    public static int MaxClients = 1;
     public static int Port { get; private set;}
     public static Dictionary<int, ClientReference> clients = new Dictionary<int, ClientReference>();
     public delegate void PacketHandler(int _fromClient, PacketNetwork _packet);
@@ -49,10 +49,10 @@ public class Server
 
         packetHandlers = new Dictionary<int, PacketHandler>(){
             { (int)ClientPackets.welcomeReceived, ServerHandle.WelcomeReceived },
-            { (int)ClientPackets.sendTouch, ServerHandle.SendTouch },
-            { (int)ClientPackets.sendSwipe, ServerHandle.SendSwipe },
-            { (int)ClientPackets.sendScrollSpeed, ServerHandle.SendScrollSpeed },
-            { (int)ClientPackets.sendRotation, ServerHandle.SendRotation }
+            { (int)ClientPackets.sendTouch, ServerHandle.TouchReceived },
+            { (int)ClientPackets.sendSwipe, ServerHandle.SwipeReceived },
+            { (int)ClientPackets.sendScrollSpeed, ServerHandle.ScrollSpeedReceived },
+            { (int)ClientPackets.sendRotation, ServerHandle.RotationReceived }
         };
     }
 }

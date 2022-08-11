@@ -13,56 +13,34 @@ public class ServerHandle
         Debug.Log("SERVER: " + Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint +  " connected succesfuly");
 
         // if message is from smartphone, send message to VR
-        if(_fromClient == 2){
-            Manager.instance.SetVirtualSmartphoneCanvasActive();
-        }
+        Manager.instance.SetVirtualSmartphoneCanvasActive();
     }
 
-    // send filter type to spawn first level node
-    public static void SendTouch(int _fromClient, PacketNetwork _packet){
-        int _clientIdCheck = _packet.ReadInt();
+    public static void TouchReceived(int _fromClient, PacketNetwork _packet){
         string _touch = _packet.ReadString();
 
-        if(_fromClient != _clientIdCheck){
-            Debug.Log("SERVER: " + _fromClient + " has assumed wrong client id");
+        if (_touch == "touch"){
+            Debug.Log("touch detected");
+            ScreenManager.instance.TouchButton();
         }
-        // send to VR
-        ServerSend.SendTouchToVR(_touch);
     }
 
-    public static void SendSwipe(int _fromClient, PacketNetwork _packet){
-        int _clientIdCheck = _packet.ReadInt();
+    public static void SwipeReceived(int _fromClient, PacketNetwork _packet){
         string _swipeType = _packet.ReadString();
-
-        if(_fromClient != _clientIdCheck){
-            Debug.Log("SERVER: " + _fromClient + " has assumed wrong client id");
-        }
-        // send to smartphone
-        ServerSend.SendSwipeToVR(_swipeType);
+        Debug.Log("receive swipe type " + _swipeType);
+        ScreenManager.instance.SetScreenMode(_swipeType);
     }
 
-    public static void SendScrollSpeed(int _fromClient, PacketNetwork _packet){
-        int _clientIdCheck = _packet.ReadInt();
+    public static void ScrollSpeedReceived(int _fromClient, PacketNetwork _packet){
         float _scrollSpeed = _packet.ReadFloat();
-
-        if(_fromClient != _clientIdCheck){
-            Debug.Log("SERVER: " + _fromClient + " has assumed wrong client id");
-        }
-        // send to VR
-        ServerSend.SendScrollSpeedToVR(_scrollSpeed);
+        ScreenManager.instance.SetScroll(_scrollSpeed);
     }
 
-    public static void SendRotation(int _fromClient, PacketNetwork _packet){
-        int _clientIdCheck = _packet.ReadInt();
+    public static void RotationReceived(int _fromClient, PacketNetwork _packet){
         float _x = _packet.ReadFloat();
         float _y = _packet.ReadFloat();
         float _z = _packet.ReadFloat();
         float _w = _packet.ReadFloat();
-
-        if(_fromClient != _clientIdCheck){
-            Debug.Log("SERVER: " + _fromClient + " has assumed wrong client id");
-        }
-        // send to VR
-        ServerSend.SendRotationToVR(_x, _y, _z, _w);
+        SmartphoneGyro.instance.SetPhoneRotation(_x, _y, _z, _w);
     }    
 }

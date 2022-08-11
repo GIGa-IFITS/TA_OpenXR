@@ -54,7 +54,6 @@ public class Manager : EventHandler
 
         // start server
         Server.Start(6000);
-        Client.instance.ConnectToServer();
     }
 
     public void Disconnected(){
