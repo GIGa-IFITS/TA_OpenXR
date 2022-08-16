@@ -78,6 +78,11 @@ public class OVRProjectConfigEditor : Editor
 		EditorGUILayout.BeginVertical(EditorStyles.helpBox);
 		EditorGUILayout.LabelField("Quest Features", EditorStyles.boldLabel);
 
+		if (EditorUserBuildSettings.activeBuildTarget != UnityEditor.BuildTarget.Android)
+		{
+			EditorGUILayout.LabelField($"Your current platform is \"{EditorUserBuildSettings.activeBuildTarget}\". These settings only apply if your active platform is \"Android\".", EditorStyles.wordWrappedMiniLabel);
+		}
+
 		if (projectConfigTabStrs == null)
 		{
 			projectConfigTabStrs = Enum.GetNames(typeof(eProjectConfigTab));
@@ -88,15 +93,17 @@ public class OVRProjectConfigEditor : Editor
 		selectedTab = (eProjectConfigTab)GUILayout.SelectionGrid((int)selectedTab, projectConfigTabStrs, 3, GUI.skin.button);
 		EditorGUILayout.Space(5);
 		bool hasModified = false;
+
 		switch (selectedTab)
 		{
 			case eProjectConfigTab.General:
 
 				// Show overlay support option
-				EditorGUI.BeginDisabledGroup(true);
-				EditorGUILayout.Toggle(new GUIContent("Focus Aware (Required)",
-					"If checked, the new overlay will be displayed when the user presses the home button. The game will not be paused, but will now receive InputFocusLost and InputFocusAcquired events."), true);
-				EditorGUI.EndDisabledGroup();
+				using (new EditorGUI.DisabledScope(true))
+				{
+					EditorGUILayout.Toggle(new GUIContent("Focus Aware (Required)",
+						"If checked, the new overlay will be displayed when the user presses the home button. The game will not be paused, but will now receive InputFocusLost and InputFocusAcquired events."), true);
+				}
 
 				// Hand Tracking Support
 				OVREditorUtil.SetupEnumField(projectConfig, "Hand Tracking Support", ref projectConfig.handTrackingSupport, ref hasModified);
@@ -105,10 +112,23 @@ public class OVRProjectConfigEditor : Editor
 					"Note that a higher tracking frequency will reserve some performance headroom from the application's budget."),
 					ref projectConfig.handTrackingFrequency, ref hasModified, "https://developer.oculus.com/documentation/unity/unity-handtracking/#enable-hand-tracking");
 
+				OVREditorUtil.SetupEnumField(projectConfig, "Hand Tracking Version", ref projectConfig.handTrackingVersion, ref hasModified);
+
 				// Enable Render Model Support
+				bool renderModelSupportAvailable = OVRPluginUpdater.IsOVRPluginOpenXRActivated();
+				EditorGUI.BeginDisabledGroup(!renderModelSupportAvailable);
+				if (!renderModelSupportAvailable)
+				{
+					projectConfig.renderModelSupport = OVRProjectConfig.RenderModelSupport.Disabled;
+				}
 				OVREditorUtil.SetupEnumField(projectConfig, new GUIContent("Render Model Support",
-					"If enabled, the application will be able to load render models from the runtime."),
+						"If enabled, the application will be able to load render models from the runtime."),
 					ref projectConfig.renderModelSupport, ref hasModified);
+				if (hasModified && projectConfig.renderModelSupport == OVRProjectConfig.RenderModelSupport.Disabled)
+				{
+					projectConfig.trackedKeyboardSupport = OVRProjectConfig.TrackedKeyboardSupport.None;
+				}
+				EditorGUI.EndDisabledGroup();
 
 				// System Keyboard Support
 				OVREditorUtil.SetupBoolField(projectConfig, new GUIContent("Requires System Keyboard",
@@ -116,12 +136,32 @@ public class OVRProjectConfigEditor : Editor
 					ref projectConfig.requiresSystemKeyboard, ref hasModified);
 
 				// Tracked Keyboard Support
-				var trackedKeyboardSetting = projectConfig.trackedKeyboardSupport;
-				OVREditorUtil.SetupEnumField(projectConfig, "Tracked Keyboard Support", ref projectConfig.trackedKeyboardSupport, ref hasModified);
-				if (trackedKeyboardSetting != projectConfig.trackedKeyboardSupport && projectConfig.trackedKeyboardSupport > OVRProjectConfig.TrackedKeyboardSupport.None)
+				bool trackedKeyboardSupportAvailable = OVRPluginUpdater.IsOVRPluginOpenXRActivated();
+				EditorGUI.BeginDisabledGroup(!trackedKeyboardSupportAvailable);
+				if (!trackedKeyboardSupportAvailable)
+				{
+					projectConfig.trackedKeyboardSupport = OVRProjectConfig.TrackedKeyboardSupport.None;
+				}
+				OVREditorUtil.SetupEnumField(projectConfig, new GUIContent("Tracked Keyboard Support",
+						"Show user's physical keyboard in correct position in VR."),
+					ref projectConfig.trackedKeyboardSupport, ref hasModified);
+				if (hasModified && projectConfig.trackedKeyboardSupport != OVRProjectConfig.TrackedKeyboardSupport.None)
+				{
 					projectConfig.renderModelSupport = OVRProjectConfig.RenderModelSupport.Enabled;
-				if (projectConfig.trackedKeyboardSupport > OVRProjectConfig.TrackedKeyboardSupport.None && projectConfig.renderModelSupport == OVRProjectConfig.RenderModelSupport.Disabled)
-					EditorGUILayout.LabelField("Render model support is required to load keyboard models from the runtime.");
+				}
+				if (!OVRPluginUpdater.IsOVRPluginOpenXRActivated())
+				{
+					EditorGUILayout.HelpBox(
+						"The OpenXR backend must be enabled in the Oculus menu to use the Render Model and Tracked Keyboard features.",
+						MessageType.Info);
+				}
+				if (projectConfig.trackedKeyboardSupport != OVRProjectConfig.TrackedKeyboardSupport.None && projectConfig.renderModelSupport == OVRProjectConfig.RenderModelSupport.Disabled)
+				{
+					EditorGUILayout.HelpBox(
+						"Render model support is required to load keyboard models from the runtime.",
+						MessageType.Error);
+				}
+				EditorGUI.EndDisabledGroup();
 
 				// System Splash Screen
 				OVREditorUtil.SetupTexture2DField(projectConfig, new GUIContent("System Splash Screen",
@@ -174,9 +214,9 @@ public class OVRProjectConfigEditor : Editor
 				// Spatial Anchors Support
 				OVREditorUtil.SetupEnumField(projectConfig, "Spatial Anchors Support", ref projectConfig.spatialAnchorsSupport, ref hasModified);
 
-				break;
-
+			break;
 		}
+		
 		EditorGUILayout.EndVertical();
 
 		// apply any pending changes to project config

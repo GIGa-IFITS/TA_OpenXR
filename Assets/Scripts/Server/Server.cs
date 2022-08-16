@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class Server
 {
-    public static int MaxClients = 1;
+    public static int MaxClients = 2;
     public static int Port { get; private set;}
     public static Dictionary<int, ClientReference> clients = new Dictionary<int, ClientReference>();
     public delegate void PacketHandler(int _fromClient, PacketNetwork _packet);
@@ -31,7 +31,7 @@ public class Server
         tcpListener.BeginAcceptTcpClient(new AsyncCallback(TCPConnectCallback), null);
         Debug.Log("SERVER: Incoming connection from " + _client.Client.RemoteEndPoint);
 
-        for(int i=1; i<= MaxClients; i++){
+        for(int i=2; i<= MaxClients; i++){
             if(clients[i].tcp.socket == null){
                 clients[i].tcp.Connect(_client);
                 Debug.Log("SERVER: Connection from " + _client.Client.RemoteEndPoint + " will have id " + i);

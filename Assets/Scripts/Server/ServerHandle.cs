@@ -17,6 +17,7 @@ public class ServerHandle
     }
 
     public static void TouchReceived(int _fromClient, PacketNetwork _packet){
+        int _clientIdCheck = _packet.ReadInt();
         string _touch = _packet.ReadString();
 
         if (_touch == "touch"){
@@ -26,17 +27,20 @@ public class ServerHandle
     }
 
     public static void SwipeReceived(int _fromClient, PacketNetwork _packet){
+        int _clientIdCheck = _packet.ReadInt();
         string _swipeType = _packet.ReadString();
         Debug.Log("receive swipe type " + _swipeType);
         ScreenManager.instance.SetScreenMode(_swipeType);
     }
 
     public static void ScrollSpeedReceived(int _fromClient, PacketNetwork _packet){
+        int _clientIdCheck = _packet.ReadInt();
         float _scrollSpeed = _packet.ReadFloat();
         ScreenManager.instance.SetScroll(_scrollSpeed);
     }
 
     public static void RotationReceived(int _fromClient, PacketNetwork _packet){
+        int _clientIdCheck = _packet.ReadInt();
         float _x = _packet.ReadFloat();
         float _y = _packet.ReadFloat();
         float _z = _packet.ReadFloat();

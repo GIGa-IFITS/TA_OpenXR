@@ -420,8 +420,6 @@ public class OVRSkeleton : MonoBehaviour
 
 					if (capsuleGO.activeSelf)
 					{
-						capsuleGO.SetActive(false);
-						capsuleGO.SetActive(true);
 						capsule.CapsuleRigidbody.MovePosition(bone.position);
 						capsule.CapsuleRigidbody.MoveRotation(bone.rotation);
 					}

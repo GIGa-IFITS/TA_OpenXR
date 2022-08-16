@@ -11,30 +11,9 @@ permissions and limitations under the License.
 ************************************************************************************/
 
 using System;
-using UnityEngine;
-using UnityEngine.Assertions;
 
-namespace Oculus.Interaction
+namespace Oculus.Interaction.Deprecated
 {
-    /// <summary>
-    /// IInteractionDriver drives the update loop of an Interaction.
-    /// </summary>
-    public interface IInteractorDriver
-    {
-        // This flag determines whether this driver should controls its own update loop
-        bool IsRootInteractorDriver { get; set; }
-
-        bool HasCandidate { get; }
-        bool ShouldSelect { get; }
-
-        bool IsHovering { get; }
-        bool IsSelecting { get; }
-        bool IsSelectingInteractable { get; }
-
-        void UpdateInteraction();
-        void UpdateHover();
-        void UpdateSelection(bool selectionCanBeEmpty);
-        void Enable();
-        void Disable();
-    }
+    [Obsolete]
+    public interface IInteractorDriver { }
 }

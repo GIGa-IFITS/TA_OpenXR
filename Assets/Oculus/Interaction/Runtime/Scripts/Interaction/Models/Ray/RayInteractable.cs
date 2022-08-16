@@ -10,88 +10,51 @@ ANY KIND, either express or implied. See the License for the specific language g
 permissions and limitations under the License.
 ************************************************************************************/
 
-using System;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.Serialization;
+using Oculus.Interaction.Surfaces;
 
 namespace Oculus.Interaction
 {
-    public class RayInteractable : Interactable<RayInteractor, RayInteractable>, IPointable
+    public class RayInteractable : PointerInteractable<RayInteractor, RayInteractable>
     {
         [SerializeField]
         private Collider _collider;
         public Collider Collider { get => _collider; }
 
-        [SerializeField, Optional]
-        private Transform _pointablePlane = null;
+        [SerializeField, Optional, Interface(typeof(IPointableSurface))]
+        private MonoBehaviour _surface = null;
 
-        public event Action<PointerArgs> OnPointerEvent = delegate { };
-        private PointableDelegate<RayInteractor> _pointableDelegate;
+        private IPointableSurface Surface;
 
-        protected bool _started = false;
-
-        protected virtual void Start()
+        protected override void Awake()
         {
-            this.BeginStart(ref _started);
+            base.Awake();
+            Surface = _surface as IPointableSurface;
+        }
+
+        protected override void Start()
+        {
+            this.BeginStart(ref _started, base.Start);
             Assert.IsNotNull(_collider);
-            _pointableDelegate = new PointableDelegate<RayInteractor>(this, ComputePointer);
             this.EndStart(ref _started);
         }
 
-        protected override void OnEnable()
+        public bool Raycast(Ray ray, out SurfaceHit hit, in float maxDistance, in bool useSurface)
         {
-            base.OnEnable();
-            if (_started)
+            hit = new SurfaceHit();
+            if (Collider.Raycast(ray, out RaycastHit raycastHit, maxDistance))
             {
-                _pointableDelegate.OnPointerEvent += InvokePointerEvent;
+                hit.Point = raycastHit.point;
+                hit.Normal = raycastHit.normal;
+                hit.Distance = raycastHit.distance;
+                return true;
             }
-        }
-
-        protected override void OnDisable()
-        {
-            if (_started)
+            else if (useSurface && Surface != null)
             {
-                _pointableDelegate.OnPointerEvent -= InvokePointerEvent;
+                return Surface.Raycast(ray, out hit, maxDistance);
             }
-            base.OnDisable();
-        }
-
-        private void InvokePointerEvent(PointerArgs args)
-        {
-            OnPointerEvent(args);
-        }
-
-        private  void ComputePointer(RayInteractor rayInteractor, out Vector3 position, out Quaternion rotation)
-        {
-            if (_pointablePlane != null)
-            {
-                var plane = new Plane(-1f * _pointablePlane.forward, _pointablePlane.position);
-                var ray = new Ray(rayInteractor.Origin, rayInteractor.Rotation * Vector3.forward);
-
-                float enter;
-                if (plane.Raycast(ray, out enter))
-                {
-                    position = ray.GetPoint(enter);
-                    rotation = Quaternion.LookRotation(-1f * _pointablePlane.forward);
-                    return;
-                }
-            }
-
-            rotation = rayInteractor.Rotation;
-
-            if (rayInteractor.CollisionInfo != null)
-            {
-                position = rayInteractor.CollisionInfo.Value.point;
-                return;
-            }
-
-            position = Vector3.zero;
-        }
-
-        protected virtual void OnDestroy()
-        {
-            _pointableDelegate = null;
+            return false;
         }
 
         #region Inject
@@ -106,9 +69,10 @@ namespace Oculus.Interaction
             _collider = collider;
         }
 
-        public void InjectOptionalPointablePlane(Transform pointablePlane)
+        public void InjectOptionalSurface(IPointableSurface surface)
         {
-            _pointablePlane = pointablePlane;
+            Surface = surface;
+            _surface = surface as MonoBehaviour;
         }
 
         #endregion
