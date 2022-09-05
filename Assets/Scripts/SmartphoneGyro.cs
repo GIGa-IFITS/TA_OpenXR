@@ -10,6 +10,12 @@ public class SmartphoneGyro : MonoBehaviour
     private Quaternion offset;
     [SerializeField] private GameObject leftHandAnchor;
     [SerializeField] private OVRHand ovrHand;
+    private Quaternion gyroInitialRotation;
+    private Transform rawGyroRotation;
+    private Quaternion initialRotation;
+    private Quaternion offsetRotation;
+    private Quaternion tempGyroRotation;
+    [SerializeField] private Transform cam;
 
     private void Awake()
     {
@@ -24,11 +30,21 @@ public class SmartphoneGyro : MonoBehaviour
         }
     }
 
+    private void Update() {
+        if(!firstTime){
+            transform.rotation = offset * rot;
+        }
+    }
+
     private void LateUpdate() {
         // follow position only if data have high confidence, else freeze to avoid hand jitter
         if(ovrHand.IsDataHighConfidence){
             transform.position = leftHandAnchor.transform.position;
         }
+    }
+
+    public void ResetPhoneRotation(){
+        firstTime = true;
     }
 
     public void SetPhoneRotation(float x, float y, float z, float w){
@@ -38,12 +54,18 @@ public class SmartphoneGyro : MonoBehaviour
         rot.w = w;
 
         if(firstTime){
-            offset = transform.rotation * Quaternion.Inverse(rot);
+            Debug.Log("reset phone position");
+            Vector3 initialEuler = rot.eulerAngles;
+            initialEuler.x = 0f;
+            initialEuler.y = 0f;
+            Quaternion initialRotation = Quaternion.Euler(initialEuler);
+            offset = Quaternion.Euler(90f, 0f, 0f) * Quaternion.Inverse(initialRotation);
+            Debug.Log("offset: " + offset.eulerAngles);
             firstTime = false;
-        }else{
-            transform.rotation = offset * rot;
         }
     }
+
+    
 
 }
 

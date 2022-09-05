@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50c666832be7afd479dbfbe99ff456a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstTime: 1
+  leftHandAnchor: {fileID: 0}
+  ovrHand: {fileID: 0}
 --- !u!1001 &1999577536898793254
 PrefabInstance:
   m_ObjectHideFlags: 0
