@@ -52,5 +52,6 @@ public class ButtonPress : MonoBehaviour
     public void ButtonPressed(){
         Debug.Log("click on " + gameObject.name + ",smartphone mode");
         btn.onClick.Invoke();
+        ServerSend.SendVibrate("vibrate");
     }
 }

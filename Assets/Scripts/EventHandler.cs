@@ -28,6 +28,9 @@ public class EventHandler : MonoBehaviour
     public GameObject wall;
     public float minSizeNode;
     public float maxSizeNode;
+    public float x_space;
+    public float y_space;
+    public float columnLength;
 
     [Header("Material")]
     public Material AbjadMaterial;
@@ -111,6 +114,7 @@ public class EventHandler : MonoBehaviour
         requestPeneliti.URL = URL + "/peneliti?abjad=none";
         StartCoroutine(requestPeneliti.RequestData((result) => {
             float med = 100 * sizeCoef;
+            int idx = 0;
             foreach (var data in result.data[0].inisial_peneliti)
             {
                 GameObject NodeAbjadPeneliti = (GameObject)Instantiate(NodePeneliti);
@@ -128,7 +132,8 @@ public class EventHandler : MonoBehaviour
                 tambahan.ukuran = size;
                 tambahan.ukuran2 = new Vector3(size, size, size);
 
-                SpawnNode(NodeAbjadPeneliti, size, med);
+                SpawnNodeAbjad(NodeAbjadPeneliti, size, idx);
+                idx++;
             }
             listPeneliti = GameObject.FindGameObjectsWithTag("ListPenelitiAbjad");
             foreach(GameObject node in listPeneliti)
@@ -851,6 +856,35 @@ public class EventHandler : MonoBehaviour
         wall.transform.LookAt(wall.transform.position + centerEyeAnchor.transform.rotation * Vector3.forward, centerEyeAnchor.transform.rotation * Vector3.up);
     }
 
+    public void SpawnNodeAbjad(GameObject node, float size, int i)
+    {
+        node.transform.SetParent(ParentNode.transform, false);
+        float x_start = ParentNode.transform.position.x - 6.25f;
+        float y_start = ParentNode.transform.position.y + 2.5f;
+        float z = ParentNode.transform.position.z;
+        node.transform.localScale = new Vector3(0f, 0f, 0f);
+
+        node.transform.localPosition = new Vector3(x_start + (x_space * (i % columnLength)), y_start + (-y_space * Mathf.FloorToInt(i / columnLength)), z);
+
+        node.GetComponentInChildren<TextMeshProUGUI>().text = node.name;
+
+        NodeVariable nodeVariable = node.GetComponent<NodeVariable>();
+
+        Material abjadMat = Resources.Load("Alphabet Materials/" + node.name, typeof(Material)) as Material;
+        node.GetComponent<Renderer>().material = abjadMat;
+        nodeVariable.hoverMaterial = Resources.Load("Alphabet Materials/" + node.name + "-hover", typeof(Material)) as Material;
+
+        // turn off text panel on top of sphere
+        node.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        node.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
+
+        nodeVariable.defaultMaterial = node.GetComponent<Renderer>().material;
+        nodeVariable.pressedMaterial = pressedMaterial;
+
+        // make collider smaller
+        node.GetComponent<SphereCollider>().radius = 0.5f;
+    }
+
     public void SpawnNode(GameObject node, float size, float med)
     {
         node.transform.SetParent(ParentNode.transform, false);
@@ -869,18 +903,7 @@ public class EventHandler : MonoBehaviour
 
         NodeVariable nodeVariable = node.GetComponent<NodeVariable>();
 
-        if (node.CompareTag("ListPenelitiAbjad"))
-        {
-            //node.GetComponent<Renderer>().material = AbjadMaterial;
-            Material abjadMat = Resources.Load("Alphabet Materials/" + node.name, typeof(Material)) as Material;
-            node.GetComponent<Renderer>().material = abjadMat;
-            nodeVariable.hoverMaterial = Resources.Load("Alphabet Materials/" + node.name + "-hover", typeof(Material)) as Material;
-
-            // turn off text panel on top of sphere
-            node.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
-            node.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
-        }
-        else if (node.CompareTag("ListPenelitiInisial"))
+        if (node.CompareTag("ListPenelitiInisial"))
         {
             node.GetComponent<Renderer>().material = InisialMaterial;
             nodeVariable.hoverMaterial = hoverMaterial;
@@ -932,7 +955,6 @@ public class EventHandler : MonoBehaviour
 
         if (node.CompareTag("ListPenelitiAbjad"))
         {
-            //node.GetComponentInChildren<Image>().sprite = AbjadSprite;
             Sprite abjadSprite = Resources.Load("Alphabet Sprites/" + node.name, typeof(Sprite)) as Sprite;
             node.GetComponentInChildren<Image>().sprite = abjadSprite;
             Sprite abjadHoverSprite = Resources.Load("Alphabet Sprites/" + node.name + "-hover", typeof(Sprite)) as Sprite;

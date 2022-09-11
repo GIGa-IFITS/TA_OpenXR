@@ -19,6 +19,14 @@ public class ServerSend
         }
     }
 
+    public static void SendVibrate(string _msg){
+        using (PacketNetwork _packet = new PacketNetwork((int)ServerPackets.sendVibrate)){
+            _packet.Write(_msg);
+
+            SendTCPData(1, _packet);
+        }
+    }
+
     // public static void SendTouchToVR(string _touch){
     //     using(PacketNetwork _packet = new PacketNetwork((int)ServerPackets.sendTouch)){
     //         _packet.Write(_touch);
