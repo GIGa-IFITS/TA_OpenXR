@@ -23,7 +23,7 @@ public class ServerSend
         using (PacketNetwork _packet = new PacketNetwork((int)ServerPackets.sendVibrate)){
             _packet.Write(_msg);
 
-            SendTCPData(1, _packet);
+            SendTCPData(2, _packet);
         }
     }
 

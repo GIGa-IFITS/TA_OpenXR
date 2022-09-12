@@ -831,7 +831,9 @@ MonoBehaviour:
   maxSizeNode: 1.5
   x_space: 1.5
   y_space: 1.8
-  columnLength: 8
+  columnLength: 12
+  x_start: -9.25
+  y_start: 1.7
   AbjadMaterial: {fileID: 2100000, guid: 5b4216c4a50918642bb09442d6512f28, type: 2}
   InisialMaterial: {fileID: 2100000, guid: 3af08a437cd4b3141a61ab3b14f9f2a9, type: 2}
   F_SCIENTICS: {fileID: 2100000, guid: d8635c38316cd3b4fa70e5e903e34657, type: 2}

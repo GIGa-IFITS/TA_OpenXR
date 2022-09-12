@@ -31,6 +31,8 @@ public class EventHandler : MonoBehaviour
     public float x_space;
     public float y_space;
     public float columnLength;
+    public float x_start;
+    public float y_start;
 
     [Header("Material")]
     public Material AbjadMaterial;
@@ -859,12 +861,12 @@ public class EventHandler : MonoBehaviour
     public void SpawnNodeAbjad(GameObject node, float size, int i)
     {
         node.transform.SetParent(ParentNode.transform, false);
-        float x_start = ParentNode.transform.position.x - 6.25f;
-        float y_start = ParentNode.transform.position.y + 2.5f;
+        float x = ParentNode.transform.position.x + x_start;
+        float y = ParentNode.transform.position.y + y_start;
         float z = ParentNode.transform.position.z;
         node.transform.localScale = new Vector3(0f, 0f, 0f);
 
-        node.transform.localPosition = new Vector3(x_start + (x_space * (i % columnLength)), y_start + (-y_space * Mathf.FloorToInt(i / columnLength)), z);
+        node.transform.localPosition = new Vector3(x + (x_space * (i % columnLength)), y + (-y_space * Mathf.FloorToInt(i / columnLength)), z);
 
         node.GetComponentInChildren<TextMeshProUGUI>().text = node.name;
 
