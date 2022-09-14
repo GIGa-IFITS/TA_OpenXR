@@ -15,7 +15,6 @@ public class SmartphoneGyro : MonoBehaviour
     private Quaternion initialRotation;
     private Quaternion offsetRotation;
     private Quaternion tempGyroRotation;
-    [SerializeField] private Transform cam;
 
     private void Awake()
     {

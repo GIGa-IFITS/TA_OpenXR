@@ -646,6 +646,8 @@ public class ScreenManager : MonoBehaviour
         //desktopScreen.transform.LookAt(desktopScreen.transform.position + centerEyeAnchor.transform.rotation * Vector3.forward, centerEyeAnchor.transform.rotation * Vector3.up);
 
         CheckIfSearching();
+
+        ServerSend.SendVibrate("up");
     }
 
     IEnumerator SwipeDown(){
@@ -662,6 +664,8 @@ public class ScreenManager : MonoBehaviour
         desktopScreen.gameObject.SetActive(false);
         smartphoneScreen.gameObject.transform.GetChild(0).gameObject.SetActive(true);
         CheckIfSearching();
+
+        ServerSend.SendVibrate("down");
     }
 
     IEnumerator WaitForFlushNode(){

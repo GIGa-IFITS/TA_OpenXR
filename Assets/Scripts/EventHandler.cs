@@ -874,14 +874,13 @@ public class EventHandler : MonoBehaviour
 
         Material abjadMat = Resources.Load("Alphabet Materials/" + node.name, typeof(Material)) as Material;
         node.GetComponent<Renderer>().material = abjadMat;
+        nodeVariable.defaultMaterial = abjadMat;
         nodeVariable.hoverMaterial = Resources.Load("Alphabet Materials/" + node.name + "-hover", typeof(Material)) as Material;
+        nodeVariable.pressedMaterial = Resources.Load("Alphabet Materials/" + node.name + "-pressed", typeof(Material)) as Material;
 
         // turn off text panel on top of sphere
         node.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
         node.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
-
-        nodeVariable.defaultMaterial = node.GetComponent<Renderer>().material;
-        nodeVariable.pressedMaterial = pressedMaterial;
 
         // make collider smaller
         node.GetComponent<SphereCollider>().radius = 0.5f;
