@@ -112,6 +112,11 @@ public class ScreenManager : MonoBehaviour
         currSearch = "Research Keyword";
     }
 
+    public void OnTapPassthroughToggle(){
+        smartphoneScreen.OnTapPassthroughToggle();
+        desktopScreen.OnTapPassthroughToggle();
+    }
+
     public void ShowNodeMenu(){
         smartphoneScreen.ShowNodeMenu();
         desktopScreen.ShowNodeMenu();

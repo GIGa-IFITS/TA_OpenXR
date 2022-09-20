@@ -290,7 +290,6 @@ Transform:
   m_Children:
   - {fileID: 379697580}
   - {fileID: 3005601684234001359}
-  - {fileID: 4404396382314800786}
   - {fileID: 671872502}
   - {fileID: 635189545}
   m_Father: {fileID: 0}
@@ -311,7 +310,8 @@ MonoBehaviour:
   startText: {fileID: 660472193}
   ovrPassthroughLayer: {fileID: 1667105142}
   isSwipe: 0
-  threshold: 0.1
+  rightHand: {fileID: 1667120057}
+  threshold: 0.0025
   duration: 2
 --- !u!1 &250535159
 GameObject:
@@ -417,7 +417,7 @@ GameObject:
   - component: {fileID: 379697585}
   - component: {fileID: 379697582}
   m_Layer: 0
-  m_Name: LogThumbPose
+  m_Name: LogPose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -437,7 +437,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hand: {fileID: 379697584}
   _shapes:
-  - {fileID: 11400000, guid: b24bfe58d749d144d98a6d242b74fff2, type: 2}
+  - {fileID: 11400000, guid: 4fc664199c6e9fb46b90a8725d76f13c, type: 2}
 --- !u!4 &379697580
 Transform:
   m_ObjectHideFlags: 0
@@ -806,7 +806,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 185735953}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &635189546
 MonoBehaviour:
@@ -822,8 +822,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hand: {fileID: 635189549}
   _shapes:
-  - {fileID: 11400000, guid: 3c87ada45140632468cc371ffdada246, type: 2}
-  - {fileID: 11400000, guid: f4bd1264636288c4c8322cdb04ae93b2, type: 2}
+  - {fileID: 11400000, guid: 4bb628b6a00e3034b97ae9f6f67501ce, type: 2}
 --- !u!114 &635189547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -970,7 +969,7 @@ MonoBehaviour:
   debugText: {fileID: 1402960975}
   ip: {fileID: 0}
   port: {fileID: 0}
-  ipAddress: 10.21.79.121
+  ipAddress: 192.168.31.247
   portServer: 5000
   handPoseSwitch: {fileID: 1709899404410711921}
   virtualSmartphone: {fileID: 1865379642564101992}
@@ -1161,9 +1160,9 @@ GameObject:
   - component: {fileID: 671872509}
   - component: {fileID: 671872508}
   - component: {fileID: 671872507}
-  - component: {fileID: 671872506}
   - component: {fileID: 671872505}
   - component: {fileID: 671872504}
+  - component: {fileID: 671872503}
   m_Layer: 0
   m_Name: StartSwipePose
   m_TagString: Untagged
@@ -1183,8 +1182,24 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 185735953}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &671872503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671872501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aebd5da9a8bd22243b407f1927f4965b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _activeStates:
+  - {fileID: 671872504}
+  - {fileID: 671872505}
+  _logicOperator: 0
 --- !u!114 &671872504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1197,7 +1212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6f9440d09721c849864899e8986e219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hand: {fileID: 671872509}
+  _hand: {fileID: 2972376060811647372}
   _transformFeatureConfigs:
     _values:
     - _mode: 0
@@ -1223,23 +1238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hand: {fileID: 671872509}
   _shapes:
-  - {fileID: 11400000, guid: e2e8bc73344f503479674350dc5e21cf, type: 2}
---- !u!114 &671872506
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 671872501}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aebd5da9a8bd22243b407f1927f4965b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _activeStates:
-  - {fileID: 671872505}
-  - {fileID: 671872504}
-  _logicOperator: 0
+  - {fileID: 11400000, guid: 3c3f27f256d61514b88804aa5efb43e8, type: 2}
 --- !u!114 &671872507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1252,7 +1251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cd9780be7e512049b4d33d5c9d0ac92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _activeState: {fileID: 671872506}
+  _activeState: {fileID: 671872505}
 --- !u!114 &671872508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3285,6 +3284,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5123660902684050339, guid: 8efedb6fc0cc462448a86b0cd24c8673,
+        type: 3}
+      propertyPath: ovrPassthroughLayer
+      value: 
+      objectReference: {fileID: 1667105142}
     - target: {fileID: 5171564050077201559, guid: 8efedb6fc0cc462448a86b0cd24c8673,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -3424,6 +3428,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909625014765606029, guid: 8efedb6fc0cc462448a86b0cd24c8673,
+        type: 3}
+      propertyPath: m_Transition
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909625014765606029, guid: 8efedb6fc0cc462448a86b0cd24c8673,
+        type: 3}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909625014765606029, guid: 8efedb6fc0cc462448a86b0cd24c8673,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1474077861}
+    - target: {fileID: 7909625014765606029, guid: 8efedb6fc0cc462448a86b0cd24c8673,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnTapPassthroughToggle
       objectReference: {fileID: 0}
     - target: {fileID: 8041611819767064124, guid: 8efedb6fc0cc462448a86b0cd24c8673,
         type: 3}
@@ -4038,7 +4062,7 @@ MonoBehaviour:
   colorMapEditorContrast: 0
   colorMapEditorBrightness: 0
   colorMapEditorPosterize: 0
-  textureOpacity_: 1
+  textureOpacity_: 0.7
   edgeRenderingEnabled_: 0
   edgeColor_: {r: 1, g: 1, b: 1, a: 1}
   colorMapType: 0
@@ -10297,6 +10321,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3799873572294412763, guid: 3fd6b36d940f9b24eae4734f5cf3119e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 4164542668619681742, guid: 3fd6b36d940f9b24eae4734f5cf3119e,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -11342,6 +11371,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6301589802719079625, guid: 3fd6b36d940f9b24eae4734f5cf3119e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6301589802815002912, guid: 3fd6b36d940f9b24eae4734f5cf3119e,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -11942,6 +11976,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7273822601137025526, guid: 3fd6b36d940f9b24eae4734f5cf3119e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1474077861}
+    - target: {fileID: 7273822601137025526, guid: 3fd6b36d940f9b24eae4734f5cf3119e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnTapPassthroughToggle
+      objectReference: {fileID: 0}
     - target: {fileID: 7289979132058655171, guid: 3fd6b36d940f9b24eae4734f5cf3119e,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -11997,6 +12041,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1474077861}
+    - target: {fileID: 7607297829140107825, guid: 3fd6b36d940f9b24eae4734f5cf3119e,
+        type: 3}
+      propertyPath: ovrPassthroughLayer
+      value: 
+      objectReference: {fileID: 1667105142}
     - target: {fileID: 7655085516096076752, guid: 3fd6b36d940f9b24eae4734f5cf3119e,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -12635,19 +12684,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2586040715268338167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4404396382314800785}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b14164f8f23faae4293baeb84485b3d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _hand: {fileID: 2972376060811647372}
 --- !u!1 &2812022916395150433
 GameObject:
   m_ObjectHideFlags: 0
@@ -12702,8 +12738,8 @@ MonoBehaviour:
   _transformFeatureConfigs:
     _values:
     - _mode: 0
-      _feature: 4
-      _state: 12
+      _feature: 6
+      _state: 18
   _transformConfig:
     PositionOffset: {x: 0, y: 0, z: 0}
     RotationOffset: {x: 0, y: 0, z: 0}
@@ -12726,7 +12762,7 @@ GameObject:
   - component: {fileID: 3005601684234001357}
   - component: {fileID: 3005601684234001352}
   m_Layer: 0
-  m_Name: ResetRockPose
+  m_Name: ResetPose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12746,8 +12782,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hand: {fileID: 3984264785195879594}
   _shapes:
-  - {fileID: 11400000, guid: 3c87ada45140632468cc371ffdada246, type: 2}
-  - {fileID: 11400000, guid: f4bd1264636288c4c8322cdb04ae93b2, type: 2}
+  - {fileID: 11400000, guid: b756d152834b3294197c2e877677d3d4, type: 2}
 --- !u!114 &3005601684234001358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12958,97 +12993,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraRigRef: {fileID: 8304599771240161833}
---- !u!114 &4404396382314800784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4404396382314800785}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08f7cfb1f9629da4494ac0840f3a3cfd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _hand: {fileID: 2586040715268338167}
-  _shapes:
-  - {fileID: 11400000, guid: 8c50ac09b966a6c41a742e54e91506c3, type: 2}
---- !u!1 &4404396382314800785
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4404396382314800786}
-  - component: {fileID: 2586040715268338167}
-  - component: {fileID: 7981371110293300566}
-  - component: {fileID: 8307185542513640609}
-  - component: {fileID: 4404396382314800787}
-  - component: {fileID: 4404396382314800784}
-  - component: {fileID: 4404396382314800789}
-  m_Layer: 0
-  m_Name: PassthroughScissorsPose
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4404396382314800786
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4404396382314800785}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 185735953}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4404396382314800787
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4404396382314800785}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aebd5da9a8bd22243b407f1927f4965b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _activeStates:
-  - {fileID: 4404396382314800784}
-  - {fileID: 4404396382314800789}
-  _logicOperator: 0
---- !u!114 &4404396382314800789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4404396382314800785}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6f9440d09721c849864899e8986e219, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _hand: {fileID: 2586040715268338167}
-  _transformFeatureConfigs:
-    _values:
-    - _mode: 0
-      _feature: 4
-      _state: 12
-  _transformConfig:
-    PositionOffset: {x: 0, y: 0, z: 0}
-    RotationOffset: {x: 0, y: 0, z: 0}
-    UpVectorType: 2
-    FeatureThresholds: {fileID: 11400000, guid: 039cf5a7424e1e046b79287e9375cf09,
-      type: 2}
 --- !u!114 &5097873834410412051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13139,36 +13083,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &7981371110293300566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4404396382314800785}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de76f7169412b8f4896235a1585d8939, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _selector: {fileID: 8307185542513640609}
-  _whenSelected:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 185735954}
-        m_MethodName: setPassthroughVisibility
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  _whenUnselected:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &7994107937604505115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13196,19 +13110,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ovrCameraRig: {fileID: 1667105144}
   _requireOvrHands: 1
---- !u!114 &8307185542513640609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4404396382314800785}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cd9780be7e512049b4d33d5c9d0ac92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _activeState: {fileID: 4404396382314800787}
 --- !u!114 &8820866526537979915
 MonoBehaviour:
   m_ObjectHideFlags: 0

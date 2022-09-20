@@ -43,6 +43,7 @@ public class SmartphoneGyro : MonoBehaviour
     }
 
     public void ResetPhoneRotation(){
+        Debug.Log("reset gesture detected, reset phone position");
         firstTime = true;
     }
 

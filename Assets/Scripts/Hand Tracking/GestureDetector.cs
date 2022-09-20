@@ -9,9 +9,11 @@ public class GestureDetector : MonoBehaviour
     public bool isSwipe;
     private Vector3 startPos;
     private Vector3 endPos;
-    private GameObject handTip;
+    [SerializeField] private GameObject rightHand;
     public float threshold;
     public float duration;
+
+    Coroutine swipeDuration;
 
     public void StartTask(){
         Debug.Log("start task called");
@@ -31,9 +33,12 @@ public class GestureDetector : MonoBehaviour
 
     public void StartSwipe(){
         isSwipe = true;
-        startPos =  GameObject.FindWithTag("InteractHand").transform.position;
+        startPos =  rightHand.transform.position;
         Debug.Log("start swipe");
-        StartCoroutine(SwipeDuration());
+        if(swipeDuration != null){
+            StopCoroutine(swipeDuration);
+        }
+        swipeDuration = StartCoroutine(SwipeDuration());
     }
 
     IEnumerator SwipeDuration(){
@@ -46,10 +51,11 @@ public class GestureDetector : MonoBehaviour
         Debug.Log("end swipe gesture");
         if(isSwipe){
             Debug.Log("check if swipe");
-            endPos = GameObject.FindWithTag("InteractHand").transform.position;
+            endPos = rightHand.transform.position;
             if((endPos - startPos).sqrMagnitude > threshold){
                 Debug.Log("swipe detected");
                 ScreenManager.instance.SetScreenMode("down");
+                StopCoroutine(swipeDuration);
             }
             isSwipe = false;
         }

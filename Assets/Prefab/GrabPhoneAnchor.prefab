@@ -949,6 +949,11 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 0.01
       objectReference: {fileID: 0}
+    - target: {fileID: 4092099456587089978, guid: cab004bcae7d2904a8bb90dd7257fc7f,
+        type: 3}
+      propertyPath: passthroughToggle
+      value: 
+      objectReference: {fileID: 7607297829140107825}
     - target: {fileID: 5152420388789040617, guid: cab004bcae7d2904a8bb90dd7257fc7f,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -962,3 +967,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8681062596099458933}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7607297829140107825 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1291364852808242500, guid: cab004bcae7d2904a8bb90dd7257fc7f,
+    type: 3}
+  m_PrefabInstance: {fileID: 8681062596099458933}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 861c4b527cb5e2a44bb1fcbb5df4f1ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

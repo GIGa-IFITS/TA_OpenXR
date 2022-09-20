@@ -18,6 +18,7 @@ public class VirtualScreen : MonoBehaviour
     [SerializeField] protected TextMeshProUGUI research;
     [Header("Search Menu")]
     [SerializeField] protected GameObject searchMenu;
+    [SerializeField] protected PassthroughToggle passthroughToggle;
     [Header("Node Menu")]
     public GameObject nodeMenu;
     [SerializeField] protected GameObject nodeMenuDefaultPanel;
@@ -98,6 +99,10 @@ public class VirtualScreen : MonoBehaviour
             nodeMenuTitleText.text = "Searching By:" + "\n" + "Research Keyword";
             cardMenuTitleText.text = "Searching By:" + "\n" + "Research Keyword";
         }
+    }
+
+    public void OnTapPassthroughToggle(){
+        passthroughToggle.SwitchToggle();
     }
 
     public void ShowLoadingNodeScreen(){
