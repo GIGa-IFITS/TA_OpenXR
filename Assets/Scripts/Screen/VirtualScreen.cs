@@ -101,8 +101,8 @@ public class VirtualScreen : MonoBehaviour
         }
     }
 
-    public void OnTapPassthroughToggle(){
-        passthroughToggle.SwitchToggle();
+    public void OnTapPassthroughToggle(bool on){
+        passthroughToggle.SwitchToggle(on);
     }
 
     public void ShowLoadingNodeScreen(){

@@ -26,6 +26,7 @@ public class ScreenManager : MonoBehaviour
     private string selectedDetail;
     private NodeVariable currentHoverNode;
     private bool isOnCardPage;
+    [SerializeField] private OVRPassthroughLayer ovrPassthroughLayer;
 
     private void Awake()
     {
@@ -113,8 +114,9 @@ public class ScreenManager : MonoBehaviour
     }
 
     public void OnTapPassthroughToggle(){
-        smartphoneScreen.OnTapPassthroughToggle();
-        desktopScreen.OnTapPassthroughToggle();
+        ovrPassthroughLayer.hidden = !ovrPassthroughLayer.hidden;
+        smartphoneScreen.OnTapPassthroughToggle(!ovrPassthroughLayer.hidden);
+        desktopScreen.OnTapPassthroughToggle(!ovrPassthroughLayer.hidden);
     }
 
     public void ShowNodeMenu(){

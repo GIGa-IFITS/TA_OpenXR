@@ -2387,6 +2387,7 @@ MonoBehaviour:
   centerEyeAnchor: {fileID: 1667105139}
   handTrackingUI: {fileID: 704906393}
   offset: 30
+  ovrPassthroughLayer: {fileID: 1667105142}
 --- !u!1001 &1481967735
 PrefabInstance:
   m_ObjectHideFlags: 0

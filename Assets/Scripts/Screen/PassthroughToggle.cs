@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PassthroughToggle : MonoBehaviour
 {
-    [SerializeField] private OVRPassthroughLayer ovrPassthroughLayer;
+    
     private bool on;
     [SerializeField] private Sprite activeSprite;
     [SerializeField] private Sprite activeHoverSprite;
@@ -16,13 +16,7 @@ public class PassthroughToggle : MonoBehaviour
     [SerializeField] private Button btn;
     [SerializeField] private Image toggleImage;
 
-    public void SwitchToggle(){
-        Debug.Log("switch toggle");
-        ovrPassthroughLayer.hidden = !ovrPassthroughLayer.hidden;
-        on = !ovrPassthroughLayer.hidden;
-
-        Debug.Log("passthrough val: " + on);
-
+    public void SwitchToggle(bool on){
         if(on){    
             toggleImage.sprite = activeSprite;
             SpriteState ss = new SpriteState();
