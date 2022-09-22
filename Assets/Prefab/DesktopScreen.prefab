@@ -8954,7 +8954,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 861c4b527cb5e2a44bb1fcbb5df4f1ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ovrPassthroughLayer: {fileID: 0}
   activeSprite: {fileID: 21300000, guid: fd545bb516cc854439bac47193dadc84, type: 3}
   activeHoverSprite: {fileID: 21300000, guid: 0d8ddfb4f314545428a53254daf25e0e, type: 3}
   activePressedSprite: {fileID: 21300000, guid: 4cac5fbe1114c3b4f971f261c6f455a5,
